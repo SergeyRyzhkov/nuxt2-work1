@@ -176,10 +176,9 @@ const nuxtConfig: NuxtConfig = {
     baseURL: process.env.API_URL,
     withCredentials: true,
   },
-
   server: {
-    port: 8010,
-    host: "localhost",
+    port: process.env.PORT || 8010,
+    host: process.env.HOST || "localhost",
   },
 };
 
