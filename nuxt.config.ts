@@ -83,8 +83,8 @@ const nuxtConfig: NuxtConfig = {
 
   buildModules: [
     "@/_core/nuxt_modules/init-router-store.module.ts",
-    "nuxt-purgecss",
     "@nuxtjs/tailwindcss",
+    "nuxt-purgecss",
     [
       "@nuxt/typescript-build",
       {
@@ -133,6 +133,7 @@ const nuxtConfig: NuxtConfig = {
   },
 
   tailwindcss: {
+    cssPath: "~assets/scss/_tailwind.scss",
     configPath: "~~/tailwind.config.js",
   },
 
@@ -176,6 +177,7 @@ const nuxtConfig: NuxtConfig = {
     baseURL: process.env.API_URL,
     withCredentials: true,
   },
+
   server: {
     port: process.env.PORT || 8010,
     host: process.env.HOST || "localhost",
