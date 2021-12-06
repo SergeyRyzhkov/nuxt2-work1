@@ -64,7 +64,7 @@ const nuxtConfig: NuxtConfig = {
     },
   },
 
-  css: ["~/assets/scss/index.scss"],
+  css: ["~/assets/styles/index.scss"],
 
   plugins: [
     { src: "@/plugins/app-init" },
@@ -84,7 +84,7 @@ const nuxtConfig: NuxtConfig = {
   buildModules: [
     "@/_core/nuxt_modules/init-router-store.module.ts",
     "@nuxtjs/tailwindcss",
-    "nuxt-purgecss",
+    // "nuxt-purgecss",
     [
       "@nuxt/typescript-build",
       {
@@ -133,21 +133,13 @@ const nuxtConfig: NuxtConfig = {
   },
 
   tailwindcss: {
-    cssPath: "~assets/scss/_tailwind.scss",
+    cssPath: "~assets/styles/_tailwind.scss",
     configPath: "~~/tailwind.config.js",
   },
 
-  purgeCSS: {
-    mode: "postcss",
-    paths: ["components/**/*.vue", "layouts/**/*.vue", "pages/**/*.vue", "modules/**/*.vue"],
-    extractors: [
-      {
-        extractor: (content) => content.replace(/<style[\s\S]*>[\s\S]*<\/style>/gi, "").match(/[\w-/:]+/g) || [],
-        extensions: ["vue"],
-      },
-    ],
-    whitelistPatterns: [/footerCon/],
-  },
+  // purgeCSS: {
+  //   paths: ["components/**/*.vue", "layouts/**/*.vue", "pages/**/*.vue", "modules/**/*.vue"],
+  // },
 
   postcss: {
     plugins: {
@@ -170,7 +162,7 @@ const nuxtConfig: NuxtConfig = {
   },
 
   styleResources: {
-    scss: ["~assets/scss/_variables.scss"],
+    scss: ["~assets/styles/_variables.scss"],
   },
 
   axios: {
