@@ -1,0 +1,63 @@
+/*! purgecss start ignore */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: none;
+}
+
+body {
+  color: $primary !important;
+  font-family: $font-stack;
+  font-size: 16px;
+  line-height: 24px !important;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 34px;
+  line-height: 40px;
+}
+
+h2 {
+  font-size: 27px;
+  line-height: 30px;
+}
+
+h3 {
+  font-size: 20px;
+  line-height: 23px;
+}
+
+h4 {
+  font-size: 16px;
+  line-height: 19px;
+}
+
+h5 {
+  font-size: 16px;
+  line-height: 28px;
+}
+
+h5 {
+  font-size: 16px;
+  line-height: 28px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: $primary;
+  margin: 0;
+  padding: 0;
+}
+
+/*! purgecss end ignore */

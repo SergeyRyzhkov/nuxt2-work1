@@ -1,0 +1,29 @@
+html {
+  overflow-x: hidden;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+  display: block;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+}
+
+.container-fluid {
+  @apply w-screen;
+}
