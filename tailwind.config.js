@@ -1,7 +1,13 @@
 module.exports = {
-  // mode: "jit",
+  mode: "jit",
   purge: {
-    content: ["components/**/*.vue", "layouts/**/*.vue", "pages/**/*.vue", "modules/**/*.vue", "./nuxt.config.{js,ts}"],
+    content: [
+      "./src/components/**/*.vue",
+      "./src/layouts/**/*.vue",
+      "./src/pages/**/*.vue",
+      "./src/modules/**/*.vue",
+      "./nuxt.config.ts",
+    ],
     options: {
       safelist: [/deep/, /vue.*?$/, /v-.*?$/, /overlay-.*?$/, /scroll-.*?$/],
       keyframes: true,

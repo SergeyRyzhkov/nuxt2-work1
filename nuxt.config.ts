@@ -20,20 +20,11 @@ const nuxtConfig: NuxtConfig = {
   modern: process.env.NODE_ENV === "production",
   srcDir: SRC_DIR,
 
-  env: {
-    API_URL: process.env.API_URL || "https://api.kaypro.plenexy.digital/api",
-    BASE_URL: process.env.BASE_URL || "https://kaypro.plenexy.digital",
-  },
-
   components: [
     { path: "@/components", pathPrefix: false },
     { path: "@/pages", pathPrefix: false },
     { path: "@/layouts", pathPrefix: false },
   ],
-
-  loading: {
-    color: "#ac1315",
-  },
 
   head: {
     htmlAttrs: {
@@ -64,7 +55,7 @@ const nuxtConfig: NuxtConfig = {
     },
   },
 
-  css: ["~/assets/styles/index.scss"],
+  css: ["~/assets/styles/_index.scss"],
 
   plugins: [
     { src: "@/plugins/app-init" },
@@ -119,6 +110,19 @@ const nuxtConfig: NuxtConfig = {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
       }
     },
+
+    // @ts-ignore
+    postcss: {
+      plugins: {
+        "postcss-import": {},
+        "tailwindcss/nesting": {},
+        tailwindcss: path.resolve(__dirname, "./tailwind.config.js"),
+        autoprefixer: {},
+      },
+      preset: {
+        stage: 1,
+      },
+    },
   },
 
   render: {
@@ -133,26 +137,13 @@ const nuxtConfig: NuxtConfig = {
   },
 
   tailwindcss: {
-    cssPath: "~assets/styles/_tailwind.scss",
+    // cssPath: "~assets/styles/_tailwind.s",
     configPath: "~~/tailwind.config.js",
   },
 
   // purgeCSS: {
   //   paths: ["components/**/*.vue", "layouts/**/*.vue", "pages/**/*.vue", "modules/**/*.vue"],
   // },
-
-  postcss: {
-    plugins: {
-      "postcss-import": {},
-      tailwindcss: path.resolve(__dirname, "./tailwind.config.js"),
-      "postcss-nested": {},
-      autoprefixer: {},
-    },
-
-    preset: {
-      stage: 1,
-    },
-  },
 
   webfontloader: {
     events: false,
