@@ -46,7 +46,7 @@ export default class LoginPage extends Vue {
   async verifyEmail() {
     await this.$serviceLocator
       .getService(AuthService)
-      .verifyEmail("sergeyryzhkov76@gmail.com", "sergeyryzhkov76@gmail.com", "8758");
+      .verifyEmail("sergeyryzhkov76@gmail.com", "sergeyryzhkov76@gmail.com", "2221");
   }
 }
 </script>
