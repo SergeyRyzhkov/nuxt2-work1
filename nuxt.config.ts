@@ -75,7 +75,7 @@ const nuxtConfig: NuxtConfig = {
   buildModules: [
     "@/_core/nuxt_modules/init-router-store.module.ts",
     "@nuxtjs/tailwindcss",
-    // "nuxt-purgecss",
+    "nuxt-purgecss",
     [
       "@nuxt/typescript-build",
       {
@@ -137,13 +137,12 @@ const nuxtConfig: NuxtConfig = {
   },
 
   tailwindcss: {
-    // cssPath: "~assets/styles/_tailwind.s",
     configPath: "~~/tailwind.config.js",
   },
 
-  // purgeCSS: {
-  //   paths: ["components/**/*.vue", "layouts/**/*.vue", "pages/**/*.vue", "modules/**/*.vue"],
-  // },
+  purgeCSS: {
+    paths: ["components/**/*.vue", "layouts/**/*.vue", "pages/**/*.vue", "modules/**/*.vue"],
+  },
 
   webfontloader: {
     events: false,
