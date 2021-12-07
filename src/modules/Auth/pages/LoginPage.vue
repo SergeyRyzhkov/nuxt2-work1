@@ -7,7 +7,8 @@
     </form>
     <div class="flex flex-col">
       <button type="button" class="mt-60" @click="register">Зарегаться</button>
-      <button type="button" class="mt-60" @click="verifyEmail">Выслать код повторно</button>
+      <button type="button" class="mt-60" @click="resendVerifyEmail">Выслать код повторно</button>
+      <button type="button" class="mt-60" @click="verifyEmail">Подтвердить код</button>
     </div>
   </main>
 </template>
@@ -38,8 +39,14 @@ export default class LoginPage extends Vue {
     await this.$serviceLocator.getService(AuthService).register(regData);
   }
 
-  async verifyEmail() {
+  async resendVerifyEmail() {
     await this.$serviceLocator.getService(AuthService).resendVerifyEmail("sergeyryzhkov76@gmail.com");
+  }
+
+  async verifyEmail() {
+    await this.$serviceLocator
+      .getService(AuthService)
+      .verifyEmail("sergeyryzhkov76@gmail.com", "sergeyryzhkov76@gmail.com", "8758");
   }
 }
 </script>

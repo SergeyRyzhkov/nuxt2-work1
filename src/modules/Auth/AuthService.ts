@@ -51,7 +51,7 @@ export class AuthService extends BaseService {
       const response = await this.apiRequest.post("users/login", loginData);
 
       if (response.status === 200) {
-        const accessToken = response.data.token;
+        const accessToken = response?.data?.access_token;
         if (!!accessToken) {
           this.updateAccessToken(accessToken);
           if (await this.getMeAndSetSessionUser()) {
