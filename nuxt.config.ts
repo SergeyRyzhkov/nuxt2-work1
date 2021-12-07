@@ -157,7 +157,7 @@ const nuxtConfig: NuxtConfig = {
 
   axios: {
     baseURL: process.env.API_URL,
-    withCredentials: true,
+    credentials: true,
   },
 
   server: {

@@ -48,10 +48,7 @@ export class AuthService extends BaseService {
 
     try {
       await this.tryGetCsfrCookie();
-      const response = await this.apiRequest.post("users/login", loginData, { withCredentials: true });
-
-      console.log(this.apiRequest.defaults);
-      console.log(this.apiRequest.options);
+      const response = await this.apiRequest.post("users/login", loginData);
 
       if (response.status === 200) {
         const accessToken = response.data.token;
