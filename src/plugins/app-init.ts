@@ -1,6 +1,5 @@
 import { Context } from "@nuxt/types";
 import { Inject } from "@nuxt/types/app";
-// import { AppConfig } from "@/AppConfig";
 import { ServiceLocator } from "@/_core/service/ServiceLocator";
 import { AuthService } from "@/modules/Auth/AuthService";
 
