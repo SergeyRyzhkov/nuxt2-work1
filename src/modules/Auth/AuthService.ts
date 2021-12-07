@@ -47,6 +47,7 @@ export class AuthService extends BaseService {
     const logonResult = new LogonResult();
 
     try {
+      await this.tryGetCsfrCookie();
       const response = await this.apiRequest.post("users/login", loginData);
       if (response.status === 200) {
         const accessToken = response.data.token;
@@ -146,6 +147,16 @@ export class AuthService extends BaseService {
       return true;
     }
     return false;
+  }
+
+  public async tryGetCsfrCookie() {
+    try {
+      this.apiRequest.setBaseURL(this.ctx.$config.baseUrl);
+      await this.apiRequest.get("sanctum/csrf-cookie");
+    } catch (err: any) {
+    } finally {
+      this.apiRequest.setBaseURL(this.ctx.$config.apiUrl);
+    }
   }
 
   public async tryRestoreSessionUser() {

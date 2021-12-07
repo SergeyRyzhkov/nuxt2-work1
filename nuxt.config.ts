@@ -164,6 +164,11 @@ const nuxtConfig: NuxtConfig = {
     port: process.env.PORT || 8010,
     host: process.env.HOST || "localhost",
   },
+
+  publicRuntimeConfig: {
+    apiUrl: process.env.API_URL || "https://api.kaypro.plenexy.digital/api",
+    baseUrl: process.env.BASE_URL || "https://api.kaypro.plenexy.digital",
+  },
 };
 
 export default nuxtConfig;

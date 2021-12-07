@@ -6,10 +6,12 @@ import { AuthService } from "@/modules/Auth/AuthService";
 
 export default (ctx: Context, inject: Inject) => {
   ServiceLocator.createFreshServiceLocator();
+
   ServiceLocator.instance.register(AuthService);
+
   ServiceLocator.instance.updateNuxtContext(ctx);
 
   inject("serviceLocator", ServiceLocator.instance);
 
-  // await ServiceLocator.instance.getService(AuthService).tryRestoreSessionUser();
+  ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
 };
