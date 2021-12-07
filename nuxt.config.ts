@@ -166,8 +166,10 @@ const nuxtConfig: NuxtConfig = {
   },
 
   publicRuntimeConfig: {
-    apiUrl: process.env.API_URL || "https://api.kaypro.plenexy.digital/api",
-    baseUrl: process.env.BASE_URL || "https://api.kaypro.plenexy.digital",
+    // apiUrl: process.env.API_URL || "https://api.kaypro.plenexy.digital/api",
+    // baseUrl: process.env.BASE_URL || "https://api.kaypro.plenexy.digital",
+    apiUrl: "https://api.kaypro.plenexy.digital/api",
+    baseUrl: "https://api.kaypro.plenexy.digital",
   },
 };
 
