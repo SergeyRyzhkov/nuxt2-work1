@@ -10,6 +10,13 @@ html {
   margin: 0;
 }
 
+.layout-wrapper {
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 a {
   text-decoration: none;
   outline: none;

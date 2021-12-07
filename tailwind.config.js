@@ -67,5 +67,15 @@ module.exports = {
         // "2xl": "6rem",
       },
     },
+
+    extend: {
+      colors: {
+        primary: "#171717",
+        secondary: "#ed791e",
+        transparent: "transparent",
+        current: "currentColor",
+        nude: "#FFF7F4",
+      },
+    },
   },
 };

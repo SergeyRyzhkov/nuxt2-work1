@@ -141,7 +141,7 @@ const nuxtConfig: NuxtConfig = {
   },
 
   purgeCSS: {
-    paths: ["components/**/*.vue", "layouts/**/*.vue", "pages/**/*.vue", "modules/**/*.vue"],
+    paths: ["./src/components/**/*.vue", "./src/layouts/**/*.vue", "./src/pages/**/*.vue", "./src/modules/**/*.vue"],
   },
 
   webfontloader: {

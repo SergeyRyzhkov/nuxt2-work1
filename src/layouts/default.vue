@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <nuxt></nuxt>
+  <div class="layout-wrapper">
+    <TheHeader> </TheHeader>
+    <nuxt class="flex-grow"></nuxt>
+    <TheFooter></TheFooter>
   </div>
 </template>
 

@@ -1,5 +1,8 @@
 <template>
-  <main class="container mt-80 text-red-600">Главная страница !!!!!!</main>
+  <main class="">
+    <section class="container-fluid"><div class="container">sdfsdfsdf</div></section>
+    <section class="bg-nude container-fluid"><div class="container">sdfsdfsdf</div></section>
+  </main>
 </template>
 
 <script lang="ts">
