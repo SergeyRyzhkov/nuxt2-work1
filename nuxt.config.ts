@@ -59,9 +59,9 @@ const nuxtConfig: NuxtConfig = {
 
   plugins: [
     { src: "@/plugins/app-init" },
+    { src: "@/plugins/directives" },
     // { src: "@/plugins/vuelidate" },
     // { src: "@/plugins/vue-lazyload" },
-    // { src: "@/plugins/directives" },
     // { src: "@/plugins/modal-manager.client" },
   ],
 
@@ -75,6 +75,7 @@ const nuxtConfig: NuxtConfig = {
   buildModules: [
     "@/_core/nuxt_modules/init-router-store.module.ts",
     "@nuxtjs/tailwindcss",
+    "@nuxtjs/style-resources",
     "nuxt-purgecss",
     [
       "@nuxt/typescript-build",

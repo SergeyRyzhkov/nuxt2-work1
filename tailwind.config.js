@@ -60,11 +60,12 @@ module.exports = {
     container: {
       center: true,
       padding: {
-        DEFAULT: "1rem",
-        // sm: "2rem",
-        // lg: "4rem",
-        // xl: "5rem",
-        // "2xl": "6rem",
+        DEFAULT: "2rem",
+        sm: "1rem",
+        md: "1rem",
+        lg: "2rem",
+        xl: "2rem",
+        "2xl": "2rem",
       },
     },
 
@@ -75,6 +76,7 @@ module.exports = {
         transparent: "transparent",
         current: "currentColor",
         nude: "#FFF7F4",
+        footer: "#575555",
       },
     },
   },

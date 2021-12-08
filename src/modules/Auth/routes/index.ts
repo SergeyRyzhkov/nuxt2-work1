@@ -8,6 +8,6 @@ const routes = [
 
 export default routes;
 
-export const lazyLoad = (promise) => {
+const lazyLoad = (promise) => {
   return promise.then((m) => m.default || m);
 };

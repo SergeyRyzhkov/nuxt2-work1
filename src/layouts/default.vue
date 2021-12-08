@@ -1,7 +1,7 @@
 <template>
   <div class="layout-wrapper">
     <TheHeader> </TheHeader>
-    <nuxt class="flex-grow"></nuxt>
+    <nuxt></nuxt>
     <TheFooter></TheFooter>
   </div>
 </template>

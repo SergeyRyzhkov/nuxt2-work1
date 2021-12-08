@@ -1,7 +1,8 @@
 <template>
-  <main class="">
-    <section class="container-fluid"><div class="container">sdfsdfsdf</div></section>
-    <section class="bg-nude container-fluid"><div class="container">sdfsdfsdf</div></section>
+  <main class="page-wrapper">
+    <section class="bg-nude container-fluid">
+      <div class="container bg-nude"><img src="/images/_tmp/1.jpg" /></div>
+    </section>
   </main>
 </template>
 

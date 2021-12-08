@@ -4,9 +4,9 @@ import { parse, stringify } from "query-string";
 
 const routesImport = JSON.parse(`<%= JSON.stringify(options.routesImport) %>`);
 
-export async function createRouter() {
-  Vue.use(Router);
+Vue.use(Router);
 
+export async function createRouter() {
   const routes = await getRoutes();
 
   const router = new Router({

@@ -12,9 +12,11 @@ export default (ctx: Context, inject: Inject) => {
 
   configAxios(ctx);
 
-  inject("serviceLocator", ServiceLocator.instance);
+  if (process.server) {
+    ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
+  }
 
-  ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
+  inject("serviceLocator", ServiceLocator.instance);
 };
 
 const configAxios = (ctx: Context) => {

@@ -17,6 +17,15 @@ html {
   flex-direction: column;
 }
 
+.page-wrapper {
+  flex-grow: 1;
+  position: relative;
+}
+
+.container-fluid {
+  @apply w-screen;
+}
+
 a {
   text-decoration: none;
   outline: none;
@@ -29,8 +38,4 @@ a:hover {
 
 img {
   display: block;
-}
-
-.container-fluid {
-  @apply w-screen;
 }
