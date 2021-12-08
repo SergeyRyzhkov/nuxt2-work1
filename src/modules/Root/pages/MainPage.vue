@@ -1,7 +1,7 @@
 <template>
   <main class="page-wrapper">
     <section class="bg-nude container-fluid">
-      <div class="container bg-nude"><img src="/images/_tmp/1.jpg" /></div>
+      <div class="container bg-nude"><img src="/images/_tmp/1.jpg" loading="lazy" /></div>
     </section>
   </main>
 </template>

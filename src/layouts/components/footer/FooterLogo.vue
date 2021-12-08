@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="/images/footer-logo.svg" class="cursor-pointer" width="132" height="50" @click="goToMainPage()" />
+    <img src="/images/footer-logo.svg" loading="lazy" class="cursor-pointer" width="132" height="50" @click="goToMainPage()" />
   </div>
 </template>
 

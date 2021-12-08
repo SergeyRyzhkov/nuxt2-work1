@@ -141,9 +141,9 @@ const nuxtConfig: NuxtConfig = {
     configPath: "~~/tailwind.config.js",
   },
 
-  purgeCSS: {
-    paths: ["./src/components/**/*.vue", "./src/layouts/**/*.vue", "./src/pages/**/*.vue", "./src/modules/**/*.vue"],
-  },
+  // purgeCSS: {
+  //   paths: ["./src/components/**/*.vue", "./src/layouts/**/*.vue", "./src/pages/**/*.vue", "./src/modules/**/*.vue"],
+  // },
 
   webfontloader: {
     events: false,
