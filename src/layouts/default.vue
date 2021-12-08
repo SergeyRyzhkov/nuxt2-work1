@@ -1,8 +1,8 @@
 <template>
   <div class="layout-wrapper">
-    <TheHeader> </TheHeader>
-    <nuxt></nuxt>
-    <TheFooter></TheFooter>
+    <TheHeader v-if="$route.name !== 'login'"> </TheHeader>
+    <nuxt />
+    <TheFooter v-if="$route.name !== 'login'"></TheFooter>
   </div>
 </template>
 

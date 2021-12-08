@@ -24,7 +24,9 @@ export default class HeaderSearchInput extends Vue {}
 <style lang="scss">
 .header-search-input {
   border-radius: 9999px !important;
-  padding-left: 20px !important;
+  height: 46px;
+  padding: 13px 23px 16px 23px;
+  border: 1px solid #DFDFDF !important;
 
   &__icon {
     position: absolute;
