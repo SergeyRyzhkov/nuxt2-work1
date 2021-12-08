@@ -2,11 +2,13 @@ import { Context } from "@nuxt/types";
 import { Inject } from "@nuxt/types/app";
 import { ServiceLocator } from "@/_core/service/ServiceLocator";
 import { AuthService } from "@/modules/Auth/AuthService";
+import { PagesContentService } from "@/modules/Root/PagesContentService";
 
 export default (ctx: Context, inject: Inject) => {
   ServiceLocator.createFreshServiceLocator();
 
   ServiceLocator.instance.register(AuthService);
+  ServiceLocator.instance.register(PagesContentService);
 
   ServiceLocator.instance.updateNuxtContext(ctx);
 

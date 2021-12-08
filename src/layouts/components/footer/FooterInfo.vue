@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="footer-ul">
-      <li>ИНФОРАЦИЯ</li>
+      <li>ИНФОРМАЦИЯ</li>
       <li>Помощь</li>
       <li>Вопрос-ответ</li>
       <li>Условия оплаты</li>

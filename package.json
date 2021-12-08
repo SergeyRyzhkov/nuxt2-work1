@@ -43,7 +43,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "node-sass": "^6.0.1",
     "nuxt-property-decorator": "latest",
-    "nuxt-purgecss": "latest",
     "nuxt-start": "^2.15.8",
     "nuxt-webfontloader": "^1.1.0",
     "postcss": "^8.3.6",
