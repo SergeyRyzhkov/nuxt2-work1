@@ -6,8 +6,13 @@ const routes = [
   },
   {
     name: "news",
-    path: "/novosti",
+    path: "/news",
     component: () => lazyLoad(import("@/modules/Root/pages/NewsPage.vue")),
+  },
+  {
+    name: "about",
+    path: "/about",
+    component: () => lazyLoad(import("@/modules/Root/pages/AboutPage.vue")),
   },
 ];
 

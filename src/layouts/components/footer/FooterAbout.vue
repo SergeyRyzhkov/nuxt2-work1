@@ -3,6 +3,9 @@
     <ul class="footer-ul">
       <li>О КОМПАНИИ</li>
       <li>
+        <nuxt-link :to="{ name: 'about' }">О нас</nuxt-link>
+      </li>
+      <li>
         <nuxt-link :to="{ name: 'news' }">Новости</nuxt-link>
       </li>
       <li>Договор-оферта</li>
