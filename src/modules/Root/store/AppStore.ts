@@ -7,11 +7,11 @@ import { RouteLink } from "@/_core/models/RouteLink";
   namespaced: true,
 })
 export default class AppStore extends VuexModule {
-  private breadCrumbList: RouteLink[] = [];
+  breadCrumbList: RouteLink[] = [];
 
-  get breadCrumbs() {
-    return this.breadCrumbList;
-  }
+  // get breadCrumbs() {
+  //   return this.breadCrumbList;
+  // }
 
   @VuexMutation
   private setBreadCrumbList(breadCrumbList: RouteLink[]) {
