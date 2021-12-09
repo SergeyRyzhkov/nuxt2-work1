@@ -3,7 +3,7 @@ import { RouteLink } from "@/_core/models/RouteLink";
 
 @Module({
   name: "AppStore",
-  stateFactory: true,
+  // stateFactory: true,
   namespaced: true,
 })
 export default class AppStore extends VuexModule {
