@@ -1,1 +1,3 @@
-export const strict = false;
+import Vuex from "vuex";
+
+export const store = new Vuex.Store<any>({});

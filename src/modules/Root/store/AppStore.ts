@@ -1,17 +1,20 @@
 import { Module, VuexModule, VuexMutation, VuexAction } from "nuxt-property-decorator";
 import { RouteLink } from "@/_core/models/RouteLink";
+import { store } from "@/store";
 
 @Module({
   name: "AppStore",
   stateFactory: true,
   namespaced: true,
+  dynamic: true,
+  store,
 })
 export default class AppStore extends VuexModule {
-  breadCrumbList: RouteLink[] = [];
+  private breadCrumbList: RouteLink[] = [];
 
-  // get breadCrumbs() {
-  //   return this.breadCrumbList;
-  // }
+  get breadCrumbs() {
+    return this.breadCrumbList;
+  }
 
   @VuexMutation
   private setBreadCrumbList(breadCrumbList: RouteLink[]) {

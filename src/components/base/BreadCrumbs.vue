@@ -34,7 +34,7 @@ import AppStore from "@/modules/Root/store/AppStore";
 @Component
 export default class BreadCrumbs extends Vue {
   get breadCrumbs() {
-    return getModule(AppStore, this.$store).breadCrumbList;
+    return getModule(AppStore, this.$store).breadCrumbs;
   }
 
   get shouldShow() {
