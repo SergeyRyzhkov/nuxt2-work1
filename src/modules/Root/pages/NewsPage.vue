@@ -32,6 +32,7 @@ export default class NewsPage extends Vue {
       { linkName: this.newsModel?.title?.substring(0, 100) + "..." },
     ];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
+    console.log("updateBreadCrumbs");
     console.log(getModule(AppStore, this.$store).breadCrumbs);
   }
 
