@@ -38,7 +38,7 @@ export default class NewsPage extends Vue {
   head() {
     if (!!this.newsModel.meta_slug) {
       this.newsModel.meta_image = this.newsModel.logo.url;
-      return this.$serviceLocator.getService(SeoMetaTagsBuilder).createHead(this.newsModel, this.$route.fullPath);
+      return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(this.newsModel, this.$route.fullPath);
     }
   }
 }

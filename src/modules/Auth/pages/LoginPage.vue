@@ -22,6 +22,7 @@ import LoginData from "../models/LoginData";
 import RegistrationData from "../models/RegistrationData";
 import AuthForm from "@/modules/Auth/components/AuthForm.vue";
 import AuthBanner from "@/modules/Auth/components/AuthBanner.vue";
+import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 
 @Component({ components: { AuthForm, AuthBanner } })
 export default class LoginPage extends Vue {
@@ -51,6 +52,10 @@ export default class LoginPage extends Vue {
     await this.$serviceLocator
       .getService(AuthService)
       .verifyEmail("sergeyryzhkov76@gmail.com", "sergeyryzhkov76@gmail.com", "2221");
+  }
+
+  head() {
+    return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(undefined, this.$route.fullPath);
   }
 }
 </script>

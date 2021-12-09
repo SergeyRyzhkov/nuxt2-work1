@@ -16,6 +16,7 @@
 import { Component, Vue } from "nuxt-property-decorator";
 import AboutPageModel from "../models/AboutPageModel";
 import { PagesContentService } from "../PagesContentService";
+import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 
 @Component
 export default class AboutPage extends Vue {
@@ -44,5 +45,12 @@ export default class AboutPage extends Vue {
   get secondImageSrc() {
     return this.aboutModel?.content_image_2?.url || null;
   }
+
+  head() {
+    return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(undefined, this.$route.fullPath);
+  }
 }
 </script>
+
+function SeoMetaTagsBuilder(SeoMetaTagsBuilder: any) { throw new Error('Function not implemented.'); } function
+SeoMetaTagsBuilder(SeoMetaTagsBuilder: any) { throw new Error('Function not implemented.'); }

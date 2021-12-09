@@ -8,7 +8,12 @@
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
+import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 
 @Component
-export default class MainPage extends Vue {}
+export default class MainPage extends Vue {
+  head() {
+    return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(undefined, this.$route.fullPath);
+  }
+}
 </script>

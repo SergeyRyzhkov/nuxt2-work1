@@ -15,6 +15,7 @@ import NewsModel from "../models/NewsModel";
 import AppStore from "../store/AppStore";
 import { Pagination } from "@/_core/models/Pagination";
 import { EmptyService } from "@/_core/service/EmptyService";
+import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 
 @Component
 export default class NewsListPage extends Vue {
@@ -42,6 +43,10 @@ export default class NewsListPage extends Vue {
   onUpdatePagination(pageNmb: number) {
     this.pagination.currentPage = pageNmb;
     this.updateData();
+  }
+
+  head() {
+    return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(undefined, this.$route.fullPath);
   }
 }
 </script>
