@@ -60,7 +60,7 @@ const nuxtConfig: NuxtConfig = {
   plugins: [
     { src: "@/plugins/app-init" },
     { src: "@/plugins/directives" },
-    // { src: "@/plugins/vuelidate" },
+    { src: "@/plugins/vuelidate" },
     // { src: "@/plugins/vue-lazyload" },
     { src: "@/plugins/modal-manager.client" },
   ],
