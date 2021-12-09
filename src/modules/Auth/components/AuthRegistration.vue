@@ -65,6 +65,4 @@ export default class AuthRegistration extends Vue {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style></style>

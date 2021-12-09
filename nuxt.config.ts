@@ -167,6 +167,12 @@ const nuxtConfig: NuxtConfig = {
     apiUrl: "https://api.kaypro.plenexy.digital/api",
     baseUrl: "https://api.kaypro.plenexy.digital",
   },
+
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: process.env.API_URL,
+    },
+  },
 };
 
 export default nuxtConfig;

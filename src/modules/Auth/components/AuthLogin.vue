@@ -43,6 +43,4 @@ export default class AuthLogin extends Vue {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style></style>

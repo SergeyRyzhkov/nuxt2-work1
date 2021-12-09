@@ -8,16 +8,16 @@
       itemtype="https://schema.org/ListItem"
     >
       <nuxt-link
-        v-if="bread.link !== ''"
-        :to="{ name: bread.link, params: bread.params }"
+        v-if="bread.name !== ''"
+        :to="{ name: bread.name, params: bread.params }"
         itemid="/"
         itemtype="https://schema.org/Thing"
         itemscope="itemscope"
         itemprop="item"
       >
-        <span itemprop="name">{{ bread.name }}</span>
+        <span itemprop="name">{{ bread.linkName }}</span>
       </nuxt-link>
-      <span v-else itemprop="name">{{ bread.name }}</span>
+      <span v-else itemprop="name">{{ bread.linkName }}</span>
     </li>
   </ul>
 </template>

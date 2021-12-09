@@ -4,7 +4,7 @@ import { ServiceLocator } from "@/_core/service/ServiceLocator";
 import { AuthService } from "@/modules/Auth/AuthService";
 import { PagesContentService } from "@/modules/Root/PagesContentService";
 
-export default (ctx: Context, inject: Inject) => {
+export default async (ctx: Context, inject: Inject) => {
   ServiceLocator.createFreshServiceLocator();
 
   ServiceLocator.instance.register(AuthService);
@@ -15,7 +15,7 @@ export default (ctx: Context, inject: Inject) => {
   configAxios(ctx);
 
   if (process.server) {
-    ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
+    await ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
   }
 
   inject("serviceLocator", ServiceLocator.instance);

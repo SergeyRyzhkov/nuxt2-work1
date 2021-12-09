@@ -14,35 +14,35 @@ export class BaseService {
     return this.ctx;
   }
 
-  protected get apiRequest() {
+  public get apiRequest() {
     return this.ctx.$axios;
   }
 
-  protected async getAnyOrNull(url: string, config?: any) {
+  public async getAnyOrNull(url: string, config?: any) {
     return await this.getAnyOrNullOrFail(false, url, config);
   }
 
-  protected async getAnyOrFail(url: string, config?: any) {
+  public async getAnyOrFail(url: string, config?: any) {
     return await this.getAnyOrNullOrFail(true, url, config);
   }
 
-  protected async getOneOrDefault<T>(Ctor: { new (): T }, url: string, config?: any): Promise<T> {
+  public async getOneOrDefault<T>(Ctor: { new (): T }, url: string, config?: any): Promise<T> {
     return await this.getOneOrFailOrDefault(false, Ctor, url, config);
   }
 
-  protected async getOneOrFail<T>(Ctor: { new (): T }, url: string, config?: any): Promise<T> {
+  public async getOneOrFail<T>(Ctor: { new (): T }, url: string, config?: any): Promise<T> {
     return await this.getOneOrFailOrDefault(true, Ctor, url, config);
   }
 
-  protected async getOneOrDefaultPost<T>(Ctor: { new (): T }, url: string, config?: any, postData?: any): Promise<T> {
+  public async getOneOrDefaultPost<T>(Ctor: { new (): T }, url: string, config?: any, postData?: any): Promise<T> {
     return await this.getOneOrEmptyOrThrowErrorPost(false, Ctor, url, config, postData);
   }
 
-  protected async getOneOrFailPost<T>(Ctor: { new (): T }, url: string, config?: any, postData?: any): Promise<T> {
+  public async getOneOrFailPost<T>(Ctor: { new (): T }, url: string, config?: any, postData?: any): Promise<T> {
     return await this.getOneOrEmptyOrThrowErrorPost(true, Ctor, url, config, postData);
   }
 
-  protected async getArrayOrEmpty<T>(ctor: { new (): T }, url: string, params?: any, pagination?: Pagination): Promise<T[]> {
+  public async getArrayOrEmpty<T>(ctor: { new (): T }, url: string, params?: any, pagination?: Pagination): Promise<T[]> {
     try {
       const response = await this.apiRequest.get(this.buildQueryWithPagination(url, pagination), params);
       const data = response?.data?.data || response?.data;
@@ -52,7 +52,7 @@ export class BaseService {
     }
   }
 
-  protected async getArrayOrEmptyPost<T>(ctor: { new (): T }, url: string, params?: any, postData?: any): Promise<T[]> {
+  public async getArrayOrEmptyPost<T>(ctor: { new (): T }, url: string, params?: any, postData?: any): Promise<T[]> {
     try {
       const response = await this.apiRequest.post(url, postData, params);
       const data = response?.data?.data || response?.data;
@@ -63,7 +63,7 @@ export class BaseService {
   }
 
   // FIXME: тут еще с ошибкой
-  protected async getArrayOrEmptyWithPaginationGet<T>(
+  public async getArrayOrEmptyWithPagination<T>(
     ctor: { new (): T },
     url: string,
     params?: any,
@@ -72,7 +72,7 @@ export class BaseService {
     return await this.getArrayOrEmptyWithPaginationAny(ctor, url, params, pagination, false);
   }
 
-  protected async getArrayOrEmptyWithPaginationPost<T>(
+  public async getArrayOrEmptyWithPaginationPost<T>(
     ctor: { new (): T },
     url: string,
     params?: any,
@@ -155,13 +155,14 @@ export class BaseService {
       if (response?.data?.meta) {
         paginCollection.pagination = plainToClass(Pagination, response?.data?.meta);
       }
-      if (response?.data?.count > -1) {
+      if (response?.data?.count > -1 && !!paginCollection.pagination) {
         paginCollection.pagination = pagination as Pagination;
         paginCollection.pagination.total = response.data.count;
       }
 
       paginCollection.seo = response?.data?.seo || {};
-    } catch {
+    } catch (err) {
+      console.log(err);
       return paginCollection;
     }
     return paginCollection;
