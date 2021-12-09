@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="base-input"
-    :class="{ 'base-input--error': isShakeError && hasError }"
-  >
+  <div class="base-input" :class="{ 'base-input--error': isShakeError && hasError }">
     <div class="base-input__wrap">
       <input
         class="base-input__input"
@@ -95,7 +92,7 @@ export default class BaseInput extends Vue {
     box-sizing: border-box;
     width: 100%;
     outline: none;
-    color: #838383;
+    //  color: #838383;
     @apply text-14 leading-24 pb-14;
     &--error {
       border: 1px solid #ff4e4e;
@@ -107,7 +104,6 @@ export default class BaseInput extends Vue {
       opacity: 1;
       color: $gray;
     }
-
   }
 
   &__help {
