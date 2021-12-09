@@ -1,37 +1,43 @@
 <template>
   <div class="flex items-center relative">
-    <input type="checkbox" :id="id"
-           v-bind="{ ...$attrs }"
-           :value="val"
-           v-on="{
-          ...$listeners,
-          input: (event) => $emit('input', event.target.value),
-          focus: (event) => $emit('focus', event.target.value),
-          blur: (event) => $emit('blur', event.target.value),
-          change: (event) => $emit('change', event.target.value),
-        }">
+    <input
+      :id="id"
+      type="checkbox"
+      v-bind="{ ...$attrs }"
+      :value="val"
+      v-on="{
+        ...$listeners,
+        input: (event) => $emit('input', event.target.value),
+        focus: (event) => $emit('focus', event.target.value),
+        blur: (event) => $emit('blur', event.target.value),
+        change: (event) => $emit('change', event.target.value),
+      }"
+    />
     <label class="text-14 leading-20 ml-12 cursor-pointer checkbox-label" :for="id">{{ label }}</label>
   </div>
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from "nuxt-property-decorator";
+import { Vue, Component, Prop } from "nuxt-property-decorator";
 
 @Component
 export default class BaseCheckbox extends Vue {
-  @Prop({required: true})
+  @Prop({ required: true })
   label: string;
-  @Prop({required: true})
+
+  @Prop({ required: true })
   id: string;
+
   @Prop()
   value;
+
   @Prop()
   val;
 }
 </script>
 
-<style lang="scss" >
-input[type=checkbox] {
+<style lang="scss">
+input[type="checkbox"] {
   -webkit-appearance: none;
   width: 18px;
   height: 18px;
@@ -71,5 +77,4 @@ input[type=checkbox] {
   user-select: none;
   cursor: pointer;
 }
-
 </style>

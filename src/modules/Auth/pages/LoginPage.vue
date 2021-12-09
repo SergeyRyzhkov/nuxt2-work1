@@ -1,7 +1,7 @@
 <template>
   <main class="flex w-screen h-screen">
-    <AuthBanner/>
-    <AuthForm/>
+    <AuthBanner />
+    <AuthForm />
     <!--    <form class="flex flex-col" @submit.prevent="onLogon">-->
     <!--      <input v-model="loginFormData.email" />-->
     <!--      <input v-model="loginFormData.password" />-->
@@ -16,14 +16,14 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "nuxt-property-decorator";
-import {AuthService} from "../AuthService";
+import { Component, Vue } from "nuxt-property-decorator";
+import { AuthService } from "../AuthService";
 import LoginData from "../models/LoginData";
 import RegistrationData from "../models/RegistrationData";
 import AuthForm from "@/modules/Auth/components/AuthForm.vue";
 import AuthBanner from "@/modules/Auth/components/AuthBanner.vue";
 
-@Component({components: {AuthForm, AuthBanner}})
+@Component({ components: { AuthForm, AuthBanner } })
 export default class LoginPage extends Vue {
   loginFormData: LoginData = new LoginData();
 

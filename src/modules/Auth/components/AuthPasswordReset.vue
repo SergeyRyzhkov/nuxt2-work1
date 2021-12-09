@@ -1,25 +1,26 @@
 <template>
   <div>
-    <AuthSubHeader :title="title" :description="description"/>
+    <AuthSubHeader :title="title" :description="description" />
     <BaseInput v-model="email" :has-error="$v.email.$error" placeholder="Введите электронную почту"></BaseInput>
     <BaseButton class="mt-40" @click="resendVerifyEmail">Отправить</BaseButton>
   </div>
 </template>
 
 <script lang="ts">
-import {Vue, Component} from "nuxt-property-decorator";
+import { Vue, Component } from "nuxt-property-decorator";
+import { required, email } from "vuelidate/lib/validators";
 import AuthSubHeader from "@/modules/Auth/components/AuthSubHeader.vue";
-import {AuthService} from "@/modules/Auth/AuthService";
-import {required, email} from "vuelidate/lib/validators";
+import { AuthService } from "@/modules/Auth/AuthService";
 
 const validations = () => {
   return {
     email: {
-      required, email
-    }
-  }
-}
-@Component({components: {AuthSubHeader}, validations})
+      required,
+      email,
+    },
+  };
+};
+@Component({ components: { AuthSubHeader }, validations })
 export default class AuthPasswordReset extends Vue {
   title: string = "Восстановление пароля";
   description: string = "Мы отправим вам письмо с ссылкой для восстановления пароля на указанную почту";
