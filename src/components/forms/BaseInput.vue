@@ -95,7 +95,7 @@ export default class BaseInput extends Vue {
     //  color: #838383;
     @apply text-14 leading-24 pb-14;
     &--error {
-      border: 1px solid #ff4e4e;
+      border-bottom: 1px solid #ff4e4e;
     }
     &--help {
       border: 1px solid #3068f7;

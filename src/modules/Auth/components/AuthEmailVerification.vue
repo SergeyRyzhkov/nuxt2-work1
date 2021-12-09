@@ -1,20 +1,39 @@
 <template>
   <div>
     <AuthSubHeader :title="title" :email="email" />
-    <BaseInput placeholder="Код из почты"></BaseInput>
-    <div class="text-code mt-20 mb-40">Запросить код повторно можно через 22 секунд</div>
-    <BaseButton>Подтвердить</BaseButton>
+    <BaseInput placeholder="Код из почты" v-model="code" :has-error="$v.code.$error"></BaseInput>
+    <div class="text-code mt-20 mb-40" >Запросить код повторно можно через 22 секунд</div>
+    <BaseButton @click="verifyEmail">Подтвердить</BaseButton>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
 import AuthSubHeader from "@/modules/Auth/components/AuthSubHeader.vue";
+import {AuthService} from "@/modules/Auth/AuthService";
+import {required} from "vuelidate/lib/validators";
+const validations = () => {
+  return {
+    code: {required}
+  }
+}
 
-@Component({ components: { AuthSubHeader } })
+@Component({ components: { AuthSubHeader }, validations })
 export default class AuthEmailVerification extends Vue {
-  email = "svetlana_lebedeva@mail.ru";
-  title = "Подтвердите почту";
+  email:string = "svetlana_lebedeva@mail.ru";
+  title:string = "Подтвердите почту";
+  code:string;
+
+  async verifyEmail() {
+    this.$v.$reset()
+    this.$v.$touch()
+    if (this.$v.$invalid){
+      return;
+    }
+    await this.$serviceLocator
+      .getService(AuthService)
+      .verifyEmail("sergeyryzhkov76@gmail.com", "sergeyryzhkov76@gmail.com", this.code);
+  }
 }
 </script>
 
