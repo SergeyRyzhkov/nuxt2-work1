@@ -33,7 +33,7 @@ export default class NewsPage extends Vue {
     ];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
     console.log("updateBreadCrumbs");
-    console.log(this.$store);
+    console.log(getModule(AppStore, this.$store));
     console.log(getModule(AppStore, this.$store).breadCrumbs);
   }
 
