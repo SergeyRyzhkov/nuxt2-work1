@@ -16,6 +16,7 @@ export class ContextServiceRegistry {
 
   public register<T extends BaseService>(Ctor: ConstructorOf<T>, ...args: any[]) {
     const service = new Ctor(...args);
+    service.nuxtContext = this.ctx;
     this.servicesMap.set(Ctor, service);
     return this;
   }
