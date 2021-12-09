@@ -2,28 +2,28 @@
   <main class="flex w-screen h-screen">
     <AuthBanner/>
     <AuthForm/>
-<!--    <form class="flex flex-col" @submit.prevent="onLogon">-->
-<!--      <input v-model="loginFormData.email" />-->
-<!--      <input v-model="loginFormData.password" />-->
-<!--      <button type="submit">Войти</button>-->
-<!--    </form>-->
-<!--    <div class="flex flex-col">-->
-<!--      <button type="button" class="mt-60" @click="register">Зарегаться</button>-->
-<!--      <button type="button" class="mt-60" @click="resendVerifyEmail">Выслать код повторно</button>-->
-<!--      <button type="button" class="mt-60" @click="verifyEmail">Подтвердить код</button>-->
-<!--    </div>-->
+    <!--    <form class="flex flex-col" @submit.prevent="onLogon">-->
+    <!--      <input v-model="loginFormData.email" />-->
+    <!--      <input v-model="loginFormData.password" />-->
+    <!--      <button type="submit">Войти</button>-->
+    <!--    </form>-->
+    <!--    <div class="flex flex-col">-->
+    <!--      <button type="button" class="mt-60" @click="register">Зарегаться</button>-->
+    <!--      <button type="button" class="mt-60" @click="resendVerifyEmail">Выслать код повторно</button>-->
+    <!--      <button type="button" class="mt-60" @click="verifyEmail">Подтвердить код</button>-->
+    <!--    </div>-->
   </main>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
-import { AuthService } from "../AuthService";
+import {Component, Vue} from "nuxt-property-decorator";
+import {AuthService} from "../AuthService";
 import LoginData from "../models/LoginData";
 import RegistrationData from "../models/RegistrationData";
 import AuthForm from "@/modules/Auth/components/AuthForm.vue";
 import AuthBanner from "@/modules/Auth/components/AuthBanner.vue";
 
-@Component({components:{AuthForm, AuthBanner}})
+@Component({components: {AuthForm, AuthBanner}})
 export default class LoginPage extends Vue {
   loginFormData: LoginData = new LoginData();
 
