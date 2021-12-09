@@ -1,5 +1,5 @@
 module.exports = {
-  //  mode: "jit",
+  mode: "jit",
   purge: {
     content: [
       "./src/components/**/*.vue",
@@ -15,17 +15,17 @@ module.exports = {
   },
 
   theme: {
-    fontSize:{
-      12: '12px',
-      14: '14px',
-      17: '17px',
-      24: '24px'
+    fontSize: {
+      12: "12px",
+      14: "14px",
+      17: "17px",
+      24: "24px",
     },
-    lineHeight:{
-      14: '14px',
-      20: '20px',
-      24: '24px',
-      30: '30px',
+    lineHeight: {
+      14: "14px",
+      20: "20px",
+      24: "24px",
+      30: "30px",
     },
     screens: {
       sm: "640px",

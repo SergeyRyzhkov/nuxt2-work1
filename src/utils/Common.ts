@@ -2,6 +2,10 @@ export const lazyLoad = (promise) => {
   return promise.then((m) => m.default || m);
 };
 
+export const delay = (ms: number) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
 // public download(_url: string, _config?: any) {
 //     //  try {
 //     //   const response = await this.$serviceRegistry

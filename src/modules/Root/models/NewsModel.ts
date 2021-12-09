@@ -1,7 +1,6 @@
-import { BaseViewModel } from "@/_core/models/BaseViewModel";
+import SeoModel from "@/_core/models/SeoModel";
 
-export default class NewsModel extends BaseViewModel {
-  id: number;
+export default class NewsModel extends SeoModel {
   title: string;
   text: string;
   logo: { url: string };

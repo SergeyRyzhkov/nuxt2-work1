@@ -1,5 +1,5 @@
 <template>
-  <article v-if="!!articleModel && articleModel.id > 0" class="article-smallitem" @click="goToCard()">
+  <article v-if="!!articleModel && !!articleModel.meta_slug" class="article-smallitem" @click="goToCard()">
     <figure class="article-smallitem__preview">
       <img :src="imageSrc" :alt="articleModel.title" itemprop="image" class="article-smallitem__preview-img" loading="lazy" />
       <figcaption>{{ articleModel.title }}</figcaption>
@@ -38,7 +38,7 @@ export default class NewsItem extends Vue {
 
   goToCard() {
     // @ts-ignore
-    this.$router.push({ name: "news-card", params: { id: this.articleModel.id } });
+    this.$router.push({ name: "news-card", params: { slug: this.articleModel.meta_slug } });
   }
 }
 </script>

@@ -45,7 +45,7 @@ const nuxtConfig: NuxtConfig = {
       {
         rel: "icon",
         type: "image/x-icon",
-        href: "/favicon.ico",
+        href: "/favicon.png",
       },
     ],
 
@@ -166,6 +166,13 @@ const nuxtConfig: NuxtConfig = {
     // baseUrl: process.env.BASE_URL || "https://api.kaypro.plenexy.digital",
     apiUrl: "https://api.kaypro.plenexy.digital/api",
     baseUrl: "https://api.kaypro.plenexy.digital",
+    siteUrl: "https://kaypro.plenexy.digital",
+
+    defaultMetaDescription:
+      "Эксклюзивный представитель итальянского бренда KAYPRO в России. Широкий ассортимент продукции, удобные способы оплаты, быстрая доставка.",
+    defaulMetaTitle:
+      "Эксклюзивный представитель итальянского бренда KAYPRO в России. Широкий ассортимент продукции, удобные способы оплаты, быстрая доставка.",
+    defaulMetaImgSrc: "https://kaypro.plenexy.digital/images/header_logo.png",
   },
 
   privateRuntimeConfig: {

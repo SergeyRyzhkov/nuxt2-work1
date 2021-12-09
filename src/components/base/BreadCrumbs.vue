@@ -1,25 +1,29 @@
 <template>
-  <ul class="brc-breadcrumb" itemscope="itemscope" itemtype="https://schema.org/BreadcrumbList">
-    <li
-      v-for="(bread, idx) in breadCrumbs"
-      :key="idx"
-      itemprop="itemListElement"
-      itemscope="itemscope"
-      itemtype="https://schema.org/ListItem"
-    >
-      <nuxt-link
-        v-if="bread.name !== ''"
-        :to="{ name: bread.name, params: bread.params }"
-        itemid="/"
-        itemtype="https://schema.org/Thing"
+  <div v-if="shouldShow" class="breadcrumbs">
+    <ol class="breadcrumbs__list" itemscope="itemscope" itemtype="https://schema.org/BreadcrumbList">
+      <li
+        v-for="(bread, idx) in breadCrumbs"
+        :key="idx"
+        itemprop="itemListElement"
         itemscope="itemscope"
-        itemprop="item"
+        itemtype="https://schema.org/ListItem"
+        class="breadcrumbs__item"
       >
-        <span itemprop="name">{{ bread.linkName }}</span>
-      </nuxt-link>
-      <span v-else itemprop="name">{{ bread.linkName }}</span>
-    </li>
-  </ul>
+        <nuxt-link
+          v-if="!!bread.name && idx !== breadCrumbs.length - 1"
+          :to="{ name: bread.name, params: bread.params, query: bread.query }"
+          itemid="/"
+          itemtype="https://schema.org/Thing"
+          itemscope="itemscope"
+          itemprop="item"
+          class="breadcrumbs__link"
+        >
+          <span itemprop="name">{{ bread.linkName }}</span>
+        </nuxt-link>
+        <span v-else itemprop="name" class="breadcrumbs__active">{{ bread.linkName }}</span>
+      </li>
+    </ol>
+  </div>
 </template>
 
 <script lang="ts">

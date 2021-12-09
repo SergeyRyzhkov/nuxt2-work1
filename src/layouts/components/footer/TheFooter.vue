@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-primary container-fluid mt-30 lg:mt-60">
+  <footer class="bg-primary container-fluid mt-auto">
     <div class="container flex items-start mt-30 mb-20 lg:mt-60 lg:mb-40">
       <footer-logo class="w-1/4"></footer-logo>
       <footer-about class="ml-100"></footer-about>

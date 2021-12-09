@@ -9,6 +9,8 @@ export type RouteLink = {
   // Параметры маршрута
   params?: any;
 
+  query?: any;
+
   // Признак видимости
   isVisible?: boolean;
 

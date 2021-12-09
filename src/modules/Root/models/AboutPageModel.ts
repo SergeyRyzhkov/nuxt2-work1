@@ -1,4 +1,4 @@
-import SeoModel from "./SeoModel";
+import SeoModel from "../../../_core/models/SeoModel";
 
 export default class AboutPageModel extends SeoModel {
   banner: { url: string };

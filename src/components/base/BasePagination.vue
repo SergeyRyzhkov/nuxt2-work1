@@ -1,28 +1,23 @@
 <template>
   <div v-if="countPage > 1" class="brc-pagination">
     <ul>
-      <li v-if="pages[0] > 1" @click="currentChange(pages[0] - 1)">&lt;</li>
-      <li v-for="page in pages" :key="page" :class="{ active: isActivePage(page) }" @click="() => currentChange(page)">
+      <li v-if="pages[0] > 1" @click="fireUpdateEvent(pages[0] - 1)">&lt;</li>
+      <li v-for="page in pages" :key="page" :class="{ active: isActivePage(page) }" @click="() => fireUpdateEvent(page)">
         {{ page }}
       </li>
-      <li v-if="pages[pages.length - 1] < countPage" @click="() => currentChange(pages[pages.length - 1] + 1)">&gt;</li>
+      <li v-if="pages[pages.length - 1] < countPage" @click="() => fireUpdateEvent(pages[pages.length - 1] + 1)">&gt;</li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "nuxt-property-decorator";
+import { Pagination } from "@/_core/models/Pagination";
 
 @Component
 export default class BasePagination extends Vue {
-  @Prop(Number)
-  limit;
-
-  @Prop(Number)
-  total;
-
-  @Prop(Number)
-  currentPage;
+  @Prop()
+  pagination: Pagination;
 
   @Prop({ default: true })
   onUpdateScroolToTop;
@@ -31,11 +26,11 @@ export default class BasePagination extends Vue {
   selectedPages: number[];
 
   isActivePage(pageNmb: number) {
-    return pageNmb === this.currentPage || this.selectedPages?.includes(pageNmb);
+    return pageNmb === this.pagination.currentPage || this.selectedPages?.includes(pageNmb);
   }
 
   get countPage() {
-    return this.limit > 0 ? Math.ceil(this.total / this.limit) : 0;
+    return this.pagination.perPage > 0 ? Math.ceil(this.pagination.total / this.pagination.perPage) : 0;
   }
 
   get pages() {
@@ -44,13 +39,13 @@ export default class BasePagination extends Vue {
     let startPage = 1;
     let endPage = this.countPage;
 
-    if (this.currentPage - Math.floor(this.limit / 2) <= 1) {
-      endPage = this.limit < this.countPage ? this.limit : this.countPage;
-    } else if (this.currentPage + Math.floor(this.limit / 2) > this.countPage) {
-      startPage = this.countPage - this.limit > 1 ? this.countPage - this.limit : 1;
+    if (this.pagination.currentPage - Math.floor(this.pagination.perPage / 2) <= 1) {
+      endPage = this.pagination.perPage < this.countPage ? this.pagination.perPage : this.countPage;
+    } else if (this.pagination.currentPage + Math.floor(this.pagination.perPage / 2) > this.countPage) {
+      startPage = this.countPage - this.pagination.perPage > 1 ? this.countPage - this.pagination.perPage : 1;
     } else {
-      startPage = this.currentPage - Math.floor(this.limit / 2);
-      endPage = startPage + this.limit - 1;
+      startPage = this.pagination.currentPage - Math.floor(this.pagination.perPage / 2);
+      endPage = startPage + this.pagination.perPage - 1;
     }
     for (let i = startPage; i <= endPage; i++) {
       pages.push(i);
@@ -58,13 +53,8 @@ export default class BasePagination extends Vue {
     return pages;
   }
 
-  currentChange(current: number) {
-    this.$emit("update:currentPage", current);
-    this.fireUpdateEvent();
-  }
-
-  fireUpdateEvent() {
-    this.$emit("update:pagination");
+  fireUpdateEvent(pageNmb: number) {
+    this.$emit("update:page", pageNmb);
     if (this.onUpdateScroolToTop) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
