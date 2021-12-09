@@ -38,7 +38,7 @@ export default class BreadCrumbs extends Vue {
   }
 
   get shouldShow() {
-    return this.breadCrumbs.length >= 2;
+    return !!this.breadCrumbs && this.breadCrumbs.length >= 2;
   }
 }
 </script>
