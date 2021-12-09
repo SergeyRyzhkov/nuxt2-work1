@@ -6,7 +6,7 @@ export default class SessionUser extends BaseViewModel {
   // eslint-disable-next-line no-use-before-define
   public static anonymousUser: SessionUser = new SessionUser();
   id = 0;
-  first_name = null;
+  first_name = "нет";
   last_name = null;
   patronymic = null;
   address = null;

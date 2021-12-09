@@ -36,7 +36,9 @@ export default class NewsPage extends Vue {
     console.log("updateBreadCrumbs");
     console.log(getModule(AppStore, this.$store));
     console.log(getModule(AuthStore, this.$store));
+
     console.log(getModule(AppStore, this.$store).breadCrumbs);
+    console.log(getModule(AuthStore, this.$store).sessionUser);
   }
 
   head() {
