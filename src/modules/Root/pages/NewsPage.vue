@@ -23,7 +23,6 @@ export default class NewsPage extends Vue {
   async fetch() {
     this.newsModel = await this.$serviceLocator.getService(EmptyService).getOneOrDefault(NewsModel, `users/news/${this.slug}`);
     this.updateBreadCrumbs();
-    // this.$nuxt.error({ statusCode: 503, message: "Unable to fetch" });
   }
 
   updateBreadCrumbs() {
@@ -33,6 +32,7 @@ export default class NewsPage extends Vue {
       { linkName: this.newsModel?.title?.substring(0, 100) + "..." },
     ];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
+    console.log(getModule(AppStore, this.$store).breadCrumbs);
   }
 
   head() {
