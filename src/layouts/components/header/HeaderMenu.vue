@@ -19,11 +19,11 @@ export default class HeaderMenu extends Vue {}
 
 <style lang="scss">
 .header-menu-list {
+  @apply text-white text-14 font-semibold;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  color: white;
-  font-size: 14px;
+  line-height: 17px;
   text-transform: uppercase;
   margin: auto;
   > li {

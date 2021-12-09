@@ -1,14 +1,10 @@
 <template>
   <div
-    v-click-outside="() => $emit('click-outside')"
     class="base-input"
     :class="{ 'base-input--error': isShakeError && hasError }"
   >
-    <label v-if="!!label" class="base-input__label" :for="id">{{ label }}</label>
-
     <div class="base-input__wrap">
       <input
-        :id="id"
         class="base-input__input"
         :value="value"
         :class="[classes, currentClasses]"
@@ -83,14 +79,6 @@ export default class BaseInput extends Vue {
   position: relative;
   width: 100%;
 
-  &__label {
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    color: $gray;
-    margin-bottom: 10px;
-  }
-
   &__wrap {
     position: relative;
   }
@@ -103,17 +91,12 @@ export default class BaseInput extends Vue {
   }
 
   &__input {
-    border: 1px solid $light-gray;
+    border-bottom: 1px solid $light-gray;
     box-sizing: border-box;
-    border-radius: 4px;
-    padding: 10px 10px 10px 10px;
     width: 100%;
-    font-size: 14px;
-    line-height: 24px;
-    font-weight: 500;
-    color: $primary;
-    transition: all 0.2s ease;
-
+    outline: none;
+    color: #838383;
+    @apply text-14 leading-24 pb-14;
     &--error {
       border: 1px solid #ff4e4e;
     }
@@ -125,10 +108,6 @@ export default class BaseInput extends Vue {
       color: $gray;
     }
 
-    &:focus {
-      border: 1px solid $primary;
-      outline: 0;
-    }
   }
 
   &__help {
