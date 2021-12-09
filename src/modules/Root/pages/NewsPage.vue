@@ -1,5 +1,5 @@
 <template>
-  <main v-if="!$fetchState.pending" class="page-wrapper container">
+  <main v-if="!$fetchState.pending && !!newsModel.meta_slug" class="page-wrapper container">
     <BreadCrumbs />
     <h1 class="mt-15 md:mt-30">{{ newsModel.title }}</h1>
     <section class="mt-30 md:mt-60" v-html="newsModel.text"></section>
