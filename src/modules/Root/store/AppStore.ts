@@ -5,6 +5,7 @@ import { RouteLink } from "@/_core/models/RouteLink";
   name: "AppStore",
   stateFactory: true,
   namespaced: true,
+  dynamic: true,
 })
 export default class AppStore extends VuexModule {
   private breadCrumbList: RouteLink[] = [];
