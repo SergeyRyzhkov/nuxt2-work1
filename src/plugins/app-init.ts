@@ -5,6 +5,7 @@ import { AuthService } from "@/modules/Auth/AuthService";
 import { PagesContentService } from "@/modules/Root/PagesContentService";
 import { EmptyService } from "@/_core/service/EmptyService";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
+import Test from "@/modules/Auth/store/Test";
 
 export default async (ctx: Context, inject: Inject) => {
   ServiceLocator.createFreshServiceLocator();
@@ -21,6 +22,8 @@ export default async (ctx: Context, inject: Inject) => {
   if (process.server) {
     await ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
   }
+
+  ctx.store.registerModule("test", Test);
 
   inject("serviceLocator", ServiceLocator.instance);
 };
