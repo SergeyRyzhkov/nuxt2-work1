@@ -4,6 +4,7 @@ export default class NewsModel extends SeoModel {
   title: string;
   text: string;
   logo: { url: string };
+  banner: { url: string };
   published_at: string;
   views_count = 10;
 

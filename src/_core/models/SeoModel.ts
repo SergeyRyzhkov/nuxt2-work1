@@ -6,7 +6,7 @@ export default class SeoModel extends BaseViewModel {
   meta_description: string;
   meta_keywords: string;
   meta_slug: string;
-  meta_image: string;
+  meta_image?: string;
   fullPath: string;
 
   public constructor(init?: Partial<SeoModel>) {

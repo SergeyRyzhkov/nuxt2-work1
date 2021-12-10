@@ -1,0 +1,51 @@
+<template>
+  <section v-if="!!item && !!item.meta_slug" class="flex flex-col m-15 cursor-pointer" @click="goToCard()">
+    <div class="relative">
+      <img :src="imageSrc" />
+      <div class="absolute top-16 left-16 bg-primary px-16 py-8 rounded-full text-14 text-white">{{ statusName }}</div>
+    </div>
+    <div class="flex items-center justify-between mt-16">
+      <div class="font-normal">{{ dateTypeAddress }}</div>
+      <div class="font-semibold">{{ priceFormatted }}</div>
+    </div>
+    <div class="text-22 mt-16">{{ item.name }}</div>
+    <div class="mt-16 font-normal">{{ item.lecturer }}</div>
+  </section>
+</template>
+
+<script lang="ts">
+import { Component, Prop, Vue } from "nuxt-property-decorator";
+import dayjs from "dayjs";
+import TrainingModel from "../models/TrainingModel";
+
+@Component
+export default class TrainingItem extends Vue {
+  @Prop()
+  item: TrainingModel;
+
+  get imageSrc() {
+    return this.item?.logo?.url || null;
+  }
+
+  goToCard() {
+    // @ts-ignore
+    this.$router.push({ name: "training-card", params: { slug: this.item.meta_slug } });
+  }
+
+  get priceFormatted() {
+    return !!this.item.price ? this.item.price.toLocaleString("ru-RU") + " ₽" : "Бесплатно";
+  }
+
+  get statusName() {
+    return this.item.status === "completed" ? "Завершено" : "Планируется";
+  }
+
+  get dateTypeAddress() {
+    return `${dayjs(this.item.date?.split("T")[0]).format("DD MMMM")} | ${this.item.is_online ? "онлайн" : "оффлайн"} | ${
+      this.item.location || "Москва"
+    }`;
+  }
+}
+</script>
+
+<style lang="scss"></style>

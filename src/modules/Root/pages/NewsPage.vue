@@ -16,7 +16,7 @@ import { EmptyService } from "@/_core/service/EmptyService";
 @Component
 export default class NewsPage extends Vue {
   @Prop()
-  slug: number;
+  slug: string;
 
   newsModel: NewsModel = new NewsModel();
 
@@ -36,7 +36,7 @@ export default class NewsPage extends Vue {
 
   head() {
     if (!!this.newsModel.meta_slug) {
-      this.newsModel.meta_image = this.newsModel.logo.url;
+      this.newsModel.meta_image = this.newsModel.logo?.url || this.newsModel.banner?.url || undefined;
       return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(this.newsModel, this.$route.fullPath);
     }
   }

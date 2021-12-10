@@ -16,10 +16,15 @@ module.exports = {
 
   theme: {
     fontSize: {
-      12: "12px",
-      14: "14px",
-      17: "17px",
-      24: "24px",
+      12: ["12px", "20px"],
+      14: ["14px", "18px"],
+      17: ["17px", "20px"],
+      18: ["18px", "20px"],
+      20: ["20px", "20px"],
+      22: ["22px", "27px"],
+      24: ["24px", "20px"],
+      46: ["46px", "49px"],
+      48: ["48px", "49px"],
     },
     lineHeight: {
       14: "14px",
@@ -88,12 +93,14 @@ module.exports = {
 
     extend: {
       colors: {
-        primary: "#171717",
-        secondary: "#ed791e",
+        primary: "#131313",
+        secondary: "#ef8532",
         transparent: "transparent",
         current: "currentColor",
-        nude: "#FFF7F4",
+        nude: "#FFF7F5",
         footer: "#575555",
+        "section-gray": "#F2F0F3",
+        "font-gray": "#9D9D9D",
       },
     },
   },
