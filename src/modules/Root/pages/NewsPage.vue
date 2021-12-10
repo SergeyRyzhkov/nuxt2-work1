@@ -12,7 +12,6 @@ import NewsModel from "../models/NewsModel";
 import AppStore from "../store/AppStore";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import { EmptyService } from "@/_core/service/EmptyService";
-import Test from "@/modules/Auth/store/Test";
 
 @Component
 export default class NewsPage extends Vue {
@@ -34,10 +33,7 @@ export default class NewsPage extends Vue {
     ];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
     console.log("updateBreadCrumbs");
-
-    getModule(Test, this.$store).updatetestState("555555");
     console.log(getModule(AppStore, this.$store).breadCrumbs);
-    console.log(getModule(Test, this.$store).gettestState);
   }
 
   head() {
