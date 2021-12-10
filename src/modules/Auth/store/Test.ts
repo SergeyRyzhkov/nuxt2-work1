@@ -10,7 +10,7 @@ export default class Test extends VuexModule {
 
   @VuexMutation
   private settestState(accessToken: string) {
-    this.accessTokenState = accessToken;
+    this.testState = accessToken;
   }
 
   @VuexAction
