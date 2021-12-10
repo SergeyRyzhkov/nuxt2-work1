@@ -1,3 +1,5 @@
 import Vuex from "vuex";
 
-export const store = new Vuex.Store<any>({});
+export function createStore() {
+  return new Vuex.Store({});
+}
