@@ -4,7 +4,9 @@ export default async ({ store }) => {
   if (!!modulesImport) {
     for (const iter of modulesImport) {
       const part = iter.split("modules")[1];
-      store.registerModule(iter.name, await lazyLoad(import(`../src/modules${part}`)));
+      const names = iter.split("/");
+      const name = names[names.length - 1].replace(".ts", "");
+      store.registerModule(name, await lazyLoad(import(`../src/modules${part}`)));
     }
   }
 };
