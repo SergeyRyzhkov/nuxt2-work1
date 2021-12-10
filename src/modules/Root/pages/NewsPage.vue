@@ -9,10 +9,10 @@
 <script lang="ts">
 import { Component, Prop, Vue, getModule } from "nuxt-property-decorator";
 import NewsModel from "../models/NewsModel";
-import AppStore from "../store/AppStore";
+import AppStore from "../../../store/AppStore";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import { EmptyService } from "@/_core/service/EmptyService";
-import AuthStore from "@/modules/Auth/store/AuthStore";
+import AuthStore from "@/store/AuthStore";
 
 @Component
 export default class NewsPage extends Vue {
