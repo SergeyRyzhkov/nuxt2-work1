@@ -25,7 +25,8 @@ export default async (ctx: Context, inject: Inject) => {
     await ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
   }
 
-  ctx.store.registerModule("test", await lazyLoad(import("@/modules/Auth/store/Test")));
+  // @ts-ignore
+  ctx.store.registerModule("test", await lazyLoad(import("@/modules/Auth/store/Test.ts")));
   // getModule(Test, ctx.store).updatetestState("9999999999999");
 
   inject("serviceLocator", ServiceLocator.instance);
