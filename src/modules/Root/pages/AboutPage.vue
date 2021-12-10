@@ -47,7 +47,7 @@ export default class AboutPage extends Vue {
   }
 
   head() {
-    return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(undefined, this.$route.fullPath);
+    return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(this.aboutModel, this.$route.fullPath);
   }
 }
 </script>
