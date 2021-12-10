@@ -2,7 +2,7 @@
   <main v-if="!$fetchState.pending" class="page-wrapper container">
     <BreadCrumbs />
     <h1 class="mt-15 md:mt-30">Обучение</h1>
-    <section class="training-list-wrapper">
+    <section class="training-list-wrapper mt-30 md:mt-40">
       <TrainingItem v-for="iter in trainingList" :key="iter.meta_slug" :item="iter"> </TrainingItem>
     </section>
     <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>
@@ -52,7 +52,9 @@ export default class TrainingListPage extends Vue {
 <style lang="scss">
 .training-list-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-  margin: 30px -15px 0;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 400px));
+  row-gap: 48px;
+  -moz-column-gap: 15px;
+  column-gap: 30px;
 }
 </style>

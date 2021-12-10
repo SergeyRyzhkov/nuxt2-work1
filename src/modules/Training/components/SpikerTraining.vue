@@ -21,7 +21,7 @@ export default class SpikerTraining extends Vue {
   model: TrainingModel;
 
   get imageSrc() {
-    return this.model.lecturer_avatar?.url || "images/spiker_default.jpg";
+    return this.model.lecturer_avatar?.url || "/images/spiker_default.jpg";
   }
 }
 </script>

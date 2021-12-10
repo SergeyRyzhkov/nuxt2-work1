@@ -1,5 +1,5 @@
 <template>
-  <section v-if="!!item && !!item.meta_slug" class="flex flex-col m-15 cursor-pointer" @click="goToCard()">
+  <section v-if="!!item && !!item.meta_slug" class="flex flex-col cursor-pointer" @click="goToCard()">
     <div class="relative">
       <img :src="imageSrc" />
       <div class="absolute top-16 left-16 bg-primary px-16 py-8 rounded-full text-14 text-white">{{ statusName }}</div>
@@ -8,8 +8,8 @@
       <div class="font-normal">{{ dateTypeAddress }}</div>
       <div class="font-semibold">{{ priceFormatted }}</div>
     </div>
-    <div class="text-22 mt-16">{{ item.name }}</div>
-    <div class="mt-16 font-normal">{{ item.lecturer }}</div>
+    <div class="text-22 mt-12">{{ item.name }}</div>
+    <div class="mt-12 font-normal">{{ item.lecturer }}</div>
   </section>
 </template>
 

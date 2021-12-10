@@ -144,7 +144,7 @@ const nuxtConfig: NuxtConfig = {
   webfontloader: {
     events: false,
     google: {
-      families: ["Montserrat:400,500,600:cyrillic&display=swap"],
+      families: ["Montserrat:400,500,600,700:cyrillic&display=swap"],
     },
   },
 
