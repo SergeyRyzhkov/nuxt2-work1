@@ -12,7 +12,6 @@ import NewsModel from "../models/NewsModel";
 import AppStore from "../store/AppStore";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import { EmptyService } from "@/_core/service/EmptyService";
-import AuthStore from "@/modules/Auth/store/AuthStore";
 
 @Component
 export default class NewsPage extends Vue {
@@ -33,8 +32,6 @@ export default class NewsPage extends Vue {
       { linkName: this.newsModel?.title?.substring(0, 120) + "..." },
     ];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
-    console.log("updateBreadCrumbs");
-    console.log(getModule(AuthStore, this.$store).sessionUser);
   }
 
   head() {
