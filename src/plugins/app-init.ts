@@ -6,7 +6,7 @@ import { AuthService } from "@/modules/Auth/AuthService";
 import { PagesContentService } from "@/modules/Root/PagesContentService";
 import { EmptyService } from "@/_core/service/EmptyService";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
-import Test from "@/modules/Auth/store/Test";
+// import Test from "@/modules/Auth/store/Test";
 import { lazyLoad } from "@/utils/Common";
 
 export default async (ctx: Context, inject: Inject) => {
@@ -25,7 +25,7 @@ export default async (ctx: Context, inject: Inject) => {
     await ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
   }
 
-  // ctx.store.registerModule("test", await lazyLoad(import("@/modules/Auth/store/Test")));
+  ctx.store.registerModule("test", await lazyLoad(import("@/modules/Auth/store/Test")));
   // getModule(Test, ctx.store).updatetestState("9999999999999");
 
   inject("serviceLocator", ServiceLocator.instance);
