@@ -52,7 +52,7 @@ export default class TrainingListPage extends Vue {
 <style lang="scss">
 .training-list-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 400px));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   row-gap: 48px;
   -moz-column-gap: 15px;
   column-gap: 30px;
