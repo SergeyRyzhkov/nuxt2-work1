@@ -27,7 +27,8 @@ export default async (ctx: Context, inject: Inject) => {
 
   // @ts-ignore
   ctx.store.registerModule("test", await lazyLoad(import("@/modules/Auth/store/Test.ts")));
-  // getModule(Test, ctx.store).updatetestState("9999999999999");
+  // @ts-ignore
+  ctx.store.registerModule("AppStore", await lazyLoad(import("@/modules/Root/store/AppStore.ts")));
 
   inject("serviceLocator", ServiceLocator.instance);
 };
