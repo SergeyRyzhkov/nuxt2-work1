@@ -12,7 +12,7 @@
 <script lang="ts">
 import { Component, getModule, Vue } from "nuxt-property-decorator";
 import NewsModel from "../models/NewsModel";
-import AppStore from "../../../store/AppStore";
+import AppStore from "../store/AppStore";
 import { Pagination } from "@/_core/models/Pagination";
 import { EmptyService } from "@/_core/service/EmptyService";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";

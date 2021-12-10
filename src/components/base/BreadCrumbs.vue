@@ -29,7 +29,7 @@
 <script lang="ts">
 import { Component, Vue, getModule } from "nuxt-property-decorator";
 
-import AppStore from "@/store/AppStore";
+import AppStore from "@/modules/Root/store/AppStore";
 
 @Component
 export default class BreadCrumbs extends Vue {

@@ -9,7 +9,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, getModule } from "nuxt-property-decorator";
 import NewsModel from "../models/NewsModel";
-import AppStore from "../../../store/AppStore";
+import AppStore from "../store/AppStore";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import { EmptyService } from "@/_core/service/EmptyService";
 import Test from "@/modules/Auth/store/Test";
@@ -36,7 +36,7 @@ export default class NewsPage extends Vue {
     console.log("updateBreadCrumbs");
 
     // getModule(Test, this.$store).updatetestState("555555");
-    console.log(getModule(Test, this.$store).gettestState);
+    console.log(getModule(AppStore, this.$store).breadCrumbs);
   }
 
   head() {

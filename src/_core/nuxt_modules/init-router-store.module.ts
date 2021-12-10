@@ -63,31 +63,31 @@ const initAppModule: Module = function () {
   // =================================================
 
   // ============== Vuex Store Modules =============
-  // const getStoreImport = () => {
-  //   const routeList = [];
-  //   const storeDirs = getDirectories(resolve(this.options.srcDir, "modules"));
+  const getStoreImport = () => {
+    const routeList = [];
+    const storeDirs = getDirectories(resolve(this.options.srcDir, "modules"));
 
-  //   if (!!storeDirs) {
-  //     for (const iter of storeDirs) {
-  //       const storePath = resolve(iter, "store");
-  //       if (existsSync(storePath)) {
-  //         fs.readdirSync(storePath).forEach((iterFile) => {
-  //           const storeFilePath = relative(this.options.buildDir, path.join(storePath, iterFile)).replace(/\/+|\\+/g, "/");
-  //           // @ts-ignore
-  //           routeList.push(storeFilePath);
-  //         });
-  //       }
-  //     }
-  //   }
-  //   return routeList;
-  // };
+    if (!!storeDirs) {
+      for (const iter of storeDirs) {
+        const storePath = resolve(iter, "store");
+        if (existsSync(storePath)) {
+          fs.readdirSync(storePath).forEach((iterFile) => {
+            const storeFilePath = relative(this.options.buildDir, path.join(storePath, iterFile)).replace(/\/+|\\+/g, "/");
+            // @ts-ignore
+            routeList.push(storeFilePath);
+          });
+        }
+      }
+    }
+    return routeList;
+  };
 
-  // this.addPlugin({
-  //   src: resolve(__dirname, "store.plugin.ts"),
-  //   options: {
-  //     modulesImport: getStoreImport(),
-  //   },
-  // });
+  this.addPlugin({
+    src: resolve(__dirname, "store.plugin.ts"),
+    options: {
+      modulesImport: getStoreImport(),
+    },
+  });
 };
 // =================================================
 

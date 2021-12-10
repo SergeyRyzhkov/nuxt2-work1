@@ -1,8 +1,10 @@
 const modulesImport = JSON.parse(`<%= JSON.stringify(options.modulesImport) %>`);
 
 export default async ({ store }) => {
-  const modulesPr = getModulesPromises();
-  const modules = await Promise.all(modulesPr);
+  // const modulesPr = getModulesPromises();
+  // const modules = await Promise.all(modulesPr);
+
+  const modules = await getModulesPromises();
 
   modules.forEach((iter: any) => {
     if (!!iter && iter.name) {
@@ -11,13 +13,13 @@ export default async ({ store }) => {
   });
 };
 
-const getModulesPromises = () => {
+const getModulesPromises = async () => {
   const modules = [];
   if (!!modulesImport) {
     for (const iter of modulesImport) {
       const part = iter.split("modules")[1];
       // @ts-ignore
-      modules.push(lazyLoad(import(`../src/modules${part}`)));
+      modules.push(await lazyLoad(import(`../src/modules${part}`)));
     }
   }
 

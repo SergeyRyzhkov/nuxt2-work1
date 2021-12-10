@@ -4,8 +4,8 @@ import { LogonResult, LogonStatus } from "./models/LogonResult";
 import RegistrationData from "./models/RegistrationData";
 import { RegistrationResult, RegistrationStatus } from "./models/RegistrationResult";
 import SessionUser from "./models/SessionUser";
+import AuthStore from "./store/AuthStore";
 import { BaseService } from "@/_core/service/BaseService";
-import AuthStore from "@/store/AuthStore";
 
 export class AuthService extends BaseService {
   cookieTokenCookieName = "KAYPRO_TOKEN";
