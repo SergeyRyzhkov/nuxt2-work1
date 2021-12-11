@@ -1,12 +1,17 @@
 <template>
   <main v-if="!$fetchState.pending && !!model.meta_slug" class="page-wrapper">
-    <div class="container">
-      <BreadCrumbs />
-    </div>
-    <section>
-      <img v-if="bannerSrc" src="bannerSrc" />
+    <!-- <div class="container"> -->
+    <!-- <BreadCrumbs /> -->
+    <!-- </div> -->
+    <section :class="[bannerSrc ? 'container' : 'container-fluid bg-strong-nude']">
+      <BaseStaticBanner :image-src="bannerSrc" class="container">
+        <BannerAbsoluteItem
+          :class="[bannerSrc ? 'absolute top-40 left-40 md:top:60 md:left-60' : 'absolute top-16 left-16 md:top-32 md:left-32']"
+          :model="model"
+        ></BannerAbsoluteItem>
+      </BaseStaticBanner>
     </section>
-    <section class="container-fluid">
+    <section class="container-fluid" :class="[bannerSrc ? 'mt-40 md:mt-60' : '']">
       <div class="training-section-wrapper">
         <h2 class="training-section__caption">ПРОГРАММА</h2>
         <div class="training-section__content"><ProgramaTraining :model="model"></ProgramaTraining></div>

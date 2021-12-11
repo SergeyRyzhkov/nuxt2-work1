@@ -28,6 +28,7 @@ module.exports = {
       36: ["36px", "36px"],
       46: ["46px", "49px"],
       48: ["48px", "49px"],
+      60: ["60px", "49px"],
     },
     lineHeight: {
       14: "14px",
@@ -80,6 +81,8 @@ module.exports = {
       100: "100px",
       110: "110px",
       120: "120px",
+      200: "200px",
+      400: "400px",
     },
 
     container: {
@@ -101,6 +104,7 @@ module.exports = {
         transparent: "transparent",
         current: "currentColor",
         nude: "#FFF7F5",
+        "strong-nude": "#FCE8D9",
         footer: "#575555",
         "section-gray": "#F2F0F3",
         "font-gray": "#9D9D9D",
