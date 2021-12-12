@@ -15,9 +15,9 @@
       ></base-calendar>
     </div>
 
-    <section class="training-list-wrapper mt-30 md:mt-40">
+    <div class="training-list-wrapper mt-30 md:mt-40">
       <TrainingItem v-for="iter in trainingList" :key="iter.meta_slug" :item="iter"> </TrainingItem>
-    </section>
+    </div>
     <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>
   </main>
 </template>
@@ -77,7 +77,7 @@ export default class TrainingListPage extends Vue {
 <style lang="scss">
 .training-list-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   row-gap: 48px;
   -moz-column-gap: 15px;
   column-gap: 30px;

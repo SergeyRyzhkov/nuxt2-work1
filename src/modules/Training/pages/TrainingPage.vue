@@ -1,14 +1,12 @@
 <template>
   <main v-if="!$fetchState.pending && !!model.meta_slug" class="page-wrapper">
-    <section :class="[bannerSrc ? 'container' : 'container-fluid bg-strong-nude']">
-      <BaseStaticBanner :image-src="bannerSrc">
-        <BannerAbsoluteItem
-          class="absolute top-16 left-16 md:top-32 md:left-32"
-          :model="model"
-          @subscribe-clicked="onSubscribeClicked()"
-        ></BannerAbsoluteItem>
-      </BaseStaticBanner>
-    </section>
+    <BaseStaticBanner :image-src="bannerSrc">
+      <BannerAbsoluteItem
+        class="absolute top-16 left-16 md:top-32 md:left-64"
+        :model="model"
+        @subscribe-clicked="onSubscribeClicked()"
+      ></BannerAbsoluteItem>
+    </BaseStaticBanner>
     <section class="container-fluid">
       <div class="training-section-wrapper">
         <h2 class="training-section__caption">ПРОГРАММА</h2>

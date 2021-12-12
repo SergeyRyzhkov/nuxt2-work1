@@ -1,10 +1,12 @@
 <template>
-  <main v-if="!$fetchState.pending && !!newsModel.meta_slug" class="page-wrapper container">
-    <BaseStaticBanner :image-src="bannerSrc" />
-    <BreadCrumbs />
-    <h1>{{ newsModel.title }}</h1>
-    <section class="mt-30 md:mt-60" v-html="newsModel.text"></section>
-  </main>
+  <div v-if="!$fetchState.pending && !!newsModel.meta_slug" class="page-wrapper">
+    <BaseStaticBanner v-if="bannerSrc" :image-src="bannerSrc" />
+    <main class="container">
+      <BreadCrumbs />
+      <h1>{{ newsModel.title }}</h1>
+      <section class="mt-30 md:mt-60" v-html="newsModel.text"></section>
+    </main>
+  </div>
 </template>
 
 <script lang="ts">
