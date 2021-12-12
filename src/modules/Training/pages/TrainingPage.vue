@@ -2,6 +2,7 @@
   <main v-if="!$fetchState.pending && !!model.meta_slug" class="page-wrapper">
     <BaseStaticBanner :image-src="bannerSrc">
       <BannerAbsoluteItem
+        v-if="bannerSrc"
         class="absolute top-16 left-16 md:top-32 md:left-64"
         :model="model"
         @subscribe-clicked="onSubscribeClicked()"
