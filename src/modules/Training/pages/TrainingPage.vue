@@ -1,17 +1,15 @@
 <template>
   <main v-if="!$fetchState.pending && !!model.meta_slug" class="page-wrapper">
-    <!-- <div class="container"> -->
-    <!-- <BreadCrumbs /> -->
-    <!-- </div> -->
     <section :class="[bannerSrc ? 'container' : 'container-fluid bg-strong-nude']">
-      <BaseStaticBanner :image-src="bannerSrc" class="container">
+      <BaseStaticBanner :image-src="bannerSrc">
         <BannerAbsoluteItem
-          :class="[bannerSrc ? 'absolute top-40 left-40 md:top:60 md:left-60' : 'absolute top-16 left-16 md:top-32 md:left-32']"
+          class="absolute top-16 left-16 md:top-32 md:left-32"
           :model="model"
+          @subscribe-clicked="onSubscribeClicked()"
         ></BannerAbsoluteItem>
       </BaseStaticBanner>
     </section>
-    <section class="container-fluid" :class="[bannerSrc ? 'mt-40 md:mt-60' : '']">
+    <section class="container-fluid">
       <div class="training-section-wrapper">
         <h2 class="training-section__caption">ПРОГРАММА</h2>
         <div class="training-section__content"><ProgramaTraining :model="model"></ProgramaTraining></div>
@@ -35,16 +33,17 @@
     <section class="container-fluid">
       <div class="training-section-wrapper">
         <h2 class="training-section__caption"></h2>
-        <div class="training-section__content"><EnrollTraining :model="model" /></div>
+        <div class="training-section__content"><EnrollTraining ref="enrollTraining" :model="model" /></div>
       </div>
     </section>
   </main>
 </template>
 
 <script lang="ts">
-import { Component, getModule, Prop, Vue } from "nuxt-property-decorator";
+import { Component, getModule, Prop, Ref, Vue } from "nuxt-property-decorator";
 import TrainingModel from "../models/TrainingModel";
 import { TrainingService } from "../TrainingService";
+import EnrollTraining from "../components/EnrollTraining.vue";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import AppStore from "@/modules/Root/store/AppStore";
 
@@ -52,6 +51,8 @@ import AppStore from "@/modules/Root/store/AppStore";
 export default class TrainingPage extends Vue {
   @Prop()
   slug: string;
+
+  @Ref() readonly enrollTraining!: EnrollTraining;
 
   model: TrainingModel = new TrainingModel();
 
@@ -82,6 +83,10 @@ export default class TrainingPage extends Vue {
       { linkName: this.model?.name?.substring(0, 120) + "..." },
     ];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
+  }
+
+  onSubscribeClicked() {
+    this.enrollTraining?.$el?.scrollIntoView({ behavior: "smooth" });
   }
 }
 </script>

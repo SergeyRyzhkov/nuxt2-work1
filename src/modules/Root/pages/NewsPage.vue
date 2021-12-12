@@ -1,7 +1,8 @@
 <template>
   <main v-if="!$fetchState.pending && !!newsModel.meta_slug" class="page-wrapper container">
+    <BaseStaticBanner :image-src="bannerSrc" />
     <BreadCrumbs />
-    <h1 class="mt-15 md:mt-30">{{ newsModel.title }}</h1>
+    <h1>{{ newsModel.title }}</h1>
     <section class="mt-30 md:mt-60" v-html="newsModel.text"></section>
   </main>
 </template>
@@ -39,6 +40,10 @@ export default class NewsPage extends Vue {
       this.newsModel.meta_image = this.newsModel.logo?.url || this.newsModel.banner?.url || undefined;
       return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(this.newsModel, this.$route.fullPath);
     }
+  }
+
+  get bannerSrc() {
+    return this.newsModel.banner?.url || undefined;
   }
 }
 </script>

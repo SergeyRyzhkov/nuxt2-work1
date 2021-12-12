@@ -9,7 +9,7 @@ module.exports = {
       "./nuxt.config.ts",
     ],
     options: {
-      safelist: [/deep/, /vue.*?$/, /v-.*?$/, /overlay-.*?$/, /scroll-.*?$/],
+      safelist: [/deep/, /vfc*/],
       keyframes: true,
     },
   },

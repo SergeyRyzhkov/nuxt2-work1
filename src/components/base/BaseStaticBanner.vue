@@ -1,6 +1,6 @@
 <template>
-  <section class="banner-image-wrapper h-200 md:h-400">
-    <img v-if="imageSrc" :src="imageSrc" height="406" class="banner-image h-200 md:h-400" />
+  <section v-if="imageSrc" class="banner-image-wrapper h-200 md:h-400 mb-40 md:mb:60">
+    <img :src="imageSrc" height="406" class="banner-image h-200 md:h-400" />
     <slot></slot>
   </section>
 </template>
