@@ -8,14 +8,20 @@
       width="19"
       height="19"
       class="ml-24 lg:ml-48 cursor-pointer"
-      @click="$router.push({ name: 'login' })"
+      @click="authModal"
     />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
+import AuthModal from "@/modules/Auth/components/AuthModal.vue";
 
-@Component
-export default class HeaderUser extends Vue {}
+@Component({components: {AuthModal}})
+export default class HeaderUser extends Vue {
+
+  authModal() {
+    this.$modalManager.modalShow(AuthModal)
+  }
+}
 </script>
