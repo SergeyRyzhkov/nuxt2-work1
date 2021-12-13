@@ -9,7 +9,11 @@
     <template #dateRangeInputs="{ startDate, endDate }">
       <div @click="pickerClick">
         <slot name="dateRangeInputs" :startDate="startDate" :endDate="endDate">
-          <div readonly class="vfc-single-input">{{ formatDateRange }}</div>
+          <div class="vfc-single-input-wrapper">
+            <div v-if="!!formatDateRange" class="vfc-single-input">{{ formatDateRange }}</div>
+            <div v-else class="vfc-single-input vfc-single-input__placeholder">{{ dateRangeInputPlaceholder }}</div>
+            <img class="vfc-single-input__img" src="/images/calendar.svg" width="18" height="18" />
+          </div>
         </slot>
       </div>
     </template>
@@ -56,6 +60,9 @@ export default class BaseCalendar extends Vue {
   @Prop()
   value: any;
 
+  @Prop({ default: "Период" })
+  dateRangeInputPlaceholder: string;
+
   get valueModel() {
     return this.value || {};
   }
@@ -98,9 +105,12 @@ export default class BaseCalendar extends Vue {
 
   get formatDateRange() {
     if (!!this.valueModel && !!this.valueModel.dateRange) {
-      return `${!!this.valueModel?.dateRange?.start ? dayjs(this.valueModel?.dateRange?.start).format("DD.MM.YYYY") : ""} ${
-        !!this.valueModel?.dateRange?.start && !!this.valueModel?.dateRange?.end ? "~" : ""
-      } ${!!this.valueModel?.dateRange?.end ? dayjs(this.valueModel?.dateRange?.end).format("DD.MM.YYYY") : ""}`;
+      const result = `${
+        !!this.valueModel?.dateRange?.start ? dayjs(this.valueModel?.dateRange?.start).format("DD.MM.YYYY") : ""
+      } ${!!this.valueModel?.dateRange?.start && !!this.valueModel?.dateRange?.end ? "~" : ""} ${
+        !!this.valueModel?.dateRange?.end ? dayjs(this.valueModel?.dateRange?.end).format("DD.MM.YYYY") : ""
+      }`;
+      return result.trim();
     }
     return null;
   }
@@ -145,22 +155,33 @@ export default class BaseCalendar extends Vue {
   color: $primary;
 }
 
-.vfc-single-input {
+.vfc-single-input-wrapper {
   display: flex;
-  align-items: center;
-  width: 100%;
-  border: 1px solid #dddde4;
-  border-radius: 4px;
-  min-height: 48px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
-  color: #16192c;
-  padding: 10px 14px;
-  position: relative;
-  cursor: pointer;
+  flex-direction: row;
+  align-items: flex-end;
+  .vfc-single-input {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    min-width: 160px;
+    border: none;
+    border-bottom: 1px solid $light-gray;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: $primary;
+    position: relative;
+    cursor: pointer;
+    border-radius: 0px;
+    padding: 0px;
+    padding-bottom: 2px;
+  }
+  .vfc-single-input__img {
+    width: 22px;
+    height: 22px;
+    margin-left: 12px;
+  }
 }
-
 .vfc-cursor-pointer {
   color: $primary;
 }

@@ -79,7 +79,6 @@ export default class TrainingListPage extends Vue {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   row-gap: 48px;
-  -moz-column-gap: 15px;
-  column-gap: 30px;
+  column-gap: 32px;
 }
 </style>
