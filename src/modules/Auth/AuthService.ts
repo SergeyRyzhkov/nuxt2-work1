@@ -19,6 +19,11 @@ export class AuthService extends BaseService {
     return !!sessUser && sessUser.id > 0;
   }
 
+  get isUserActive() {
+    const sessUser = this.authStore.sessionUser;
+    return !!sessUser && sessUser.id > 0 && sessUser.status === "active";
+  }
+
   public getSessionUser(): SessionUser {
     return this.authStore.sessionUser;
   }

@@ -2,12 +2,21 @@
   <div>
     <AuthSubHeader :title="title" :tabs-visible="true" :is-active="'login'" @setFormType="(type) => $emit('setFormType', type)" />
     <form @submit.prevent="onLogon">
-      <BaseInput v-model="loginFormData.email" placeholder="E-mail*" :has-error="$v.loginFormData.email.$error" class="mb-27" />
+      <BaseInput
+        v-model="loginFormData.email"
+        placeholder="E-mail*"
+        :has-error="$v.loginFormData.email.$error"
+        class="mb-27"
+        :is-shake-error="true"
+        @blur="$v.loginFormData.email.$touch()"
+      />
       <BaseInput
         v-model="loginFormData.password"
         placeholder="Пароль*"
         :has-error="$v.loginFormData.password.$error"
+        :is-shake-error="true"
         type="password"
+        @blur="$v.loginFormData.password.$touch()"
       />
       <div class="mt-24 flex items-center justify-between">
         <BaseCheckbox :id="'remember-me'" :label="'Запомнить меня'" />

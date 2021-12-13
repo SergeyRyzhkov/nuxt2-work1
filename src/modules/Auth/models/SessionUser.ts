@@ -18,4 +18,9 @@ export default class SessionUser extends BaseViewModel {
   ITN = null;
   PSRN = null;
   entity_address = null;
+  price_type = null;
+  subscribe = null;
+  created_at = null;
+  updated_at = null;
+  status = null;
 }
