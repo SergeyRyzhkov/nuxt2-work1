@@ -1,7 +1,6 @@
 <template>
-  <main class="flex w-screen h-screen">
-    <AuthBanner />
-    <AuthForm />
+  <main class="w-screen h-screen">
+    <AuthForm class="float-right" />
     <!--    <form class="flex flex-col" @submit.prevent="onLogon">-->
     <!--      <input v-model="loginFormData.email" />-->
     <!--      <input v-model="loginFormData.password" />-->
@@ -21,10 +20,9 @@ import { AuthService } from "../AuthService";
 import LoginData from "../models/LoginData";
 import RegistrationData from "../models/RegistrationData";
 import AuthForm from "@/modules/Auth/components/AuthForm.vue";
-import AuthBanner from "@/modules/Auth/components/AuthBanner.vue";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 
-@Component({ components: { AuthForm, AuthBanner } })
+@Component({ components: { AuthForm } })
 export default class LoginPage extends Vue {
   loginFormData: LoginData = new LoginData();
 
