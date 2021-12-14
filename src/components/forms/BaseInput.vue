@@ -2,17 +2,28 @@
   <div class="base-input" :class="{ 'base-input--error': isShakeError && hasError }">
     <div class="base-input__wrap">
       <input
+        ref="maskFiled"
+        v-imask="mask"
         class="base-input__input"
         :value="value"
-        :class="[classes, currentClasses]"
+        :class="[classes, currentClasses, type === 'password' ? 'pr-16 md:pr-30' : '']"
+        :type="type === 'password' && showPassword ? '' : type"
         v-bind="{ ...$attrs }"
         v-on="{
           ...$listeners,
-          input: (event) => $emit('input', event.target.value),
+          input: () => {},
           focus: (event) => $emit('focus', event),
           blur: (event) => $emit('blur', event),
         }"
+        @input="onInput"
+        @keyup.delete="onDelete"
+        @complete="onComplete"
       />
+
+      <a v-if="type === 'password'" href="#" class="absolute top-0 right-0 z-100" @click.prevent="showPassword = !showPassword">
+        <img v-show="showPassword" src="/icons/eye-open.svg" width="32" height="32" />
+        <img v-show="!showPassword" src="/icons/eye-close.svg" width="32" height="32" />
+      </a>
     </div>
 
     <slot />
@@ -29,22 +40,31 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "nuxt-property-decorator";
+import { Component, Vue, Prop, Ref } from "nuxt-property-decorator";
 import { Guid } from "@/utils/Guid";
+
+type InputType = "text" | "number" | "tel" | "email" | "password" | "find" | "select";
 
 @Component({
   inheritAttrs: false,
 })
 export default class BaseInput extends Vue {
   showPassword = false;
+  @Ref("maskFiled") readonly maskFiled!: HTMLInputElement | any;
 
   @Prop({ default: () => Guid.newGuid() })
   id: string;
 
+  @Prop({ default: "" })
+  mask: string;
+
+  @Prop({ default: "text" })
+  type: InputType;
+
   @Prop()
   value;
 
-  @Prop({ default: false })
+  @Prop({ default: true })
   isShakeError: boolean;
 
   @Prop()
@@ -61,6 +81,32 @@ export default class BaseInput extends Vue {
 
   @Prop({ default: false })
   hasError: boolean;
+
+  mounted() {
+    if (this.value) {
+      if (this.$refs.maskFiled) {
+        this.maskFiled.maskRef.typedValue = String(this.value);
+      }
+    }
+  }
+
+  onInput(e) {
+    if (!e?.target?.maskRef) {
+      this.$emit("input", e.target.value);
+    }
+  }
+
+  onDelete(e) {
+    if (!!e?.target?.maskRef) {
+      this.$emit("input", "");
+    }
+  }
+
+  onComplete(e) {
+    if (!!e && !!e.detail && !!e.detail._unmaskedValue) {
+      this.$emit("input", e.detail._unmaskedValue);
+    }
+  }
 
   get currentClasses() {
     return {
@@ -92,8 +138,9 @@ export default class BaseInput extends Vue {
     box-sizing: border-box;
     width: 100%;
     outline: none;
-    //  color: #838383;
-    @apply text-14 leading-24 pb-14;
+    font-size: 14px;
+    font-weight: 500;
+    padding-bottom: 8px;
     &--error {
       border-bottom: 1px solid #ff4e4e;
     }
@@ -103,6 +150,10 @@ export default class BaseInput extends Vue {
     &::placeholder {
       opacity: 1;
       color: $gray;
+    }
+    &:focus {
+      border-bottom: 1px solid $primary;
+      outline: none;
     }
   }
 

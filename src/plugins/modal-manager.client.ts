@@ -1,14 +1,7 @@
 import { Context, Plugin } from "@nuxt/types";
 import { Inject } from "@nuxt/types/app";
 import Vue, { ComponentOptions, AsyncComponent } from "vue";
-
 import VModal from "vue-js-modal/dist/ssr.nocss";
-
-declare module "vue/types/vue" {
-  interface Vue {
-    $modal: VModal;
-  }
-}
 
 declare module "vue/types/vue" {
   interface Vue {
@@ -49,10 +42,21 @@ interface ModalOptions {
   maxHeight?: number;
   pivotX?: number;
   pivotY?: number;
+  shiftX?: number;
+  shiftY?: number;
   root?: typeof Vue;
 }
 
 class ModalManager {
+  modalShowFullScreen(
+    modal: typeof Vue | ComponentOptions<Vue> | AsyncComponent,
+    props = {},
+    options: ModalOptions = {},
+    events: any = {}
+  ) {
+    return this.modalShow(modal, props, { ...{ classes: "w--modal vue-dialog__full" }, ...options }, events);
+  }
+
   modalShow(
     modal: typeof Vue | ComponentOptions<Vue> | AsyncComponent,
     props = {},

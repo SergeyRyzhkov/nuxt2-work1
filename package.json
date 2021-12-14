@@ -13,6 +13,7 @@
     "class-transformer": "latest",
     "cookie-universal-nuxt": "^2.1.5",
     "dayjs": "^1.10.5",
+    "imask": "^6.2.2",
     "nuxt": "^2.15.8",
     "query-string": "^7.0.0",
     "v-tooltip": "^2.1.3",

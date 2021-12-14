@@ -1,4 +1,7 @@
 import Vue from "vue";
+import ImaskDirective from "./vue-imask-directive";
+
+Vue.directive("imask", ImaskDirective);
 
 Vue.directive("click-outside", {
   inserted(el, binding, vnode) {

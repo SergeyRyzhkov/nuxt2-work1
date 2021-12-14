@@ -179,7 +179,7 @@ export default class BaseCalendar extends Vue {
   .vfc-single-input__img {
     width: 22px;
     height: 22px;
-    margin-left: 12px;
+    margin-left: 10px;
   }
 }
 .vfc-cursor-pointer {

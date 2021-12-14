@@ -1,46 +1,93 @@
 <template>
-  <div class="w-1/2 h-full pl-38 mr-60">
-    <FormHeader :back-btn="backIsVisible()" @back="back" />
-    <div class="w-3/5 m-auto min-w-360">
-      <AuthLogin v-if="formVisible === 'login'" :is-active="formVisible" @setFormType="(type) => changeForm(type)"></AuthLogin>
-      <AuthRegistration v-if="formVisible === 'registration'" @setFormType="(type) => changeForm(type)"></AuthRegistration>
-      <AuthPasswordReset v-if="formVisible === 'reset'" @setFormType="(type) => changeForm(type)"></AuthPasswordReset>
-      <AuthEmailVerification v-if="formVisible === 'verify'"></AuthEmailVerification>
-    </div>
-  </div>
+  <BaseModalFullScreen :back-enabled="!loginRegFormVisible" @go-back="onGoBack()" @close="$emit('close')">
+    <template #header-center>
+      <div v-if="errorMessage" class="ml-auto border-secondary border border-solid text-secondary p-20 text-14">
+        <span>{{ errorMessage }}</span>
+      </div>
+    </template>
+    <template #right-side>
+      <div class="xl:px-60 h-full overflow-y-auto">
+        <LoginRegistrationForm
+          v-if="loginRegFormVisible"
+          @reset-clicked="resetPasswordClicked()"
+          @need-verify-email="onNeedVerifyEmail"
+          @login-success="onLoginSuccess"
+          @registration-success="onRegistrationSuccess"
+          @error="onError"
+        ></LoginRegistrationForm>
+        <PasswordReset
+          v-if="resetPasswordVisible"
+          :email="loginData.email"
+          @error="onError"
+          @reset-success="onResetSuccess()"
+        ></PasswordReset>
+        <EmailVerification
+          v-if="emailVerification"
+          :login-data="loginData"
+          @error="onError"
+          @verify-success="onVerifySuccess()"
+        ></EmailVerification>
+      </div>
+    </template>
+  </BaseModalFullScreen>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
-import FormHeader from "@/modules/Auth/components/FormHeader.vue";
-import AuthLogin from "@/modules/Auth/components/AuthLogin.vue";
-import AuthRegistration from "@/modules/Auth/components/AuthRegistration.vue";
-import AuthPasswordReset from "@/modules/Auth/components/AuthPasswordReset.vue";
-import AuthEmailVerification from "@/modules/Auth/components/AuthEmailVerification.vue";
+import LoginData from "../models/LoginData";
 
-@Component({ components: { FormHeader, AuthLogin, AuthRegistration, AuthPasswordReset, AuthEmailVerification } })
+@Component
 export default class AuthForm extends Vue {
-  formVisible: string = "login";
+  loginRegFormVisible = true;
+  resetPasswordVisible = false;
+  emailVerification = false;
+  errorMessage: string | null = null;
 
-  changeForm(type: string) {
-    this.formVisible = type;
+  loginData: LoginData = new LoginData();
+
+  resetPasswordClicked() {
+    this.loginRegFormVisible = false;
+    this.emailVerification = false;
+    this.resetPasswordVisible = true;
   }
 
-  back() {
-    this.formVisible = "login";
+  onNeedVerifyEmail(loginData: LoginData) {
+    this.loginData = loginData;
+    this.loginRegFormVisible = false;
+    this.resetPasswordVisible = false;
+    this.emailVerification = true;
   }
 
-  backIsVisible() {
-    const isActive = ["reset", "verify"];
-    if (isActive.includes(this.formVisible)) {
-      return true;
-    } else return false;
+  onRegistrationSuccess(loginData: LoginData) {
+    this.loginData = loginData;
+    this.loginRegFormVisible = false;
+    this.resetPasswordVisible = false;
+    this.emailVerification = true;
+  }
+
+  onResetSuccess() {
+    this.loginRegFormVisible = true;
+    this.resetPasswordVisible = false;
+    this.emailVerification = false;
+  }
+
+  onVerifySuccess() {
+    this.$emit("close");
+  }
+
+  onLoginSuccess() {
+    this.$emit("close");
+  }
+
+  onGoBack() {
+    this.resetPasswordVisible = false;
+    this.emailVerification = false;
+    this.loginRegFormVisible = true;
+  }
+
+  onError(errorMessage: string) {
+    this.errorMessage = errorMessage;
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.min-w-360 {
-  min-width: 360px;
-}
-</style>
+1001

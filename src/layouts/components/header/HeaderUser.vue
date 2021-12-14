@@ -15,13 +15,12 @@
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
-import AuthModal from "@/modules/Auth/components/AuthModal.vue";
+import AuthForm from "@/modules/Auth/components/AuthForm.vue";
 
-@Component({components: {AuthModal}})
+@Component({ components: { AuthForm } })
 export default class HeaderUser extends Vue {
-
   authModal() {
-    this.$modalManager.modalShow(AuthModal)
+    this.$modalManager.modalShowFullScreen(AuthForm);
   }
 }
 </script>

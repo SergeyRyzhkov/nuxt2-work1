@@ -125,7 +125,10 @@ export class AuthService extends BaseService {
   public async recoverPassword(email: string) {
     try {
       await this.apiRequest.post("users/recover", { email });
-    } catch (e) {}
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   public async resendVerifyEmail(email: string) {

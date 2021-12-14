@@ -49,10 +49,6 @@ export const numberMask = {
 };
 
 export const inn = {
-  // definitions: {
-  //   "#": /^(\d{10}|\d{12})$/,
-  // },
-  // /^([\d]{10}|[\d]{12})$/
   mask: "############",
   definitions: {
     "#": /[0-9]/,
