@@ -26,6 +26,8 @@ const nuxtConfig: NuxtConfig = {
     { path: "@/layouts", pathPrefix: false },
   ],
 
+  loading: { color: "#ef8532" },
+
   head: {
     htmlAttrs: {
       prefix: "og:http://ogp.me/ns#",
@@ -127,7 +129,7 @@ const nuxtConfig: NuxtConfig = {
   },
 
   render: {
-    compressor: false,
+    // compressor: false,
     resourceHints: false,
     etag: false,
     crossorigin: "anonymous",

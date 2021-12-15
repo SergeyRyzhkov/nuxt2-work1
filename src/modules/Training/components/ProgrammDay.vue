@@ -38,7 +38,7 @@ export default class ProgrammDay extends Vue {
     visibility: hidden;
     opacity: 0;
     height: 0;
-    transition: height 1s ease, opacity 1s ease;
+    transition: all 0.3s ease;
     &.active {
       margin-top: 16px;
       visibility: visible;

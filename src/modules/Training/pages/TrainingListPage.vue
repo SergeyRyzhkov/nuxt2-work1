@@ -5,6 +5,7 @@
       <h1>Обучение</h1>
       <base-calendar
         v-model="daysRange"
+        class="hidden md:block"
         :config="{
           isMultiple: true,
           calendarsCount: 1,

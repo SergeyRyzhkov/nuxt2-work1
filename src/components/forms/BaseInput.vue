@@ -1,30 +1,26 @@
 <template>
   <div class="base-input" :class="{ 'base-input--error': isShakeError && hasError }">
-    <div class="base-input__wrap">
-      <input
-        ref="maskFiled"
-        v-imask="mask"
-        class="base-input__input"
-        :value="value"
-        :class="[classes, currentClasses, type === 'password' ? 'pr-16 md:pr-30' : '']"
-        :type="type === 'password' && showPassword ? '' : type"
-        v-bind="{ ...$attrs }"
-        v-on="{
-          ...$listeners,
-          input: () => {},
-          focus: (event) => $emit('focus', event),
-          blur: (event) => $emit('blur', event),
-        }"
-        @input="onInput"
-        @keyup.delete="onDelete"
-        @complete="onComplete"
-      />
+    <label v-if="!!label" class="base-input__label" :for="id">{{ label }}</label>
+    <input
+      :id="id"
+      ref="maskFiled"
+      v-imask="mask"
+      :value="value"
+      :class="[currentClasses, 'base-input__input', classes, type === 'password' ? 'pr-16 md:pr-30' : '']"
+      :type="type === 'password' && showPassword ? '' : type"
+      v-bind="{ ...$attrs }"
+      v-on="{
+        ...$listeners,
+        input: (event) => onInput(event),
+      }"
+      @keyup.delete="onDelete"
+      @complete="onComplete"
+    />
 
-      <a v-if="type === 'password'" href="#" class="absolute top-0 right-0 z-100" @click.prevent="showPassword = !showPassword">
-        <img v-show="showPassword" src="/icons/eye-open.svg" width="32" height="32" />
-        <img v-show="!showPassword" src="/icons/eye-close.svg" width="32" height="32" />
-      </a>
-    </div>
+    <a v-if="type === 'password'" href="#" class="absolute top-0 right-0 z-100" @click.prevent="showPassword = !showPassword">
+      <img v-show="showPassword" src="/icons/eye-open.svg" width="32" height="32" />
+      <img v-show="!showPassword" src="/icons/eye-close.svg" width="32" height="32" />
+    </a>
 
     <slot />
 
@@ -58,6 +54,9 @@ export default class BaseInput extends Vue {
   @Prop({ default: "" })
   mask: string;
 
+  @Prop({ default: true })
+  triggerOnlyValidMaskValue: boolean;
+
   @Prop({ default: "text" })
   type: InputType;
 
@@ -82,29 +81,47 @@ export default class BaseInput extends Vue {
   @Prop({ default: false })
   hasError: boolean;
 
-  mounted() {
+  async mounted() {
+    await this.$nextTick();
     if (this.value) {
-      if (this.$refs.maskFiled) {
+      if (!!this.maskFiled?.maskRef) {
         this.maskFiled.maskRef.typedValue = String(this.value);
+        this.maskFiled.maskRef.unmaskedValue = String(this.value);
       }
     }
   }
 
-  onInput(e) {
-    if (!e?.target?.maskRef) {
+  async onInput(e) {
+    if (!this.maskFiled?.maskRef) {
       this.$emit("input", e.target.value);
+      return;
+    }
+
+    await this.$nextTick();
+    if (!!this.maskFiled?.maskRef && !this.triggerOnlyValidMaskValue) {
+      this.$emit("input", this.maskFiled.maskRef.unmaskedValue);
     }
   }
 
-  onDelete(e) {
-    if (!!e?.target?.maskRef) {
-      this.$emit("input", "");
+  async onDelete(e) {
+    if (!!this.maskFiled?.maskRef && this.triggerOnlyValidMaskValue) {
+      const prevValue = this.maskFiled.maskRef.value;
+      const prevUnmaskedValue = this.maskFiled.maskRef.unmaskedValue;
+
+      if (!!e?.target?.maskRef) {
+        this.$emit("input", "");
+      }
+
+      await this.$nextTick();
+      this.maskFiled.maskRef.value = prevValue;
+      this.maskFiled.maskRef.unmaskedValue = prevUnmaskedValue;
     }
   }
 
-  onComplete(e) {
-    if (!!e && !!e.detail && !!e.detail._unmaskedValue) {
-      this.$emit("input", e.detail._unmaskedValue);
+  async onComplete() {
+    await this.$nextTick();
+    if (!!this.maskFiled?.maskRef) {
+      this.$emit("input", this.maskFiled.maskRef.unmaskedValue);
     }
   }
 
@@ -113,6 +130,13 @@ export default class BaseInput extends Vue {
       "base-input__input--error": this.hasError,
       "base-input__input--help": !!this.help,
     };
+  }
+
+  destroyed() {
+    if (!!this.maskFiled?.maskRef) {
+      this.maskFiled.maskRef.destroy();
+      delete this.maskFiled.maskRef;
+    }
   }
 }
 </script>
@@ -155,6 +179,14 @@ export default class BaseInput extends Vue {
       border-bottom: 1px solid $primary;
       outline: none;
     }
+  }
+
+  &__label {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    margin-bottom: 10px;
+    color: $gray;
   }
 
   &__help {

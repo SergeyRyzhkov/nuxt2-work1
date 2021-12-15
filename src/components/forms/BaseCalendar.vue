@@ -34,8 +34,9 @@
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 import FunctionalCalendar from "vue-functional-calendar/src/components/FunctionalCalendar.vue";
 import dayjs from "dayjs";
+import { BaseViewModel } from "@/_core/models/BaseViewModel";
 
-export class DaysRangeModel {
+export class DaysRangeModel extends BaseViewModel {
   dateRange = {
     start: "",
     end: "",
@@ -158,7 +159,7 @@ export default class BaseCalendar extends Vue {
 .vfc-single-input-wrapper {
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
   .vfc-single-input {
     display: flex;
     align-items: center;
@@ -179,7 +180,8 @@ export default class BaseCalendar extends Vue {
   .vfc-single-input__img {
     width: 22px;
     height: 22px;
-    margin-left: 10px;
+    margin-left: 1px;
+    cursor: pointer;
   }
 }
 .vfc-cursor-pointer {

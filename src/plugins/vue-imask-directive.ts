@@ -3,14 +3,14 @@ import IMask from "imask";
 export default {
   name: "imask",
   bind: (el, _binding, _vnode) => {
-    if (!!_binding && !!_binding.value && !!_binding.value.mask) {
+    if (!!_binding?.value?.mask) {
       initMask(el, _binding.value);
     }
   },
 
   update: (el, _binding, _vnode) => {
-    if (!!_binding && !!_binding.value && !!_binding.value.mask) {
-      if (el.maskRef) {
+    if (!!_binding?.value?.mask) {
+      if (!!el.maskRef) {
         el.maskRef.updateOptions(_binding.value);
         if (el.value !== el.maskRef.value) el.maskRef._onChange();
       } else initMask(el, _binding.value);

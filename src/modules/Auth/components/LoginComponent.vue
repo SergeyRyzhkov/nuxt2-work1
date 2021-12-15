@@ -20,7 +20,7 @@
       <BaseCheckbox :id="'remember-me'" :label="'Запомнить меня'" />
       <div class="text-14 cursor-pointer text-secondary" @click="$emit('reset-clicked')">Забыли пароль ?</div>
     </div>
-    <BaseButton class="mt-20 md:mt-40" type="submit">Войти</BaseButton>
+    <BaseButton class="mt-40 md:mt-60" type="submit">Войти</BaseButton>
   </form>
 </template>
 

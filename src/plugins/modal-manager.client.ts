@@ -18,6 +18,7 @@ Vue.use(VModal, {
     maxWidth: 568,
     height: "auto",
     scrollable: true,
+    // transition: "all 2s ease",
   },
 });
 
@@ -78,7 +79,11 @@ class ModalManager {
           returnDataResolver: resolve,
         },
         options,
-        events
+        {
+          ...events,
+          ...{ "before-open": (_event) => (document.documentElement.style.overflowY = "hidden") },
+          ...{ "before-close": (_event) => (document.documentElement.style.overflowY = "auto") },
+        }
       );
     });
   }

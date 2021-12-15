@@ -1,14 +1,14 @@
 <template>
   <BaseModalFullScreen :back-enabled="!loginRegFormVisible" @go-back="onGoBack()" @close="$emit('close')">
     <template #header-center>
-      <div v-if="errorMessage" class="ml-auto border-secondary border border-solid text-secondary p-20 text-14">
+      <div v-show="errorMessage" class="ml-auto border-secondary border border-solid text-secondary p-20 text-14">
         <span>{{ errorMessage }}</span>
       </div>
     </template>
     <template #right-side>
-      <div class="xl:px-60 h-full overflow-y-auto">
+      <div class="xl:px-40 pb-20 h-full overflow-y-auto">
         <LoginRegistrationForm
-          v-if="loginRegFormVisible"
+          v-show="loginRegFormVisible"
           @reset-clicked="resetPasswordClicked()"
           @need-verify-email="onNeedVerifyEmail"
           @login-success="onLoginSuccess"
@@ -16,13 +16,13 @@
           @error="onError"
         ></LoginRegistrationForm>
         <PasswordReset
-          v-if="resetPasswordVisible"
+          v-show="resetPasswordVisible"
           :email="loginData.email"
           @error="onError"
           @reset-success="onResetSuccess()"
         ></PasswordReset>
         <EmailVerification
-          v-if="emailVerification"
+          v-show="emailVerification"
           :login-data="loginData"
           @error="onError"
           @verify-success="onVerifySuccess()"
@@ -46,12 +46,14 @@ export default class AuthForm extends Vue {
   loginData: LoginData = new LoginData();
 
   resetPasswordClicked() {
+    this.errorMessage = null;
     this.loginRegFormVisible = false;
     this.emailVerification = false;
     this.resetPasswordVisible = true;
   }
 
   onNeedVerifyEmail(loginData: LoginData) {
+    this.errorMessage = null;
     this.loginData = loginData;
     this.loginRegFormVisible = false;
     this.resetPasswordVisible = false;
@@ -59,6 +61,7 @@ export default class AuthForm extends Vue {
   }
 
   onRegistrationSuccess(loginData: LoginData) {
+    this.errorMessage = null;
     this.loginData = loginData;
     this.loginRegFormVisible = false;
     this.resetPasswordVisible = false;
@@ -66,16 +69,19 @@ export default class AuthForm extends Vue {
   }
 
   onResetSuccess() {
+    this.errorMessage = null;
     this.loginRegFormVisible = true;
     this.resetPasswordVisible = false;
     this.emailVerification = false;
   }
 
   onVerifySuccess() {
+    this.errorMessage = null;
     this.$emit("close");
   }
 
   onLoginSuccess() {
+    this.errorMessage = null;
     this.$emit("close");
   }
 

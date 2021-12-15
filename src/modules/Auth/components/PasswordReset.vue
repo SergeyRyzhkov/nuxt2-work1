@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1 class="uppercase mb-20">Восстановление пароля</h1>
+    <h2 class="uppercase mb-20">Восстановление пароля</h2>
     <div class="mb-40 md:mb-60">Мы отправим вам письмо с ссылкой для восстановления пароля на указанную почту</div>
     <BaseInput
       v-model="email"
@@ -9,7 +9,7 @@
       :is-shake-error="true"
       @blur="$v.email.$touch()"
     ></BaseInput>
-    <BaseButton class="mt-20 md:mt-40" @click="recoverPassword"> Отправить</BaseButton>
+    <BaseButton class="mt-40 md:mt-60" @click="recoverPassword"> Отправить</BaseButton>
   </section>
 </template>
 

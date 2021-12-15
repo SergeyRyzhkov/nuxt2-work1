@@ -11,11 +11,12 @@
       v-model="registrationData.phone"
       type="tel"
       placeholder="Телефон"
-      :mask="phoneNumberMask"
+      :mask="phoneMask"
       :has-error="$v.registrationData.phone.$error"
       class="mb-27"
       @blur="$v.registrationData.phone.$touch()"
     />
+    {{ registrationData.phone }}
     <BaseInput
       v-model="registrationData.email"
       placeholder="Email*"
@@ -60,7 +61,7 @@
         >
       </div>
     </div>
-    <BaseButton type="submit" class="mt-20 md:mt-40">Зарегистрироваться</BaseButton>
+    <BaseButton type="submit" class="mt-40 md:mt-60">Зарегистрироваться</BaseButton>
   </form>
 </template>
 
@@ -71,7 +72,7 @@ import RegistrationData from "../models/RegistrationData";
 import { AuthService } from "../AuthService";
 import { RegistrationStatus } from "../models/RegistrationResult";
 import LoginData from "../models/LoginData";
-import { phoneNumberMask } from "@/utils/InputMaskDefinitions";
+import { phoneMask } from "@/utils/InputMaskDefinitions";
 
 const validations = () => {
   return {
@@ -95,7 +96,7 @@ export default class RegistrationComponent extends Vue {
   title: string = "Войдите в свой аккаунт";
   registrationData: RegistrationData = new RegistrationData();
 
-  phoneNumberMask = phoneNumberMask;
+  phoneMask = phoneMask;
 
   async register() {
     this.$v.$touch();

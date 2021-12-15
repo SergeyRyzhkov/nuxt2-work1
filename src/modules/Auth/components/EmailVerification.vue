@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1 class="uppercase mb-20">Подтвердите почту</h1>
+    <h2 class="uppercase mb-20">Подтвердите почту</h2>
     <div class="mb-20 mb:mb-40">{{ loginData.email }}</div>
     <BaseInput
       v-model="code"
@@ -13,7 +13,7 @@
     <div v-show="isSendEnabled" class="mt-20 text-14 cursor-pointer text-secondary" @click="resendCode()">
       Отправить код повторно
     </div>
-    <BaseButton v-show="isSendEnabled" class="mt-20 md:mt-40" @click="verifyEmail">Отправить</BaseButton>
+    <BaseButton v-show="isSendEnabled" class="mt-40 md:mt-60" @click="verifyEmail">Отправить</BaseButton>
   </section>
 </template>
 

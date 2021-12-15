@@ -2,8 +2,8 @@
   <nav class="flex flex-col">
     <ul class="header-menu-list">
       <li>Каталог</li>
-      <li><nuxt-link :to="{ name: 'training' }">Обучение</nuxt-link></li>
-      <li>Акции</li>
+      <li><nuxt-link :to="{ name: 'training' }">Обучение парикмахеров</nuxt-link></li>
+      <li>Сотрудничество</li>
       <li><nuxt-link :to="{ name: 'news' }">Новости</nuxt-link></li>
       <li>Контакты</li>
     </ul>
