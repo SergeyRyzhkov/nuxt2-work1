@@ -8,4 +8,6 @@ export default class LoginData extends BaseViewModel {
 
   public email: string | null = "";
   public password: string | null = "";
+
+  public rememberMe = true;
 }

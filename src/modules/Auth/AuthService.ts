@@ -37,9 +37,6 @@ export class AuthService extends BaseService {
     if (!accessToken) {
       this.authStore.updateSessionUser(SessionUser.anonymousUser);
     }
-    if (!!accessToken) {
-      this.saveTokenToCookie(accessToken);
-    }
   }
 
   public clearAccessToken() {
@@ -61,6 +58,9 @@ export class AuthService extends BaseService {
           this.updateAccessToken(accessToken);
           if (await this.getMeAndSetSessionUser()) {
             logonResult.logonStatus = LogonStatus.OK;
+            if (loginData.rememberMe) {
+              this.saveTokenToCookie(accessToken);
+            }
           }
         } else {
           logonResult.logonStatus = LogonStatus.RegistrationNotConfirmed;
@@ -170,10 +170,12 @@ export class AuthService extends BaseService {
 
   public async tryRestoreSessionUser() {
     const accessToken = this.nuxtContext.app.$cookies.get(this.cookieTokenCookieName, { parseJSON: false });
+    //  const xsrfTokenCookie = this.nuxtContext.app.$cookies.get("XSRF-TOKEN", { parseJSON: false });
     if (!!accessToken) {
       try {
         const options = {
           headers: { authorization: `Bearer ${accessToken}` },
+          // "X-XSRF-TOKEN": xsrfTokenCookie,
         };
         const user = await this.getOneOrDefault(SessionUser, "users/me", options);
         if (!!user && user.id > 0) {

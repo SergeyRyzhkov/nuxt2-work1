@@ -12,7 +12,7 @@ export default class RegistrationData extends BaseViewModel {
   last_name: string | undefined | null = null;
   patronymic: string | undefined | null = null;
   address: string | undefined | null = null;
-  phone: string | undefined | null = "9218941537";
+  phone: string | undefined | null = "";
   email: string | null = null;
   agreement: boolean = false;
   subscribe: boolean = false;

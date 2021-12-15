@@ -20,6 +20,7 @@ export default async (ctx: Context, inject: Inject) => {
 
   if (process.server) {
     await ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
+    await ServiceLocator.instance.getService(AuthService).tryRestoreSessionUser();
   }
 
   inject("serviceLocator", ServiceLocator.instance);

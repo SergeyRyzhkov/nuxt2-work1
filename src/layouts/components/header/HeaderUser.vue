@@ -10,17 +10,23 @@
       class="ml-24 lg:ml-48 cursor-pointer"
       @click="authModal"
     />
+    {{ userName }}
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 import AuthForm from "@/modules/Auth/components/AuthForm.vue";
+import { AuthService } from "@/modules/Auth/AuthService";
 
 @Component({ components: { AuthForm } })
 export default class HeaderUser extends Vue {
   authModal() {
     this.$modalManager.modalShowFullScreen(AuthForm);
+  }
+
+  get userName() {
+    return this.$serviceLocator.getService(AuthService).getSessionUser().first_name;
   }
 }
 </script>
