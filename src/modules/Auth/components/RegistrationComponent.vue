@@ -16,7 +16,6 @@
       class="mb-27"
       @blur="$v.registrationData.phone.$touch()"
     />
-    {{ registrationData.phone }}
     <BaseInput
       v-model="registrationData.email"
       placeholder="Email*"
