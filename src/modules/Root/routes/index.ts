@@ -20,6 +20,11 @@ const routes = [
     path: "/about",
     component: () => lazyLoad(import("@/modules/Root/pages/AboutPage.vue")),
   },
+  {
+    name: "cooperation",
+    path: "/cooperation",
+    component: () => lazyLoad(import("@/modules/Root/pages/CooperationPage.vue")),
+  },
 ];
 
 export default routes;

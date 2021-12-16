@@ -166,7 +166,7 @@ export default class BaseInput extends Vue {
     font-weight: 500;
     padding-bottom: 8px;
     &--error {
-      border-bottom: 1px solid #ff4e4e;
+      border-bottom: 1px solid $red-color;
     }
     &--help {
       border: 1px solid #3068f7;
@@ -203,7 +203,7 @@ export default class BaseInput extends Vue {
     font-weight: 500;
     font-size: 12px;
     line-height: 15px;
-    color: #ff4e4e;
+    color: $red-color;
     position: absolute;
     margin-top: 4px;
     left: 0;
