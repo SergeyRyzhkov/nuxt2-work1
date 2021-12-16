@@ -3,9 +3,15 @@
     <ul class="footer-ul">
       <li>ИНФОРМАЦИЯ</li>
       <li>Помощь</li>
-      <li>Вопрос-ответ</li>
-      <li>Условия оплаты</li>
-      <li>Условия доставки</li>
+      <li>
+        <nuxt-link :to="{ name: 'faq' }">Вопрос-ответ</nuxt-link>
+      </li>
+      <li>
+        <nuxt-link :to="{ name: 'documents' }">Условия оплаты</nuxt-link>
+      </li>
+      <li>
+        <nuxt-link :to="{ name: 'documents' }">Условия доставки</nuxt-link>
+      </li>
       <li>Акции</li>
       <li>Гарантия на товар</li>
     </ul>

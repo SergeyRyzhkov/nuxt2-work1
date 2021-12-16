@@ -25,6 +25,17 @@ const routes = [
     path: "/cooperation",
     component: () => lazyLoad(import("@/modules/Root/pages/CooperationPage.vue")),
   },
+  {
+    name: "faq",
+    path: "/faq",
+    component: () => lazyLoad(import("@/modules/Root/pages/FaqPage.vue")),
+  },
+  {
+    name: "documents",
+    path: "/documents",
+    props: { isFaq: false },
+    component: () => lazyLoad(import("@/modules/Root/pages/FaqPage.vue")),
+  },
 ];
 
 export default routes;

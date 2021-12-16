@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Emit } from "nuxt-property-decorator";
+import { Component, Prop, Vue } from "nuxt-property-decorator";
 
 @Component
 export default class BaseBackToTop extends Vue {
@@ -53,8 +53,7 @@ export default class BaseBackToTop extends Vue {
     this.isVisible = window.pageYOffset > this.offsetTopStart;
   }
 
-  @Emit()
-  private scrollToWindowTop() {
+  scrollToWindowTop() {
     window.scrollTo({
       top: 0,
       left: 0,
