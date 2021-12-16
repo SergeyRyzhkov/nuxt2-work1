@@ -9,7 +9,7 @@
       :is-shake-error="true"
       @blur="$v.code.$touch()"
     ></BaseInput>
-    <div v-show="!isSendEnabled" class="mt-20 text-14 text-font-gray">{{ resendDelayText }}</div>
+    <div v-show="!isSendEnabled" class="mt-20 text-14 text-gray-color">{{ resendDelayText }}</div>
     <div v-show="isSendEnabled" class="mt-20 text-14 cursor-pointer text-secondary" @click="resendCode()">
       Отправить код повторно
     </div>

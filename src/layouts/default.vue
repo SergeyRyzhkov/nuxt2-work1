@@ -1,8 +1,9 @@
 <template>
   <div class="layout-wrapper">
-    <TheHeader v-if="$route.name !== 'login'"> </TheHeader>
+    <TheHeader class="hidden lg:block"> </TheHeader>
+    <TheMobileHeader class="block lg:hidden"></TheMobileHeader>
     <nuxt />
-    <TheFooter v-if="$route.name !== 'login'"></TheFooter>
+    <TheFooter class="mt-40 md:mt-60"></TheFooter>
     <client-only><BaseBackToTop></BaseBackToTop></client-only>
   </div>
 </template>

@@ -10,10 +10,11 @@ Vue.directive("click-outside", {
 
     const onClickHandler = (e) => {
       const elem = e.target as HTMLElement;
+
       if (!!callback && callback instanceof Function && elem.id !== "dont_outside" && !elem.classList.contains("dont_outside")) {
         if (!el.contains(elem)) {
           e.stopPropagation();
-          callback.call(vm, event);
+          callback.call(vm, e);
         }
       }
     };
