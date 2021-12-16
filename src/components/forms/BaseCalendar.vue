@@ -145,7 +145,7 @@ export default class BaseCalendar extends Vue {
   text-align: center;
   width: 30px;
   line-height: 30px;
-  border-radius: 6px !important;
+  border-radius: 50% !important;
   margin: 0 auto;
   background-color: #d4d8ea !important;
   color: black !important;
@@ -232,11 +232,7 @@ export default class BaseCalendar extends Vue {
       content: attr(data-date);
       color: #000;
       display: flex;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
       justify-content: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
       align-items: center;
     }
 
@@ -253,7 +249,7 @@ export default class BaseCalendar extends Vue {
 .vfc-today {
   background-color: $primary !important;
   border-color: $primary !important;
-  border-radius: 6px !important;
+  border-radius: 50% !important;
   color: white;
 }
 

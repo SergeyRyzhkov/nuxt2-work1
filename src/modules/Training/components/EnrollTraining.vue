@@ -4,6 +4,7 @@
       Записаться на курс или <br />
       получить бесплатную консультацию
     </div>
+    <LazyFeedbackForm class="mt-40 md:mt-60"></LazyFeedbackForm>
   </div>
 </template>
 
@@ -17,5 +18,3 @@ export default class EnrollTraining extends Vue {
   model: TrainingModel;
 }
 </script>
-
-<style lang="scss"></style>

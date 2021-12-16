@@ -3,7 +3,15 @@
     <BaseStaticBanner v-if="bannerSrc" :image-src="bannerSrc" class="bg-strong-nude" />
     <main class="container flex flex-col">
       <h1>{{ title }}</h1>
-      <section class="mt-30 md:mt-60 ml-auto mr-auto w-full md:w-3/4" v-html="description"></section>
+      <section class="mt-30 md:mt-60 ml-auto mr-auto w-full md:w-2/3" v-html="description"></section>
+
+      <section class="mt-30 md:mt-60 ml-auto mr-auto w-full md:w-2/3">
+        <div class="text-24 font-semibold">
+          Заполните форму для сотрудничества с KAYPRO <br />
+          и мы с Вами свяжемся!
+        </div>
+        <LazyFeedbackForm class="mt-40 md:mt-60"></LazyFeedbackForm>
+      </section>
     </main>
   </div>
 </template>

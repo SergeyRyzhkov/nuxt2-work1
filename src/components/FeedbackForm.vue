@@ -1,0 +1,105 @@
+<template>
+  <form @submit.prevent="send">
+    <BaseInput
+      v-model="formModel.name"
+      placeholder="ФИО*"
+      :has-error="$v.formModel.name.$error"
+      class="mb-27"
+      @blur="$v.formModel.name.$touch()"
+    />
+    <div class="flex flex-col md:flex-row">
+      <BaseInput
+        v-model="formModel.phone"
+        type="tel"
+        placeholder="Телефон*"
+        :mask="phoneMask"
+        :has-error="$v.formModel.phone.$error"
+        class="mb-27"
+        @blur="$v.formModel.phone.$touch()"
+      />
+      <BaseInput
+        v-model="formModel.email"
+        placeholder="Email*"
+        :has-error="$v.formModel.email.$error"
+        class="mb-27 md:ml-32"
+        @blur="$v.formModel.email.$touch()"
+      />
+    </div>
+
+    <div class="flex flex-col md:flex-row">
+      <BaseInput
+        v-model="formModel.area"
+        placeholder="Из какого вы города*"
+        :has-error="$v.formModel.area.$error"
+        class="mb-27"
+        @blur="$v.formModel.area.$touch()"
+      />
+      <LazyBaseMultiSelect placeholder="Сфера деятельности*" :options="areaOptions" class="mb-27 md:ml-32"> </LazyBaseMultiSelect>
+    </div>
+
+    <BaseInput
+      v-model="formModel.comment"
+      placeholder="Комментарий*"
+      :has-error="$v.formModel.comment.$error"
+      class="mb-27"
+      @blur="$v.formModel.comment.$touch()"
+    />
+    <BaseButton type="submit" class="mt-20 md:mt-40">Отправить</BaseButton>
+  </form>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from "nuxt-property-decorator";
+import { email, required } from "vuelidate/lib/validators";
+import { phoneMask } from "@/utils/InputMaskDefinitions";
+import { EmptyService } from "@/_core/service/EmptyService";
+import { BaseViewModel } from "@/_core/models/BaseViewModel";
+
+const validations = () => {
+  return {
+    formModel: {
+      name: { required },
+      phone: { required },
+      email: { required, email },
+      comment: { required },
+      area: { required },
+    },
+  };
+};
+
+class FeedbackModel extends BaseViewModel {
+  name = "";
+  phone = "";
+  email = "";
+  comment = "";
+  agreement = 1;
+  type: "support" | "appeal" | "request" = "request";
+  area = "";
+}
+
+@Component({ validations })
+export default class FeedbackForm extends Vue {
+  formModel: FeedbackModel = new FeedbackModel();
+  phoneMask = phoneMask;
+
+  send() {
+    this.$v.$touch();
+    if (this.$v.$invalid) {
+      return;
+    }
+    this.$serviceLocator.getService(EmptyService).apiRequest.post("/users/feedback", this.formModel);
+  }
+
+  areaOptions = [
+    { id: 1, name: "Мастер-парикмахер" },
+    { id: 2, name: "Салон красоты" },
+    { id: 3, name: "Школа парикмахеров" },
+    { id: 4, name: "Магазин проф. косметики" },
+    { id: 5, name: "Дистрибьютор в регионе" },
+    { id: 6, name: "Оптовая фирма" },
+    { id: 7, name: "Другое" },
+  ];
+}
+</script>
+
+<style lang="scss"></style>
