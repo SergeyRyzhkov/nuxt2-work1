@@ -23,7 +23,8 @@ export default class BaseButton extends Vue {
   border-radius: 9999px;
   transition: all 0.3s ease;
   &:hover {
-    background-color: $primary;
+    background-color: $secondary;
+    border-color: $secondary;
     color: white;
   }
 }

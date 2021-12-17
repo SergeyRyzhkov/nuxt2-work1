@@ -34,7 +34,13 @@
         class="mb-27"
         @blur="$v.formModel.area.$touch()"
       />
-      <LazyBaseMultiSelect placeholder="Сфера деятельности*" :options="areaOptions" class="mb-27 md:ml-32"> </LazyBaseMultiSelect>
+      <LazyBaseMultiSelect
+        v-model="formModel.area"
+        placeholder="Сфера деятельности*"
+        :options="areaOptions"
+        class="mb-27 md:ml-32"
+      >
+      </LazyBaseMultiSelect>
     </div>
 
     <BaseInput
@@ -97,7 +103,6 @@ export default class FeedbackForm extends Vue {
     { id: 4, name: "Магазин проф. косметики" },
     { id: 5, name: "Дистрибьютор в регионе" },
     { id: 6, name: "Оптовая фирма" },
-    { id: 7, name: "Другое" },
   ];
 }
 </script>

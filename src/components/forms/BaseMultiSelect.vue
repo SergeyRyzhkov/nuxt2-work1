@@ -1,13 +1,15 @@
 <template>
-  <multiselect
-    :classes="classes"
-    v-bind="{ ...$attrs, ...defaultOptions }"
-    :options="selectOptions"
-    v-on="{
-      ...$listeners,
-    }"
-  >
-  </multiselect>
+  <div class="base-multiselect">
+    <multiselect
+      :classes="classes"
+      v-bind="{ ...$attrs, ...defaultOptions }"
+      :options="selectOptions"
+      v-on="{
+        ...$listeners,
+      }"
+    >
+    </multiselect>
+  </div>
 </template>
 
 <script lang="ts">
@@ -43,59 +45,74 @@ export default class BaseMultiSelect extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-::v-deep .multiselect {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
-  // color: #16192c;
-
-  .multiselect__content-wrapper {
-    z-index: 1002;
-  }
-
-  .multiselect__input {
+<style lang="scss">
+.base-multiselect {
+  width: 100%;
+  .multiselect {
     font-weight: 500;
     font-size: 14px;
-    line-height: 24px;
-    color: #16192c;
-  }
+    line-height: 22px;
+    min-height: 32px;
+    cursor: pointer;
 
-  .multiselect__select {
-    min-height: 48px;
-    height: 48px;
-    line-height: 14px;
-  }
-  ::v-deep .multiselect__tags {
-    color: $primary;
-    border: 1px solid #dddde4;
-    border-radius: 4px;
-    min-height: 48px;
-    .multiselect__single {
+    // color: #16192c;
+
+    .multiselect__content-wrapper {
+      z-index: 1002;
+    }
+
+    .multiselect__input {
       font-weight: 500;
       font-size: 14px;
       line-height: 24px;
       color: #16192c;
-      padding: 0px;
-      margin: 0px;
-      padding-left: 8px;
-      vertical-align: middle;
     }
-  }
-  .multiselect__option--highlight {
-    background: #eef0fb;
-    outline: none;
-    color: $primary;
-  }
 
-  .multiselect__option--disabled {
-    background: #ededed80 !important;
-    cursor: text;
-    pointer-events: none;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 500;
-    color: inherit !important;
+    .multiselect__select {
+      z-index: 1000;
+      padding: 0px;
+      height: 10px;
+      min-height: 24px;
+      width: 14px;
+    }
+    .multiselect__tags {
+      color: $primary;
+      border: none;
+      border-bottom: 1px solid $light-gray;
+      min-height: 32px;
+      padding: 0px;
+      border-radius: 0px;
+      .multiselect__single {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+        padding: 0px;
+        margin: 0px;
+        padding-left: 8px;
+        vertical-align: middle;
+      }
+      .multiselect__placeholder {
+        opacity: 1;
+        color: $gray;
+        padding: 0px;
+        margin-bottom: 8px;
+      }
+    }
+    .multiselect__option--highlight {
+      background: none;
+      outline: none;
+      color: $secondary;
+    }
+
+    .multiselect__option--disabled {
+      background: #ededed80 !important;
+      cursor: text;
+      pointer-events: none;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500;
+      color: inherit !important;
+    }
   }
 }
 </style>
