@@ -6,7 +6,7 @@
       <footer-info class="ml-100"></footer-info>
       <footer-contacts class="ml-100 flex-shrink-0"></footer-contacts>
     </div>
-    <div class="container-fluid border-b border-footer"></div>
+    <div class="container-fluid border-b border-footer-color"></div>
     <FooterLast class="container flex lg:my-30"></FooterLast>
   </footer>
 </template>

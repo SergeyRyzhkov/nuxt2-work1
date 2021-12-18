@@ -27,13 +27,7 @@
     </div>
 
     <div class="flex flex-col md:flex-row">
-      <BaseInput
-        v-model="formModel.area"
-        placeholder="Из какого вы города*"
-        :has-error="$v.formModel.area.$error"
-        class="mb-27"
-        @blur="$v.formModel.area.$touch()"
-      />
+      <BaseInput v-model="formModel.city" placeholder="Из какого вы города*" class="mb-27" />
       <LazyBaseMultiSelect
         v-model="formModel.area"
         placeholder="Сфера деятельности*"
@@ -68,7 +62,6 @@ const validations = () => {
       phone: { required },
       email: { required, email },
       comment: { required },
-      area: { required },
     },
   };
 };
@@ -80,7 +73,8 @@ class FeedbackModel extends BaseViewModel {
   comment = "";
   agreement = 1;
   type: "support" | "appeal" | "request" = "request";
-  area = "";
+  area: any = {};
+  city = "";
 }
 
 @Component({ validations })
@@ -93,6 +87,7 @@ export default class FeedbackForm extends Vue {
     if (this.$v.$invalid) {
       return;
     }
+    this.formModel.area = this.formModel?.area.name;
     this.$serviceLocator.getService(EmptyService).apiRequest.post("/users/feedback", this.formModel);
   }
 
@@ -106,5 +101,3 @@ export default class FeedbackForm extends Vue {
   ];
 }
 </script>
-
-<style lang="scss"></style>

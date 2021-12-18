@@ -101,13 +101,13 @@ module.exports = {
 
     extend: {
       colors: {
-        primary: "#131313",
-        secondary: "#ef8532",
+        primary: "var(--primary)",
+        secondary: "var(--secondary)",
         transparent: "transparent",
         current: "currentColor",
         nude: "#FFF7F5",
         "strong-nude": "#FCE8D9",
-        footer: "#575555",
+        "footer-color": "var(--footer-color)",
         "section-gray": "#F2F0F3",
         "gray-color": "#9D9D9D",
       },
