@@ -1,5 +1,16 @@
 <template>
   <form @submit.prevent="send">
+    <div class="flex mb-32" v-if="radio">
+      <label for="opt1" class="radio">
+        <input type="radio" name="rdo" id="opt1" class="hidden"/>
+        <span class="label"></span>Обращение
+      </label>
+
+      <label for="opt2" class="radio ml-74">
+        <input type="radio" name="rdo" id="opt2" class="hidden"/>
+        <span class="label"></span>Запрос технологу
+      </label>
+    </div>
     <BaseInput
       v-model="formModel.name"
       placeholder="ФИО*"
@@ -49,7 +60,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
+import { Component, Vue, Prop } from "nuxt-property-decorator";
 import { email, required } from "vuelidate/lib/validators";
 import { phoneMask } from "@/utils/InputMaskDefinitions";
 import { EmptyService } from "@/_core/service/EmptyService";
@@ -81,6 +92,9 @@ class FeedbackModel extends BaseViewModel {
 export default class FeedbackForm extends Vue {
   formModel: FeedbackModel = new FeedbackModel();
   phoneMask = phoneMask;
+
+  @Prop({default:false})
+  radio: boolean;
 
   send() {
     this.$v.$touch();
