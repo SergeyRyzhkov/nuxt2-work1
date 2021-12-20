@@ -1,7 +1,7 @@
 <template>
   <main v-if="!$fetchState.pending" class="page-wrapper container">
     <BreadCrumbs />
-    <h1 class="mt-15 md:mt-30">Новости</h1>
+    <h1>Новости</h1>
     <section class="article-list-wrapper">
       <NewsItem v-for="iter in newsList" :key="iter.meta_slug" :article-model="iter"> </NewsItem>
     </section>

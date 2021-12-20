@@ -25,6 +25,7 @@ Vue.directive("click-outside", {
 
 Vue.directive("select-overflow", {
   inserted: (el, _binding, vnode) => {
+    let originalParentPosition;
     let originalWidth;
     let originalPosition;
     let originalZIndex;
@@ -38,18 +39,25 @@ Vue.directive("select-overflow", {
     // @ts-ignore
     vnode.child.$watch("isOpen", (isOpen) => {
       selectIsOpen = isOpen;
+
       if (isOpen) {
         const { offsetWidth } = el;
+        // @ts-ignore
+        originalParentPosition = el.parentElement.style.position;
         originalWidth = el.style.width;
         originalPosition = el.style.position;
         originalZIndex = el.style.zIndex;
+        // @ts-ignore
+        el.parentElement.style.position = "relative";
         el.style.width = `${offsetWidth}px`;
         el.style.position = "absolute";
         // @ts-ignore
-        el.style.zIndex = 2;
+        el.style.zIndex = 9999;
         // @ts-ignore
         el.parentNode.insertBefore(clone, el.nextSibling); // insert after el
       } else {
+        // @ts-ignore
+        el.parentElement.style.position = originalParentPosition;
         el.style.position = originalPosition;
         el.style.width = originalWidth;
         el.style.zIndex = originalZIndex;

@@ -1,7 +1,7 @@
 <template>
   <main v-if="!$fetchState.pending" class="page-wrapper container">
     <BreadCrumbs />
-    <div class="flex flex-col md:flex-row mt-20 md:mt-40">
+    <div class="flex flex-col md:flex-row">
       <FaqLeftSide class="w-full md:w-1/4" :faq-model="faqList" @select-item="faqSelected"></FaqLeftSide>
       <div class="w-full md:w-3/4" v-html="selectedFaq.description"></div>
     </div>

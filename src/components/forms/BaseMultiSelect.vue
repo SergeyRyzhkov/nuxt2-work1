@@ -1,6 +1,7 @@
 <template>
   <div class="base-multiselect">
     <multiselect
+      v-select-overflow
       :classes="classes"
       v-bind="{ ...$attrs, ...defaultOptions }"
       :options="selectOptions"
@@ -28,8 +29,6 @@ export default class BaseMultiSelect extends Vue {
 
   defaultOptions = {
     options: [{ id: 1000, name: "Другое" }],
-    "preserve-search": true,
-    autocomplete: true,
     searchable: false,
     "close-on-select": true,
     "show-labels": false,
@@ -58,7 +57,9 @@ export default class BaseMultiSelect extends Vue {
     // color: #16192c;
 
     .multiselect__content-wrapper {
-      z-index: 1002;
+      z-index: 999999;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
     }
 
     .multiselect__input {
@@ -69,7 +70,7 @@ export default class BaseMultiSelect extends Vue {
     }
 
     .multiselect__select {
-      z-index: 1000;
+      z-index: 999999;
       padding: 0px;
       height: 10px;
       min-height: 24px;

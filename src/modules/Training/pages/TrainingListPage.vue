@@ -1,7 +1,7 @@
 <template>
   <main v-if="!$fetchState.pending" class="page-wrapper container">
     <BreadCrumbs />
-    <div class="flex items-center justify-between mt-15 md:mt-30">
+    <div class="flex items-center justify-between">
       <h1>Обучение</h1>
       <base-calendar
         v-model="daysRange"

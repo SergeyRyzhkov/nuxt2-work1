@@ -1,5 +1,5 @@
 <template>
-  <div v-if="shouldShow" class="breadcrumbs">
+  <div v-if="shouldShow" class="breadcrumbs mt-28 mb-28">
     <ol class="breadcrumbs__list" itemscope="itemscope" itemtype="https://schema.org/BreadcrumbList">
       <li
         v-for="(bread, idx) in breadCrumbs"
@@ -45,7 +45,7 @@ export default class BreadCrumbs extends Vue {
 
 <style lang="scss">
 .breadcrumbs {
-  padding: 12px 0;
+  // padding: 12px 0;
 
   &__list {
     list-style-type: none;
