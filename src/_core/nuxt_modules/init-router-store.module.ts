@@ -42,7 +42,7 @@ const initAppModule: Module = function () {
     if (!!moduleDirs) {
       for (const iter of moduleDirs) {
         const routePath = resolve(iter, "routes");
-        if (existsSync(routePath)) {
+        if (existsSync(routePath) && fs.readdirSync(routePath).length > 0) {
           const routerFilePath = relative(this.options.buildDir, routePath).replace(/\/+|\\+/g, "/");
           // @ts-ignore
           routeList.push(routerFilePath);
@@ -70,7 +70,7 @@ const initAppModule: Module = function () {
     if (!!storeDirs) {
       for (const iter of storeDirs) {
         const storePath = resolve(iter, "store");
-        if (existsSync(storePath)) {
+        if (existsSync(storePath) && fs.readdirSync(storePath).length > 0) {
           fs.readdirSync(storePath).forEach((iterFile) => {
             const storeFilePath = relative(this.options.buildDir, path.join(storePath, iterFile)).replace(/\/+|\\+/g, "/");
             // @ts-ignore
