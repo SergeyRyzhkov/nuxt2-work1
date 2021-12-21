@@ -18,7 +18,7 @@
       <li><nuxt-link :to="{ name: 'training' }">Обучение парикмахеров</nuxt-link></li>
       <li><nuxt-link :to="{ name: 'cooperation' }">Сотрудничество</nuxt-link></li>
       <li><nuxt-link :to="{ name: 'news' }">Новости</nuxt-link></li>
-      <li>Контакты</li>
+      <li><nuxt-link :to="{ name: 'contacts' }">Контакты</nuxt-link></li>
     </ul>
   </div>
 </template>

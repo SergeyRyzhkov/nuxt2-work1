@@ -12,6 +12,7 @@
 <script lang="ts">
 import { Vue, Component, getModule } from "nuxt-property-decorator";
 import AppStore from "@/modules/Root/store/AppStore";
+import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 
 @Component
 export default class ContactsPage extends Vue {
@@ -27,6 +28,10 @@ export default class ContactsPage extends Vue {
       { linkName: "Контакты", name: "contacts" },
     ];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
+  }
+
+  head() {
+    return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(undefined, this.$route.fullPath);
   }
 }
 </script>
