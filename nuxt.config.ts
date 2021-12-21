@@ -69,7 +69,7 @@ const nuxtConfig: NuxtConfig = {
   ],
 
   router: {
-    // prefetchLinks: false,
+    prefetchLinks: false,
     // middleware: ["requiresAuthorize"],
   },
 
