@@ -73,7 +73,7 @@ class FeedbackModel extends BaseViewModel {
   comment = "";
   agreement = 1;
   type: "support" | "appeal" | "request" = "request";
-  area: any = {};
+  area: any = null;
   city = "";
 }
 

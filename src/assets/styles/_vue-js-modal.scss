@@ -11,10 +11,21 @@
   background: #fff;
   box-shadow: 0 16px 32px rgba(38, 43, 47, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.7);
+  left: 0px !important;
+  margin: auto !important;
 
   @media (min-width: 768px) {
     padding: 40px 40px;
   }
+}
+
+.vue-dialog__full {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100%;
+  margin: 0px !important;
+  top: 0px !important;
+  left: 0px !important;
 }
 
 .vue-dialog-w-max {
@@ -26,15 +37,6 @@
   position: absolute;
   top: 8px;
   right: 16px;
-}
-
-.vue-dialog__full {
-  width: 100vw !important;
-  height: 100vh !important;
-  max-width: 100%;
-  margin: 0px !important;
-  top: 0px !important;
-  left: 0px !important;
 }
 
 .vue-modal-resizer {
