@@ -85,7 +85,7 @@ class FeedbackModel extends BaseViewModel {
   agreement = 1;
   area: any = null;
   city = "";
-  type: "support" | "appeal" | "request" | "cooperation" = "support";
+  type: "support" | "appeal" | "request" | "cooperation" = "appeal";
 }
 
 @Component({ validations })

@@ -18,6 +18,7 @@
         </ul>
       </div>
     </div>
+    <LazyBaseYandexMap class="w-full mt-25 md:mt-45 h-3/4"></LazyBaseYandexMap>
   </div>
 </template>
 
