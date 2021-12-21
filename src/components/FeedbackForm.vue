@@ -1,13 +1,13 @@
 <template>
   <form @submit.prevent="send">
-    <div class="flex mb-32" v-if="radio">
+    <div v-if="radio" class="flex mb-32">
       <label for="opt1" class="radio">
-        <input type="radio" name="rdo" id="opt1" class="hidden"/>
+        <input id="opt1" v-model="formModel.type" type="radio" name="rdo" class="hidden" value="appeal" />
         <span class="label"></span>Обращение
       </label>
 
       <label for="opt2" class="radio ml-74">
-        <input type="radio" name="rdo" id="opt2" class="hidden"/>
+        <input id="opt2" v-model="formModel.type" type="radio" name="rdo" class="hidden" value="request" />
         <span class="label"></span>Запрос технологу
       </label>
     </div>
@@ -83,9 +83,9 @@ class FeedbackModel extends BaseViewModel {
   email = "";
   comment = "";
   agreement = 1;
-  type: "support" | "appeal" | "request" = "request";
   area: any = null;
   city = "";
+  type: "support" | "appeal" | "request" | "cooperation" = "support";
 }
 
 @Component({ validations })
@@ -93,7 +93,7 @@ export default class FeedbackForm extends Vue {
   formModel: FeedbackModel = new FeedbackModel();
   phoneMask = phoneMask;
 
-  @Prop({default:false})
+  @Prop({ default: false })
   radio: boolean;
 
   send() {
