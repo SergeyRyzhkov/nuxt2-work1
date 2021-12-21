@@ -31,6 +31,11 @@ const routes = [
     component: () => lazyLoad(import("@/modules/Root/pages/FaqPage.vue")),
   },
   {
+    name: "contacts",
+    path: "/contacts",
+    component: () => lazyLoad(import("@/modules/Root/pages/ContactsPage.vue")),
+  },
+  {
     name: "documents",
     path: "/documents",
     props: { isFaq: false },
