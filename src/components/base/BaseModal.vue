@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <span
       class="vue-dialog_close-button after:content-['\00d7'] text-32 font-normal cursor-pointer ml-auto"
       @click="$emit('close')"

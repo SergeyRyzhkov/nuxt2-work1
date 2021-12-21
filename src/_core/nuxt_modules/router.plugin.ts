@@ -23,13 +23,15 @@ export async function createRouter() {
       return result ? "?" + result : "";
     },
 
-    scrollBehavior(to, from, savedPosition) {
+    scrollBehavior(to, from, _savedPosition) {
       if (to.name !== from.name) {
-        if (!!savedPosition) {
-          return savedPosition;
-        } else {
-          return { x: 0, y: 0, behavior: "smooth" };
-        }
+        // if (!!savedPosition) {
+        //   return savedPosition;
+        // } else {
+        //   return { x: 0, y: 0 };
+        // }
+
+        return { x: 0, y: 0 };
       }
     },
   });

@@ -1,5 +1,5 @@
 <template>
-  <main v-if="!$fetchState.pending" class="page-wrapper container">
+  <main class="page-wrapper container">
     <BreadCrumbs />
     <h1>Новости</h1>
     <section class="article-list-wrapper">

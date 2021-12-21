@@ -14,7 +14,7 @@
 
     <ul class="mobile-menu-list" :class="{ active: menuOpened === true }">
       <li class="bg-light-gray">Личный кабинет</li>
-      <li>Каталог</li>
+      <li><nuxt-link :to="{ name: 'catalog' }">Каталог</nuxt-link></li>
       <li><nuxt-link :to="{ name: 'training' }">Обучение парикмахеров</nuxt-link></li>
       <li><nuxt-link :to="{ name: 'cooperation' }">Сотрудничество</nuxt-link></li>
       <li><nuxt-link :to="{ name: 'news' }">Новости</nuxt-link></li>

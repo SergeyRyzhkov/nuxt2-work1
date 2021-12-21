@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!$fetchState.pending && !!newsModel.meta_slug" class="page-wrapper">
+  <div v-if="!!newsModel.meta_slug" class="page-wrapper">
     <BaseStaticBanner v-if="bannerSrc" :image-src="bannerSrc" />
     <main class="container">
       <BreadCrumbs />

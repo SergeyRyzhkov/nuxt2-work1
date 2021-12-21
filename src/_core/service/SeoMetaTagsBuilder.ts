@@ -2,7 +2,7 @@ import { BaseService } from "./BaseService";
 import SeoModel from "@/_core/models/SeoModel";
 
 export class SeoMetaTagsBuilder extends BaseService {
-  public create(meta?: SeoModel, _pageRelativePath?: string) {
+  public create(meta: SeoModel | null | undefined, _pageRelativePath?: string) {
     meta = this.setDefaultValues(meta, _pageRelativePath);
 
     return {
@@ -47,7 +47,7 @@ export class SeoMetaTagsBuilder extends BaseService {
     };
   }
 
-  private setDefaultValues(headMetaTagInfo?: SeoModel, _pageRelativePath?: string): SeoModel {
+  private setDefaultValues(headMetaTagInfo: SeoModel | null | undefined, _pageRelativePath?: string): SeoModel {
     const config = this.ctx.$config;
 
     headMetaTagInfo = headMetaTagInfo || new SeoModel();

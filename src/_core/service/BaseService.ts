@@ -47,7 +47,8 @@ export class BaseService {
       const response = await this.apiRequest.get(this.buildQueryWithPagination(url, pagination), params);
       const data = response?.data?.data || response?.data;
       return !!data ? plainToClass(ctor, Array.from(data)) : [];
-    } catch {
+    } catch (err) {
+      console.log(err);
       return [];
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <main v-if="!$fetchState.pending" class="page-wrapper container">
+  <main class="page-wrapper container">
     <BreadCrumbs />
     <div class="flex flex-col md:flex-row">
       <FaqLeftSide class="w-full md:w-1/4" :faq-model="faqList" @select-item="faqSelected"></FaqLeftSide>

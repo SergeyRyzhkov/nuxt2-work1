@@ -1,5 +1,5 @@
 <template>
-  <button class="base-button" :classes="classes" v-bind="{ ...$attrs }" @click="$emit('click')">
+  <button class="base-button" :classes="classes" v-bind="$attrs" v-on="$listeners">
     <slot />
   </button>
 </template>
@@ -21,7 +21,7 @@ export default class BaseButton extends Vue {
   text-transform: uppercase;
   border: 1px solid $primary;
   border-radius: 9999px;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease-in-out;
   &:hover {
     background-color: $secondary;
     border-color: $secondary;

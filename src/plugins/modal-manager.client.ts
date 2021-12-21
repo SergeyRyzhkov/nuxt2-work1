@@ -79,6 +79,7 @@ class ModalManager {
           returnDataResolver: resolve,
         },
         options,
+        // { ...options, ...{ transition: "nice-modal-fade", overlayTransition: "overlay-fade" } },
         {
           ...events,
           ...{ "before-open": (_event) => (document.documentElement.style.overflowY = "hidden") },

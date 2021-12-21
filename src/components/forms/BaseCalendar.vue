@@ -44,6 +44,7 @@ export class DaysRangeModel extends BaseViewModel {
 }
 
 @Component({
+  inheritAttrs: false,
   components: {
     FunctionalCalendar,
   },

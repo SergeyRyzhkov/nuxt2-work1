@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!$fetchState.pending" class="page-wrapper">
+  <div class="page-wrapper">
     <BaseStaticBanner v-if="bannerSrc" :image-src="bannerSrc" class="bg-strong-nude" />
     <main class="container flex flex-col">
       <h1>{{ title }}</h1>

@@ -39,7 +39,7 @@ export default class BaseYandexMap extends Vue {
   }
 
   async mounted() {
-    await loadYmap({ ...this.settings, debug: false });
+    // await loadYmap({ ...this.settings, debug: false });
   }
 }
 </script>

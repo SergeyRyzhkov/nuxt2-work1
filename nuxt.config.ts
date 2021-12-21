@@ -69,7 +69,7 @@ const nuxtConfig: NuxtConfig = {
   ],
 
   router: {
-    prefetchLinks: false,
+    // prefetchLinks: false,
     // middleware: ["requiresAuthorize"],
   },
 
@@ -132,7 +132,7 @@ const nuxtConfig: NuxtConfig = {
     // compressor: false,
     resourceHints: false,
     etag: false,
-    crossorigin: "anonymous",
+    // crossorigin: "anonymous",
 
     bundleRenderer: {
       runInNewContext: false,
