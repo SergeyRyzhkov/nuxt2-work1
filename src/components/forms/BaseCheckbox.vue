@@ -3,29 +3,31 @@
     <input
       :id="id"
       type="checkbox"
-      v-bind="{ ...$attrs }"
+      v-bind="$attrs"
+      :checked="value"
       v-on="{
         ...$listeners,
         change: (event) => $emit('change', event.target.checked),
       }"
     />
-    <label class="text-14 leading-20 ml-12 cursor-pointer checkbox-label" :for="id">{{ label }}</label>
+    <label class="checkbox-label" :for="id">{{ label }}</label>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop, Model } from "nuxt-property-decorator";
+import { Guid } from "@/utils/Guid";
 
 @Component
 export default class BaseCheckbox extends Vue {
   @Prop({ required: true })
   label: string;
 
-  @Prop({ required: true })
+  @Prop({ default: () => Guid.newGuid() })
   id: string;
 
   @Model("change", { type: Boolean })
-  readonly checked!: boolean;
+  readonly value!: boolean;
 }
 </script>
 
@@ -34,7 +36,7 @@ input[type="checkbox"] {
   -webkit-appearance: none;
   width: 18px;
   height: 18px;
-  border: 1px solid hsl(0, 0%, 85%);
+  border: 1px solid #c9c9c9;
   border-radius: 1px;
   vertical-align: sub;
   position: absolute;
@@ -45,10 +47,6 @@ input[type="checkbox"] {
   &:checked {
     background-color: #000000;
     border-color: #000000;
-
-    &:focus,
-    &:hover {
-    }
   }
 
   &:after {
@@ -62,12 +60,15 @@ input[type="checkbox"] {
     background-size: 12px;
     background-repeat: no-repeat;
     background-position: center;
+    cursor: pointer;
   }
 }
 
 .checkbox-label {
   padding: 0 18px;
+  margin-left: 12px;
   user-select: none;
   cursor: pointer;
+  font-size: 14px;
 }
 </style>

@@ -39,7 +39,7 @@
 import { Component, Vue, Prop, Ref } from "nuxt-property-decorator";
 import { Guid } from "@/utils/Guid";
 
-type InputType = "text" | "number" | "tel" | "email" | "password" | "find" | "select";
+type InputType = "text" | "number" | "tel" | "email" | "password" | "find" | "select" | "checkbox";
 
 @Component({
   inheritAttrs: false,

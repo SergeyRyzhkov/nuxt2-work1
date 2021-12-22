@@ -74,7 +74,7 @@ export default class CategoryCatalog extends Vue {
     }
     .product_category__sub {
       font-size: 14px;
-      padding-top: 16px;
+      padding-top: 14px;
       .product_category__sub_title {
         font-weight: 600;
       }
@@ -86,7 +86,7 @@ export default class CategoryCatalog extends Vue {
 
   .product_category__title {
     > button {
-      border: 1px solid black;
+      border: 1px solid $primary;
       padding: 5px;
       border-radius: 50%;
       transition: all 0.2s ease-in-out;

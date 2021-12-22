@@ -161,7 +161,7 @@ export class AuthService extends BaseService {
   }
 
   public async getMeAndSetSessionUser() {
-    const currentUser = await this.getOneOrDefault(SessionUser, "users/me");
+    const currentUser = await this.getOneOrDefault(SessionUser, "users/profile");
     if (!!currentUser && currentUser.id > 0) {
       this.authStore.updateSessionUser(currentUser);
       return true;
@@ -188,7 +188,7 @@ export class AuthService extends BaseService {
           headers: { authorization: `Bearer ${accessToken}` },
           // "X-XSRF-TOKEN": xsrfTokenCookie,
         };
-        const user = await this.getOneOrDefault(SessionUser, "users/me", options);
+        const user = await this.getOneOrDefault(SessionUser, "users/profile", options);
         if (!!user && user.id > 0) {
           this.authStore.updateSessionUser(user);
           this.updateAccessToken(accessToken);
