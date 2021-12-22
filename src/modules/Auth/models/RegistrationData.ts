@@ -8,15 +8,15 @@ export default class RegistrationData extends BaseViewModel {
 
   fio: string | undefined | null = null;
   first_name: string | undefined | null = null;
-  second_name: string | undefined | null = null;
   last_name: string | undefined | null = null;
   patronymic: string | undefined | null = null;
   address: string | undefined | null = null;
   phone: string | undefined | null = "";
   email: string | null = null;
-  agreement: boolean = false;
-  subscribe: boolean = false;
-  password: string | null = null;
+  agreement: boolean = true;
+  subscribe: boolean = true;
+  oldPassword: string | null | undefined = null;
+  password: string | null | undefined = null;
   password_confirmation: string | undefined | null = null;
   entity = 0;
   entity_name: string | undefined | null = null;
@@ -27,7 +27,6 @@ export default class RegistrationData extends BaseViewModel {
   static buildFirstSecondPatrFromFio(data: RegistrationData) {
     data.first_name = null;
     data.patronymic = null;
-    data.second_name = null;
 
     if (!!data && !!data.fio) {
       const arr = data.fio.trim().split(" ");
@@ -39,7 +38,6 @@ export default class RegistrationData extends BaseViewModel {
       }
       if (arr.length > 2) {
         data.patronymic = cleanArr[2];
-        data.second_name = cleanArr[2];
       }
     }
   }

@@ -140,13 +140,24 @@ export class AuthService extends BaseService {
     }
   }
 
-  public async updatePassword(code: number, newPassword: string) {
+  // eslint-disable-next-line camelcase
+  public async updatePassword(data: RegistrationData) {
     try {
-      const response = await this.apiRequest.put("users/password/recover?_method=PUT", { code, new_password: newPassword });
+      const response = await this.apiRequest.post("users/profile/change-password", {
+        // eslint-disable-next-line camelcase
+        old_password: data.oldPassword,
+        password: data.password,
+        // eslint-disable-next-line camelcase
+        password_confirmation: data.password_confirmation,
+      });
       return response.status === 200;
     } catch (err) {
       return false;
     }
+  }
+
+  public async updateProfile(registrationData: RegistrationData) {
+    return await this.apiRequest.post("users/profile?_method=PUT", registrationData);
   }
 
   public async getMeAndSetSessionUser() {

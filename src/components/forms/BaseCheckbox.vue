@@ -4,13 +4,9 @@
       :id="id"
       type="checkbox"
       v-bind="{ ...$attrs }"
-      :value="val"
       v-on="{
         ...$listeners,
-        input: (event) => $emit('input', event.target.value),
-        focus: (event) => $emit('focus', event.target.value),
-        blur: (event) => $emit('blur', event.target.value),
-        change: (event) => $emit('change', event.target.value),
+        change: (event) => $emit('change', event.target.checked),
       }"
     />
     <label class="text-14 leading-20 ml-12 cursor-pointer checkbox-label" :for="id">{{ label }}</label>
@@ -18,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from "nuxt-property-decorator";
+import { Vue, Component, Prop, Model } from "nuxt-property-decorator";
 
 @Component
 export default class BaseCheckbox extends Vue {
@@ -28,11 +24,8 @@ export default class BaseCheckbox extends Vue {
   @Prop({ required: true })
   id: string;
 
-  @Prop()
-  value;
-
-  @Prop()
-  val;
+  @Model("change", { type: Boolean })
+  readonly checked!: boolean;
 }
 </script>
 

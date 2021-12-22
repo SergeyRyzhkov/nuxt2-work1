@@ -47,18 +47,14 @@
       @blur="$v.registrationData.password_confirmation.$touch()"
     />
     <div class="flex flex-col mt-24">
-      <div class="flex items-center relative mb-14">
-        <input id="privacy" v-model="registrationData.agreement" type="checkbox" />
-        <label class="text-14 leading-20 ml-12 cursor-pointer checkbox-label" for="privacy"
-          >Я согласен на обработку персональных данных</label
-        >
-      </div>
-      <div class="flex items-center relative">
-        <input id="news" v-model="registrationData.subscribe" type="checkbox" />
-        <label class="text-14 leading-20 ml-12 cursor-pointer checkbox-label" for="news"
-          >Информирование о новинках и акциях</label
-        >
-      </div>
+      <BaseCheckbox
+        id="privacy"
+        v-model="registrationData.agreement"
+        class="mb-14"
+        label="Я согласен на обработку персональных данных"
+      />
+
+      <BaseCheckbox id="news" v-model="registrationData.subscribe" class="mb-14" label="Информирование о новинках и акциях" />
     </div>
     <BaseButton type="submit" class="mt-40 md:mt-60">Зарегистрироваться</BaseButton>
   </form>
@@ -82,13 +78,9 @@ const validations = () => {
       password: { required },
       password_confirmation: { required, sameAsPassword: sameAs("password") },
       address: { required },
-      agreement: { mustBeTrue },
-      subscribe: { mustBeTrue },
     },
   };
 };
-
-const mustBeTrue = (value) => !!value;
 
 @Component({ validations })
 export default class RegistrationComponent extends Vue {
