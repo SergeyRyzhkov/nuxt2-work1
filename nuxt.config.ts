@@ -151,7 +151,7 @@ const nuxtConfig: NuxtConfig = {
   },
 
   styleResources: {
-    scss: ["~assets/styles/_variables.scss"],
+    scss: ["~assets/styles/_variables.scss", "~assets/styles/_media.scss"],
   },
 
   axios: {

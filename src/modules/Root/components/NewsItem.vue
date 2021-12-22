@@ -4,7 +4,7 @@
       <img :src="imageSrc" :alt="articleModel.title" itemprop="image" class="article-smallitem__preview-img" loading="lazy" />
       <figcaption>{{ articleModel.title }}</figcaption>
     </figure>
-    <header class="article-smallitem__header">
+    <header class="article-smallitem__header leading-20">
       {{ articleModel.title }}
     </header>
     <div class="article-smallitem__stat-info">
@@ -15,10 +15,9 @@
           >{{ articleModel.published_at ? new Date(articleModel.published_at).toLocaleDateString("ru-RU") : "" }}</span
         >
       </div>
-      <div v-if="articleModel.views_count > 0" class="article-smallitem__views">
-        <img src="/images/eye.svg" alt="Количество просмотров" title="Количество просмотров" />
-        <span>{{ 10 }}</span>
-      </div>
+<!--      <div v-if="articleModel.views_count > 0" class="article-smallitem__views">-->
+<!--        <img src="/images/eye.svg" alt="Количество просмотров" title="Количество просмотров" />-->
+<!--      </div>-->
     </div>
   </article>
 </template>
@@ -45,20 +44,14 @@ export default class NewsItem extends Vue {
 
 <style lang="scss">
 .article-smallitem {
-  border: 1px solid $light-gray;
-  margin: 15px;
-  margin-top: 0px;
+  margin: 0px 15px 39px 15px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  &:hover {
-    box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.12);
-  }
 }
 .article-smallitem__preview-img {
   max-width: 100%;
   width: 100%;
-  max-height: 180px;
   object-fit: cover;
   object-position: center;
 }
@@ -67,17 +60,15 @@ figcaption {
 }
 .article-smallitem__header {
   flex-grow: 1;
-  padding: 10px;
+  @apply py-10;
 }
 
 .article-smallitem__stat-info {
   color: $gray;
   display: flex;
   flex-direction: row;
-  border-top: 1px solid $light-gray;
   font-size: 13px;
-  padding: 10px;
-
+  @apply pt-2;
   .article-smallitem__views {
     text-align: right;
     width: 50%;
