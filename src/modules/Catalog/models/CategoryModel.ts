@@ -19,4 +19,8 @@ export default class CategoryModel extends SeoModel {
   parent: CategoryModel;
 
   isOpened = false;
+
+  static getRoutePath(model: CategoryModel) {
+    return !!model.parent ? `${CategoryModel.getRoutePath(model.parent)}/${model.meta_slug}` : `/catalog/${model.meta_slug}`;
+  }
 }

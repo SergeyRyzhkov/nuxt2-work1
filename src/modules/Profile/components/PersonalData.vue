@@ -8,7 +8,7 @@
           <BaseInput v-model="registrationData.fio" placeholder="ФИО*" class="mb-27" />
           <div class="flex items-center">
             <BaseInput v-model="registrationData.phone" placeholder="Телефон*" type="tel" :mask="phoneMask" class="mb-27 pr-16" />
-            <BaseInput placeholder="Email*" class="mb-27 pl-16" />
+            <BaseInput v-model="registrationData.email" placeholder="Email*" class="mb-27 pl-16" />
           </div>
           <BaseInput v-model="registrationData.address" placeholder="Адрес доставки*" class="mb-32" />
           <BaseButton type="submit">Сохранить</BaseButton>

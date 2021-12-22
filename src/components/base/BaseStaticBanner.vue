@@ -1,7 +1,7 @@
 <template>
   <section
     class="banner-image-wrapper h-220 md:h-400 mb-20 lg:mb-40 xl:mb-60"
-    :class="[imageSrc ? 'w-screen lg:container' : 'container-fluid bg-strong-nude']"
+    :class="[imageSrc ? 'w-screen' : 'container-fluid bg-strong-nude']"
   >
     <img :src="imageSrc" height="406" class="banner-image h-200 md:h-400" />
     <slot></slot>
@@ -30,10 +30,8 @@ export default class BaseStaticBanner extends Vue {
   .banner-image {
     width: 100%;
     max-width: 100%;
-    -o-object-fit: cover;
     object-fit: cover;
-    -o-object-position: left;
-    object-position: left;
+    object-position: top;
   }
 }
 </style>

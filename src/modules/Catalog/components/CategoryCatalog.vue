@@ -11,7 +11,7 @@
           :stroke="buttonStroke(iter)"
           @mouseover.native="hoveredCategoryModelId = iter.id"
           @mouseleave.native="hoveredCategoryModelId = 0"
-          @click="toogle(iter)"
+          @click.native="toogle(iter)"
         ></BaseOpenCloseButton>
       </div>
       <div
@@ -63,14 +63,15 @@ export default class CategoryCatalog extends Vue {
 <style lang="scss">
 .product_category__wrapper {
   .product_category__content {
+    height: 0px;
+    max-height: 0px;
+    overflow-y: hidden;
     visibility: hidden;
-    opacity: 0;
-    height: 0;
     transition: all 0.2s ease-in-out;
     &.active {
       visibility: visible;
-      opacity: 1;
       height: auto;
+      max-height: 600px;
     }
     .product_category__sub {
       font-size: 14px;
@@ -89,7 +90,7 @@ export default class CategoryCatalog extends Vue {
       border: 1px solid $primary;
       padding: 5px;
       border-radius: 50%;
-      transition: all 0.2s ease-in-out;
+      transition: all 0.1s ease-in-out;
       &.active {
         transform: rotate(180deg);
       }
@@ -113,7 +114,7 @@ export default class CategoryCatalog extends Vue {
   }
 
   .product_category + .product_category {
-    margin-top: 20px;
+    padding-top: 20px;
   }
 }
 </style>

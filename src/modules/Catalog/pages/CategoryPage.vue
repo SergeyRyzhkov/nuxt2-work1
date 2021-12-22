@@ -37,7 +37,7 @@ export default class CategoryPage extends Vue {
   }
 
   async loadCategories() {
-    this.h1Text = !this.model || this.model?.subcategory?.length > 0 ? "Каталог" : this.model.title;
+    this.h1Text = !this.model ? "Каталог" : this.model.title;
 
     const breadCrumbList: RouteLink[] = [];
 

@@ -1,7 +1,7 @@
 <template>
   <nav class="flex flex-col">
     <ul class="header-menu-list">
-      <li><nuxt-link :to="{ name: 'catalog' }">Каталог</nuxt-link></li>
+      <li><span v-click-outside="closeCatalogMenu" class="p-16" @click="$emit('toogleCatalogMenu')">Каталог</span></li>
       <li><nuxt-link :to="{ name: 'training' }">Обучение парикмахеров</nuxt-link></li>
       <li><nuxt-link :to="{ name: 'cooperation' }">Сотрудничество</nuxt-link></li>
       <li><nuxt-link :to="{ name: 'news' }">Новости</nuxt-link></li>
@@ -14,7 +14,11 @@
 import { Component, Vue } from "nuxt-property-decorator";
 
 @Component
-export default class HeaderMenu extends Vue {}
+export default class HeaderMenu extends Vue {
+  closeCatalogMenu() {
+    this.$emit("closeCatalogMenu");
+  }
+}
 </script>
 
 <style lang="scss">
@@ -27,6 +31,10 @@ export default class HeaderMenu extends Vue {}
   text-transform: uppercase;
   margin: auto;
   > li {
+    > a {
+      padding: 16px;
+    }
+
     display: inline-block;
     white-space: nowrap;
     cursor: pointer;

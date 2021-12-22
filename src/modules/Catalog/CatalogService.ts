@@ -9,15 +9,7 @@ export class CatalogService extends BaseService {
   }
 
   async getBySlug(slug: string) {
-    const res = await this.getOneOrDefault(CategoryModel, `users/product-categories/${slug}`);
-    if (!!res.subcategory) {
-      res.subcategory.forEach((iter) => {
-        if (!!iter.parent_id) {
-          iter.parent = res;
-        }
-      });
-    }
-    return res;
+    return await this.getOneOrDefault(CategoryModel, `users/product-categories/${slug}`);
   }
 
   buldBreadCrumb(breadCrumbList: RouteLink[], model: CategoryModel | null) {
@@ -37,14 +29,10 @@ export class CatalogService extends BaseService {
   }
 
   addCatalogRoute(model: CategoryModel) {
-    if (model.meta_slug === "odit") {
-      console.log(model);
-    }
-
     if (this.ctx.app.router?.getRoutes().findIndex((iter) => iter.name === model.meta_slug) === -1) {
       const config = {
         name: model.meta_slug,
-        path: `/${!!model.parent ? model.parent.meta_slug : "catalog"}/${model.meta_slug}`,
+        path: CategoryModel.getRoutePath(model),
         props: { slug: model.meta_slug },
         component: () => lazyLoad(import("@/modules/Catalog/pages/CategoryPage.vue")),
       };

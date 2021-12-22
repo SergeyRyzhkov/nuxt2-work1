@@ -1,7 +1,7 @@
 <template>
   <section class="w-full">
     <h3>Личные данные</h3>
-    <div class="mt-40 flex flex-row items-center justify-between">
+    <div class="mt-40 flex flex-col md:flex-row items-center justify-between">
       <div>
         <button type="button" class="order-tab-page" :class="{ active: tabActive === 1 }" @click="tabActive = 1">Текущие</button>
         <button type="button" class="order-tab-page" :class="{ active: tabActive === 2 }" @click="tabActive = 2">
@@ -13,7 +13,6 @@
       </div>
       <base-calendar
         v-model="daysRange"
-        class="hidden md:block"
         :config="{
           isMultiple: true,
           calendarsCount: 1,

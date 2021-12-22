@@ -2,7 +2,7 @@
   <div>
     <ul class="footer-ul">
       <li>ИНФОРМАЦИЯ</li>
-      <li>Помощь</li>
+      <li><nuxt-link :to="{ name: 'documents' }">Помощь</nuxt-link></li>
       <li>
         <nuxt-link :to="{ name: 'faq' }">Вопрос-ответ</nuxt-link>
       </li>
@@ -12,8 +12,8 @@
       <li>
         <nuxt-link :to="{ name: 'documents' }">Условия доставки</nuxt-link>
       </li>
-      <li>Акции</li>
-      <li>Гарантия на товар</li>
+
+      <li><nuxt-link :to="{ name: 'documents' }">Гарантия на товар</nuxt-link></li>
     </ul>
   </div>
 </template>

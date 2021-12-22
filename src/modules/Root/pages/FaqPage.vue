@@ -35,7 +35,7 @@ export default class MainPage extends Vue {
   }
 
   updateBreadCrumbs() {
-    const breadCrumbList = [{ linkName: "Главная", name: "main" }, { linkName: "Вопрос-ответ" }];
+    const breadCrumbList = [{ linkName: "Главная", name: "main" }, { linkName: this.isFaq ? "Вопрос-ответ" : "Документы" }];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
   }
 
