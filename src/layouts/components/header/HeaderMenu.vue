@@ -1,7 +1,10 @@
 <template>
   <nav class="flex flex-col">
     <ul class="header-menu-list">
-      <li><span v-click-outside="closeCatalogMenu" class="p-16" @click="$emit('toogleCatalogMenu')">Каталог</span></li>
+      <li>
+        <span v-click-outside="closeCatalogMenu" class="p-16" @click="$emit('toogleCatalogMenu')">Каталог</span>
+        <BaseOpenCloseButton></BaseOpenCloseButton>
+      </li>
       <li><nuxt-link :to="{ name: 'training' }">Обучение парикмахеров</nuxt-link></li>
       <li><nuxt-link :to="{ name: 'cooperation' }">Сотрудничество</nuxt-link></li>
       <li><nuxt-link :to="{ name: 'news' }">Новости</nuxt-link></li>
