@@ -1,3 +1,12 @@
+========== TO_DO ==============
+
+1. Старница Новости (список) и детальная по фигме
+2. Выдрать из C:\_RSN\_projects\front.kaypro\src\components\FeedbackForm.vue - радиобуттон и вынести его в BaseRadion - пригодится
+3. Компонент - бегущая строка (в base его)
+4. В компоненте C:\_RSN\_projects\front.kaypro\src\components\forms\BaseCalendar.vue  - сделать опицонально возможность очищать значение (кнопка с крестиком - по нажатии эмит)
+5. C:\_RSN\_projects\front.kaypro\src\modules\Profile\components\PersonalData.vue - валидация 
+
+
 фигма
 https://www.figma.com/file/WQxvaT90N3xLnGOkSlKG9n/KAYPRO?node-id=0%3A1
 
@@ -12,13 +21,6 @@ API
 https://winter-comet-610410.postman.co/workspace/Team-Workspace~b5ea60f9-713c-405c-8582-593b1c84ac5d/overview
 
 
-Мастер-парикмахер
-Салон красоты
-Школа парикмахеров
-Магазин проф. косметики
-Дистрибьютор в регионе
-Оптовая фирма
-Другое
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 1. Общий осмотр на предмент орфографических, синтаксических и стилистических ошибок

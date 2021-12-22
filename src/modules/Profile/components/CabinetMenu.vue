@@ -29,6 +29,8 @@ export default class CabinetMenu extends Vue {
 <style lang="scss">
 .cabinet-menu {
   > li {
+    font-size: 14px;
+    font-weight: 500;
     a {
       &.router-link-exact-active {
         color: $secondary;

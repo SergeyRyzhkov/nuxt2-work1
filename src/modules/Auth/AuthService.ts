@@ -74,8 +74,10 @@ export class AuthService extends BaseService {
   }
 
   public async logout() {
-    this.clearAccessToken();
-    await this.apiRequest.post("users/logout");
+    try {
+      this.clearAccessToken();
+      await this.apiRequest.post("users/logout");
+    } catch {}
   }
 
   public async register(registrationData: RegistrationData) {
@@ -160,8 +162,8 @@ export class AuthService extends BaseService {
     return await this.apiRequest.post("users/profile?_method=PUT", registrationData);
   }
 
-  public async getMeAndSetSessionUser() {
-    const currentUser = await this.getOneOrDefault(SessionUser, "users/profile");
+  public async getMeAndSetSessionUser(options?: any) {
+    const currentUser = await this.getOneOrDefault(SessionUser, "users/profile", options);
     if (!!currentUser && currentUser.id > 0) {
       this.authStore.updateSessionUser(currentUser);
       return true;
@@ -188,9 +190,7 @@ export class AuthService extends BaseService {
           headers: { authorization: `Bearer ${accessToken}` },
           // "X-XSRF-TOKEN": xsrfTokenCookie,
         };
-        const user = await this.getOneOrDefault(SessionUser, "users/profile", options);
-        if (!!user && user.id > 0) {
-          this.authStore.updateSessionUser(user);
+        if (await this.getMeAndSetSessionUser(options)) {
           this.updateAccessToken(accessToken);
         }
       } catch (errr) {

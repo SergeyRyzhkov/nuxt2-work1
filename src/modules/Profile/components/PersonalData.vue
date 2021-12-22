@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <h2>Личные данные</h2>
+  <section class="w-2/4">
+    <h3>Личные данные</h3>
     <div class="mt-22">
       <div>Персональные данные</div>
       <div class="mt-33">
@@ -57,9 +57,5 @@ export default class PersonalData extends Vue {
     RegistrationData.buildFirstSecondPatrFromFio(this.registrationData);
     this.$serviceLocator.getService(AuthService).updateProfile(this.registrationData);
   }
-
-  // set fio(val: string) {
-  //   SessionUser.buildFirstSecondPatrFromFio(this.user, val);
-  // }
 }
 </script>
