@@ -5,6 +5,13 @@ const routes = [
     component: () => lazyLoad(import("@/modules/Catalog/pages/CategoryPage.vue")),
     props: { slug: "" },
   },
+
+  {
+    name: "product",
+    path: "/products/:slug",
+    component: () => lazyLoad(import("@/modules/Catalog/pages/ProductPage.vue")),
+    props: true,
+  },
 ];
 
 export default routes;

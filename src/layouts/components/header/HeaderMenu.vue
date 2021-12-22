@@ -1,9 +1,15 @@
 <template>
   <nav class="flex flex-col">
     <ul class="header-menu-list">
-      <li>
-        <span v-click-outside="closeCatalogMenu" class="p-16" @click="$emit('toogleCatalogMenu')">Каталог</span>
-        <BaseOpenCloseButton></BaseOpenCloseButton>
+      <li v-click-outside="closeCatalogMenu" class="header-menu-list--catalog" @click="toogle()">
+        <span class="py-16">Каталог</span>
+        <BaseOpenCloseButton
+          width="13"
+          height="13"
+          stroke="white"
+          :class="[isOpened ? 'active' : '']"
+          class="dont_outside"
+        ></BaseOpenCloseButton>
       </li>
       <li><nuxt-link :to="{ name: 'training' }">Обучение парикмахеров</nuxt-link></li>
       <li><nuxt-link :to="{ name: 'cooperation' }">Сотрудничество</nuxt-link></li>
@@ -18,6 +24,13 @@ import { Component, Vue } from "nuxt-property-decorator";
 
 @Component
 export default class HeaderMenu extends Vue {
+  isOpened = false;
+
+  toogle() {
+    this.isOpened = !this.isOpened;
+    this.$emit("toogleCatalogMenu");
+  }
+
   closeCatalogMenu() {
     this.$emit("closeCatalogMenu");
   }
@@ -44,6 +57,20 @@ export default class HeaderMenu extends Vue {
   }
   > li + li {
     margin-left: 46px;
+  }
+  &--catalog {
+    display: flex !important;
+    align-items: center;
+    > span {
+      padding-right: 4px;
+    }
+    > button {
+      padding: 5px;
+      transition: all 0.1s ease-in-out;
+      &.active {
+        transform: rotate(180deg);
+      }
+    }
   }
 }
 </style>

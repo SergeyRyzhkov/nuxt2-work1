@@ -42,7 +42,7 @@ module.exports = {
       md: "768px",
       lg: "1024px",
       xl: "1280px",
-      "2xl": "1350px",
+      "2xl": "1440px",
     },
 
     spacing: {
@@ -91,6 +91,8 @@ module.exports = {
       200: "200px",
       216: "216px",
       220: "220px",
+      280: "280px",
+      240: "240px",
       400: "400px",
     },
 

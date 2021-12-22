@@ -1,3 +1,4 @@
+import ProductModel from "./ProductModel";
 import SeoModel from "@/_core/models/SeoModel";
 
 export default class CategoryModel extends SeoModel {
@@ -19,6 +20,7 @@ export default class CategoryModel extends SeoModel {
   parent: CategoryModel;
 
   isOpened = false;
+  products: ProductModel[];
 
   static getRoutePath(model: CategoryModel) {
     return !!model.parent ? `${CategoryModel.getRoutePath(model.parent)}/${model.meta_slug}` : `/catalog/${model.meta_slug}`;

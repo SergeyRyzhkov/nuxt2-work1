@@ -1,9 +1,14 @@
 import CategoryModel from "./models/CategoryModel";
+import ProductModel from "./models/ProductModel";
 import { BaseService } from "@/_core/service/BaseService";
 import { RouteLink } from "@/_core/models/RouteLink";
 import { lazyLoad } from "@/utils/Common";
 
 export class CatalogService extends BaseService {
+  async getProduct(slug: string) {
+    return await this.getOneOrDefault(ProductModel, `users/product/${slug}`);
+  }
+
   async getRoot() {
     return await this.getArrayOrEmpty(CategoryModel, "users/product-categories-menu");
   }
@@ -46,6 +51,13 @@ export class CatalogService extends BaseService {
   createCategoryRouteLocation(model: CategoryModel) {
     return {
       name: model.meta_slug,
+      params: { slug: model.meta_slug },
+    };
+  }
+
+  createProductRouteLocation(model: ProductModel) {
+    return {
+      name: "product",
       params: { slug: model.meta_slug },
     };
   }

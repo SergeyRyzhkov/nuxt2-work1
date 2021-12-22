@@ -1,8 +1,17 @@
 <template>
   <main class="page-wrapper container">
     <BreadCrumbs />
-    <h1>{{ h1Text }}</h1>
-    <CategoryCatalog :categories="categories" class="w-1/4 mt-22"></CategoryCatalog>
+    <div class="flex">
+      <div class="w-1/4">
+        <h1>{{ h1Text }}</h1>
+        <CategoryCatalog :categories="categories" class="mt-22"></CategoryCatalog>
+      </div>
+      <div class="w-3/4 ml-30">
+        <RootCategory v-show="isRootCategory"></RootCategory>
+        <CategoryContent v-show="isNotLeafCategory"></CategoryContent>
+        <LeafCategory v-show="isLeafCategory" :model="model"></LeafCategory>
+      </div>
+    </div>
   </main>
 </template>
 
@@ -22,6 +31,18 @@ export default class CategoryPage extends Vue {
   model: CategoryModel | null = new CategoryModel();
   categories: CategoryModel[] = [];
   h1Text = "Каталог";
+
+  get isRootCategory() {
+    return !this.slug;
+  }
+
+  get isNotLeafCategory() {
+    return !!this.model?.subcategory?.length;
+  }
+
+  get isLeafCategory() {
+    return !this.model?.subcategory?.length && !!this.slug;
+  }
 
   head() {
     if (!!this.model?.meta_slug) {
