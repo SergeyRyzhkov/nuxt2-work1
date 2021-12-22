@@ -1,8 +1,8 @@
 <template>
   <section v-if="!!categories" class="product_category__wrapper">
     <div v-for="iter in categories" :key="iter.id" class="product_category">
-      <div class="product_category__title">
-        <span :class="[iter.isOpened ? 'active' : '']" @click="goToCategory(iter)">{{ iter.title }}</span>
+      <div class="product_category__title" :class="[iter.isOpened ? 'active' : '']">
+        <span @click="goToCategory(iter)">{{ iter.title }}</span>
         <BaseOpenCloseButton
           v-show="hasChildren(iter)"
           :class="[iter.isOpened ? 'active' : '']"
@@ -105,7 +105,7 @@ export default class CategoryCatalog extends Vue {
     align-items: center;
     &.active {
       color: $secondary;
-      font-weight: 700;
+      font-weight: 600;
     }
     &:hover {
       color: $secondary;
