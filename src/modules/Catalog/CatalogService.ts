@@ -6,7 +6,7 @@ import { lazyLoad } from "@/utils/Common";
 
 export class CatalogService extends BaseService {
   async getProduct(slug: string) {
-    return await this.getOneOrDefault(ProductModel, `users/product/${slug}`);
+    return await this.getOneOrDefault(ProductModel, `users/products/${slug}`);
   }
 
   async getRoot() {

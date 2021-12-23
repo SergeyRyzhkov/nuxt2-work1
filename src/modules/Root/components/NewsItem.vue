@@ -15,9 +15,9 @@
           >{{ articleModel.published_at ? new Date(articleModel.published_at).toLocaleDateString("ru-RU") : "" }}</span
         >
       </div>
-<!--      <div v-if="articleModel.views_count > 0" class="article-smallitem__views">-->
-<!--        <img src="/images/eye.svg" alt="Количество просмотров" title="Количество просмотров" />-->
-<!--      </div>-->
+      <!--      <div v-if="articleModel.views_count > 0" class="article-smallitem__views">-->
+      <!--        <img src="/images/eye.svg" alt="Количество просмотров" title="Количество просмотров" />-->
+      <!--      </div>-->
     </div>
   </article>
 </template>
@@ -44,7 +44,7 @@ export default class NewsItem extends Vue {
 
 <style lang="scss">
 .article-smallitem {
-  margin: 0px 15px 39px 15px;
+  // margin: 0px 15px 39px 15px;
   display: flex;
   flex-direction: column;
   cursor: pointer;

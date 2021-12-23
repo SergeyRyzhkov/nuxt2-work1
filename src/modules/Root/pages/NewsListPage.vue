@@ -2,7 +2,7 @@
   <main class="page-wrapper container">
     <BreadCrumbs />
     <h1>Новости</h1>
-    <section class="article-list-wrapper">
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-30 gap-x-30 mt-40">
       <NewsItem v-for="iter in newsList" :key="iter.meta_slug" :article-model="iter"> </NewsItem>
     </section>
     <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>
@@ -50,16 +50,3 @@ export default class NewsListPage extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-.article-list-wrapper {
-  display: grid;
-  margin: 30px -15px 0;
-  @include mobile-small {
-    grid-template-columns: 1fr 1fr;
-  }
-  @include tablet{
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-</style>

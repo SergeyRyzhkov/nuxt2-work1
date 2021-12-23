@@ -57,7 +57,6 @@ export default class BasePagination extends Vue {
 
   fireUpdateEvent(pageNmb: number) {
     this.$emit("update:page", pageNmb);
-    console.log(this.pagination.currentPage)
     if (this.onUpdateScroolToTop) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -76,7 +75,7 @@ export default class BasePagination extends Vue {
     justify-content: center;
     flex-wrap: wrap;
     > li {
-      &:not(.page-action){
+      &:not(.page-action) {
         margin: 11px;
         display: flex;
         justify-content: center;
@@ -87,7 +86,7 @@ export default class BasePagination extends Vue {
         font-weight: 600;
         cursor: pointer;
       }
-      &.page-action{
+      &.page-action {
         line-height: 17px;
         font-size: 14px;
         width: 125px;
