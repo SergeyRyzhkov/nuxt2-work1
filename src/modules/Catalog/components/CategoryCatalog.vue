@@ -11,7 +11,7 @@
           :stroke="buttonStroke(iter)"
           @mouseover.native="hoveredCategoryModelId = iter.id"
           @mouseleave.native="hoveredCategoryModelId = 0"
-          @click.native="toogle(iter)"
+          @click.prevent="toogle(iter)"
         ></BaseOpenCloseButton>
       </div>
       <div
@@ -19,6 +19,7 @@
         :key="subCat.id"
         class="product_category__content"
         :class="[iter.isOpened ? 'active' : '']"
+        @click="goToCategory(subCat)"
       >
         <div class="product_category__sub">
           <span class="product_category__sub_title">{{ subCat.title }}</span>
@@ -65,6 +66,10 @@ export default class CategoryCatalog extends Vue {
   .product_category__content {
     height: 0px;
     overflow-y: hidden;
+    cursor: pointer;
+    &:hover {
+      color: $secondary;
+    }
     &.active {
       height: auto;
     }
