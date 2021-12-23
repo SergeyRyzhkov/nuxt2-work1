@@ -1,33 +1,45 @@
 <template>
-  <FunctionalCalendar ref="Calendar" v-model="valueModel" v-bind="{ ...$attrs, configs: calendarConfigs }" v-on="$listeners">
-    <template #default="{ day }">
-      <slot name="day" :day="day">
-        {{ day.day }}
-      </slot>
-    </template>
-
-    <template #dateRangeInputs="{ startDate, endDate }">
-      <div @click="pickerClick">
-        <slot name="dateRangeInputs" :startDate="startDate" :endDate="endDate">
-          <div class="vfc-single-input-wrapper">
-            <div v-if="!!formatDateRange" class="vfc-single-input">{{ formatDateRange }}</div>
-            <div v-else class="vfc-single-input vfc-single-input__placeholder">{{ dateRangeInputPlaceholder }}</div>
-            <img class="vfc-single-input__img" src="/images/calendar.svg" width="18" height="18" />
-          </div>
+  <section class="flex items-center">
+    <FunctionalCalendar ref="Calendar" v-model="valueModel" v-bind="{ ...$attrs, configs: calendarConfigs }" v-on="$listeners">
+      <template #default="{ day }">
+        <slot name="day" :day="day">
+          {{ day.day }}
         </slot>
-      </div>
-    </template>
+      </template>
 
-    <template #datePickerInput="{ selectedDate }">
-      <div @click="pickerClick">
-        <slot name="datePickerInput" :selectedDate="selectedDate">
-          <div readonly class="vfc-single-input">{{ selectedDate }}</div>
-        </slot>
-      </div>
-    </template>
+      <template #dateRangeInputs="{ startDate, endDate }">
+        <div @click="pickerClick">
+          <slot name="dateRangeInputs" :startDate="startDate" :endDate="endDate">
+            <div class="vfc-single-input-wrapper">
+              <div v-if="!!formatDateRange" class="vfc-single-input">{{ formatDateRange }}</div>
+              <div v-else class="vfc-single-input vfc-single-input__placeholder">{{ dateRangeInputPlaceholder }}</div>
+              <img class="vfc-single-input__img" src="/images/calendar.svg" width="18" height="18" />
+            </div>
+          </slot>
+        </div>
+      </template>
 
-    <template #footer><slot name="footer"></slot></template>
-  </FunctionalCalendar>
+      <template #datePickerInput="{ selectedDate }">
+        <div @click="pickerClick">
+          <slot name="datePickerInput" :selectedDate="selectedDate">
+            <div readonly class="vfc-single-input">{{ selectedDate }}</div>
+          </slot>
+        </div>
+      </template>
+
+      <template #footer>
+        <div class="flex flex-col w-full">
+          <slot name="footer"></slot>
+        </div>
+      </template>
+
+
+    </FunctionalCalendar>
+    <svg v-if="value.dateRange.end || value.dateRange.start" @click="$emit('clear')" class="ml-10 cursor-pointer" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="15.1591" height="1.51591" rx="0.757954" transform="matrix(0.701006 0.713155 -0.701006 0.713155 1.0625 0.108887)" fill="#131313"/>
+      <rect width="15.1591" height="1.51591" rx="0.757954" transform="matrix(0.701006 -0.713155 0.701006 0.713155 0.310547 10.8105)" fill="#131313"/>
+    </svg>
+  </section>
 </template>
 
 <script lang="ts">
@@ -64,6 +76,10 @@ export default class BaseCalendar extends Vue {
 
   @Prop({ default: "Период" })
   dateRangeInputPlaceholder: string;
+
+  created(){
+    console.log(this.value);
+  }
 
   get valueModel() {
     return this.value || {};

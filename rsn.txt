@@ -1,8 +1,8 @@
 ========== TO_DO ==============
-2. Выдрать из C:\_RSN\_projects\front.kaypro\src\components\FeedbackForm.vue - радиобуттон и вынести его в BaseRadion - пригодится
-3. Компонент - бегущая строка (в base его)
-4. В компоненте C:\_RSN\_projects\front.kaypro\src\components\forms\BaseCalendar.vue  - сделать опицонально возможность очищать значение (кнопка с крестиком - по нажатии эмит)
-5. C:\_RSN\_projects\front.kaypro\src\modules\Profile\components\PersonalData.vue - валидация
+2. Выдрать из C:\_RSN\_projects\front.kaypro\src\components\FeedbackForm.vue - радиобуттон и вынести его в BaseRadion - пригодится  +
+3. Компонент - бегущая строка (в base его) +
+4. В компоненте C:\_RSN\_projects\front.kaypro\src\components\forms\BaseCalendar.vue  - сделать опицонально возможность очищать значение (кнопка с крестиком - по нажатии эмит) + событие '@clear'
+5. C:\_RSN\_projects\front.kaypro\src\modules\Profile\components\PersonalData.vue - валидация +
 
 
 фигма
