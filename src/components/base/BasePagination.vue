@@ -1,11 +1,13 @@
 <template>
   <div v-if="countPage > 1" class="brc-pagination">
     <ul>
+      <li class="page-action" @click="fireUpdateEvent(pagination.currentPage - 1)">Назад</li>
       <li v-if="pages[0] > 1" @click="fireUpdateEvent(pages[0] - 1)">&lt;</li>
       <li v-for="page in pages" :key="page" :class="{ active: isActivePage(page) }" @click="() => fireUpdateEvent(page)">
         {{ page }}
       </li>
       <li v-if="pages[pages.length - 1] < countPage" @click="() => fireUpdateEvent(pages[pages.length - 1] + 1)">&gt;</li>
+      <li class="page-action" @click="fireUpdateEvent(pagination.currentPage + 1)">Вперед</li>
     </ul>
   </div>
 </template>
@@ -55,6 +57,7 @@ export default class BasePagination extends Vue {
 
   fireUpdateEvent(pageNmb: number) {
     this.$emit("update:page", pageNmb);
+    console.log(this.pagination.currentPage)
     if (this.onUpdateScroolToTop) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -72,19 +75,24 @@ export default class BasePagination extends Vue {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-
     > li {
-      padding: 10px;
-      margin: 8px;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      font-size: 17px;
-      font-weight: 600;
-      cursor: pointer;
+      &:not(.page-action){
+        margin: 11px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      &.page-action{
+        line-height: 17px;
+        font-size: 14px;
+        width: 125px;
+        @apply text-center flex items-center justify-center cursor-pointer;
+      }
 
       // &:hover {
       //   color: $red;
@@ -92,10 +100,13 @@ export default class BasePagination extends Vue {
       //   border: 1px solid gray;
       // }
 
-      &.active {
-        background-color: #efefef;
-        border: 1px solid #efefef;
-        color: #0919a8;
+      &.active:not(.page-action) {
+        padding: 10px;
+        margin: 4px;
+        width: 34px;
+        height: 34px;
+        background-color: $secondary;
+        color: #ffffff;
       }
     }
   }

@@ -54,7 +54,12 @@ export default class NewsListPage extends Vue {
 <style lang="scss">
 .article-list-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   margin: 30px -15px 0;
+  @include mobile-small {
+    grid-template-columns: 1fr 1fr;
+  }
+  @include tablet{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 </style>
