@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrapper">
-    <BaseStaticBanner v-if="bannerSrc" :image-src="bannerSrc" class="bg-strong-nude" />
+    <BaseStaticBanner :image-src="bannerSrc" class="bg-strong-nude" />
     <main class="container flex flex-col">
       <h1>{{ title }}</h1>
       <section class="mt-30 md:mt-60 ml-auto mr-auto w-full md:w-2/3" v-html="description"></section>
