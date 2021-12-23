@@ -1,13 +1,13 @@
 <template>
   <div v-if="countPage > 1" class="brc-pagination">
     <ul>
-      <li class="page-action" @click="fireUpdateEvent(pagination.currentPage - 1)">Назад</li>
+      <li class="page-action" :class="{disabled: pagination.currentPage === 1}" @click="fireUpdateEvent(pagination.currentPage - 1)">Назад</li>
       <li v-if="pages[0] > 1" @click="fireUpdateEvent(pages[0] - 1)">&lt;</li>
       <li v-for="page in pages" :key="page" :class="{ active: isActivePage(page) }" @click="() => fireUpdateEvent(page)">
         {{ page }}
       </li>
       <li v-if="pages[pages.length - 1] < countPage" @click="() => fireUpdateEvent(pages[pages.length - 1] + 1)">&gt;</li>
-      <li class="page-action" @click="fireUpdateEvent(pagination.currentPage + 1)">Вперед</li>
+      <li class="page-action" @click="fireUpdateEvent(pagination.currentPage + 1)" :class="{disabled: pagination.currentPage === pagination.lastPage}">Вперед</li>
     </ul>
   </div>
 </template>
@@ -37,7 +37,7 @@ export default class BasePagination extends Vue {
 
   get pages() {
     const pages: number[] = [];
-
+    console.log(this.pagination)
     let startPage = 1;
     let endPage = this.countPage;
 
@@ -91,6 +91,10 @@ export default class BasePagination extends Vue {
         font-size: 14px;
         width: 125px;
         @apply text-center flex items-center justify-center cursor-pointer;
+        &.disabled {
+            color: #C9C9C9;
+            pointer-events: none;
+        }
       }
 
       // &:hover {
