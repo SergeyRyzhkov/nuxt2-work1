@@ -64,14 +64,9 @@ export default class CategoryCatalog extends Vue {
 .product_category__wrapper {
   .product_category__content {
     height: 0px;
-    max-height: 0px;
     overflow-y: hidden;
-    visibility: hidden;
-    transition: all 0.2s ease-in-out;
     &.active {
-      visibility: visible;
       height: auto;
-      max-height: 600px;
     }
     .product_category__sub {
       font-size: 14px;
