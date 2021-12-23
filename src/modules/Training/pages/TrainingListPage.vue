@@ -24,6 +24,7 @@
           isDatePicker: false,
           placeholder: 'Выберите дату',
         }"
+        @clear="clearDate"
       ></base-calendar>
     </div>
 
@@ -68,6 +69,12 @@ export default class TrainingListPage extends Vue {
       .getAll(this.pagination, this.daysRange.dateRange.start, this.daysRange.dateRange.end);
     this.trainingList = result.data;
     this.pagination = result.pagination;
+  }
+
+  clearDate() {
+    this.daysRange = new DaysRangeModel();
+    this.pagination.currentPage = 1;
+    this.updateData();
   }
 
   updateBreadCrumbs() {

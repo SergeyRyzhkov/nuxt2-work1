@@ -2,9 +2,11 @@ import ProductModel from "@/modules/Catalog/models/ProductModel";
 import { BaseService } from "@/_core/service/BaseService";
 
 export class ProfileService extends BaseService {
-
-  async getFavorites() {
-    return await this.getOneOrDefault(ProductModel, "/favorites");
+  getFavorites() {
+    const res: ProductModel[] = [];
+    for (let i = 0; i < 100; i++) {
+      res.push(new ProductModel());
+    }
+    return res;
   }
-
 }

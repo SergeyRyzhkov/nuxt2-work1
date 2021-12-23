@@ -19,8 +19,8 @@ const routes = [
   {
     name: "favorites",
     path: "/favorites",
-    component: () => lazyLoad(import("@/modules/Profile/pages/Favorites.vue")),
-  }
+    component: () => lazyLoad(import("@/modules/Profile/pages/FavoritesPage.vue")),
+  },
 ];
 
 export default routes;

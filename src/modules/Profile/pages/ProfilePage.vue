@@ -11,6 +11,7 @@
 <script lang="ts">
 import { Vue, Component, getModule } from "nuxt-property-decorator";
 import AppStore from "@/modules/Root/store/AppStore";
+import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 
 @Component
 export default class ProfilePage extends Vue {
@@ -24,6 +25,10 @@ export default class ProfilePage extends Vue {
       { linkName: "Профиль", name: "profile" },
     ];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
+  }
+
+  head() {
+    return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(undefined, this.$route.fullPath);
   }
 }
 </script>

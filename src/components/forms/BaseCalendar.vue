@@ -32,12 +32,31 @@
           <slot name="footer"></slot>
         </div>
       </template>
-
-
     </FunctionalCalendar>
-    <svg v-if="value.dateRange.end || value.dateRange.start" @click="$emit('clear')" class="ml-10 cursor-pointer" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="15.1591" height="1.51591" rx="0.757954" transform="matrix(0.701006 0.713155 -0.701006 0.713155 1.0625 0.108887)" fill="#131313"/>
-      <rect width="15.1591" height="1.51591" rx="0.757954" transform="matrix(0.701006 -0.713155 0.701006 0.713155 0.310547 10.8105)" fill="#131313"/>
+    <svg
+      v-if="value.dateRange.end || value.dateRange.start"
+      class="ml-10 cursor-pointer"
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      @click.prevent="$emit('clear')"
+    >
+      <rect
+        width="15.1591"
+        height="1.51591"
+        rx="0.757954"
+        transform="matrix(0.701006 0.713155 -0.701006 0.713155 1.0625 0.108887)"
+        fill="#131313"
+      />
+      <rect
+        width="15.1591"
+        height="1.51591"
+        rx="0.757954"
+        transform="matrix(0.701006 -0.713155 0.701006 0.713155 0.310547 10.8105)"
+        fill="#131313"
+      />
     </svg>
   </section>
 </template>
@@ -77,7 +96,7 @@ export default class BaseCalendar extends Vue {
   @Prop({ default: "Период" })
   dateRangeInputPlaceholder: string;
 
-  created(){
+  created() {
     console.log(this.value);
   }
 

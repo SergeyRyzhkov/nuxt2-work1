@@ -22,23 +22,23 @@
         v-model="registrationData.password_confirmation"
         placeholder="Повторите пароль*"
         :has-error="$v.registrationData.password_confirmation.$error"
-        @blur="$v.registrationData.password_confirmation.$touch()"
         type="password"
         class="mb-32"
+        @blur="$v.registrationData.password_confirmation.$touch()"
       />
       <BaseButton type="submit">Изменить</BaseButton>
     </form>
     <div class="flex items-center mt-60">
-      <BaseCheckbox id="subscribe" label="Получать информацию о новинках и акциях"/>
+      <BaseCheckbox id="subscribe" label="Получать информацию о новинках и акциях" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "nuxt-property-decorator";
-import {AuthService} from "@/modules/Auth/AuthService";
+import { Component, Vue } from "nuxt-property-decorator";
+import { required, sameAs } from "vuelidate/lib/validators";
+import { AuthService } from "@/modules/Auth/AuthService";
 import RegistrationData from "@/modules/Auth/models/RegistrationData";
-import {email, required, sameAs} from "vuelidate/lib/validators";
 
 const validations = () => {
   return {
@@ -50,12 +50,12 @@ const validations = () => {
   };
 };
 
-@Component({validations})
-export default class PasswordRecovery extends Vue{
+@Component({ validations })
+export default class PasswordRecovery extends Vue {
   registrationData: RegistrationData = new RegistrationData();
 
   changePassword() {
-    this.$v.$touch()
+    this.$v.$touch();
     if (this.$v.$invalid) {
       return;
     }
@@ -63,4 +63,3 @@ export default class PasswordRecovery extends Vue{
   }
 }
 </script>
-

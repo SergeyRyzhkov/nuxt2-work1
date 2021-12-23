@@ -34,8 +34,8 @@
             v-model="registrationData.address"
             placeholder="Адрес доставки*"
             :has-error="$v.registrationData.address.$error"
-            @blur="$v.registrationData.address.$touch()"
             class="mb-32"
+            @blur="$v.registrationData.address.$touch()"
           />
           <BaseButton type="submit">Сохранить</BaseButton>
         </form>
@@ -46,24 +46,24 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from "nuxt-property-decorator";
-import {AuthService} from "@/modules/Auth/AuthService";
-import {phoneMask} from "@/utils/InputMaskDefinitions";
+import { Vue, Component } from "nuxt-property-decorator";
+import { email, required } from "vuelidate/lib/validators";
+import { AuthService } from "@/modules/Auth/AuthService";
+import { phoneMask } from "@/utils/InputMaskDefinitions";
 import RegistrationData from "@/modules/Auth/models/RegistrationData";
-import {email, required} from "vuelidate/lib/validators";
 
 const validations = () => {
   return {
     registrationData: {
-      fio: {required},
-      phone: {required},
-      email: {required, email},
-      address: {required},
+      fio: { required },
+      phone: { required },
+      email: { required, email },
+      address: { required },
     },
   };
 };
 
-@Component({validations})
+@Component({ validations })
 export default class PersonalData extends Vue {
   registrationData: RegistrationData = new RegistrationData();
   phoneMask = phoneMask;
@@ -73,7 +73,7 @@ export default class PersonalData extends Vue {
   }
 
   savePersonal() {
-    this.$v.$touch()
+    this.$v.$touch();
     if (this.$v.$invalid) {
       return;
     }

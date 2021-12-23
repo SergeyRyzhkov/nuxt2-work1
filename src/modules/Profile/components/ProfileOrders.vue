@@ -13,7 +13,6 @@
       </div>
       <base-calendar
         v-model="daysRange"
-        @clear="clearDate"
         :config="{
           isMultiple: true,
           calendarsCount: 1,
@@ -21,6 +20,7 @@
           isDatePicker: false,
           placeholder: 'Выберите дату',
         }"
+        @clear="clearDate"
       />
     </div>
   </section>
@@ -35,9 +35,8 @@ export default class ProfileOrders extends Vue {
   tabActive = 1;
   daysRange: DaysRangeModel = new DaysRangeModel();
 
-  clearDate(){
-    this.daysRange.dateRange.end = ""
-    this.daysRange.dateRange.start = ""
+  clearDate() {
+    this.daysRange = new DaysRangeModel();
   }
 }
 </script>
