@@ -5,42 +5,65 @@
       <div>Персональные данные</div>
       <div class="mt-33">
         <form @submit.prevent="savePersonal">
-          <BaseInput v-model="registrationData.fio" placeholder="ФИО*" class="mb-27" />
+          <BaseInput
+            v-model="registrationData.fio"
+            placeholder="ФИО*"
+            class="mb-27"
+            :has-error="$v.registrationData.fio.$error"
+            @blur="$v.registrationData.fio.$touch()"
+          />
           <div class="flex items-center">
-            <BaseInput v-model="registrationData.phone" placeholder="Телефон*" type="tel" :mask="phoneMask" class="mb-27 pr-16" />
-            <BaseInput v-model="registrationData.email" placeholder="Email*" class="mb-27 pl-16" />
+            <BaseInput
+              v-model="registrationData.phone"
+              placeholder="Телефон*"
+              type="tel"
+              :mask="phoneMask"
+              class="mb-27 pr-16"
+              :has-error="$v.registrationData.phone.$error"
+              @blur="$v.registrationData.phone.$touch()"
+            />
+            <BaseInput
+              v-model="registrationData.email"
+              placeholder="Email*"
+              class="mb-27 pl-16"
+              :has-error="$v.registrationData.email.$error"
+              @blur="$v.registrationData.email.$touch()"
+            />
           </div>
-          <BaseInput v-model="registrationData.address" placeholder="Адрес доставки*" class="mb-32" />
+          <BaseInput
+            v-model="registrationData.address"
+            placeholder="Адрес доставки*"
+            :has-error="$v.registrationData.address.$error"
+            @blur="$v.registrationData.address.$touch()"
+            class="mb-32"
+          />
           <BaseButton type="submit">Сохранить</BaseButton>
         </form>
       </div>
-
-      <div class="mt-62">Смена пароля</div>
-      <form class="mt-33" @submit.prevent="changePassword">
-        <BaseInput v-model="registrationData.oldPassword" placeholder="Старый пароль*" type="password" class="mb-27" />
-        <BaseInput v-model="registrationData.password" placeholder="Новый пароль*" type="password" class="mb-27" />
-        <BaseInput
-          v-model="registrationData.password_confirmation"
-          placeholder="Повторите пароль*"
-          type="password"
-          class="mb-32"
-        />
-        <BaseButton type="submit">Изменить</BaseButton>
-      </form>
-      <div class="flex items-center mt-60">
-        <BaseCheckbox id="subscribe" label="Получать информацию о новинках и акциях" />
-      </div>
+      <PasswordRecovery />
     </div>
   </section>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator";
-import { AuthService } from "@/modules/Auth/AuthService";
-import { phoneMask } from "@/utils/InputMaskDefinitions";
+import {Vue, Component} from "nuxt-property-decorator";
+import {AuthService} from "@/modules/Auth/AuthService";
+import {phoneMask} from "@/utils/InputMaskDefinitions";
 import RegistrationData from "@/modules/Auth/models/RegistrationData";
+import {email, required} from "vuelidate/lib/validators";
 
-@Component
+const validations = () => {
+  return {
+    registrationData: {
+      fio: {required},
+      phone: {required},
+      email: {required, email},
+      address: {required},
+    },
+  };
+};
+
+@Component({validations})
 export default class PersonalData extends Vue {
   registrationData: RegistrationData = new RegistrationData();
   phoneMask = phoneMask;
@@ -49,11 +72,11 @@ export default class PersonalData extends Vue {
     this.registrationData = this.$serviceLocator.getService(AuthService).getSessionUser();
   }
 
-  changePassword() {
-    this.$serviceLocator.getService(AuthService).updatePassword(this.registrationData);
-  }
-
   savePersonal() {
+    this.$v.$touch()
+    if (this.$v.$invalid) {
+      return;
+    }
     RegistrationData.buildFirstSecondPatrFromFio(this.registrationData);
     this.$serviceLocator.getService(AuthService).updateProfile(this.registrationData);
   }
