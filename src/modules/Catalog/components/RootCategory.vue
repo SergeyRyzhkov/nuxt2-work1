@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>RootCategory</h1>
     <section>
       <img src="" />
     </section>

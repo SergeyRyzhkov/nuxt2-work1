@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from "nuxt-property-decorator";
-import { yandexMap, ymapMarker, loadYmap } from "vue-yandex-maps";
+import { yandexMap, ymapMarker } from "vue-yandex-maps";
 import { MapMarker } from "@/components/map/MapMarker";
 
 @Component({

@@ -1,8 +1,19 @@
 <template>
   <main v-if="!$fetchState.pending" class="page-wrapper container">
     <BreadCrumbs />
-    <div class="flex items-center justify-between">
+    <div class="arenda-banner flex items-center p-16 md:p-40">
+      <h1 class="grow flex-shrink-0">Аренда студии</h1>
+      <p class="text-14 break-all md:ml-60 md:mr-120">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+      </p>
+      <BaseButton class="grow flex-shrink-0 md:ml-auto bg-white" @click="$router.push({ name: 'training-arenda-card' })"
+        >Узнать больше</BaseButton
+      >
+    </div>
+    <div class="flex items-center justify-between mt-40 md:mt-60">
       <h1>Обучение</h1>
+      <nuxt-link :to="{ name: 'training-arenda-card' }">fdsfsdf</nuxt-link>
       <base-calendar
         v-model="daysRange"
         class="hidden md:block"
@@ -81,5 +92,9 @@ export default class TrainingListPage extends Vue {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   row-gap: 48px;
   column-gap: 32px;
+}
+
+.arenda-banner {
+  background: linear-gradient(268.69deg, #baccff -0.81%, #f2e1dc 60.12%), #eaeaea;
 }
 </style>

@@ -17,11 +17,21 @@ export class CatalogService extends BaseService {
     return await this.getOneOrDefault(CategoryModel, `users/product-categories/${slug}`);
   }
 
-  buldBreadCrumb(breadCrumbList: RouteLink[], model: CategoryModel | null) {
-    if (!!model) {
+  buildBreadCrumb(model: CategoryModel | null) {
+    const breadCrumbList: RouteLink[] = [];
+    if (!!model && model.id > 0) {
+      this._buildBreadCrumb(breadCrumbList, model);
+    }
+    breadCrumbList.push({ linkName: "Каталог", name: "catalog" }, { linkName: "Главная", name: "main" });
+    breadCrumbList.reverse();
+    return breadCrumbList;
+  }
+
+  _buildBreadCrumb(breadCrumbList: RouteLink[], model: CategoryModel | null) {
+    if (!!model && !!model.id) {
       breadCrumbList.push({ linkName: model.title, name: model.meta_slug });
       if (!!model.parent) {
-        this.buldBreadCrumb(breadCrumbList, model.parent);
+        this._buildBreadCrumb(breadCrumbList, model.parent);
       }
     }
   }

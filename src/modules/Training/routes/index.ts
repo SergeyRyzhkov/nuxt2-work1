@@ -1,9 +1,15 @@
-// import { lazyLoad } from "@/utils/Common";
 const routes = [
   {
     name: "training",
     path: "/training",
     component: () => lazyLoad(import("@/modules/Training/pages/TrainingListPage.vue")),
+  },
+
+  {
+    name: "training-arenda-card",
+    path: "/training/arenda",
+    props: true,
+    component: () => lazyLoad(import("@/modules/Training/pages/ArendaPage.vue")),
   },
   {
     name: "training-card",
