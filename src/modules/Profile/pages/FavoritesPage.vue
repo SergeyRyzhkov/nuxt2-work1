@@ -24,7 +24,7 @@ export default class FavoritesPage extends Vue {
 
   fetch() {
     this.updateBreadCrumbs();
-    this.productList = this.$serviceLocator.getService(ProfileService).getFavorites();
+    this.updateData();
   }
 
   updateBreadCrumbs() {
@@ -36,6 +36,8 @@ export default class FavoritesPage extends Vue {
     // const result = this.$serviceLocator.getService(ProfileService).getFavorites(this.pagination);
     // this.model = result.data;
     // this.pagination = result.pagination;
+
+    this.pagination.total = 100;
     this.productList = this.$serviceLocator.getService(ProfileService).getFavorites();
   }
 
