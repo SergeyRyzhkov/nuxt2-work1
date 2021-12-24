@@ -1,8 +1,8 @@
 <template>
   <form @submit.prevent="send">
     <div v-if="radio" class="flex mb-32">
-      <BaseRadio id="'opt1'" v-model="formModel.type" label="Обращение" name="rdo" value="appeal" />
-      <BaseRadio id="'opt2'" v-model="formModel.type" class="ml-74" label="Запрос технологу" name="rdo" value="request" />
+      <BaseRadioButton id="'opt1'" v-model="formModel.type" label="Обращение" name="rdo" value="appeal" />
+      <BaseRadioButton id="'opt2'" v-model="formModel.type" class="ml-74" label="Запрос технологу" name="rdo" value="request" />
     </div>
     <BaseInput
       v-model="formModel.name"

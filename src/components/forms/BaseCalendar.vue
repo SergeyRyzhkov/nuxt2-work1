@@ -1,64 +1,40 @@
 <template>
-  <section class="flex items-center">
-    <FunctionalCalendar ref="Calendar" v-model="valueModel" v-bind="{ ...$attrs, configs: calendarConfigs }" v-on="$listeners">
-      <template #default="{ day }">
-        <slot name="day" :day="day">
-          {{ day.day }}
+  <FunctionalCalendar ref="Calendar" v-model="valueModel" v-bind="{ ...$attrs, configs: calendarConfigs }" v-on="$listeners">
+    <template #default="{ day }">
+      <slot name="day" :day="day">
+        {{ day.day }}
+      </slot>
+    </template>
+
+    <template #dateRangeInputs="{ startDate, endDate }">
+      <div @click="pickerClick">
+        <slot name="dateRangeInputs" :startDate="startDate" :endDate="endDate">
+          <div class="vfc-single-input-wrapper">
+            <div v-if="!!formatDateRange" class="vfc-single-input">{{ formatDateRange }}</div>
+            <div v-else class="vfc-single-input vfc-single-input__placeholder">{{ dateRangeInputPlaceholder }}</div>
+            <span v-if="value.dateRange.end || value.dateRange.start" class="vfc-calendar-close" @click.stop="$emit('clear')"
+              >+</span
+            >
+            <img class="vfc-single-input__img" src="/images/calendar.svg" width="18" height="18" />
+          </div>
         </slot>
-      </template>
+      </div>
+    </template>
 
-      <template #dateRangeInputs="{ startDate, endDate }">
-        <div @click="pickerClick">
-          <slot name="dateRangeInputs" :startDate="startDate" :endDate="endDate">
-            <div class="vfc-single-input-wrapper">
-              <div v-if="!!formatDateRange" class="vfc-single-input">{{ formatDateRange }}</div>
-              <div v-else class="vfc-single-input vfc-single-input__placeholder">{{ dateRangeInputPlaceholder }}</div>
-              <img class="vfc-single-input__img" src="/images/calendar.svg" width="18" height="18" />
-            </div>
-          </slot>
-        </div>
-      </template>
+    <template #datePickerInput="{ selectedDate }">
+      <div @click="pickerClick">
+        <slot name="datePickerInput" :selectedDate="selectedDate">
+          <div readonly class="vfc-single-input">{{ selectedDate }}</div>
+        </slot>
+      </div>
+    </template>
 
-      <template #datePickerInput="{ selectedDate }">
-        <div @click="pickerClick">
-          <slot name="datePickerInput" :selectedDate="selectedDate">
-            <div readonly class="vfc-single-input">{{ selectedDate }}</div>
-          </slot>
-        </div>
-      </template>
-
-      <template #footer>
-        <div class="flex flex-col w-full">
-          <slot name="footer"></slot>
-        </div>
-      </template>
-    </FunctionalCalendar>
-    <svg
-      v-if="value.dateRange.end || value.dateRange.start"
-      class="ml-10 cursor-pointer"
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      @click.prevent="$emit('clear')"
-    >
-      <rect
-        width="15.1591"
-        height="1.51591"
-        rx="0.757954"
-        transform="matrix(0.701006 0.713155 -0.701006 0.713155 1.0625 0.108887)"
-        fill="#131313"
-      />
-      <rect
-        width="15.1591"
-        height="1.51591"
-        rx="0.757954"
-        transform="matrix(0.701006 -0.713155 0.701006 0.713155 0.310547 10.8105)"
-        fill="#131313"
-      />
-    </svg>
-  </section>
+    <template #footer>
+      <div class="flex flex-col w-full">
+        <slot name="footer"></slot>
+      </div>
+    </template>
+  </FunctionalCalendar>
 </template>
 
 <script lang="ts">
@@ -95,10 +71,6 @@ export default class BaseCalendar extends Vue {
 
   @Prop({ default: "Период" })
   dateRangeInputPlaceholder: string;
-
-  created() {
-    console.log(this.value);
-  }
 
   get valueModel() {
     return this.value || {};
@@ -174,7 +146,6 @@ export default class BaseCalendar extends Vue {
 }
 </script>
 
-//
 <style lang="scss">
 .vfc-calendar-day__selected {
   display: inline-block;
@@ -219,6 +190,20 @@ export default class BaseCalendar extends Vue {
 }
 .vfc-cursor-pointer {
   color: $primary;
+}
+
+.vfc-calendar-close {
+  transform: rotate(45deg);
+  font-size: 24px;
+  background-color: #e3e3e3;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .vfc-calendar {

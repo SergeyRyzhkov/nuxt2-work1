@@ -9,12 +9,13 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from "nuxt-property-decorator";
+import { Guid } from "@/utils/Guid";
 @Component
-export default class BaseRadio extends Vue {
+export default class BaseRadioButton extends Vue {
   @Prop()
   name: string;
 
-  @Prop()
+  @Prop({ default: Guid.newGuid() })
   id: number;
 
   @Prop()
