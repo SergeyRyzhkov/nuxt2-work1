@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link v-show="!!model" :to="routeLink" class="flex flex-col items-center">
+  <nuxt-link v-show="!!model" :to="routeLink" class="flex flex-col items-center hover:scale-105">
     <BaseHeartButton class="ml-auto" :is-red="true"></BaseHeartButton>
     <img src="/images/tmp_product.jpg" height="280" width="240" class="w-240 h-280 p-20 object-cover object-left-top" />
     <div class="text-14 text-gray-color uppercase font-semibold">Для лица</div>

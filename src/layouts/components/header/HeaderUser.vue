@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center">
-    <img src="/images/header_heart.svg" loading="lazy" width="24" height="24" />
+    <img src="/images/header_heart.svg" loading="lazy" width="24" height="24" class="cursor-pointer" @click="gotoFavor()" />
     <img src="/images/header_shop.svg" loading="lazy" width="22" height="22" class="ml-24 lg:ml-48" />
     <img
       src="/images/header_user.svg"
@@ -8,9 +8,8 @@
       width="19"
       height="19"
       class="ml-24 lg:ml-48 cursor-pointer"
-      @click="authModal"
+      @click="authModalOrProfile()"
     />
-    {{ userName }}
   </div>
 </template>
 
@@ -21,8 +20,18 @@ import { AuthService } from "@/modules/Auth/AuthService";
 
 @Component({ components: { AuthForm } })
 export default class HeaderUser extends Vue {
-  authModal() {
-    this.$modalManager.modalShowFullScreen(AuthForm);
+  authModalOrProfile() {
+    if (this.$serviceLocator.getService(AuthService).isAuthenticated) {
+      this.$router.push({ name: "profile" });
+    } else {
+      this.$modalManager.modalShowFullScreen(AuthForm);
+    }
+  }
+
+  gotoFavor() {
+    if (this.$route.name !== "favorites") {
+      this.$router.push({ name: "favorites" });
+    }
   }
 
   get userName() {

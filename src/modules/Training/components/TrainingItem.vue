@@ -1,5 +1,5 @@
 <template>
-  <section v-if="!!item && !!item.meta_slug" class="flex flex-col cursor-pointer" @click="goToCard()">
+  <section v-if="!!item && !!item.meta_slug" class="flex flex-col cursor-pointer hover:scale-105" @click="goToCard()">
     <div class="relative">
       <img :src="imageSrc" />
       <div class="absolute top-16 left-16 bg-primary px-16 py-8 rounded-full text-14 text-white">{{ statusName }}</div>
@@ -42,7 +42,7 @@ export default class TrainingItem extends Vue {
 
   get dateTypeAddress() {
     return `${dayjs(this.item.date?.split("T")[0]).format("DD MMMM")} | ${this.item.is_online ? "онлайн" : "оффлайн"} | ${
-      this.item.location || "Москва"
+      this.item.location || "Россия"
     }`;
   }
 }

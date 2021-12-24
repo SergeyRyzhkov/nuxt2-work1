@@ -1,5 +1,5 @@
 <template>
-  <article v-if="!!articleModel && !!articleModel.meta_slug" class="article-smallitem" @click="goToCard()">
+  <article v-if="!!articleModel && !!articleModel.meta_slug" class="article-smallitem hover:scale-105" @click="goToCard()">
     <figure class="article-smallitem__preview">
       <img :src="imageSrc" :alt="articleModel.title" itemprop="image" class="article-smallitem__preview-img" loading="lazy" />
       <figcaption>{{ articleModel.title }}</figcaption>

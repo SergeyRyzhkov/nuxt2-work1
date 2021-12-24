@@ -1,8 +1,8 @@
 <template>
-  <main class="container page-wrapper mb-100">
+  <main class="container page-wrapper">
     <BreadCrumbs />
     <h1>Контакты</h1>
-    <div class="flex lg:flex-row flex-col mt-45">
+    <div class="flex lg:flex-row flex-col mt-40">
       <ContactsInfo class="lg:pr-56" />
       <ContactsForm class="lg:pl-56" />
     </div>

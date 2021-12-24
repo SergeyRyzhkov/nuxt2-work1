@@ -2,12 +2,10 @@
   <main class="page-wrapper container">
     <BreadCrumbs />
     <h1>Избранное</h1>
-    <div class="mt-32 mb-62 lg:mb-200">
-      <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-y-60 gap-y-28 gap-x-9 gap-x-30">
-        <FavoriteItem v-for="i in 16" :key="i" />
-      </div>
-      <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>
+    <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-y-60 gap-y-28 gap-x-9 gap-x-30 mt-40">
+      <ProductItem v-for="(index, iter) in productList" :key="index" :model="iter" />
     </div>
+    <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>
   </main>
 </template>
 
@@ -21,12 +19,12 @@ import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 
 @Component
 export default class FavoritesPage extends Vue {
-  model: ProductModel[] = [];
+  productList: ProductModel[] = [];
   pagination: Pagination = new Pagination();
 
   fetch() {
     this.updateBreadCrumbs();
-    this.model = this.$serviceLocator.getService(ProfileService).getFavorites();
+    this.productList = this.$serviceLocator.getService(ProfileService).getFavorites();
   }
 
   updateBreadCrumbs() {
@@ -38,7 +36,7 @@ export default class FavoritesPage extends Vue {
     // const result = this.$serviceLocator.getService(ProfileService).getFavorites(this.pagination);
     // this.model = result.data;
     // this.pagination = result.pagination;
-    this.model = this.$serviceLocator.getService(ProfileService).getFavorites();
+    this.productList = this.$serviceLocator.getService(ProfileService).getFavorites();
   }
 
   onUpdatePagination(pageNmb: number) {
