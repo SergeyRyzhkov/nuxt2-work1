@@ -5,7 +5,7 @@
       <ul class="cabinet-menu">
         <li><nuxt-link :to="{ name: 'personal' }" exact>Личные данные</nuxt-link></li>
         <li><nuxt-link :to="{ name: 'orders' }">Заказы</nuxt-link></li>
-        <li><nuxt-link :to="'/'">Избранное</nuxt-link></li>
+        <li><nuxt-link :to="'favorites'">Избранное</nuxt-link></li>
         <li><nuxt-link :to="'/'">Корзина</nuxt-link></li>
         <li><a href="javascript:void(0)" @click="logout">Выйти</a></li>
       </ul>
