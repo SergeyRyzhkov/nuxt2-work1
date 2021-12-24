@@ -13,7 +13,6 @@
     </div>
     <div class="flex items-center justify-between mt-40 md:mt-60">
       <h1>Обучение</h1>
-      <nuxt-link :to="{ name: 'training-arenda-card' }">fdsfsdf</nuxt-link>
       <base-calendar
         v-model="daysRange"
         class="hidden md:block"

@@ -195,7 +195,8 @@ export default class BaseCalendar extends Vue {
 .vfc-calendar-close {
   transform: rotate(45deg);
   font-size: 24px;
-  background-color: #e3e3e3;
+  color: white;
+  background-color: #acacac;
   border-radius: 50%;
   width: 20px;
   height: 20px;
