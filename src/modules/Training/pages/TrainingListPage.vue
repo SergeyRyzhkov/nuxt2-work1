@@ -13,7 +13,6 @@
     </div>
     <div class="flex items-center justify-between mt-40 md:mt-60">
       <h1>Обучение</h1>
-      <nuxt-link :to="{ name: 'training-arenda-card' }">fdsfsdf</nuxt-link>
       <base-calendar
         v-model="daysRange"
         class="hidden md:block"
@@ -28,7 +27,7 @@
       ></base-calendar>
     </div>
 
-    <div class="training-list-wrapper mt-30 md:mt-40">
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-y-40 gap-x-30 mt-30 md:mt-40">
       <TrainingItem v-for="iter in trainingList" :key="iter.meta_slug" :item="iter"> </TrainingItem>
     </div>
     <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>
@@ -94,13 +93,6 @@ export default class TrainingListPage extends Vue {
 </script>
 
 <style lang="scss">
-.training-list-wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  row-gap: 48px;
-  column-gap: 32px;
-}
-
 .arenda-banner {
   background: linear-gradient(268.69deg, #baccff -0.81%, #f2e1dc 60.12%), #eaeaea;
 }

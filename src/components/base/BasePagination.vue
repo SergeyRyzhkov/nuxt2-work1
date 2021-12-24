@@ -49,7 +49,6 @@ export default class BasePagination extends Vue {
 
   get pages() {
     const pages: number[] = [];
-    console.log(this.pagination);
     let startPage = 1;
     let endPage = this.countPage;
 
@@ -101,20 +100,16 @@ export default class BasePagination extends Vue {
       &.page-action {
         line-height: 17px;
         font-size: 14px;
-        width: 125px;
-        @apply text-center flex items-center justify-center cursor-pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
         &.disabled {
           color: #c9c9c9;
           pointer-events: none;
+          margin: 8px;
         }
       }
-
-      // &:hover {
-      //   color: $red;
-      //   cursor: pointer;
-      //   border: 1px solid gray;
-      // }
-
       &.active:not(.page-action) {
         padding: 10px;
         margin: 4px;
