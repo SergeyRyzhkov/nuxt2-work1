@@ -17,28 +17,25 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from "nuxt-property-decorator";
+import { Vue, Component } from "nuxt-property-decorator";
 
 @Component
-export default class CartTotal extends Vue{
-}
+export default class CartTotal extends Vue {}
 </script>
 
 <style lang="scss">
-.cart-total{
+.cart-total {
   padding-top: 16px;
-  background: #ffffff;
   position: absolute;
   bottom: 0;
-  .cart-info{
+  .cart-info {
     font-size: 14px;
     line-height: 17px;
-    &-large{
+    &-large {
       @apply mt-25;
       font-size: 24px;
       line-height: 29px;
     }
   }
-
 }
 </style>

@@ -12,19 +12,19 @@
         <h2>Способ доставки</h2>
         <div class="mt-30">
           <div class="mb-16">
-            <BaseRadioButton id="del-1" :label="'Доставка до двери курьером СДЭК'" name="del-1" class="label-top" />
+            <BaseRadioButton id="del-1" :label="'Доставка до двери курьером СДЭК'" name="delivery" class="label-top" />
             <div class="pl-30 del-info mt-9">275₽, 14-16 декабря</div>
           </div>
           <div class="mb-16">
-            <BaseRadioButton id="del-2" :label="'Доставка до пункта выдачи СДЭК'" name="del-2" class="label-top" />
+            <BaseRadioButton id="del-2" :label="'Доставка до пункта выдачи СДЭК'" name="delivery" class="label-top" />
             <div class="pl-30 del-info mt-9">135₽, 20-22 декабря</div>
           </div>
           <div class="mb-16">
-            <BaseRadioButton id="del-3" :label="'Самовывоз из офиса г. Москва'" name="del-3" class="label-top" />
+            <BaseRadioButton id="del-3" :label="'Самовывоз из офиса г. Москва'" name="delivery" class="label-top" />
             <div class="pl-30 del-info mt-9">0₽, 14-16 декабря</div>
           </div>
           <div>
-            <BaseRadioButton id="del-4" :label="'Самовывоз из офиса г. Москва'" name="del-4" class="label-top" />
+            <BaseRadioButton id="del-4" :label="'Самовывоз из офиса г. Москва'" name="delivery" class="label-top" />
             <div class="pl-30 del-info mt-9">0₽, 14-16 декабря</div>
           </div>
         </div>
@@ -32,8 +32,8 @@
       <div class="mt-52">
         <h2>Способа оплаты</h2>
         <div class="mt-32">
-          <BaseRadioButton id="oay-1" :label="'Наличными при получении'" name="pay-1" class="mb-20" />
-          <BaseRadioButton id="pay-1" :label="'Банковской картой на сайте'" name="pay-1" />
+          <BaseRadioButton id="pay-1" :label="'Наличными при получении'" name="pay" class="mb-20" />
+          <BaseRadioButton id="pay-2" :label="'Банковской картой на сайте'" name="pay" />
         </div>
       </div>
       <div class="mt-52">

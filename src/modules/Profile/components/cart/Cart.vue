@@ -10,8 +10,9 @@
       </div>
       <div :class="{ 'm-cart': isOrdering }" class="mt-24 md:mt-42 flex flex-col h-full">
         <div class="flex flex-col cart-items" :class="{ 'order-items': isOrdering }">
-          <CartItem />
-          <CartItem />
+          <CartItem :is-ordering="isOrdering" />
+          <CartItem :is-ordering="isOrdering" />
+          <CartItem :is-ordering="isOrdering" />
         </div>
         <CartTotal :class="{ 'total-static': isOrdering }" />
       </div>

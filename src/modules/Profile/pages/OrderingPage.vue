@@ -40,6 +40,6 @@ export default class OrderingPage extends Vue {
 }
 
 .linear-order {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 1) 50%, rgba(250, 250, 250, 1) 50%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 1) 50%, rgba(248, 248, 248, 1) 50%);
 }
 </style>
