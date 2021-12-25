@@ -1,5 +1,5 @@
 <template>
-  <div class="xl:px-40 h-full mt-7 cart" :class="{ 'pr-0 xl:pr-0 pl-58 xl:pl-58': isOrdering }">
+  <div class="xl:px-40 h-full mt-7 cart" :class="{ 'pr-0 xl:pr-0 md:pl-58 xl:pl-58': isOrdering }">
     <div class="relative h-full">
       <div v-if="!isOrdering" class="cart-title">
         <div class="flex items-end relative">
@@ -14,7 +14,7 @@
           <CartItem :is-ordering="isOrdering" />
           <CartItem :is-ordering="isOrdering" />
         </div>
-        <CartTotal :class="{ 'total-static': isOrdering }" />
+        <CartTotal :is-ordering="isOrdering" :class="{ 'total-static': isOrdering }" />
       </div>
     </div>
   </div>

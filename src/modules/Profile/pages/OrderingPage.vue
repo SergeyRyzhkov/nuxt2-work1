@@ -1,12 +1,12 @@
 <template>
   <main class="page-wrapper linear-order">
-    <div class="container flex">
-      <section class="w-1/2 pt-60 line-half">
+    <div class="container flex flex-col md:flex-col">
+      <section class="w-full md:w-1/2 pt-60 line-half">
         <h1>Оформление заказа</h1>
         <BreadCrumbs />
         <OrderForm />
       </section>
-      <section class="w-1/2 pt-60">
+      <section class="w-full md:w-1/2 pt-60">
         <Cart :is-ordering="true" />
       </section>
     </div>
@@ -36,10 +36,14 @@ export default class OrderingPage extends Vue {
 
 <style lang="scss">
 .line-half {
-  border-right: 0.5px solid #c9c9c9;
+  @include tablet {
+    border-right: 0.5px solid #c9c9c9;
+  }
 }
 
 .linear-order {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 1) 50%, rgba(248, 248, 248, 1) 50%);
+  @include tablet {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 50%, rgba(248, 248, 248, 1) 50%);
+  }
 }
 </style>

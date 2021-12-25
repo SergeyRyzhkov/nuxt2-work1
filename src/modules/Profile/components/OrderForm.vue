@@ -1,5 +1,5 @@
 <template>
-  <section class="pt-22 pr-76 order-form">
+  <section class="pt-22 md:pr-76 order-form">
     <h2>Контактная информация</h2>
     <form class="mt-30">
       <BaseInput placeholder="ФИО*" class="mb-27" />
