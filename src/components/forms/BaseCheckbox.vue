@@ -10,7 +10,7 @@
         change: (event) => $emit('change', event.target.checked),
       }"
     />
-    <label class="checkbox-label" :for="id">{{ label }}</label>
+    <label v-if="label" class="checkbox-label" :for="id">{{ label }}</label>
   </div>
 </template>
 
@@ -20,7 +20,7 @@ import { Guid } from "@/utils/Guid";
 
 @Component
 export default class BaseCheckbox extends Vue {
-  @Prop({ required: true })
+  @Prop()
   label: string;
 
   @Prop({ default: () => Guid.newGuid() })

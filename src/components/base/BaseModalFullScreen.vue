@@ -1,8 +1,8 @@
 <template>
   <div class="flex min-h-full h-full">
-    <div class="hidden md:block md:w-1/2 lg:w-7/12 bg-strong-nude opacity-50"></div>
+    <div class="hidden md:block md:w-1/2 lg:w-7/12"></div>
     <div class="w-full md:w-1/2 lg:w-5/12 p-18 md:p-32 bg-white flex flex-col">
-      <div class="mb-20 md:mb-60">
+      <div class="" :class="headerPadding">
         <slot name="header">
           <div class="flex justify-between items-center">
             <button v-show="backEnabled" type="button" class="flex items-center" @click="$emit('go-back')">
@@ -35,9 +35,20 @@ import { Component, Prop, Vue } from "nuxt-property-decorator";
 export default class BaseModalFullScreen extends Vue {
   @Prop({ default: true })
   backEnabled: boolean;
+
+  @Prop({ default: false })
+  isPinnedHeader: boolean;
+
+
+  get headerPadding(){
+    return this.isPinnedHeader ? 'mb-0' : 'mb-20 md:mb-60'
+  }
 }
 </script>
 
 <style lang="scss">
 @import "~/assets/styles/_vue-js-modal.scss";
+.v--modal-overlay{
+  background: rgba(19, 19, 19, .3) !important;
+}
 </style>
