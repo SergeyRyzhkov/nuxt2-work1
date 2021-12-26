@@ -1,7 +1,14 @@
 <template>
   <article v-if="!!articleModel && !!articleModel.meta_slug" class="article-smallitem hover:scale-105" @click="goToCard()">
     <figure class="article-smallitem__preview">
-      <img :src="imageSrc" :alt="articleModel.title" itemprop="image" class="article-smallitem__preview-img" loading="lazy" />
+      <img
+        v-lozad="imageSrc"
+        :alt="articleModel.title"
+        itemprop="image"
+        class="article-smallitem__preview-img"
+        width="400"
+        height="300"
+      />
       <figcaption>{{ articleModel.title }}</figcaption>
     </figure>
     <header class="article-smallitem__header leading-20">
@@ -15,9 +22,6 @@
           >{{ articleModel.published_at ? new Date(articleModel.published_at).toLocaleDateString("ru-RU") : "" }}</span
         >
       </div>
-      <!--      <div v-if="articleModel.views_count > 0" class="article-smallitem__views">-->
-      <!--        <img src="/images/eye.svg" alt="Количество просмотров" title="Количество просмотров" />-->
-      <!--      </div>-->
     </div>
   </article>
 </template>
@@ -53,7 +57,7 @@ export default class NewsItem extends Vue {
   max-width: 100%;
   width: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center top;
 }
 figcaption {
   display: none;

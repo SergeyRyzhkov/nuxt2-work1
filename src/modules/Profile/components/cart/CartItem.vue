@@ -1,7 +1,7 @@
 <template>
   <section class="cart-item">
     <figure class="cart-item-image">
-      <img src="/images/tmp_product.jpg" alt="" itemprop="image" class="" loading="lazy" />
+      <img v-lozad="'/images/tmp_product.jpg'" alt="" itemprop="image" class="" />
       <figcaption></figcaption>
     </figure>
     <div class="pl-16 md:pl-26" :class="{ 'flex justify-between md:items-center flex-col md:flex-row w-full': isOrdering }">

@@ -1,19 +1,30 @@
 <template>
-  <section>
+  <div>
     <label :for="id" class="radio">
-      <input :id="id" type="radio" :name="name" class="hidden" v-bind="$attrs" :value="value" />
+      <input
+        :id="id"
+        type="radio"
+        :name="name"
+        class="hidden"
+        v-bind="$attrs"
+        :value="value"
+        :checked="isChecked"
+        v-on="{
+          ...$listeners,
+          change: (event) => $emit('change', event.target.value),
+        }"
+      />
       <span class="label"></span>{{ label }}
     </label>
-    {{ value }}
-  </section>
+  </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "nuxt-property-decorator";
+import { Component, Vue, Prop, Model } from "nuxt-property-decorator";
 import { Guid } from "@/utils/Guid";
 @Component
 export default class BaseRadioButton extends Vue {
-  @Prop({ default: Guid.newGuid() })
+  @Prop({ default: () => Guid.newGuid() })
   id: number;
 
   @Prop()
@@ -24,6 +35,13 @@ export default class BaseRadioButton extends Vue {
 
   @Prop()
   value: string | number;
+
+  @Model("change")
+  readonly modelValue!: string | number;
+
+  get isChecked() {
+    return this.modelValue === this.value;
+  }
 }
 </script>
 

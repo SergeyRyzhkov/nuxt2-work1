@@ -34,7 +34,7 @@ import { Vue, Component } from "nuxt-property-decorator";
 import { DaysRangeModel } from "@/components/forms/BaseCalendar.vue";
 
 @Component
-export default class ProfileOrders extends Vue {
+export default class ProfileOrderList extends Vue {
   tabActive = 1;
   daysRange: DaysRangeModel = new DaysRangeModel();
 
