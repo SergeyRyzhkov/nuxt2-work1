@@ -1,6 +1,6 @@
 <template>
   <main class="page-wrapper linear-order">
-    <div class="container flex flex-col md:flex-col">
+    <div class="container flex flex-col md:flex-row">
       <section class="w-full md:w-1/2 pt-60 line-half">
         <h1>Оформление заказа</h1>
         <BreadCrumbs />

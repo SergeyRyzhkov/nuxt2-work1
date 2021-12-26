@@ -15,11 +15,11 @@
         <div>НДС</div>
         <div>0 ₽</div>
       </div>
-      <div class="flex items-center justify-between mt-8 cart-info">
+      <div v-if="isOrdering" class="flex items-center justify-between mt-8 cart-info">
         <div>Доставка</div>
         <div>0 ₽</div>
       </div>
-      <div class="flex items-center justify-between mt-8 cart-info">
+      <div v-if="isOrdering" class="flex items-center justify-between mt-8 cart-info">
         <div>Скидка</div>
         <div>0 ₽</div>
       </div>
@@ -29,7 +29,9 @@
       <div>Итого</div>
       <div>2 000 ₽</div>
     </div>
-    <BaseButton v-if="!isOrdering" class="w-full mt-32">Перейти к оформлению</BaseButton>
+    <BaseButton class="w-full mt-32" :class="{ 'lg:hidden': isOrdering }">{{
+      isOrdering ? "Оформить" : "Перейти к оформлению"
+    }}</BaseButton>
   </section>
 </template>
 

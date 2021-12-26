@@ -47,7 +47,7 @@
           </label>
         </div>
       </div>
-      <BaseButton class="mt-40">Оформтиь</BaseButton>
+      <BaseButton class="mt-40 hidden lg:block">Оформтиь</BaseButton>
     </form>
   </section>
 </template>
