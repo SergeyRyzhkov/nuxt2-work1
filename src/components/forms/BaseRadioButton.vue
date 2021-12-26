@@ -1,9 +1,10 @@
 <template>
   <section>
     <label :for="id" class="radio">
-      <input :id="id" type="radio" :name="name" class="hidden" :value="value" v-bind="$attrs" v-on="$listeners" />
+      <input :id="id" type="radio" :name="name" class="hidden" v-bind="$attrs" :value="value" />
       <span class="label"></span>{{ label }}
     </label>
+    {{ value }}
   </section>
 </template>
 
@@ -12,17 +13,17 @@ import { Component, Vue, Prop } from "nuxt-property-decorator";
 import { Guid } from "@/utils/Guid";
 @Component
 export default class BaseRadioButton extends Vue {
-  @Prop()
-  name: string;
-
   @Prop({ default: Guid.newGuid() })
   id: number;
 
   @Prop()
-  value;
+  label: string;
 
   @Prop()
-  label: string;
+  name: string;
+
+  @Prop()
+  value: string | number;
 }
 </script>
 

@@ -39,16 +39,15 @@ export default class BaseModalFullScreen extends Vue {
   @Prop({ default: false })
   isPinnedHeader: boolean;
 
-
-  get headerPadding(){
-    return this.isPinnedHeader ? 'mb-0' : 'mb-20 md:mb-60'
+  get headerPadding() {
+    return this.isPinnedHeader ? "mb-0" : "mb-20 md:mb-60";
   }
 }
 </script>
 
 <style lang="scss">
 @import "~/assets/styles/_vue-js-modal.scss";
-.v--modal-overlay{
-  background: rgba(19, 19, 19, .3) !important;
+.v--modal-overlay {
+  background: rgba(19, 19, 19, 0.3) !important;
 }
 </style>
