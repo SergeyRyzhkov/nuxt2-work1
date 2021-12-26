@@ -1,7 +1,5 @@
 <template>
   <section>
-    <div v-show="catalogMenuVisible" class="fixed min-h-screen h-screen w-full bg-strong-nude opacity-80 top-0 left-0 z-40"></div>
-
     <header class="z-50 relative">
       <div class="bg-primary container-fluid text-sm z-50 h-[37px]">
         <!-- <LazyBaseTicker direction="row" :repeat="true" :repeat-margin="86" :speed="{ type: 'pps', number: 130 }">
@@ -18,12 +16,7 @@
         </div>
       </div>
       <div class="container-fluid bg-primary relative">
-        <HeaderMenu
-          class="container"
-          @toogleCatalogMenu="toogleCatalogMenu()"
-          @closeCatalogMenu="closeCatalogMenu()"
-        ></HeaderMenu>
-        <CatalogMenu :menu-visible="catalogMenuVisible"></CatalogMenu>
+        <HeaderMenu class="container"></HeaderMenu>
       </div>
     </header>
   </section>
@@ -33,15 +26,5 @@
 import { Component, Vue } from "nuxt-property-decorator";
 
 @Component
-export default class TheHeader extends Vue {
-  catalogMenuVisible = false;
-
-  toogleCatalogMenu() {
-    this.catalogMenuVisible = !this.catalogMenuVisible;
-  }
-
-  closeCatalogMenu() {
-    this.catalogMenuVisible = false;
-  }
-}
+export default class TheHeader extends Vue {}
 </script>

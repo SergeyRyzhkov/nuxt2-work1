@@ -28,7 +28,11 @@ export default class FavoritesPage extends Vue {
   }
 
   updateBreadCrumbs() {
-    const breadCrumbList = [{ linkName: "Главная", name: "main" }, { linkName: "Избранное" }];
+    const breadCrumbList = [
+      { linkName: "Главная", name: "main" },
+      { linkName: "Профиль", name: "personal" },
+      { linkName: "Избранное" },
+    ];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
   }
 

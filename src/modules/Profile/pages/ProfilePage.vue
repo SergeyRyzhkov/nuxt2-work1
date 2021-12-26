@@ -3,7 +3,7 @@
     <BreadCrumbs />
     <div class="flex flex-row">
       <CabinetMenu class="w-1/4" />
-      <nuxt-child></nuxt-child>
+      <nuxt-child class="w-2/4"></nuxt-child>
     </div>
   </main>
 </template>

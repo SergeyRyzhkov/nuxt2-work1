@@ -1,5 +1,5 @@
 <template>
-  <BaseInput v-model="search" placeholder="Искать товар" classes="header-search-input">
+  <BaseInput v-model="search" v-click-outside="closeSearch" placeholder="Искать товар" classes="header-search-input">
     <svg
       class="header-search-input__icon"
       width="25"
@@ -17,7 +17,7 @@
         <div class="no-results">Нет результатов</div>
       </div>
       <div class="dropdown-results flex-wrap justify-between flex">
-        <div v-for="i in 6" class="flex items-center">
+        <div v-for="i in 6" :key="i" class="flex items-center">
           <figure class="dropdown-img">
             <img src="/images/FavoriteTestImage.png" alt="" itemprop="image" loading="lazy" />
             <figcaption></figcaption>
@@ -36,6 +36,11 @@ import { Component, Vue } from "nuxt-property-decorator";
 @Component
 export default class HeaderSearchInput extends Vue {
   search: string = "";
+
+  closeSearch() {
+    this.search = "";
+    console.log(this.search);
+  }
 }
 </script>
 
@@ -59,7 +64,7 @@ export default class HeaderSearchInput extends Vue {
   left: 0;
   z-index: -1;
   opacity: 0.3;
-  background: #131313;
+  background: $primary;
 }
 .header-search-input {
   border-radius: 9999px !important;
@@ -69,7 +74,7 @@ export default class HeaderSearchInput extends Vue {
   border: 1px solid #dfdfdf !important;
   &-dropdown {
     z-index: 40;
-    border-top: 2px solid #131313;
+    border-top: 2px solid $primary;
     position: absolute;
     height: auto;
     width: 100%;

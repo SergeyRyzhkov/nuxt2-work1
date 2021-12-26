@@ -2,7 +2,7 @@
   <div class="flex min-h-full h-full">
     <div class="hidden md:block md:w-1/2 lg:w-7/12"></div>
     <div class="w-full md:w-1/2 lg:w-5/12 p-18 md:p-32 bg-white flex flex-col">
-      <div class="" :class="headerPadding">
+      <div :class="headerPadding">
         <slot name="header">
           <div class="flex justify-between items-center">
             <button v-show="backEnabled" type="button" class="flex items-center" @click="$emit('go-back')">

@@ -16,6 +16,7 @@
       <li><nuxt-link :to="{ name: 'news' }">Новости</nuxt-link></li>
       <li><nuxt-link :to="{ name: 'contacts' }">Контакты</nuxt-link></li>
     </ul>
+    <CatalogMenu :menu-visible="isOpened"></CatalogMenu>
   </nav>
 </template>
 
@@ -28,11 +29,10 @@ export default class HeaderMenu extends Vue {
 
   toogle() {
     this.isOpened = !this.isOpened;
-    this.$emit("toogleCatalogMenu");
   }
 
   closeCatalogMenu() {
-    this.$emit("closeCatalogMenu");
+    this.isOpened = false;
   }
 }
 </script>

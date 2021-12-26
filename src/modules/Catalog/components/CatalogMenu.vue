@@ -10,6 +10,7 @@
         <img src="/images/catalog-menu-banner.jpg" />
       </div>
     </div>
+    <div class="fixed min-h-screen h-screen w-full bg-primary opacity-30 top-0 left-0 z-[-1]"></div>
   </div>
 </template>
 
@@ -44,7 +45,6 @@ export default class CatalogMenu extends Vue {
   right: 0;
   background-color: white;
   top: 49px;
-  z-index: 9;
   visibility: hidden;
   height: 0px;
   max-height: 0px;

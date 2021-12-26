@@ -1,6 +1,6 @@
 <template>
   <section class="w-full">
-    <h3>Личные данные</h3>
+    <h3>Заказы</h3>
     <div class="mt-40 flex flex-col md:flex-row items-center justify-between">
       <div>
         <button type="button" class="order-tab-page" :class="{ active: tabActive === 1 }" @click="tabActive = 1">Текущие</button>
@@ -23,9 +23,7 @@
         @clear="clearDate"
       />
     </div>
-    <div class="flex flex-col mt-25">
-      <OrderItem />
-    </div>
+    <OrderItem v-for="i in 10" :key="i" class="flex flex-col mt-25" />
   </section>
 </template>
 

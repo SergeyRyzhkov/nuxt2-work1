@@ -20,7 +20,7 @@
       </div>
       <div class="mt-24 flex justify-between">
         <div class="flex items-center order-item-products">
-          <div class="order-item-product flex flex-col">
+          <div class="first:ml-0 ml-8 flex flex-col">
             <figure class="order-item-product-image">
               <img src="/images/tmp_product.jpg" alt="" itemprop="image" class="" loading="lazy" />
               <figcaption></figcaption>
@@ -28,7 +28,7 @@
             <div class="order-item-product-title mt-12">Маска KAYPRO Botu-Cure</div>
             <div class="order-item-product-price mt-6">2 000 ₽</div>
           </div>
-          <div class="order-item-product flex flex-col">
+          <div class="ml-8 flex flex-col">
             <figure class="order-item-product-image">
               <img src="/images/tmp_product.jpg" alt="" itemprop="image" class="" loading="lazy" />
               <figcaption></figcaption>
@@ -61,11 +61,8 @@ export default class OrderItem extends Vue {}
 
 <style lang="scss">
 .order-item {
-  &-products {
-    .order-item-product + .order-item-product {
-      margin-left: 8px;
-    }
-  }
+  border: 1px solid #e8e8e8;
+
   &-pay {
     max-width: 336px;
     &-cancel {
@@ -128,9 +125,6 @@ export default class OrderItem extends Vue {}
   &-header {
     @apply flex flex-col md:flex-row items-center justify-between px-20 pt-16 pb-12;
     background: #f6f6f6;
-    border: 1px solid #e8e8e8;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
   }
 }
 </style>
