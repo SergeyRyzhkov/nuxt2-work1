@@ -16,7 +16,6 @@
       />
       <span class="label"></span>{{ label }}
     </label>
-    {{ value }}
   </div>
 </template>
 

@@ -86,7 +86,7 @@ export default class FeedbackForm extends Vue {
   formModel: FeedbackModel = new FeedbackModel();
   phoneMask = phoneMask;
 
-  @Prop({ default: true })
+  @Prop({ default: false })
   radio: boolean;
 
   onChange(val) {
