@@ -23,6 +23,9 @@
         @clear="clearDate"
       />
     </div>
+    <div class="flex flex-col mt-25">
+      <OrderItem />
+    </div>
   </section>
 </template>
 

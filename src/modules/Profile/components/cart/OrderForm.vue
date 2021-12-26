@@ -3,9 +3,9 @@
     <h2>Контактная информация</h2>
     <form class="mt-30" @submit.prevent="">
       <BaseInput placeholder="ФИО*" class="mb-27" />
-      <div class="flex justify-between mb-27">
-        <BaseInput placeholder="Телефон*" class="w-1/2 pr-16" />
-        <BaseInput placeholder="Email*" class="w-1/2 pl-16" />
+      <div class="lg:flex justify-between lg:mb-27">
+        <BaseInput placeholder="Телефон*" class="mb-27 lg:mb-0 lg:w-1/2 lg:pr-16" />
+        <BaseInput placeholder="Email*" class="mb-27 lg:mb-0 lg:w-1/2 lg:pl-16" />
       </div>
       <BaseInput placeholder="Адрес*" />
       <div class="mt-52">
@@ -47,7 +47,7 @@
           </label>
         </div>
       </div>
-      <BaseButton class="mt-40" type="submit">Оформтиь</BaseButton>
+      <BaseButton class="mt-40 hidden lg:block" type="submit">Оформтиь</BaseButton>
     </form>
   </section>
 </template>
