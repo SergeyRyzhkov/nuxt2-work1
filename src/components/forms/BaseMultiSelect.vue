@@ -1,7 +1,6 @@
 <template>
   <div class="base-multiselect">
     <multiselect
-      v-select-overflow
       :classes="classes"
       v-bind="{ ...$attrs, ...defaultOptions }"
       :options="selectOptions"

@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="w-1/3 py-40">
-        <img src="/images/catalog-menu-banner.jpg" loading="lazy" />
+        <img src="/images/catalog-menu-banner.jpg" />
       </div>
     </div>
   </div>

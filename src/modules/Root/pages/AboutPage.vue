@@ -4,8 +4,8 @@
     <main class="container flex flex-col">
       <section class="about-page-free-text" v-html="firstContent"></section>
       <section class="flex flex-col lg:flex-row mt-30 md:mt-60 w-auto lg:w-5/6 ml-auto mr-auto items-center justify-center">
-        <img :src="firstImageSrc" loading="lazy" class="w-full" />
-        <img :src="secondImageSrc" loading="lazy" class="w-full ml-0 lg:ml-20 mt-30 lg:mt-0" />
+        <img v-lozad="firstImageSrc" class="w-full" />
+        <img v-lozad="secondImageSrc" class="w-full ml-0 lg:ml-20 mt-30 lg:mt-0" />
       </section>
       <section class="about-page-free-text" v-html="lastContent"></section>
     </main>

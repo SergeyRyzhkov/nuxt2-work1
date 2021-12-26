@@ -2,7 +2,7 @@
   <article v-if="!!articleModel && !!articleModel.meta_slug" class="article-smallitem hover:scale-105" @click="goToCard()">
     <figure class="article-smallitem__preview">
       <img
-        :src="imageSrc"
+        v-lozad="imageSrc"
         :alt="articleModel.title"
         itemprop="image"
         class="article-smallitem__preview-img"
