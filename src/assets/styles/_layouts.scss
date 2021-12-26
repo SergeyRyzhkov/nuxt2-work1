@@ -44,10 +44,17 @@ a {
   color: inherit;
   outline: none;
   display: block;
+  border: 0;
 }
 
 a:hover {
   text-decoration: none;
+}
+
+img {
+  border: 0px;
+  object-fit: cover;
+  content-visibility: auto;
 }
 
 :focus {
@@ -72,10 +79,6 @@ textarea,
 input:active,
 textarea:active {
   outline: none;
-}
-input[type="checkbox"]:focus,
-input[type="radio"]:focus {
-  visibility: hidden;
 }
 
 /*! purgecss end ignore */

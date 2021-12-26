@@ -1,7 +1,9 @@
 <template>
-  <section v-if="!!item && !!item.meta_slug" class="flex flex-col cursor-pointer hover:scale-105" @click="goToCard()">
+  <section v-if="!!item && !!item.meta_slug" class="flex flex-col cursor-pointer" @click="goToCard()">
     <div class="relative">
-      <img v-lozad="imageSrc" width="300" height="200" />
+      <figure>
+        <img v-lozad="imageSrc" width="300" height="160" class="h-160 hover:scale-105 transition-all" />
+      </figure>
       <div class="absolute top-16 left-16 bg-primary px-16 py-8 rounded-full text-14 text-white">{{ statusName }}</div>
     </div>
     <div class="flex items-center justify-between mt-16">

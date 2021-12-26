@@ -1,7 +1,12 @@
 <template>
-  <nuxt-link v-show="!!model" :to="routeLink" class="flex flex-col items-center hover:scale-105">
+  <nuxt-link v-show="!!model" :to="routeLink" class="flex flex-col items-center">
     <BaseHeartButton class="ml-auto" :is-red="true"></BaseHeartButton>
-    <img v-lozad="'/images/tmp_product.jpg'" height="280" width="240" class="w-240 h-280 p-20 object-cover object-left-top" />
+    <img
+      v-lozad="'/images/tmp_product.jpg'"
+      height="280"
+      width="240"
+      class="w-240 h-280 p-20 object-cover object-left-top hover:scale-105 transition-all"
+    />
     <div class="text-14 text-gray-color uppercase font-semibold">Для лица</div>
     <div class="text-center mt-12">Шампунь KAYPRO Caviar Supreme для окрашенных волос</div>
     <div class="text-18 font-semibold mt-12">{{ price }}</div>

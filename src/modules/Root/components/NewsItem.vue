@@ -1,13 +1,13 @@
 <template>
-  <article v-if="!!articleModel && !!articleModel.meta_slug" class="article-smallitem hover:scale-105" @click="goToCard()">
+  <article v-if="!!articleModel && !!articleModel.meta_slug" class="article-smallitem" @click="goToCard()">
     <figure class="article-smallitem__preview">
       <img
         v-lozad="imageSrc"
-        :alt="articleModel.title"
+        alt=" "
         itemprop="image"
-        class="article-smallitem__preview-img"
+        class="article-smallitem__preview-img hover:scale-105 transition-all"
         width="400"
-        height="300"
+        height="280"
       />
       <figcaption>{{ articleModel.title }}</figcaption>
     </figure>
@@ -56,9 +56,11 @@ export default class NewsItem extends Vue {
 .article-smallitem__preview-img {
   max-width: 100%;
   width: 100%;
+  height: 280px;
   object-fit: cover;
   object-position: center top;
 }
+
 figcaption {
   display: none;
 }
