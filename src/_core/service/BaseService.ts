@@ -42,13 +42,12 @@ export class BaseService {
     return await this.getOneOrEmptyOrThrowErrorPost(true, Ctor, url, config, postData);
   }
 
-  public async getArrayOrEmpty<T>(ctor: { new (): T }, url: string, params?: any, pagination?: Pagination): Promise<T[]> {
+  public async getArrayOrEmpty<T>(ctor: { new (): T }, url: string, params?: any): Promise<T[]> {
     try {
-      const response = await this.apiRequest.get(this.buildQueryWithPagination(url, pagination), params);
+      const response = await this.apiRequest.get(this.buildQueryWithPagination(url), params);
       const data = response?.data?.data || response?.data;
       return !!data ? plainToClass(ctor, Array.from(data)) : [];
-    } catch (err) {
-      console.log(err);
+    } catch {
       return [];
     }
   }
