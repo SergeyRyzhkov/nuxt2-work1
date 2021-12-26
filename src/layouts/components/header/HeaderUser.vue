@@ -1,7 +1,14 @@
 <template>
   <div class="flex items-center">
     <img src="/images/header_heart.svg" loading="lazy" width="24" height="24" class="cursor-pointer" @click="gotoFavor()" />
-    <img src="/images/header_shop.svg" loading="lazy" width="22" height="22" class="ml-24 lg:ml-48 cursor-pointer" @click="cartModal()" />
+    <img
+      src="/images/header_shop.svg"
+      loading="lazy"
+      width="22"
+      height="22"
+      class="ml-24 lg:ml-48 cursor-pointer"
+      @click="cartModal()"
+    />
     <img
       src="/images/header_user.svg"
       loading="lazy"
@@ -16,7 +23,7 @@
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 import AuthForm from "@/modules/Auth/components/AuthForm.vue";
-import CartModal from "@/modules/Profile/components/cart/CartModal.vue"
+import CartModal from "@/modules/Profile/components/cart/CartModal.vue";
 import { AuthService } from "@/modules/Auth/AuthService";
 
 @Component({ components: { AuthForm } })
@@ -28,8 +35,9 @@ export default class HeaderUser extends Vue {
       this.$modalManager.modalShowFullScreen(AuthForm);
     }
   }
+
   cartModal() {
-      this.$modalManager.modalShowFullScreen(CartModal);
+    this.$modalManager.modalShowFullScreen(CartModal);
   }
 
   gotoFavor() {
