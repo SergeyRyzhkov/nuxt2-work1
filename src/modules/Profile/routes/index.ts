@@ -12,7 +12,7 @@ const routes = [
       {
         name: "orders",
         path: "orders",
-        component: () => lazyLoad(import("@/modules/Profile/components/ProfileOrders.vue")),
+        component: () => lazyLoad(import("@/modules/Profile/components/ProfileOrderList.vue")),
       },
     ],
   },
