@@ -1,11 +1,11 @@
 <template>
   <div class="page-wrapper">
-    <BaseStaticBanner :image-src="bannerSrc" class="bg-strong-nude" />
-    <main class="container flex flex-col">
+    <BaseStaticBanner :image-src="bannerSrc" />
+    <main class="container flex flex-col w-full md:w-1/2 ml-auto mr-auto">
       <h1>{{ title }}</h1>
-      <section class="mt-30 md:mt-60 ml-auto mr-auto w-full md:w-2/3" v-html="description"></section>
+      <section class="mt-30 md:mt-60" v-html="description"></section>
 
-      <section class="mt-30 md:mt-60 ml-auto mr-auto w-full md:w-2/3">
+      <section class="mt-30 md:mt-60 w-full md:w-9/12">
         <div class="text-24 font-semibold">
           Заполните форму для сотрудничества с KAYPRO <br />
           и мы с Вами свяжемся!
