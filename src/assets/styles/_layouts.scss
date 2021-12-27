@@ -24,7 +24,7 @@ html {
 }
 
 * {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .layout-wrapper {
@@ -61,14 +61,10 @@ img {
   content-visibility: auto;
 }
 
-:focus {
+* :focus {
   outline: none !important;
 }
-::-moz-focus-outer,
-::-moz-focus-inner {
-  border: 0px !important;
-  padding: 0;
-}
+
 a:focus,
 a:active,
 button:focus {
@@ -77,6 +73,7 @@ button:focus {
   outline-width: 0 !important;
   outline-style: none !important;
   box-shadow: 0 0 0 0 rgba(0, 123, 255, 0) !important;
+  user-select: none;
 }
 input,
 textarea,
