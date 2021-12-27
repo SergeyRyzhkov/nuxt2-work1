@@ -56,7 +56,7 @@ export default class HeaderMenu extends Vue {
     cursor: pointer;
   }
   > li + li {
-    margin-left: 46px;
+    margin-left: 42px;
   }
   &--catalog {
     display: flex !important;

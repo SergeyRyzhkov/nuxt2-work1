@@ -1,10 +1,16 @@
 <template>
   <div v-if="!!newsModel.meta_slug" class="page-wrapper">
     <BaseStaticBanner v-if="bannerSrc" :image-src="bannerSrc" />
-    <main class="container">
-      <BreadCrumbs />
-      <h1>{{ newsModel.title }}</h1>
-      <section class="mt-30 md:mt-60" v-html="newsModel.text"></section>
+    <main class="container mt-40">
+      <div class="flex flex-col-reverse md:flex-row">
+        <div class="w-full mt-32 md:mt-0 md:w-1/4">
+          {{ newsDate }}
+        </div>
+        <div class="w-full md:w-1/2">
+          <h1>{{ newsModel.title }}</h1>
+          <section class="mt-30 md:mt-60" v-html="newsModel.text"></section>
+        </div>
+      </div>
     </main>
   </div>
 </template>
@@ -46,6 +52,10 @@ export default class NewsPage extends Vue {
 
   get bannerSrc() {
     return this.newsModel.banner?.url || undefined;
+  }
+
+  get newsDate() {
+    return this.$dayjs(this.newsModel.published_at).format("DD MMMM YYYY");
   }
 }
 </script>

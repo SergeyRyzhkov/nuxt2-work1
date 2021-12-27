@@ -1,7 +1,6 @@
 import IMask from "imask";
 
 export default {
-  name: "imask",
   bind: (el, _binding, _vnode) => {
     if (!!_binding?.value?.mask) {
       initMask(el, _binding.value);

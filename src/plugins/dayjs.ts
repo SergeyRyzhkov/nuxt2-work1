@@ -13,22 +13,22 @@ dayjs.extend(isSameOrBefore);
 
 declare module "vue/types/vue" {
   interface Vue {
-    $date: typeof dayjs;
+    $dayjs: typeof dayjs;
   }
 }
 
 declare module "@nuxt/types" {
   interface NuxtAppOptions {
-    $date: typeof dayjs;
+    $dayjs: typeof dayjs;
   }
 
   interface Context {
-    $date: typeof dayjs;
+    $dayjs: typeof dayjs;
   }
 }
 
 // export { dayjs as date };
 
 export default (_ctx: Context, inject: Inject) => {
-  inject("date", dayjs);
+  inject("dayjs", dayjs);
 };

@@ -131,7 +131,7 @@ const nuxtConfig: NuxtConfig = {
     // compressor: false,
     resourceHints: false,
     etag: false,
-    // crossorigin: "anonymous",
+    crossorigin: "anonymous",
 
     bundleRenderer: {
       runInNewContext: false,
@@ -142,13 +142,6 @@ const nuxtConfig: NuxtConfig = {
     configPath: "~~/tailwind.config.js",
   },
 
-  webfontloader: {
-    events: false,
-    google: {
-      families: ["Montserrat:400,500,600,700:cyrillic&display=swap"],
-    },
-  },
-
   styleResources: {
     scss: ["~assets/styles/_variables.scss", "~assets/styles/_media.scss"],
   },
@@ -156,6 +149,13 @@ const nuxtConfig: NuxtConfig = {
   axios: {
     baseURL: process.env.API_URL,
     credentials: true,
+  },
+
+  webfontloader: {
+    events: false,
+    google: {
+      families: ["Montserrat:400,500,600,700:cyrillic&display=swap"],
+    },
   },
 
   server: {
