@@ -40,7 +40,7 @@ export default class ContactsInfo extends Vue {
   }
 
   get phone() {
-    return formatPhoneNumber(this.contactInfo?.phone);
+    return formatPhoneNumber(this.contactInfo?.content?.phone);
   }
 
   get schedule() {
