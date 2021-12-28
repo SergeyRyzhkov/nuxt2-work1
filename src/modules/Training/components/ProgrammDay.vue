@@ -32,13 +32,18 @@ export default class ProgrammDay extends Vue {
 .programm-day {
   border-bottom: 1px solid #c9c9c9;
   padding: 18px 0px 18px 0px;
+  > span {
+    line-height: 0px;
+  }
   &__content {
     max-height: 0px;
     overflow-y: hidden;
     font-size: 14px;
     transition: 0.2s;
+    margin-top: 0px;
     &.active {
       max-height: 300px;
+      margin-top: 16px;
     }
   }
 }
