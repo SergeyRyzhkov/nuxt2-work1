@@ -1,9 +1,15 @@
 <template>
   <section
-    class="w-full flex flex-col relative overflow-hidden h-220 md:h-400 mb-20 lg:mb-40 xl:mb-60"
-    :class="[!isContainer ? 'w-screen' : '']"
+    class="w-full flex flex-col relative overflow-hidden mb-20 lg:mb-40 xl:mb-60"
+    :class="[!isContainer ? 'w-screen' : '', wide ? 'h-400 md:h-600' : 'h-200 md:h-400']"
   >
-    <img :src="image" height="400" alt=" " class="object-cover object-left-top w-full max-w-full h-200 md:h-400" />
+    <img
+      :src="image"
+      :height="height"
+      alt=" "
+      class="object-cover object-left-top w-full max-w-full"
+      :class="[wide ? 'h-400 md:h-600' : 'h-200 md:h-400']"
+    />
     <slot></slot>
   </section>
 </template>
@@ -13,6 +19,9 @@ import { Component, Prop, Vue } from "nuxt-property-decorator";
 
 @Component
 export default class BaseStaticBanner extends Vue {
+  @Prop({ default: false })
+  wide;
+
   @Prop()
   imageSrc: string;
 
@@ -24,6 +33,10 @@ export default class BaseStaticBanner extends Vue {
 
   get image() {
     return this.imageSrc || this.defaultImage || null;
+  }
+
+  get height() {
+    return this.wide ? "600" : "400";
   }
 }
 </script>
