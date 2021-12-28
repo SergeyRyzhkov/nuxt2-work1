@@ -2,11 +2,11 @@
   <div class="page-wrapper">
     <BaseStaticBanner :image-src="bannerSrc" default-image="/images/default-banner-black.jpg">
       <div class="absolute w-screen bottom-60 md:bottom-120">
-        <h1 class="container w-1/2 text-white">{{ title }}</h1>
+        <h1 class="container w-1/2 text-white" v-html="title"></h1>
       </div>
     </BaseStaticBanner>
     <main class="container flex flex-col w-full md:w-1/2 ml-auto mr-auto">
-      <section class="mt-20 md:mt-40" v-html="description"></section>
+      <section v-html="description"></section>
 
       <section class="mt-30 md:mt-60 w-full md:w-9/12">
         <div class="text-24 font-semibold">
