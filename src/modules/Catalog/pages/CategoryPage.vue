@@ -51,17 +51,18 @@ export default class CategoryPage extends Vue {
     }
     this.model = !!slug && slug !== "catalog" ? await this.$serviceLocator.getService(CatalogService).getBySlug(slug) : null;
 
-    this.h1Text = !this.model ? "Каталог" : this.model.title;
+    this.h1Text = !!this.model?.id && !this.model?.subcategory?.length ? this.model.title : "Каталог";
 
     getModule(AppStore, this.$store).updateBreadCrumbList(
       this.$serviceLocator.getService(CatalogService).buildBreadCrumb(this.model)
     );
 
-    if (!!this.model && !!this.model.id) {
-      this.categories = this.model.subcategory;
-    } else {
-      this.categories = await this.$serviceLocator.getService(CatalogService).getRoot();
-    }
+    // if (!!this.model && !!this.model.id) {
+    //   this.categories = this.model.subcategory;
+    // } else {
+    //   this.categories = await this.$serviceLocator.getService(CatalogService).getRoot();
+    // }
+    this.categories = await this.$serviceLocator.getService(CatalogService).getRoot();
   }
 
   head() {

@@ -1,6 +1,6 @@
 <template>
   <main v-if="!$fetchState.pending && !!model.meta_slug" class="page-wrapper">
-    <BaseStaticBanner :image-src="bannerSrc" class="bg-strong-nude">
+    <BaseStaticBanner :image-src="bannerSrc" class="bg-strong-nude mb-0">
       <div class="absolute w-screen bg-strong-nude" :class="[!bannerSrc ? 'top-0 py-24 md:py-40' : 'top-16 md:top-32']">
         <BannerAbsoluteItem class="container" :model="model" @subscribe-clicked="onSubscribeClicked()"></BannerAbsoluteItem>
       </div>
