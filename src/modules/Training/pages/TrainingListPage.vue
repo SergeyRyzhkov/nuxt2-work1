@@ -1,13 +1,15 @@
 <template>
   <main v-if="!$fetchState.pending" class="page-wrapper container">
     <BreadCrumbs />
-    <div class="arenda-banner flex items-center p-16 md:p-40">
-      <h1 class="grow flex-shrink-0">Аренда студии</h1>
-      <p class="text-14 break-all md:ml-60 md:mr-120">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-      </p>
-      <BaseButton class="grow flex-shrink-0 md:ml-auto bg-white" @click="$router.push({ name: 'training-arenda-card' })"
+    <div class="arenda-banner flex flex-col justify-between lg:flex-row lg:items-center p-16 md:p-40">
+      <div class="flex flex-col md:flex-row md:items-center">
+        <h1 class="grow flex-shrink-0">Аренда студии</h1>
+        <p class="text-14 break-all md:ml-40 xl:ml-60 w-full lg:w-1/2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+        </p>
+      </div>
+      <BaseButton class="grow flex-shrink-0 mt-18 lg:mt-0 bg-white w-max" @click="$router.push({ name: 'training-arenda-card' })"
         >Узнать больше</BaseButton
       >
     </div>

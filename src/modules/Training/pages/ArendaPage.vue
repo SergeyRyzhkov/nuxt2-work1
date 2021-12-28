@@ -1,10 +1,11 @@
 <template>
   <main>
-    <div class="arenda-page container-fluid h-400 relative"></div>
-    <div class="container relative -mt-130 md:-mt-150 w-full md:w-1/2">
-      <h1>Аренда студии</h1>
+    <div class="arenda-page container-fluid flex items-end h-400 relative">
+      <div class="container relative  w-full  md:w-8/12 xl:w-1/2 mb-32 md:mb-55">
+        <h1>Аренда студии</h1>
+      </div>
     </div>
-    <div class="container page-wrapper mt-150 md:mt-190 w-full md:w-5/12 ml-auto mr-auto">
+    <div class="container page-wrapper mt-32 md:mt-55 w-full md:w-8/12 xl:w-1/2 ml-auto mr-auto">
       <p class="text-24 font-semibold">
         Итальянское совершенство, передовые технологии и инновации в beauty-индустрии и исключительно натуральные компоненты
         позволяют нам создавать идеальные продукты для красоты ваших волос!
