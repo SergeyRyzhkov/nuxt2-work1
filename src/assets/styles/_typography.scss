@@ -1,8 +1,15 @@
 /*! purgecss start ignore */
+@font-face {
+  font-family: "Compact";
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+  src: url("/fonts/compact/compact.ttf") format("truetype");
+}
 
 body {
   color: $primary !important;
-  font-family: "Montserrat", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Montserrat", "Compact", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 22px !important;
   font-weight: 500;

@@ -78,13 +78,14 @@ export default class TheMobileHeader extends Vue {
     width: 100vw;
     min-height: 100%;
     height: 100vh;
-    background-color: #bbbbbb;
+    background-color: $primary;
     opacity: 0.7;
   }
 }
 .mobile-menu-list {
   //   display: none;
   background: white;
+  visibility: hidden;
   transform: translateX(-120%);
   box-sizing: border-box;
   position: fixed;
@@ -97,11 +98,12 @@ export default class TheMobileHeader extends Vue {
   overflow-y: scroll;
   z-index: 2147483678;
   transform-style: flat;
-  transition: transform 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  width: 70vw;
+  width: 90vw;
 
   &.active {
+    visibility: visible;
     transform: none;
   }
 

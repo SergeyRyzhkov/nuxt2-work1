@@ -15,6 +15,9 @@ module.exports = {
   },
 
   theme: {
+    fontFamily: {
+      compact: ["Compact"],
+    },
     fontSize: {
       12: ["12px", "18px"],
       14: ["14px", "18px"],

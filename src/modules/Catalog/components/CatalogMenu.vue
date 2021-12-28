@@ -1,13 +1,13 @@
 <template>
   <div v-show="!$fetchState.pending" class="catalog-top-menu" :class="[menuVisible ? 'active' : '']">
     <div class="container flex justify-between">
-      <div class="catalog-top-menu__grid py-40 w-2/3">
-        <div v-for="iter in list" :key="iter.id">
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-y-24 gap-x-24 py-40 w-2/3">
+        <div v-for="iter in list" :key="iter.id" @mouseover="categoryOver(iter)">
           <span class="catalog-top-menu__title" @click="goToCatalog(iter)">{{ iter.title }}</span>
         </div>
       </div>
       <div class="w-1/3 py-40">
-        <img src="/images/catalog-menu-banner.jpg" />
+        <img v-lozad="banerSrc" alt="" width="400" height="240" class="w-400 h-240 object-cover object-left-top" />
       </div>
     </div>
     <div class="fixed min-h-screen h-screen w-full bg-primary opacity-30 top-0 left-0 z-[-1]"></div>
@@ -25,6 +25,7 @@ export default class CatalogMenu extends Vue {
   menuVisible: boolean;
 
   list: CategoryModel[] = [];
+  banerSrc = "/images/catalog-menu-banner.jpg";
 
   async fetch() {
     this.list = await this.$serviceLocator.getService(CatalogService).getRoot();
@@ -35,6 +36,10 @@ export default class CatalogMenu extends Vue {
     if (this.$route.name !== loc.name) {
       this.$router.push(loc);
     }
+  }
+
+  categoryOver(model: CategoryModel) {
+    this.banerSrc = model.banner_menu?.url || "/images/catalog-menu-banner.jpg";
   }
 }
 </script>
@@ -56,12 +61,6 @@ export default class CatalogMenu extends Vue {
     height: max-content;
     max-height: 40vh;
   }
-  .catalog-top-menu__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 24px;
-  }
-
   .catalog-top-menu__title {
     font-size: 14px;
     font-weight: 500;

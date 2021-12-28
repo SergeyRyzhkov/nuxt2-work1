@@ -49,6 +49,13 @@ const nuxtConfig: NuxtConfig = {
         type: "image/x-icon",
         href: "/favicon.png",
       },
+
+      {
+        rel: "preload",
+        href: "/fonts/compact/compact.ttf",
+        as: "font",
+        crossorigin: "anonymous",
+      },
     ],
 
     bodyAttrs: {
