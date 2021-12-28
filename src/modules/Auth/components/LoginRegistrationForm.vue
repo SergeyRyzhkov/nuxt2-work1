@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2 class="uppercase mb-40 md:mb-60">{{ title }}</h2>
+    <h1 class="uppercase mb-40 md:mb-60">{{ title }}</h1>
     <div class="auth-logon-tabs mb-40 md:mb-60 w-full md:w-1/2">
       <button
         type="button"
