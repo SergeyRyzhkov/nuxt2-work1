@@ -3,7 +3,7 @@
     class="w-full flex relative overflow-hidden h-220 md:h-400 mb-20 lg:mb-40 xl:mb-60"
     :class="[!isContainer ? 'w-screen' : '']"
   >
-    <img :src="imageSrc" height="406" class="object-cover object-left-top w-full max-w-full h-200 md:h-400" />
+    <img :src="imageSrc" height="400" alt=" " class="object-cover object-left-top w-full max-w-full h-200 md:h-400" />
     <slot></slot>
   </section>
 </template>
@@ -16,7 +16,7 @@ export default class BaseStaticBanner extends Vue {
   @Prop()
   imageSrc: string;
 
-  @Prop({ default: false })
+  @Prop({ default: true })
   isContainer: boolean;
 }
 </script>
