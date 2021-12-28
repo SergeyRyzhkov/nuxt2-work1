@@ -68,7 +68,6 @@ export default class RootCategory extends Vue {
 
   async fetch() {
     this.model = await this.$serviceLocator.getService(EmptyService).getAnyOrNull("users/pages/catalog");
-    console.log(this.model);
   }
 
   head() {

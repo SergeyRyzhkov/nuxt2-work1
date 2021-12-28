@@ -20,7 +20,7 @@
     <section class="container-fluid bg-section-gray">
       <div class="training-section-wrapper">
         <h2 class="training-section__caption">СТОИМОСТЬ КУРСА</h2>
-        <div class="training-section__content text-48 font-bold">
+        <div class="training-section__content text-48 font-semibold">
           <div>{{ priceFormatted }}</div>
           <div class="text-14 font-semibold mt-16 underline cursor-pointer">Скачать программу курса</div>
         </div>

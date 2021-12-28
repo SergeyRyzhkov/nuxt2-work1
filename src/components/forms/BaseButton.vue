@@ -1,5 +1,10 @@
 <template>
-  <button class="base-button" :classes="classes" v-bind="$attrs" v-on="$listeners">
+  <button
+    class="base-button"
+    :class="[classes, paddingEmpty ? 'base-button__empty-padding' : '']"
+    v-bind="$attrs"
+    v-on="$listeners"
+  >
     <slot />
   </button>
 </template>
@@ -10,6 +15,9 @@ import { Vue, Component, Prop } from "nuxt-property-decorator";
 export default class BaseButton extends Vue {
   @Prop()
   classes;
+
+  @Prop({ default: false })
+  paddingEmpty;
 }
 </script>
 
@@ -23,10 +31,16 @@ export default class BaseButton extends Vue {
   border: 1px solid $primary;
   border-radius: 9999px;
   transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &:hover {
     background-color: $secondary;
     border-color: $secondary;
     color: white;
+  }
+  &__empty-padding {
+    padding: 0px;
   }
 }
 </style>

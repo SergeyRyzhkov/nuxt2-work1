@@ -3,7 +3,7 @@
     <div class="order-item-header flex flex-col md:flex-row md:items-center justify-between px-20 pt-16 pb-12">
       <div class="flex flex-col md:flex-row md:items-center">
         <div>
-          <div class="order-item-id">Заказ №: <span class="font-bold">12233445667</span></div>
+          <div class="order-item-id">Заказ №: <span class="font-semibold">12233445667</span></div>
           <div class="order-item-date">Дата создания: 25 июля 2021, 19:30</div>
         </div>
         <div class="md:pl-67 order-item-status">В обработке</div>
@@ -62,12 +62,12 @@ export default class OrderItem extends Vue {}
 <style lang="scss">
 .order-item {
   border: 1px solid #e8e8e8;
- &-btn{
-   padding: 12px 34px !important;
-   font-size: 12px !important;
- }
+  &-btn {
+    padding: 12px 34px !important;
+    font-size: 12px !important;
+  }
   &-pay {
-    @include widescreen{
+    @include widescreen {
       max-width: 40%;
     }
     &-cancel {
