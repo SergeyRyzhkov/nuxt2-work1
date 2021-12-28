@@ -1,6 +1,9 @@
 <template>
   <main v-show="!!slug && !$fetchState.pending" class="page-wrapper container">
     <BreadCrumbs />
+    <ProductCard />
+    <!--    аккордион-->
+    <h2 class="text-42 font-bold mt-86">Рекомендуем</h2>
   </main>
 </template>
 
