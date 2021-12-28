@@ -10,7 +10,7 @@
           <li class="mt-15 underline underline-offset-4">
             <a :href="`mailto:${email}`">{{ email }}</a>
           </li>
-          <li class="mt-15">@kaypro_russia</li>
+          <!-- <li class="mt-15">@kaypro_russia</li> -->
         </ul>
       </div>
       <div class="flex flex-col ml-100">
