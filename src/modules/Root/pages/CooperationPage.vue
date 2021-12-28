@@ -5,10 +5,10 @@
         <h1 class="container w-full md:w-1/2 text-white" v-html="title"></h1>
       </div>
     </BaseStaticBanner>
-    <main class="container flex flex-col w-full md:w-1/2 ml-auto mr-auto">
-      <section v-html="description"></section>
+    <main class="container flex flex-col">
+      <section class="w-full md:w-1/2 ml-auto mr-auto" v-html="description"></section>
 
-      <section class="mt-30 md:mt-60 w-full md:w-9/12">
+      <section class="mt-30 md:mt-60 w-full md:w-1/2 ml-auto mr-auto">
         <div class="text-24 font-semibold">
           Заполните форму для сотрудничества с KAYPRO <br />
           и мы с Вами свяжемся!
