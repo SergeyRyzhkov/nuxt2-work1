@@ -1,8 +1,8 @@
 <template>
   <div class="page-wrapper">
     <BaseStaticBanner :image-src="bannerSrc" default-image="/images/default-banner-black.jpg">
-      <div class="absolute w-screen bottom-60 md:bottom-120">
-        <h1 class="container w-1/2 text-white" v-html="title"></h1>
+      <div class="absolute w-screen bottom-30 md:bottom-60">
+        <h1 class="container w-full md:w-1/2 text-white" v-html="title"></h1>
       </div>
     </BaseStaticBanner>
     <main class="container flex flex-col w-full md:w-1/2 ml-auto mr-auto">
