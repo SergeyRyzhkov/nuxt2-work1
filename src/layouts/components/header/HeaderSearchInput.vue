@@ -39,7 +39,6 @@ export default class HeaderSearchInput extends Vue {
 
   closeSearch() {
     this.search = "";
-    console.log(this.search);
   }
 }
 </script>

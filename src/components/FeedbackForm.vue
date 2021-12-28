@@ -1,8 +1,8 @@
 <template>
   <form @submit.prevent="send">
     <div v-if="radio" class="flex mb-32">
-      <BaseRadioButton v-model="formModel.type" label="Обращение" name="rdo" value="appeal" />
-      <BaseRadioButton v-model="formModel.type" class="ml-74" label="Запрос технологу" name="rdo3" value="request" />
+      <BaseRadioButton v-model="formModel.type" label="Обращение" value="appeal" />
+      <BaseRadioButton v-model="formModel.type" class="ml-74" label="Запрос технологу" value="request" />
     </div>
     <BaseInput
       v-model="formModel.name"
@@ -88,10 +88,6 @@ export default class FeedbackForm extends Vue {
 
   @Prop({ default: false })
   radio: boolean;
-
-  onChange(val) {
-    console.log(val);
-  }
 
   send() {
     this.$v.$touch();

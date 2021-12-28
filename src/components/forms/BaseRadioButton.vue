@@ -1,8 +1,7 @@
 <template>
   <div>
-    <label :for="id" class="radio">
+    <label class="radio">
       <input
-        :id="id"
         type="radio"
         :name="name"
         class="hidden"
@@ -21,12 +20,8 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Model } from "nuxt-property-decorator";
-import { Guid } from "@/utils/Guid";
 @Component
 export default class BaseRadioButton extends Vue {
-  @Prop({ default: () => Guid.newGuid() })
-  id: number;
-
   @Prop()
   label: string;
 
