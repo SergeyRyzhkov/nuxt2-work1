@@ -52,8 +52,14 @@ const nuxtConfig: NuxtConfig = {
 
       {
         rel: "preload",
-        href: "/fonts/compact/compact.ttf",
+        href: "/fonts/compact/compact.woff2",
         as: "font",
+        crossorigin: "anonymous",
+      },
+
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css?family=Montserrat:500,600,700&amp;subset=cyrillic&amp;display=swap",
         crossorigin: "anonymous",
       },
     ],
@@ -79,7 +85,7 @@ const nuxtConfig: NuxtConfig = {
     // middleware: ["requiresAuthorize"],
   },
 
-  modules: ["@nuxtjs/axios", "cookie-universal-nuxt", "nuxt-webfontloader"],
+  modules: ["@nuxtjs/axios", "cookie-universal-nuxt"],
 
   buildModules: [
     "@/_core/nuxt_modules/init-router-store.module.ts",
@@ -158,12 +164,12 @@ const nuxtConfig: NuxtConfig = {
     credentials: true,
   },
 
-  webfontloader: {
-    events: false,
-    google: {
-      families: ["Montserrat:400,500,600,700:cyrillic&display=swap"],
-    },
-  },
+  // webfontloader: {
+  //   events: false,
+  //   google: {
+  //     families: ["Montserrat:400,500,600,700:cyrillic&display=swap"],
+  //   },
+  // },
 
   server: {
     port: process.env.PORT || 8010,

@@ -4,7 +4,7 @@
   font-display: swap;
   font-weight: normal;
   font-style: normal;
-  src: url("/fonts/compact/compact.ttf") format("truetype");
+  src: url("/fonts/compact/compact.woff2") format("woff2");
 }
 
 body {
@@ -21,8 +21,11 @@ textarea {
 }
 
 h1 {
-  font-size: 34px;
-  line-height: 40px;
+  font-family: "Compact";
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 49px;
+  text-transform: uppercase;
 }
 
 h2 {
