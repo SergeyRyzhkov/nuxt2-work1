@@ -9,7 +9,7 @@
 
 body {
   color: $primary !important;
-  font-family: "Montserrat", "Compact", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: $font-famaly;
   font-size: 16px;
   line-height: 22px !important;
   font-weight: 500;

@@ -208,7 +208,7 @@ export default class BaseCalendar extends Vue {
 }
 
 .vfc-calendar {
-  font-family: inherit;
+  font-family: $font-famaly;
   font-size: 13px;
   line-height: 24px !important;
   font-weight: 500;
