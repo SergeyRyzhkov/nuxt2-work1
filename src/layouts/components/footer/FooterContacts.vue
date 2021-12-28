@@ -32,7 +32,6 @@
         <li>+7(495)740-07-00</li>
         <li>info@kaypro.ru</li>
         <li>Москва, Остаповский проезд, 5, стр. 1, оф. 801</li>
-        <li>Картинки</li>
       </ul>
     </div>
     <FooterSocials class="lg:mt-20 lg:py-0 pt-32 pb-22" />

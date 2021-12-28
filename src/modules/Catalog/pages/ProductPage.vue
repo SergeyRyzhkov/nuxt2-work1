@@ -5,7 +5,7 @@
       <section class="flex flex-col md:flex-row md:items-start">
         <div class="md:w-1/2 lg:w-7/12"></div>
         <div class="lg:w-5/12 md:w-1/2">
-          <div class="text-[#4BC967] ml-24 text-14 block md:hidden">В наличии на складе</div>
+          <div class="text-[#4BC967] text-14 block md:hidden">В наличии на складе</div>
           <h2 class="text-24 font-semibold">MAIKE Fluid Foundation 01 Light Beige - Тональный флюид</h2>
           <div class="text-gray-color mt-16 text-14">Артикул: 1233456789</div>
           <div class="mt-32">

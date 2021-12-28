@@ -13,7 +13,7 @@ export default class FooterLast extends Vue {}
 </script>
 
 <style lang="scss">
-.footer-bottom{
+.footer-bottom {
   &-text {
     color: $footer-color;
     font-size: 14px;
