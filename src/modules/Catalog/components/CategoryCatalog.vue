@@ -68,14 +68,15 @@ export default class CategoryCatalog extends Vue {
 <style lang="scss">
 .product_category__wrapper {
   .product_category__content {
-    height: 0px;
+    max-height: 0px;
     overflow-y: hidden;
+    transition: 0.2s;
     cursor: pointer;
     &:hover {
       color: $secondary;
     }
     &.active {
-      height: auto;
+      max-height: 300px;
     }
     .product_category__sub {
       font-size: 14px;
@@ -90,6 +91,7 @@ export default class CategoryCatalog extends Vue {
   }
 
   .product_category__title {
+    cursor: pointer;
     > button {
       border: 1px solid $primary;
       padding: 5px;

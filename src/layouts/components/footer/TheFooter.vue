@@ -3,9 +3,9 @@
     <div class="container flex flex-col lg:flex-row items-start justify-between pt-20 pb-10 lg:pt-40 lg:pb-20">
       <div class="lg:w-auto flex flex-col w-full lg:min-w-[206px] xl:min-w-[306px]">
         <footer-logo></footer-logo>
-        <footer-subscribe class="mt-22 lg:mt-45"/>
+        <footer-subscribe class="mt-22 lg:mt-45" />
       </div>
-      <div class="w-full flex  lg:justify-end">
+      <div class="w-full flex lg:justify-end">
         <div class="flex w-full flex-col lg:flex-row lg:w-11/12 items-start justify-between xl:w-11/12 xl:w-10/12 mt-40 lg:mt-0">
           <footer-about></footer-about>
           <footer-info class="lg:ml-20"></footer-info>
@@ -26,14 +26,17 @@ export default class TheFooter extends Vue {}
 </script>
 
 <style lang="scss">
-.footer-title{
-  @include widescreen{
+.footer-title {
+  @include widescreen {
     margin-bottom: 28px;
     padding: 0;
     width: auto;
   }
-  svg.show{
-    > rect:first-child{
+  svg {
+    cursor: pointer;
+  }
+  svg.show {
+    > rect:first-child {
       display: none;
     }
   }
@@ -41,9 +44,9 @@ export default class TheFooter extends Vue {}
   padding: 14px 0;
   color: white;
 }
-.footer-menu-list{
+.footer-menu-list {
   border-bottom: 1px solid #575555;
-  @include widescreen{
+  @include widescreen {
     border-bottom: none;
     width: auto;
   }
@@ -54,13 +57,13 @@ export default class TheFooter extends Vue {}
   font-size: 14px;
   max-height: 0;
   overflow: hidden;
-  transition: .3s;
-  @include widescreen{
+  transition: 0.3s;
+  @include widescreen {
     max-height: none !important;
     padding-bottom: 0;
   }
   &.show {
-      max-height: 300px;
+    max-height: 300px;
     padding-bottom: 24px;
   }
   > li + li {
