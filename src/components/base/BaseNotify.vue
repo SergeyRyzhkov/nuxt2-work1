@@ -14,6 +14,20 @@ import { Component, Vue, Prop } from "nuxt-property-decorator";
 export default class BaseNotify extends Vue {
   @Prop({ default: "Выполнено !" })
   text: string;
+
+  @Prop({ default: true })
+  autoClose: boolean;
+
+  @Prop({ default: 2000 })
+  closeInterval: boolean;
+
+  mounted() {
+    if (this.autoClose) {
+      setTimeout(() => {
+        this.$emit("close");
+      }, this.closeInterval);
+    }
+  }
 }
 </script>
 
