@@ -1,13 +1,20 @@
 <template>
   <main class="page-wrapper">
-    <BaseStaticBanner v-if="!!bannerUrl" :image-src="bannerUrl"></BaseStaticBanner>
+    <BaseStaticBanner v-if="!!bannerUrl" :image-src="bannerUrl" default-image="/images/about_default_banner.jpg">
+      <div class="absolute w-screen bottom-30 md:bottom-60">
+        <h1 class="container w-full md:w-1/2 text-white">
+          Добро пожаловать в <br />
+          KAYPRO
+        </h1>
+      </div>
+    </BaseStaticBanner>
     <main class="container flex flex-col">
-      <section class="about-page-free-text" v-html="firstContent"></section>
+      <section class="w-auto xl:w-1/2 ml-auto mr-auto" v-html="firstContent"></section>
       <section class="flex flex-col lg:flex-row mt-30 md:mt-60 w-auto lg:w-5/6 ml-auto mr-auto items-center justify-center">
         <img v-lozad="firstImageSrc" class="w-full" />
         <img v-lozad="secondImageSrc" class="w-full ml-0 lg:ml-20 mt-30 lg:mt-0" />
       </section>
-      <section class="about-page-free-text" v-html="lastContent"></section>
+      <section class="mt-30 lg:mt-60 w-auto xl:w-1/2 ml-auto mr-auto" v-html="lastContent"></section>
     </main>
   </main>
 </template>
@@ -51,9 +58,3 @@ export default class AboutPage extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-.about-page-free-text {
-  @apply mt-30 lg:mt-60 w-auto xl:w-1/2 ml-auto mr-auto;
-}
-</style>

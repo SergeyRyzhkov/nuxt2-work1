@@ -15,23 +15,20 @@ module.exports = {
   },
 
   theme: {
-    fontFamily: {
-      compact: ["Compact"],
-    },
     fontSize: {
       12: ["12px", "18px"],
       14: ["14px", "18px"],
       17: ["17px", "20px"],
-      18: ["18px", "20px"],
-      20: ["20px", "27px"],
-      22: ["22px", "27px"],
-      24: ["24px", "32px"],
-      28: ["32px", "28px"],
-      32: ["32px", "32px"],
-      36: ["36px", "36px"],
-      46: ["46px", "49px"],
-      48: ["48px", "49px"],
-      60: ["60px", "49px"],
+      18: ["18px", "27px"],
+      20: ["20px", "30px"],
+      22: ["22px", "33px"],
+      24: ["24px", "36px"],
+      28: ["28px", "32"],
+      32: ["32px", "48px"],
+      36: ["36px", "50px"],
+      46: ["46px", "50px"],
+      48: ["48px", "50px"],
+      60: ["60px", "50px"],
     },
     lineHeight: {
       14: "14px",
@@ -114,6 +111,7 @@ module.exports = {
       240: "240px",
       300: "300px",
       400: "400px",
+      600: "600px",
     },
 
     container: {
@@ -141,6 +139,9 @@ module.exports = {
         "footer-color": "var(--footer-color)",
         "section-gray": "#F2F0F3",
         "gray-color": "#9D9D9D",
+      },
+      fontFamily: {
+        compact: ["Compact"],
       },
     },
   },

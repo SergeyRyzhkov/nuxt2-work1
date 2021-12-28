@@ -1,6 +1,6 @@
 <template>
   <nuxt-link v-show="!!model" :to="routeLink" class="flex flex-col items-center">
-    <BaseHeartButton class="ml-auto" :is-red="true"></BaseHeartButton>
+    <BaseHeartButton class="ml-auto" :is-red="true" @click.prevent="add2Favor()"></BaseHeartButton>
     <img
       v-lozad="'/images/tmp_product.jpg'"
       height="280"
@@ -30,6 +30,10 @@ export default class ProductItem extends Vue {
 
   get routeLink() {
     return this.$serviceLocator.getService(CatalogService).createProductRouteLocation(this.model);
+  }
+
+  add2Favor() {
+    this.$modalManager.showNotify("Добавлено");
   }
 
   addToBasket() {}
