@@ -2,6 +2,7 @@ import { Context, Plugin } from "@nuxt/types";
 import { Inject } from "@nuxt/types/app";
 import Vue, { ComponentOptions, AsyncComponent } from "vue";
 import VModal from "vue-js-modal/dist/ssr.nocss";
+import BaseNotify from "@/components/base/BaseNotify.vue";
 
 declare module "vue/types/vue" {
   interface Vue {
@@ -87,6 +88,10 @@ class ModalManager {
         }
       );
     });
+  }
+
+  showNotify(text: string) {
+    this.modalShow(BaseNotify, { text });
   }
 }
 

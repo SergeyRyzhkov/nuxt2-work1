@@ -19,8 +19,8 @@
         </button>
         <slot name="header-center"></slot>
       </div>
-      <slot></slot>
     </slot>
+    <slot></slot>
   </div>
 </template>
 
