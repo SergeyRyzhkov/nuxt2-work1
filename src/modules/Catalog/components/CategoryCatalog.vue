@@ -1,8 +1,8 @@
 <template>
   <section v-if="!!categories" class="product_category__wrapper">
     <div v-for="iter in categories" :key="iter.id" class="product_category">
-      <div class="product_category__title" :class="[iter.isOpened ? 'active' : '']">
-        <span @click="goToCategory(iter)">{{ iter.title }}</span>
+      <div class="product_category__title" :class="[iter.isOpened ? 'active' : '']" @click="goToCategory(iter)">
+        <span>{{ iter.title }}</span>
         <BaseOpenCloseButton
           v-show="hasChildren(iter)"
           :class="[iter.isOpened ? 'active' : '']"
@@ -11,7 +11,7 @@
           :stroke="buttonStroke(iter)"
           @mouseover.native="hoveredCategoryModelId = iter.id"
           @mouseleave.native="hoveredCategoryModelId = 0"
-          @click.prevent="toogle(iter)"
+          @click.stop="toogle(iter)"
         ></BaseOpenCloseButton>
       </div>
       <div
@@ -55,8 +55,12 @@ export default class CategoryCatalog extends Vue {
   }
 
   goToCategory(model: CategoryModel) {
-    const parms = this.$serviceLocator.getService(CatalogService).createCategoryRouteLocation(model);
-    this.$router.push(parms);
+    if (!this.hasChildren(model)) {
+      const parms = this.$serviceLocator.getService(CatalogService).createCategoryRouteLocation(model);
+      this.$router.push(parms);
+    } else {
+      model.isOpened = !model.isOpened;
+    }
   }
 }
 </script>

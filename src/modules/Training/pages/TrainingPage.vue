@@ -1,12 +1,9 @@
 <template>
   <main v-if="!$fetchState.pending && !!model.meta_slug" class="page-wrapper">
     <BaseStaticBanner :image-src="bannerSrc">
-      <BannerAbsoluteItem
-        v-if="bannerSrc"
-        class="absolute top-16 left-16 md:top-32 md:left-64"
-        :model="model"
-        @subscribe-clicked="onSubscribeClicked()"
-      ></BannerAbsoluteItem>
+      <div class="absolute w-screen bg-strong-nude" :class="[!bannerSrc ? 'top-0 py-24 md:py-40' : 'top-16 md:top-32']">
+        <BannerAbsoluteItem class="container" :model="model" @subscribe-clicked="onSubscribeClicked()"></BannerAbsoluteItem>
+      </div>
     </BaseStaticBanner>
     <section class="container-fluid">
       <div class="training-section-wrapper">

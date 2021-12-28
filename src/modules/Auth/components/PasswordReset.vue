@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2 class="uppercase mb-20">Восстановление пароля</h2>
+    <h1 class="uppercase mb-20">Восстановление пароля</h1>
     <div class="mb-40 md:mb-60">Мы отправим вам письмо с ссылкой для восстановления пароля на указанную почту</div>
     <BaseInput
       v-model="email"

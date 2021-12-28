@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="w-1/2">
     <h3>Личные данные</h3>
     <div class="mt-22">
       <div>Персональные данные</div>

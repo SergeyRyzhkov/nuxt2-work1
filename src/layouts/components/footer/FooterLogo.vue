@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[108px] sm:w-[153px]">
+  <div class="w-[124px] sm:w-[153px]">
     <img v-lozad="'/images/footer-logo.svg'" class="cursor-pointer w-full" width="152" height="68" @click="goToMainPage()" />
   </div>
 </template>

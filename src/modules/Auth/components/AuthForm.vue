@@ -66,6 +66,7 @@ export default class AuthForm extends Vue {
     this.loginRegFormVisible = false;
     this.resetPasswordVisible = false;
     this.emailVerification = true;
+    this.$router.push({ name: "personal" });
   }
 
   onResetSuccess() {
@@ -78,11 +79,13 @@ export default class AuthForm extends Vue {
   onVerifySuccess() {
     this.errorMessage = null;
     this.$emit("close");
+    this.$router.push({ name: "personal" });
   }
 
   onLoginSuccess() {
     this.errorMessage = null;
     this.$emit("close");
+    this.$router.push({ name: "personal" });
   }
 
   onGoBack() {

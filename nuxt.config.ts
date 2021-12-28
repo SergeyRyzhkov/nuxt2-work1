@@ -49,6 +49,20 @@ const nuxtConfig: NuxtConfig = {
         type: "image/x-icon",
         href: "/favicon.png",
       },
+
+      {
+        rel: "preload",
+        href: "/fonts/compact/compact.woff2",
+        as: "font",
+        crossorigin: "anonymous",
+      },
+
+      // {
+      //   rel: "preload",
+      //   as: "stylesheet",
+      //   href: "https://fonts.googleapis.com/css?family=Montserrat:500,600,700&amp;subset=cyrillic&amp;display=swap",
+      //   media: "all",
+      // },
     ],
 
     bodyAttrs: {

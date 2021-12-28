@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2 class="uppercase mb-20">Подтвердите почту</h2>
+    <h1 class="uppercase mb-20">Подтвердите почту</h1>
     <div class="mb-20 mb:mb-40">{{ loginData.email }}</div>
     <BaseInput
       v-model="code"

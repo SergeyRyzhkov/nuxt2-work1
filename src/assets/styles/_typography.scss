@@ -1,8 +1,15 @@
 /*! purgecss start ignore */
+@font-face {
+  font-family: "Compact";
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+  src: url("/fonts/compact/compact.woff2") format("woff2");
+}
 
 body {
   color: $primary !important;
-  font-family: "Montserrat", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: $font-famaly;
   font-size: 16px;
   line-height: 22px !important;
   font-weight: 500;
@@ -14,8 +21,11 @@ textarea {
 }
 
 h1 {
-  font-size: 34px;
-  line-height: 40px;
+  font-family: "Compact";
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 49px;
+  text-transform: uppercase;
 }
 
 h2 {
