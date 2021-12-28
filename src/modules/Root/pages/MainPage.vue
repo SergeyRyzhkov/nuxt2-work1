@@ -17,12 +17,24 @@
 import { Component, Vue } from "nuxt-property-decorator";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import CooperationForm from "@/components/CooperationForm.vue";
+import { EmptyService } from "@/_core/service/EmptyService";
+import SeoModel from "@/_core/models/SeoModel";
+
+class MainPageModel extends SeoModel {}
 
 @Component
 export default class MainPage extends Vue {
-  // СooperationForm
+  model: MainPageModel = new MainPageModel();
+
+  async fetch() {
+    this.model = await this.$serviceLocator.getService(EmptyService).getAnyOrNull("users/pages/home");
+  }
+
   head() {
-    return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(undefined, this.$route.fullPath);
+    // Тут еще картинку
+    if (this.model) {
+      return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(this.model, this.$route.fullPath);
+    }
   }
 
   openForm() {

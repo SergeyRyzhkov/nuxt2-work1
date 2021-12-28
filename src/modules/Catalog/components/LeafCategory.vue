@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <h1>LeafCategory</h1>
-    <BaseStaticBanner image-src="/images/tmp_category.jpg" :is-container="true"></BaseStaticBanner>
-    <section v-if="!!model" class="mt-40 md:mt-60">
+  <div v-if="!!model">
+    <BaseStaticBanner :image-src="bannerSrc" :is-container="true" default-image="/images/default-banner-black.jpg"
+      ><h1 v-if="!bannerSrc" class="absolute bottom-30 md:bottom-60 left-60 text-white" v-html="model.title"></h1
+    ></BaseStaticBanner>
+    <section v-if="!!model && !!model.products" class="mt-40 md:mt-60">
+      <div class="text-14 text-text-gray mb-24">{{ productCountText }}</div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-40 gap-x-30">
         <ProductItem v-for="iter in model.products" :key="iter.id" :model="iter"> </ProductItem>
       </div>
@@ -18,5 +20,13 @@ import CategoryModel from "../models/CategoryModel";
 export default class LeafCategory extends Vue {
   @Prop()
   model: CategoryModel;
+
+  get bannerSrc() {
+    return this.model?.banner?.url;
+  }
+
+  get productCountText() {
+    return `Найдено ${this.model?.products.length || 0} товаров`;
+  }
 }
 </script>

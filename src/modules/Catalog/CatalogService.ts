@@ -71,4 +71,16 @@ export class CatalogService extends BaseService {
       params: { slug: model.meta_slug },
     };
   }
+
+  getAllProducts(category: CategoryModel, list: ProductModel[] = []) {
+    if (category.products) {
+      list = [...list, ...category.products];
+    }
+    category.subcategory?.forEach((iter) => {
+      if (!!iter) {
+        this.getAllProducts(iter, list);
+      }
+    });
+    return list;
+  }
 }

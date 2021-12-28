@@ -7,7 +7,7 @@
       :src="image"
       :height="height"
       alt=" "
-      class="object-cover object-left-top w-full max-w-full"
+      class="object-cover object-top w-full max-w-full"
       :class="[wide ? 'h-400 md:h-600' : 'h-200 md:h-400']"
     />
     <slot></slot>

@@ -5,7 +5,8 @@
       v-lozad="'/images/tmp_product.jpg'"
       height="280"
       width="240"
-      class="w-240 h-280 p-20 object-cover object-left-top hover:scale-105 transition-all"
+      alt=" "
+      class="w-240 h-280 object-scale-down object-top hover:scale-105 transition-all"
     />
     <div class="text-14 text-gray-color uppercase font-semibold">Для лица</div>
     <div class="text-center mt-12">Шампунь KAYPRO Caviar Supreme для окрашенных волос</div>

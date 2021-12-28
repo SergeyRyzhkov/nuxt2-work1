@@ -1,7 +1,7 @@
 <template>
   <section v-if="!!categories" class="product_category__wrapper">
     <div v-for="iter in categories" :key="iter.id" class="product_category">
-      <div class="product_category__title" :class="[iter.isOpened ? 'active' : '']" @click="goToCategory(iter)">
+      <div class="product_category__title" :class="[iter.isOpened ? 'active' : '']" @click.stop="goToCategory(iter)">
         <span>{{ iter.title }}</span>
         <BaseOpenCloseButton
           v-show="hasChildren(iter)"
@@ -31,16 +31,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "nuxt-property-decorator";
+import { Component, Vue } from "nuxt-property-decorator";
 import { CatalogService } from "../CatalogService";
 import CategoryModel from "../models/CategoryModel";
 
 @Component
 export default class CategoryCatalog extends Vue {
-  @Prop()
-  categories: CategoryModel[];
-
+  categories: CategoryModel[] = [];
   hoveredCategoryModelId: number = 0;
+
+  async fetch() {
+    this.categories = await this.$serviceLocator.getService(CatalogService).getRoot();
+  }
 
   toogle(model: CategoryModel) {
     model.isOpened = !model.isOpened;
@@ -59,7 +61,7 @@ export default class CategoryCatalog extends Vue {
       const parms = this.$serviceLocator.getService(CatalogService).createCategoryRouteLocation(model);
       this.$router.push(parms);
     } else {
-      model.isOpened = !model.isOpened;
+      this.$emit("category-clicked", model);
     }
   }
 }
@@ -70,7 +72,7 @@ export default class CategoryCatalog extends Vue {
   .product_category__content {
     max-height: 0px;
     overflow-y: hidden;
-    transition: 0.2s;
+    transition: all 0.2s ease-in-out;
     cursor: pointer;
     &:hover {
       color: $secondary;
@@ -86,6 +88,9 @@ export default class CategoryCatalog extends Vue {
       }
       .product_category__sub_subtitle {
         color: $text-gray;
+        &:hover {
+          color: $secondary;
+        }
       }
     }
   }
@@ -96,7 +101,7 @@ export default class CategoryCatalog extends Vue {
       border: 1px solid $primary;
       padding: 5px;
       border-radius: 50%;
-      transition: all 0.1s ease-in-out;
+      transition: all 0.3s ease-in-out;
       &.active {
         transform: rotate(180deg);
       }

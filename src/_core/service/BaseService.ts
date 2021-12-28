@@ -4,6 +4,9 @@ import { Pagination } from "../models/Pagination";
 import { DataWithPagination } from "../models/DataWithPagination";
 
 export class BaseService {
+  getFavorites() {
+    throw new Error('Method not implemented.');
+  }
   protected ctx: Context;
 
   public set nuxtContext(ctx: Context) {

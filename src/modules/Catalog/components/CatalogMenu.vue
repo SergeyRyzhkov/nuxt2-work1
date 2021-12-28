@@ -10,7 +10,10 @@
         <img v-lozad="banerSrc" alt=" " width="400" height="240" class="w-400 h-240 object-cover object-left-top" />
       </div>
     </div>
-    <div class="fixed min-h-screen h-screen w-full bg-primary opacity-30 top-0 left-0 z-[-1]"></div>
+    <div
+      class="fixed min-h-screen h-screen w-full bg-primary opacity-30 top-0 left-0 z-[-1]"
+      :class="[!menuVisible ? 'hidden' : 'block']"
+    ></div>
   </div>
 </template>
 
@@ -50,13 +53,11 @@ export default class CatalogMenu extends Vue {
   right: 0;
   background-color: white;
   top: 49px;
-  visibility: hidden;
-  height: 0px;
   max-height: 0px;
   position: absolute;
-  transition: max-height 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;
   &.active {
-    visibility: visible;
     position: absolute;
     height: max-content;
     max-height: 40vh;
