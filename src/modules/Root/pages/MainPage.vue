@@ -70,8 +70,8 @@
       </div>
     </section>
 
-    <section class="container mt-40 md:mt-100">
-      <h2 class="text-48 font-compact uppercase">Змейка</h2>
+    <section class="mt-40 md:mt-100">
+      <SnakeComponent />
     </section>
   </main>
 </template>
