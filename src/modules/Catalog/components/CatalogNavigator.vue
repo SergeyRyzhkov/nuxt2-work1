@@ -1,7 +1,7 @@
 <template>
-  <section v-if="!!categories" class="product_category__wrapper">
+  <section v-if="!$fetchState.pending" class="product_category__wrapper">
     <div v-for="iter in categories" :key="iter.id" class="product_category">
-      <div class="product_category__title" :class="[iter.isOpened ? 'active' : '']" @click.stop="goToCategory(iter)">
+      <div class="product_category__title" :class="[iter.isOpened ? 'active' : '']" @click.stop="categoryClicked(iter)">
         <span>{{ iter.title }}</span>
         <BaseOpenCloseButton
           v-show="hasChildren(iter)"
@@ -14,12 +14,13 @@
           @click.stop="toogle(iter)"
         ></BaseOpenCloseButton>
       </div>
+
       <div
         v-for="subCat in iter.subcategory"
         :key="subCat.id"
         class="product_category__content"
         :class="[iter.isOpened ? 'active' : '']"
-        @click="goToCategory(subCat)"
+        @click.stop="categoryClicked(subCat)"
       >
         <div class="product_category__sub">
           <span class="product_category__sub_title">{{ subCat.title }}</span>
@@ -27,6 +28,16 @@
         </div>
       </div>
     </div>
+
+    <!-- <div v-show="!!parentCategoryName" class="flex flex-col mt-32">
+      <span>Категория</span>
+      <button type="button" class="flex items-center mt-20" @click.stop="goBack">
+        <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.99316 9.9873L1.98621 5.98035L5.99316 1.97339" stroke="#16192C" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+        <div class="text-14 ml-6">{{ parentCategoryName }}</div>
+      </button>
+    </div> -->
   </section>
 </template>
 
@@ -36,13 +47,18 @@ import { CatalogService } from "../CatalogService";
 import CategoryModel from "../models/CategoryModel";
 
 @Component
-export default class CategoryCatalog extends Vue {
+export default class CatalogNavigator extends Vue {
   categories: CategoryModel[] = [];
+
   hoveredCategoryModelId: number = 0;
 
   async fetch() {
     this.categories = await this.$serviceLocator.getService(CatalogService).getRoot();
   }
+
+  // get parentCategoryName() {
+  //   return this.selectedModel?.parent?.title;
+  // }
 
   toogle(model: CategoryModel) {
     model.isOpened = !model.isOpened;
@@ -56,13 +72,15 @@ export default class CategoryCatalog extends Vue {
     return model.id === this.hoveredCategoryModelId ? "white" : "#16192C";
   }
 
-  goToCategory(model: CategoryModel) {
-    if (!this.hasChildren(model)) {
-      const parms = this.$serviceLocator.getService(CatalogService).createCategoryRouteLocation(model);
-      this.$router.push(parms);
-    } else {
-      this.$emit("category-clicked", model);
-    }
+  categoryClicked(model: CategoryModel) {
+    this.$emit("category-clicked", model);
+  }
+
+  goBack() {
+    // if (this.model?.parent) {
+    //   const parms = this.$serviceLocator.getService(CatalogService).getRouteLocation(this.model.parent);
+    //   this.$router.push(parms);
+    // }
   }
 }
 </script>

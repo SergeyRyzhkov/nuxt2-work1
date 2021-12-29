@@ -1,9 +1,17 @@
 const routes = [
   {
     name: "catalog",
-    path: "/catalog/(.*)*",
-    component: () => lazyLoad(import("@/modules/Catalog/pages/CategoryPage.vue")),
-    props: { slug: "" },
+    path: "/catalog",
+    component: () => lazyLoad(import("@/modules/Catalog/pages/CatalogPage.vue")),
+    props: { slug: null },
+    children: [
+      {
+        name: "catalog-any",
+        path: "*",
+        props: true,
+        component: () => lazyLoad(import("@/modules/Catalog/components/CategoryContent.vue")),
+      },
+    ],
   },
 
   {
