@@ -1,5 +1,5 @@
 <template>
-  <button v-on="$listeners"><img :src="imageSrc" :width="width" :height="height" /></button>
+  <button class="z-10" v-on="$listeners"><img :src="imageSrc" :width="width" :height="height" /></button>
 </template>
 
 <script lang="ts">

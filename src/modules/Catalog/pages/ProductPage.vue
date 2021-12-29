@@ -126,6 +126,11 @@
       <div class="mt-16 md:mt-32 flex flex-nowrap overflow-x-auto">
         <ProductItem v-for="(index, iter) in popular" :key="index" :model="iter" class="first:ml-0 ml-16 md:ml-32" />
       </div>
+      <!-- <BaseSlider :slides="popular">
+        <template #slide="{ slide }">
+          <ProductItem :model="slide" class="first:ml-0 ml-16 md:ml-32" />
+        </template>
+      </BaseSlider> -->
     </section>
   </main>
 </template>

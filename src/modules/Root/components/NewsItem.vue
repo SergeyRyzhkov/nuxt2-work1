@@ -16,11 +16,7 @@
     </header>
     <div class="article-smallitem__stat-info">
       <div class="article-smallitem__date">
-        <span
-          itemprop="datePublished"
-          :content="articleModel.published_at ? new Date(articleModel.published_at).toISOString().split('T')[0] : ''"
-          >{{ articleModel.published_at ? new Date(articleModel.published_at).toLocaleDateString("ru-RU") : "" }}</span
-        >
+        <span itemprop="datePublished" :content="dateFormatted">{{ dateFormatted }}</span>
       </div>
     </div>
   </article>
@@ -42,6 +38,10 @@ export default class NewsItem extends Vue {
   goToCard() {
     // @ts-ignore
     this.$router.push({ name: "news-card", params: { slug: this.articleModel.meta_slug } });
+  }
+
+  get dateFormatted() {
+    return this.$dayjs(this.articleModel.published_at).format("DD MMMM YYYY");
   }
 }
 </script>

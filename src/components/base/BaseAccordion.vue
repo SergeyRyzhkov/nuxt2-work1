@@ -2,8 +2,8 @@
   <div class="base-accordion">
     <div class="flex font-semibold text-18 justify-between items-center cursor-pointer" @click="toogle()">
       <slot name="header"></slot>
-      <span v-show="!isContentActive" class="text-28 font-normal">+</span>
-      <span v-show="isContentActive" class="text-28 font-normal">-</span>
+      <span v-show="!isContentActive" class="text-30 font-normal">+</span>
+      <span v-show="isContentActive" class="text-30 font-normal">-</span>
     </div>
     <div class="base-accordion__content" :class="[isContentActive ? 'active' : '']">
       <slot name="content"></slot>
