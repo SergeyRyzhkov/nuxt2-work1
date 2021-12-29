@@ -1,7 +1,7 @@
 <template>
   <div class="w-full lg:w-1/2">
     <div class="flex flex-col md:flex-row">
-      <div class="flex flex-col w-1/3">
+      <div class="flex flex-col w-full md:w-1/3">
         <div class="font-semibold">Для связи</div>
         <ul class="mt-28 text-14">
           <li>

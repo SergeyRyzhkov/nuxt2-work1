@@ -2,8 +2,8 @@
   <div class="base-accordion">
     <div class="flex font-semibold text-18 justify-between items-center cursor-pointer" @click="toogle()">
       <slot name="header"></slot>
-      <span v-show="!isContentActive" class="text-30 font-normal">+</span>
-      <span v-show="isContentActive" class="text-30 font-normal">-</span>
+      <span v-show="!isContentActive" class="text-34 font-normal">+</span>
+      <span v-show="isContentActive" class="text-34 font-normal">-</span>
     </div>
     <div class="base-accordion__content" :class="[isContentActive ? 'active' : '']">
       <slot name="content"></slot>
@@ -27,7 +27,7 @@ export default class BaseAccordion extends Vue {
 <style lang="scss">
 .base-accordion {
   border-bottom: 1px solid #c9c9c9;
-  padding: 18px 0px 18px 0px;
+  padding: 12px 0 12px 0;
   > span {
     transition: 0.2s;
     line-height: 0px;
@@ -37,10 +37,10 @@ export default class BaseAccordion extends Vue {
     transition: 0.2s;
     max-height: 0px;
     overflow-y: hidden;
-    margin-top: 0px;
+    padding: 0px;
     &.active {
       max-height: 300px;
-      margin-top: 16px;
+      padding-bottom: 8px;
     }
   }
 }

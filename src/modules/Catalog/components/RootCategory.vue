@@ -2,7 +2,7 @@
   <div v-if="!$fetchState.pending">
     <BaseStaticBanner :image-src="bannerSrc" :is-container="true" default-image="/images/default-banner-black.jpg">
       <div class="absolute w-full h-full flex flex-col items-center justify-between p-20 md:p-60">
-        <div class="font-compact text-60 md:text-100 uppercase" v-html="bannerTitle"></div>
+        <div class="font-compact text-60 md:text-100 uppercase">{{ bannerTitle }}</div>
         <div v-html="bannerDescription"></div>
         <base-button>{{ bannerButtonText }}</base-button>
       </div>
