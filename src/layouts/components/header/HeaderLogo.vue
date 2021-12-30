@@ -1,5 +1,5 @@
 <template>
-  <img src="/images/header_logo.png" class="cursor-pointer" width="132" height="50" @click="goToMainPage()" />
+  <img src="/images/header_logo.png" class="cursor-pointer w-[112px] md:w-[132px]"  width="132" height="50" @click="goToMainPage()" />
 </template>
 
 <script lang="ts">

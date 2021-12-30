@@ -58,8 +58,8 @@
     </section>
 
     <!-- instagram -->
-    <section class="container mt-40 md:mt-100">
-      <h2 class="text-48 font-compact uppercase">Инста</h2>
+    <section class="mt-40 md:mt-185">
+      <InstagramBlock />
     </section>
 
     <section class="container mt-40 md:mt-100 flex flex-col">
