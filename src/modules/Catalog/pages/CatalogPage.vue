@@ -24,27 +24,32 @@ import AppStore from "@/modules/Root/store/AppStore";
 export default class CatalogPage extends Vue {
   selectedModel: CategoryModel = new CategoryModel();
 
-  get h1Text() {
-    return !!this.selectedModel?.id && !this.selectedModel?.subcategory?.length ? this.selectedModel?.title : "Каталог";
+  async fetch() {
+    await this.updateDta();
   }
 
   @Watch("$route.path")
   async onRoutePathChanged() {
-    const lastSlug = this.lastRoutePathPart;
+    await this.updateDta();
+  }
+
+  get h1Text() {
+    return !!this.selectedModel?.id && !this.selectedModel?.subcategory?.length ? this.selectedModel?.title : "Каталог";
+  }
+
+  async updateDta() {
+    const lastSlug = this.$route.params.slug;
 
     this.selectedModel =
       !!lastSlug && lastSlug !== "catalog"
         ? await this.$serviceLocator.getService(CatalogService).getBySlug(lastSlug)
         : new CategoryModel();
+
     this.updateBreadCrumbs(this.selectedModel);
   }
 
-  async onCategoryClicked(model: CategoryModel) {
-    this.updateBreadCrumbs(model);
-
-    this.selectedModel = await this.$serviceLocator.getService(CatalogService).getBySlug(model.meta_slug);
-
-    const parms = this.$serviceLocator.getService(CatalogService).getRouteLocation(this.selectedModel);
+  onCategoryClicked(model: CategoryModel) {
+    const parms = this.$serviceLocator.getService(CatalogService).getRouteLocation(model);
     if (parms.name !== this.$route.name) {
       this.$router.push(parms);
     }
@@ -52,11 +57,6 @@ export default class CatalogPage extends Vue {
 
   updateBreadCrumbs(model: CategoryModel) {
     getModule(AppStore, this.$store).updateBreadCrumbList(this.$serviceLocator.getService(CatalogService).buildBreadCrumb(model));
-  }
-
-  get lastRoutePathPart() {
-    const slugs = this.$route?.path?.split("/");
-    return !!slugs && !!slugs.length ? slugs[slugs.length - 1] : null;
   }
 
   head() {

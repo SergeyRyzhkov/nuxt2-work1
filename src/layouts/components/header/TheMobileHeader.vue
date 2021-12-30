@@ -68,7 +68,6 @@ export default class TheMobileHeader extends Vue {
 
 .mobile-menu__wrapper {
   z-index: 1000;
-  //display: none;
   &.active {
     position: fixed;
     display: block;
@@ -83,10 +82,9 @@ export default class TheMobileHeader extends Vue {
   }
 }
 .mobile-menu-list {
-  //   display: none;
   background: white;
   visibility: hidden;
-  transform: translateX(-120%);
+  transform: translateX(-100%);
   box-sizing: border-box;
   position: fixed;
   top: 0px;
@@ -95,7 +93,7 @@ export default class TheMobileHeader extends Vue {
   background-color: white;
   height: 100vh;
   // max-height: calc(100vh - 60px);
-  overflow-y: scroll;
+  overflow-y: auto;
   z-index: 2147483678;
   transform-style: flat;
   transition: all 0.3s ease-in-out;

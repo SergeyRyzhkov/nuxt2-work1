@@ -11,6 +11,12 @@ const routes = [
         props: true,
         component: () => lazyLoad(import("@/modules/Catalog/components/CategoryContent.vue")),
       },
+      {
+        name: "catalog-root",
+        path: "/catalog",
+        props: true,
+        component: () => lazyLoad(import("@/modules/Catalog/components/CategoryContent.vue")),
+      },
     ],
   },
 

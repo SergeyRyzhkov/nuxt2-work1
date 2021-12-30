@@ -22,7 +22,7 @@ export class CatalogService extends BaseService {
     if (!!model && model.id > 0) {
       this._buildBreadCrumb(breadCrumbList, model);
     }
-    breadCrumbList.push({ linkName: "Каталог", name: "catalog" }, { linkName: "Главная", name: "main" });
+    breadCrumbList.push({ linkName: "Каталог", name: "catalog-root" }, { linkName: "Главная", name: "main" });
     breadCrumbList.reverse();
     return breadCrumbList;
   }

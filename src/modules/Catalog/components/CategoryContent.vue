@@ -1,6 +1,5 @@
 <template>
-  <div v-if="!!model">
-    {{ model }}
+  <div>
     <RootCategory v-show="isRootCategory"></RootCategory>
     <LeafCategory v-show="isLeafCategory" :model="model"></LeafCategory>
   </div>
