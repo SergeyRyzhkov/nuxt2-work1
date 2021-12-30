@@ -30,7 +30,7 @@ export default class ProductItem extends Vue {
   }
 
   get routeLink() {
-    return this.$serviceLocator.getService(CatalogService).createProductRouteLocation(this.model);
+    return this.$serviceLocator.getService(CatalogService).getProductRouteLocation(this.model);
   }
 
   add2Favor() {

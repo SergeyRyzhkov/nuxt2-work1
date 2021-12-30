@@ -91,7 +91,7 @@ cursor: pointer;
 }
 .mobile-menu-list {
   visibility: hidden;
-  transform: translateX(-120%);
+  transform: translateX(-100%);
   box-sizing: border-box;
   position: fixed;
   top: 106px;

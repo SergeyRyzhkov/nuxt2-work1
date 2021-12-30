@@ -11,7 +11,7 @@
     <section class="mt-40 md:mt-60">
       <h2 class="text-42 font-compact uppercase">Популярное</h2>
       <div class="mt-16 md:mt-32 flex flex-nowrap overflow-x-auto">
-        <ProductItem v-for="(index, iter) in popular" :key="index" :model="iter" class="first:ml-0 ml-16 md:ml-32" />
+        <ProductItem v-for="(iter, index) in popular" :key="index" :model="iter" class="first:ml-0 ml-16 md:ml-32" />
       </div>
     </section>
 
@@ -35,7 +35,7 @@
     <section class="mt-40 md:mt-60">
       <h2 class="text-42 font-compact uppercase">Хиты продаж</h2>
       <div class="mt-16 md:mt-32 flex flex-nowrap overflow-x-auto">
-        <ProductItem v-for="(index, iter) in popular" :key="index" :model="iter" class="first:ml-0 ml-16 md:ml-32" />
+        <ProductItem v-for="(iter, index) in popular" :key="index" :model="iter" class="first:ml-0 ml-16 md:ml-32" />
       </div>
     </section>
   </div>

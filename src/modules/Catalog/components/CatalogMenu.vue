@@ -35,7 +35,7 @@ export default class CatalogMenu extends Vue {
   }
 
   goToCatalog(model: CategoryModel) {
-    const loc = this.$serviceLocator.getService(CatalogService).createCategoryRouteLocation(model);
+    const loc = this.$serviceLocator.getService(CatalogService).getRouteLocation(model);
     if (this.$route.name !== loc.name) {
       this.$router.push(loc);
     }

@@ -9,6 +9,8 @@ export type RouteLink = {
   // Параметры маршрута
   params?: any;
 
+  props?: any;
+
   query?: any;
 
   // Признак видимости

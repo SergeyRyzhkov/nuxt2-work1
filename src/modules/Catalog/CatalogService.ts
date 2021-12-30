@@ -22,7 +22,7 @@ export class CatalogService extends BaseService {
     if (!!model && model.id > 0) {
       this._buildBreadCrumb(breadCrumbList, model);
     }
-    breadCrumbList.push({ linkName: "Каталог", name: "catalog" }, { linkName: "Главная", name: "main" });
+    breadCrumbList.push({ linkName: "Каталог", name: "catalog-root" }, { linkName: "Главная", name: "main" });
     breadCrumbList.reverse();
     return breadCrumbList;
   }
@@ -47,25 +47,29 @@ export class CatalogService extends BaseService {
     if (this.ctx.app.router?.getRoutes().findIndex((iter) => iter.name === model.meta_slug) === -1) {
       const config = {
         name: model.meta_slug,
-        path: CategoryModel.getRoutePath(model),
+        path: this.getRoutePath(model),
         props: { slug: model.meta_slug },
-        component: () => lazyLoad(import("@/modules/Catalog/pages/CategoryPage.vue")),
+        component: () => lazyLoad(import("@/modules/Catalog/components/CategoryContent.vue")),
       };
-      this.ctx.app.router?.addRoute(config);
+      this.ctx.app.router?.addRoute("catalog", config);
     }
     if (!!model.subcategory?.length) {
       model.subcategory.forEach((iter) => this.addCatalogRoute(iter));
     }
   }
 
-  createCategoryRouteLocation(model: CategoryModel) {
+  getRoutePath(model: CategoryModel) {
+    return !!model.parent ? `${this.getRoutePath(model.parent)}/${model.meta_slug}` : `/catalog/${model.meta_slug}`;
+  }
+
+  getRouteLocation(model: CategoryModel) {
     return {
       name: model.meta_slug,
       params: { slug: model.meta_slug },
     };
   }
 
-  createProductRouteLocation(model: ProductModel) {
+  getProductRouteLocation(model: ProductModel) {
     return {
       name: "product",
       params: { slug: model.meta_slug },

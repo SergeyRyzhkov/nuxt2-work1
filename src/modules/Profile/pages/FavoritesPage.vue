@@ -3,7 +3,7 @@
     <BreadCrumbs />
     <h1>Избранное</h1>
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 md:gap-y-60 gap-y-28 gap-x-30 mt-40">
-      <ProductItem v-for="(index, iter) in productList" :key="index" :model="iter" />
+      <ProductItem v-for="(iter, index) in productList" :key="index" :model="iter" />
     </div>
     <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>
   </main>

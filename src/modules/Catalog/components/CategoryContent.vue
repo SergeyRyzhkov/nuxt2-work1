@@ -1,15 +1,7 @@
 <template>
-  <div v-if="!!model">
-    <h1>{{ model.title }}</h1>
-    <section>Слайдер</section>
-    <section class="mt-40 md:mt-60">Болшие слайдеры</section>
-    <section class="mt-40 md:mt-60">Банеры</section>
-    <section v-if="!!model && !!products" class="mt-40 md:mt-60">
-      <div class="text-14 text-text-gray mb-24">{{ productCountText }}</div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-40 gap-x-30">
-        <ProductItem v-for="iter in products" :key="iter.id" :model="iter"> </ProductItem>
-      </div>
-    </section>
+  <div>
+    <RootCategory v-show="isRootCategory"></RootCategory>
+    <LeafCategory v-show="isLeafCategory" :model="model"></LeafCategory>
   </div>
 </template>
 
@@ -22,6 +14,21 @@ import CategoryModel from "../models/CategoryModel";
 export default class CategoryContent extends Vue {
   @Prop()
   model: CategoryModel;
+
+  @Prop()
+  slug: string;
+
+  get isRootCategory() {
+    return !this.slug && !this.model?.id;
+  }
+
+  get isNotLeafCategory() {
+    return !!this.model?.subcategory?.length;
+  }
+
+  get isLeafCategory() {
+    return !!this.model?.id && !this.model?.subcategory?.length;
+  }
 
   get productCountText() {
     return `Найдено ${this.products.length || 0} товаров`;
