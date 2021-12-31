@@ -37,14 +37,10 @@
     <FooterSocials class="lg:mt-20 lg:py-0 pt-32 pb-22" />
     <div class="flex items-center mb-24 lg:mb-0 lg:mt-40">
       <a href="" target="_blank">
-        <figure>
-          <img src="/images/app_store.svg" alt="">
-        </figure>
+        <img src="/images/app_store.svg" alt=" " width="140" height="42" />
       </a>
       <a href="" target="_blank">
-      <figure class="ml-14">
-        <img src="/images/google_play.svg" alt="">
-      </figure>
+        <img class="ml-14" src="/images/google_play.svg" alt=" " width="140" height="42" />
       </a>
     </div>
   </div>
