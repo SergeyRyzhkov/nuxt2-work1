@@ -47,8 +47,8 @@
             для скачивания.</span
           >
           <div class="mt-32 md:mt-60 flex items-center">
-            <img v-lozad="'/images/app_store.svg'" alt=" " />
-            <img v-lozad="'/images/google_play.svg'" class="ml-16" alt=" " />
+            <img v-lozad="'/images/app_store.svg'" alt=" " width="140" height="42" />
+            <img v-lozad="'/images/google_play.svg'" class="ml-16" alt=" " width="140" height="42" />
           </div>
         </div>
       </div>

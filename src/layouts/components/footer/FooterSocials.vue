@@ -7,9 +7,7 @@
       target="_blank"
       class="social-item flex items-center justify-center"
     >
-      <figure>
-        <img v-lozad="item.icon" />
-      </figure>
+      <img v-lozad="item.icon" alt=" " width="37" height="37" />
     </a>
   </section>
 </template>
