@@ -28,16 +28,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <div v-show="!!parentCategoryName" class="flex flex-col mt-32">
-      <span>Категория</span>
-      <button type="button" class="flex items-center mt-20" @click.stop="goBack">
-        <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5.99316 9.9873L1.98621 5.98035L5.99316 1.97339" stroke="#16192C" stroke-width="1.5" stroke-linecap="round" />
-        </svg>
-        <div class="text-14 ml-6">{{ parentCategoryName }}</div>
-      </button>
-    </div> -->
   </section>
 </template>
 
@@ -55,10 +45,6 @@ export default class CatalogNavigator extends Vue {
   async fetch() {
     this.categories = await this.$serviceLocator.getService(CatalogService).getRoot();
   }
-
-  // get parentCategoryName() {
-  //   return this.selectedModel?.parent?.title;
-  // }
 
   toogle(model: CategoryModel) {
     model.isOpened = !model.isOpened;

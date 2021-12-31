@@ -1,24 +1,32 @@
 <template>
-  <section v-if="!!item && !!item.meta_slug" class="flex flex-col cursor-pointer" @click="goToCard()">
-    <div class="relative">
-      <img v-lozad="imageSrc" width="300" height="160" class="h-160 hover:scale-105 transition-all" alt=" " />
-      <div class="absolute top-16 left-16 bg-primary px-16 py-8 rounded-full text-14 text-white">{{ statusName }}</div>
-    </div>
-    <div class="flex items-center justify-between mt-16">
-      <div class="text-14">{{ dateTypeAddress }}</div>
-      <div class="font-semibold">{{ priceFormatted }}</div>
-    </div>
-    <div class="text-22 mt-12">{{ item.name }}</div>
-    <div class="mt-12 text-14">{{ item.lecturer }}</div>
-  </section>
+  <LazyHydrate when-visible>
+    <section v-if="!!item && !!item.meta_slug" class="flex flex-col cursor-pointer" @click="goToCard()">
+      <div class="relative">
+        <img v-lozad="imageSrc" width="300" height="160" class="h-160 hover:scale-105 transition-all" alt=" " />
+        <div class="absolute top-16 left-16 bg-primary px-16 py-8 rounded-full text-14 text-white">{{ statusName }}</div>
+      </div>
+      <div class="flex items-center justify-between mt-16">
+        <div class="text-14">{{ dateTypeAddress }}</div>
+        <div class="font-semibold">{{ priceFormatted }}</div>
+      </div>
+      <div class="text-22 mt-12">{{ item.name }}</div>
+      <div class="mt-12 text-14">{{ item.lecturer }}</div>
+    </section>
+  </LazyHydrate>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 import dayjs from "dayjs";
+import LazyHydrate from "vue-lazy-hydration";
 import TrainingModel from "../models/TrainingModel";
 
-@Component
+@Component({
+  name: "TrainingItem",
+  components: {
+    LazyHydrate,
+  },
+})
 export default class TrainingItem extends Vue {
   @Prop()
   item: TrainingModel;

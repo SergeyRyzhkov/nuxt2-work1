@@ -141,7 +141,6 @@ import { CatalogService } from "../CatalogService";
 import ProductModel from "../models/ProductModel";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import AppStore from "@/modules/Root/store/AppStore";
-import { ProfileService } from "@/modules/Profile/ProfileService";
 
 @Component
 export default class ProductPage extends Vue {
@@ -156,7 +155,8 @@ export default class ProductPage extends Vue {
   }
 
   get popular() {
-    return this.$serviceLocator.getService(ProfileService).getFavorites();
+    return null;
+    // return this.$serviceLocator.getService(ProfileService).getFavorites();
   }
 
   add2Favor() {}

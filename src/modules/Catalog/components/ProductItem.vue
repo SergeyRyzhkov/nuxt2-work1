@@ -10,7 +10,7 @@
         class="w-240 h-280 object-scale-down object-top hover:scale-105 transition-all"
       />
       <div class="text-14 text-gray-color uppercase font-semibold">Для лица</div>
-      <div class="text-center mt-12">Шампунь KAYPRO Caviar Supreme для окрашенных волос</div>
+      <div class="text-center mt-12">{{ model.name }}</div>
       <div class="text-18 font-semibold mt-12">{{ price }}</div>
       <BaseButton class="my-32 mt-20" @click.prevent="addToBasket()">В корзину</BaseButton>
     </nuxt-link>

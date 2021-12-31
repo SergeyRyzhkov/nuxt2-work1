@@ -20,6 +20,8 @@ const nuxtConfig: NuxtConfig = {
   modern: process.env.NODE_ENV === "production",
   srcDir: SRC_DIR,
 
+  cache: true,
+
   components: [
     { path: "@/components", pathPrefix: false },
     { path: "@/pages", pathPrefix: false },
@@ -137,7 +139,6 @@ const nuxtConfig: NuxtConfig = {
   render: {
     compressor: false,
     resourceHints: false,
-    etag: false,
     crossorigin: "anonymous",
 
     bundleRenderer: {

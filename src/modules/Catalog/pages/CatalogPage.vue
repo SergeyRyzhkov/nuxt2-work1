@@ -25,19 +25,19 @@ export default class CatalogPage extends Vue {
   selectedModel: CategoryModel = new CategoryModel();
 
   async fetch() {
-    await this.updateDta();
+    await this.updateData();
   }
 
   @Watch("$route.path")
   async onRoutePathChanged() {
-    await this.updateDta();
+    await this.updateData();
   }
 
   get h1Text() {
     return !!this.selectedModel?.id && !this.selectedModel?.subcategory?.length ? this.selectedModel?.title : "Каталог";
   }
 
-  async updateDta() {
+  async updateData() {
     const lastSlug = this.$route.path.split("/")[this.$route.path.split("/").length - 1];
 
     this.selectedModel =
