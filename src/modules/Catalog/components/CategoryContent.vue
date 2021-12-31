@@ -31,7 +31,7 @@ export default class CategoryContent extends Vue {
   }
 
   get productCountText() {
-    return `Найдено ${this.products.length || 0} товаров`;
+    return this.$serviceLocator.getService(CatalogService).productCountText(this.model);
   }
 
   get products() {

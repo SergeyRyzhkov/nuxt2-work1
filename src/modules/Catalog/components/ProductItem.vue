@@ -25,6 +25,13 @@ export default class ProductItem extends Vue {
   @Prop()
   model: ProductModel;
 
+  name = "ProductItem";
+
+  serverCacheKey(_props) {
+    console.log("1");
+    return 1;
+  }
+
   get price() {
     return "10 000 ₽";
   }

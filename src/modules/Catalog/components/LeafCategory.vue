@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!!model">
+  <div>
     <BaseStaticBanner :image-src="bannerSrc" :is-container="true" default-image="/images/default-banner-black.jpg"
       ><h1 v-if="!bannerSrc" class="absolute bottom-30 md:bottom-60 left-60 text-white" v-html="model.title"></h1
     ></BaseStaticBanner>
@@ -15,18 +15,26 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 import CategoryModel from "../models/CategoryModel";
+import { CatalogService } from "../CatalogService";
 
 @Component
 export default class LeafCategory extends Vue {
   @Prop()
   model: CategoryModel;
 
+  name = "LeafCategory";
+
+  serverCacheKey(_props) {
+    console.log("1");
+    return 1;
+  }
+
   get bannerSrc() {
     return this.model?.banner?.url;
   }
 
   get productCountText() {
-    return `Найдено ${this.model?.products.length || 0} товаров`;
+    return this.$serviceLocator.getService(CatalogService).productCountText(this.model);
   }
 }
 </script>

@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div class="bg-primary container-fluid text-sm z-50 h-[43px]">
-</div>
+    <div class="bg-primary container-fluid text-sm z-50 h-[43px]"></div>
     <header class="flex p-16 items-center h-[63px]">
-      <div class="menu-toogler" :class="{active: menuOpened}" @click="menuToggle()">
+      <div class="menu-toogler" :class="{ active: menuOpened }" @click="menuToggle()">
         <span></span>
         <span></span>
         <span></span>
@@ -32,19 +31,19 @@ export default class TheMobileHeader extends Vue {
 
   menuToggle() {
     this.menuOpened = !this.menuOpened;
-    const overflow = document.getElementsByTagName('html')[0]
+    const overflow = document.getElementsByTagName("html")[0];
     if (this.menuOpened) {
-      overflow.style.overflow =  'hidden'
+      overflow.style.overflow = "hidden";
     } else {
-      overflow.style.overflow =  'auto'
+      overflow.style.overflow = "auto";
     }
-      }
+  }
 }
 </script>
 
 <style lang="scss">
 .menu-toogler {
-cursor: pointer;
+  cursor: pointer;
   &.active {
     > span:nth-child(1) {
       transform: rotate(45deg) translate(5px, 4px);
@@ -109,20 +108,19 @@ cursor: pointer;
     visibility: visible;
     transform: none;
   }
-ul {
-  li {
-    font-size: 16px;
-    line-height: 20px;
-    cursor: pointer;
-    a {
-      padding: 10px !important;
-      border-bottom: none;
-    }
-    &:hover {
-      color: $secondary;
+  ul {
+    li {
+      font-size: 16px;
+      line-height: 20px;
+      cursor: pointer;
+      a {
+        padding: 10px !important;
+        border-bottom: none;
+      }
+      &:hover {
+        color: $secondary;
+      }
     }
   }
-}
-
 }
 </style>

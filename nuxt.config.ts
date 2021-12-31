@@ -10,8 +10,8 @@
 //       },
 //     },
 // },
-
 import path from "path";
+import LRU from "lru-cache";
 import { NuxtConfig } from "@nuxt/types";
 
 const SRC_DIR: NuxtConfig["srcDir"] = "src/";
@@ -56,13 +56,6 @@ const nuxtConfig: NuxtConfig = {
         as: "font",
         crossorigin: "anonymous",
       },
-
-      // {
-      //   rel: "preload",
-      //   as: "stylesheet",
-      //   href: "https://fonts.googleapis.com/css?family=Montserrat:500,600,700&amp;subset=cyrillic&amp;display=swap",
-      //   media: "all",
-      // },
     ],
 
     bodyAttrs: {
@@ -142,13 +135,16 @@ const nuxtConfig: NuxtConfig = {
   },
 
   render: {
-    // compressor: false,
+    compressor: false,
     resourceHints: false,
     etag: false,
     crossorigin: "anonymous",
 
     bundleRenderer: {
-      runInNewContext: false,
+      cache: new LRU({
+        max: 10000,
+        maxAge: 1000 * 60 * 15,
+      }),
     },
   },
 

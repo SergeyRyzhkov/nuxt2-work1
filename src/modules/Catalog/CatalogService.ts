@@ -3,6 +3,7 @@ import ProductModel from "./models/ProductModel";
 import { BaseService } from "@/_core/service/BaseService";
 import { RouteLink } from "@/_core/models/RouteLink";
 import { lazyLoad } from "@/utils/Common";
+import { decOfNum } from "@/utils/Formaters";
 
 export class CatalogService extends BaseService {
   async getProduct(slug: string) {
@@ -86,5 +87,9 @@ export class CatalogService extends BaseService {
       }
     });
     return list;
+  }
+
+  productCountText(model: CategoryModel) {
+    return `Найдено ${model?.products.length || 0} ${decOfNum(model?.products.length || 0, ["товар", "товара", "товаров"])}`;
   }
 }

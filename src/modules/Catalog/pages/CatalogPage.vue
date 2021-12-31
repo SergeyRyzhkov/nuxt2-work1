@@ -7,7 +7,7 @@
         <CatalogNavigator class="mt-22" @category-clicked="onCategoryClicked"></CatalogNavigator>
       </div>
       <div class="w-3/4 ml-40">
-        <nuxt-child :model="selectedModel"></nuxt-child>
+        <nuxt-child keep-alive :model="selectedModel"></nuxt-child>
       </div>
     </div>
   </main>
@@ -38,7 +38,7 @@ export default class CatalogPage extends Vue {
   }
 
   async updateDta() {
-    const lastSlug = this.$route.params.slug;
+    const lastSlug = this.$route.path.split("/")[this.$route.path.split("/").length - 1];
 
     this.selectedModel =
       !!lastSlug && lastSlug !== "catalog"
