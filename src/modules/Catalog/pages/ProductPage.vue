@@ -171,7 +171,7 @@ export default class ProductPage extends Vue {
   updateBreadCrumbs() {
     const breadCrumbList = [
       { linkName: "Главная", name: "main" },
-      { linkName: "Каталог", name: "catalog" },
+      { linkName: "Каталог", name: "catalog-root" },
       { linkName: `${this.model.title || this.model.meta_slug}` },
     ];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);

@@ -22,13 +22,6 @@ export default class LeafCategory extends Vue {
   @Prop()
   model: CategoryModel;
 
-  name = "LeafCategory";
-
-  serverCacheKey(_props) {
-    console.log("1");
-    return 1;
-  }
-
   get bannerSrc() {
     return this.model?.banner?.url;
   }
