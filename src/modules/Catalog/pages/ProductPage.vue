@@ -6,8 +6,8 @@
         <div class="md:w-1/2 lg:w-7/12"></div>
         <div class="lg:w-5/12 md:w-1/2">
           <div class="text-[#4BC967] text-14 block md:hidden">В наличии на складе</div>
-          <h2 class="text-24 font-semibold">MAIKE Fluid Foundation 01 Light Beige - Тональный флюид</h2>
-          <div class="text-gray-color mt-16 text-14">Артикул: 1233456789</div>
+          <h2 class="text-24 font-semibold">{{ model.name }}</h2>
+          <div class="text-gray-color mt-16 text-14">Артикул: {{ model.vendor_code }}</div>
           <div class="mt-32">
             <div class="flex flex-row md:flex-col items-center md:items-start justify-between">
               <div class="text-28 font-semibold">2 815 ₽</div>
@@ -114,14 +114,14 @@
               <span class="font-semibold">Состав</span>
             </template>
             <template #content
-              ><div class="text-14">{{ model.unit }}</div></template
+              ><div class="text-14">{{ model.composition }}</div></template
             >
           </BaseAccordion>
         </div>
       </div>
     </section>
 
-    <section class="mt-40 md:mt-60 container">
+    <section v-if="!!popular" class="mt-40 md:mt-60 container">
       <h2 class="text-42 font-compact uppercase">Рекомендуем</h2>
       <div class="mt-16 md:mt-32 flex flex-nowrap overflow-x-auto">
         <ProductItem v-for="(iter, index) in popular" :key="index" :model="iter" class="first:ml-0 ml-16 md:ml-32" />
@@ -172,6 +172,7 @@ export default class ProductPage extends Vue {
     const breadCrumbList = [
       { linkName: "Главная", name: "main" },
       { linkName: "Каталог", name: "catalog-root" },
+      // { linkName: this.model.category, name: this.model.category },
       { linkName: `${this.model.title || this.model.meta_slug}` },
     ];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);

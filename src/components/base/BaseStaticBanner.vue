@@ -1,5 +1,5 @@
 <template>
-  <section
+  <div
     class="w-full flex flex-col relative overflow-hidden mb-20 lg:mb-40 xl:mb-60"
     :class="[!isContainer ? 'w-screen' : '', wide ? 'h-400 md:h-600' : 'h-200 md:h-400']"
   >
@@ -11,7 +11,7 @@
       :class="[wide ? 'h-400 md:h-600' : 'h-200 md:h-400']"
     />
     <slot></slot>
-  </section>
+  </div>
 </template>
 
 <script lang="ts">

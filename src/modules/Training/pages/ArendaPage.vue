@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="arenda-page container-fluid flex items-end h-400 relative">
-      <div class="container relative  w-full  md:w-8/12 xl:w-1/2 mb-32 md:mb-55">
+      <div class="container relative w-full md:w-8/12 xl:w-1/2 mb-32 md:mb-55">
         <h1>Аренда студии</h1>
       </div>
     </div>

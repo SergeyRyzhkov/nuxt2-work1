@@ -3,39 +3,51 @@
     <BaseStaticBanner :image-src="bannerSrc" :is-container="true" default-image="/images/default-banner-black.jpg">
       <div class="absolute w-full h-full flex flex-col items-center justify-between p-20 md:p-60">
         <div class="font-compact text-60 md:text-100 uppercase">{{ bannerTitle }}</div>
-        <div v-html="bannerDescription"></div>
-        <base-button>{{ bannerButtonText }}</base-button>
+        <div class="text-18" v-html="bannerDescription"></div>
+        <base-button class="grow flex-shrink-0 mt-18 lg:mt-0 bg-white w-max">{{ bannerButtonText }}</base-button>
       </div>
     </BaseStaticBanner>
 
-    <section class="mt-40 md:mt-60">
+    <section v-if="!!popular" class="mt-40 md:mt-60">
       <h2 class="text-42 font-compact uppercase">Популярное</h2>
       <div class="mt-16 md:mt-32 flex flex-nowrap overflow-x-auto">
-        <ProductItem v-for="(iter, index) in popular" :key="index" :model="iter" class="first:ml-0 ml-16 md:ml-32" />
+        <ProductItem v-for="iter in popular" :key="iter.id" :model="iter" class="first:ml-0 ml-16 md:ml-32" />
       </div>
     </section>
 
-    <section class="mt-40 md:mt-60 flex flex-col md:flex-row w-full">
-      <img v-lozad="lineImg1" alt=" " class="object-cover object-top md:w-1/2 w-full h-200 md:h-300" height="300" />
-      <img
-        v-lozad="lineImg2"
-        alt=" "
-        class="object-cover object-top md:w-1/2 w-full h-200 md:h-300 mt-32 md:mt-0 ml-0 md:ml-32"
-        height="300"
-      />
+    <section class="mt-40 md:mt-60 flex flex-col md:flex-row w-full justify-between">
+      <div class="w-full md:w-1/2">
+        <img v-lozad="lineImg1" alt=" " class="object-cover object-top w-full h-200 md:h-300" height="300" />
+        <div class="text-18 mt-16 font-semibold uppercase">{{ lineText1 }}</div>
+      </div>
+      <div class="w-full md:w-1/2 md:ml-32">
+        <img
+          v-lozad="lineImg2"
+          alt=" "
+          class="object-cover object-top w-full h-200 md:h-300 mt-32 md:mt-0 ml-0 md:ml-32"
+          height="300"
+        />
+        <div class="text-18 mt-16 font-semibold uppercase">{{ lineText2 }}</div>
+      </div>
     </section>
     <section class="mt-40 md:mt-60">
-      <BaseStaticBanner :image-src="bannerSrc2" :is-container="true" default-image="/images/default-banner-black.jpg">
-        <div class="absolute w-full h-full flex flex-col items-center pt-20 md:pt-100">
+      <BaseStaticBanner
+        :image-src="bannerSrc2"
+        :is-container="true"
+        default-image="/images/default-banner-black.jpg"
+        class="md:h-300"
+      >
+        <div class="absolute w-full h-full flex flex-col items-center pt-20 md:pt-60">
           <div class="font-compact text-48 uppercase" v-html="bannerTitle2"></div>
-          <base-button class="mt-24">{{ bannerButtonText2 }}</base-button>
+          <div class="mt-32 md:mt-44" v-html="bannerDescription2"></div>
+          <base-button class="grow flex-shrink-0 mt-18 lg:mt-24 bg-white w-max">{{ bannerButtonText2 }}</base-button>
         </div>
       </BaseStaticBanner>
     </section>
-    <section class="mt-40 md:mt-60">
+    <section v-if="!!bestSellers" class="mt-40 md:mt-60">
       <h2 class="text-42 font-compact uppercase">Хиты продаж</h2>
       <div class="mt-16 md:mt-32 flex flex-nowrap overflow-x-auto">
-        <ProductItem v-for="(iter, index) in popular" :key="index" :model="iter" class="first:ml-0 ml-16 md:ml-32" />
+        <ProductItem v-for="iter in bestSellers" :key="iter.id" :model="iter" class="first:ml-0 ml-16 md:ml-32" />
       </div>
     </section>
   </div>
@@ -43,10 +55,10 @@
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
+import ProductModel from "../models/ProductModel";
 import { EmptyService } from "@/_core/service/EmptyService";
 import SeoModel from "@/_core/models/SeoModel";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
-import { ProfileService } from "@/modules/Profile/ProfileService";
 
 class CatalogDescription extends SeoModel {
   banner: { url: string };
@@ -56,9 +68,9 @@ class CatalogDescription extends SeoModel {
   content: {
     banner1: { title: string; description: string; button_text: string };
     banner2: { title: string; description: string; button_text: string };
-    bestsellers: [];
-    line: { titel: string }[];
-    popular: [];
+    bestsellers: ProductModel[];
+    line: { title: string }[];
+    popular: ProductModel[];
   };
 }
 
@@ -100,6 +112,14 @@ export default class RootCategory extends Vue {
     return this.model?.content_image_2?.url || "";
   }
 
+  get lineText1() {
+    return this.model?.content?.line[0]?.title || "";
+  }
+
+  get lineText2() {
+    return this.model?.content?.line[1]?.title || "";
+  }
+
   get bannerSrc2() {
     return this.model?.banner2?.url;
   }
@@ -117,7 +137,11 @@ export default class RootCategory extends Vue {
   }
 
   get popular() {
-    return this.$serviceLocator.getService(ProfileService).getFavorites();
+    return this.model?.content?.popular || null;
+  }
+
+  get bestSellers() {
+    return this.model?.content?.bestsellers || null;
   }
 }
 </script>
