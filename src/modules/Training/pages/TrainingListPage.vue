@@ -46,7 +46,7 @@ import AppStore from "@/modules/Root/store/AppStore";
 import { DaysRangeModel } from "@/components/forms/BaseCalendar.vue";
 
 // FIXME:
-// сделать модельку банер, красткое описаниен и полное описание
+// сделать модельку - банер, заголовок, красткое описаниен и полное описание (как бек отдает)
 // Тут В фетче дернуть this.arendaModel = await this.$serviceLocator.getService(PagesContentService).getArendaPage() - там нет еще
 // Из полученного подставить наименование заголовка и краткое описание
 // При клике на кнопку мы сейчас дергаем маршрут. В маршрут передать параметром модкль (чтоб потмо не дергать еще раз) @click="$router.push({ name: 'training-arenda-card',params.... })
