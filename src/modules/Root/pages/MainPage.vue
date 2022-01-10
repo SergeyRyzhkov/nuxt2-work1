@@ -63,7 +63,7 @@
         </div>
       </div>
       <div class="w-full md:w-1/2 bg-nude">
-        <img v-lozad="'/images/main-apps.png'" alt=" " />
+        <img v-lozad="'/images/main-apps.png'" alt=" " height="680" width="630" />
       </div>
     </section>
 
