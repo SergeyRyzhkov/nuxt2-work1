@@ -1,5 +1,11 @@
 <template>
-  <img src="/images/header_logo.png" class="cursor-pointer w-[112px] lg:w-[132px]"  width="132" height="50" @click="goToMainPage()" />
+  <img
+    v-lozad="'/images/header_logo.png'"
+    class="cursor-pointer w-[112px] lg:w-[132px]"
+    width="132"
+    height="50"
+    @click="goToMainPage()"
+  />
 </template>
 
 <script lang="ts">
