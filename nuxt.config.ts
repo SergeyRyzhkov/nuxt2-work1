@@ -16,7 +16,7 @@ import { NuxtConfig } from "@nuxt/types";
 
 const SRC_DIR: NuxtConfig["srcDir"] = "src/";
 
-const isDev = process.env.NODE_ENV === "production";
+const isDev = process.env.NODE_ENV === "development";
 
 const nuxtConfig: NuxtConfig = {
   modern: !isDev,
@@ -106,6 +106,7 @@ const nuxtConfig: NuxtConfig = {
     },
 
     optimization: {
+      removeEmptyChunks: true,
       splitChunks: {
         chunks: "all",
       },
@@ -117,11 +118,11 @@ const nuxtConfig: NuxtConfig = {
       commons: true,
     },
 
-    extend(config, ctx) {
-      if (ctx.isDev) {
-        config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
-      }
-    },
+    // extend(config, ctx) {
+    //   if (ctx.isDev) {
+    //     config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
+    //   }
+    // },
 
     // @ts-ignore
     postcss: {
