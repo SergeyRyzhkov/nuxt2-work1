@@ -16,7 +16,7 @@
       <li><nuxt-link :to="{ name: 'news' }">Новости</nuxt-link></li>
       <li><nuxt-link :to="{ name: 'contacts' }">Контакты</nuxt-link></li>
     </ul>
-    <LazyHydrate when-visible>
+    <LazyHydrate when-idle>
       <CatalogMenu :menu-visible="isOpened"></CatalogMenu>
     </LazyHydrate>
   </nav>

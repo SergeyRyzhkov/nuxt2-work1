@@ -1,6 +1,11 @@
 import SeoModel from "@/_core/models/SeoModel";
 
 export default class ProductModel extends SeoModel {
+  public constructor(init?: Partial<ProductModel>) {
+    super();
+    Object.assign(this, init);
+  }
+
   id: number;
   id_1c: string;
   barcode: number;

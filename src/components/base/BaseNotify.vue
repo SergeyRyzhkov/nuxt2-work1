@@ -18,7 +18,7 @@ export default class BaseNotify extends Vue {
   @Prop({ default: true })
   autoClose: boolean;
 
-  @Prop({ default: 2000 })
+  @Prop({ default: 1200 })
   closeInterval: number;
 
   mounted() {

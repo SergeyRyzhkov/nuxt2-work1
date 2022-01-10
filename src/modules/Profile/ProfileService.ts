@@ -5,7 +5,7 @@ export class ProfileService extends BaseService {
   getFavorites() {
     const res: ProductModel[] = [];
     for (let i = 0; i < 16; i++) {
-      res.push(new ProductModel());
+      res.push(new ProductModel({ id: i, meta_slug: `slug-${i}` }));
     }
     return res;
   }

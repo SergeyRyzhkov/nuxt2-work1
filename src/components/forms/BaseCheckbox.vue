@@ -1,7 +1,6 @@
 <template>
   <div class="flex items-center relative">
     <input
-      :id="id"
       type="checkbox"
       v-bind="$attrs"
       :checked="value"
@@ -10,7 +9,7 @@
         change: (event) => $emit('change', event.target.checked),
       }"
     />
-    <label v-if="label" class="checkbox-label" :for="id">{{ label }}</label>
+    <label v-if="label" class="checkbox-label">{{ label }}</label>
   </div>
 </template>
 
@@ -22,9 +21,6 @@ import { Guid } from "@/utils/Guid";
 export default class BaseCheckbox extends Vue {
   @Prop()
   label: string;
-
-  @Prop({ default: () => Guid.newGuid() })
-  id: string;
 
   @Model("change", { type: Boolean })
   readonly value!: boolean;

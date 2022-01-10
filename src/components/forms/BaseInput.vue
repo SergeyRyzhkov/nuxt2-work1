@@ -1,8 +1,7 @@
 <template>
   <div class="base-input" :class="{ 'base-input--error': isShakeError && hasError }">
-    <label v-if="!!label" class="base-input__label" :for="id">{{ label }}</label>
+    <label v-if="!!label" class="base-input__label">{{ label }}</label>
     <input
-      :id="id"
       ref="maskFiled"
       v-imask="mask"
       :value="value"
@@ -37,7 +36,6 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Ref } from "nuxt-property-decorator";
-import { Guid } from "@/utils/Guid";
 
 type InputType = "text" | "number" | "tel" | "email" | "password" | "find" | "select" | "checkbox";
 
@@ -47,9 +45,6 @@ type InputType = "text" | "number" | "tel" | "email" | "password" | "find" | "se
 export default class BaseInput extends Vue {
   showPassword = false;
   @Ref("maskFiled") readonly maskFiled!: HTMLInputElement | any;
-
-  @Prop({ default: () => Guid.newGuid() })
-  id: string;
 
   @Prop({ default: "" })
   mask: string;

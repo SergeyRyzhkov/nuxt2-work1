@@ -90,6 +90,7 @@
         </div>
       </section>
     </div>
+
     <section class="bg-nude container-fluid">
       <div class="container">
         <div class="md:w-1/2 lg:w-7/12 mt-40 md:mt-60 py-32 md:py-64">
@@ -97,24 +98,30 @@
             <template #header>
               <span class="font-semibold">Описание</span>
             </template>
-            <template #content
-              ><div class="text-14">{{ model.full_description }}</div></template
-            >
+            <template #content>
+              <LazyHydrate never>
+                <div class="text-14">{{ model.full_description }}</div>
+              </LazyHydrate>
+            </template>
           </BaseAccordion>
           <BaseAccordion>
             <template #header>
               <span class="font-semibold">Характеристики</span>
             </template>
-            <template #content
-              ><div class="text-14">{{ model.characteristic }}</div></template
-            >
+            <template #content>
+              <LazyHydrate never>
+                <div class="text-14">{{ model.characteristic }}</div></LazyHydrate
+              >
+            </template>
           </BaseAccordion>
           <BaseAccordion>
             <template #header>
               <span class="font-semibold">Состав</span>
             </template>
             <template #content
-              ><div class="text-14">{{ model.composition }}</div></template
+              ><LazyHydrate never
+                ><div class="text-14">{{ model.composition }}</div></LazyHydrate
+              ></template
             >
           </BaseAccordion>
         </div>
@@ -123,26 +130,31 @@
 
     <section v-if="!!popular" class="mt-40 md:mt-60 container">
       <h2 class="text-42 font-compact uppercase">Рекомендуем</h2>
-      <div class="mt-16 md:mt-32 flex flex-nowrap overflow-x-auto">
-        <ProductItem v-for="(iter, index) in popular" :key="index" :model="iter" class="first:ml-0 ml-16 md:ml-32" />
-      </div>
-      <!-- <BaseSlider :slides="popular">
-        <template #slide="{ slide }">
-          <ProductItem :model="slide" class="first:ml-0 ml-16 md:ml-32" />
-        </template>
-      </BaseSlider> -->
+      <LazyHydrate when-visible>
+        <LazyBaseSwiper :slides="popular" class="mt-32">
+          <template #slide="{ slide }">
+            <ProductItem :model="slide" class="w-max"></ProductItem>
+          </template>
+        </LazyBaseSwiper>
+      </LazyHydrate>
     </section>
   </main>
 </template>
 
 <script lang="ts">
 import { Component, getModule, Prop, Vue } from "nuxt-property-decorator";
+import LazyHydrate from "vue-lazy-hydration";
 import { CatalogService } from "../CatalogService";
 import ProductModel from "../models/ProductModel";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import AppStore from "@/modules/Root/store/AppStore";
+import { ProfileService } from "@/modules/Profile/ProfileService";
 
-@Component
+@Component({
+  components: {
+    LazyHydrate,
+  },
+})
 export default class ProductPage extends Vue {
   @Prop()
   slug: string;
@@ -155,8 +167,8 @@ export default class ProductPage extends Vue {
   }
 
   get popular() {
-    return null;
-    // return this.$serviceLocator.getService(ProfileService).getFavorites();
+    // return null;
+    return this.$serviceLocator.getService(ProfileService).getFavorites();
   }
 
   add2Favor() {}

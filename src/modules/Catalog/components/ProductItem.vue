@@ -1,7 +1,7 @@
 <template>
   <LazyHydrate when-visible>
-    <nuxt-link v-show="!!model" :to="routeLink" class="flex flex-col items-center">
-      <BaseHeartButton class="ml-auto" :is-red="true" @click.prevent="add2Favor()"></BaseHeartButton>
+    <nuxt-link v-show="!!model" :to="routeLink" class="flex flex-col items-center relative">
+      <BaseHeartButton class="absolute top-10 right-10" :is-red="true" @click.prevent="add2Favor()"></BaseHeartButton>
       <img
         v-lozad="imageSrc"
         height="280"
@@ -11,8 +11,8 @@
       />
       <div class="text-14 text-gray-color uppercase font-semibold">{{ model.title }}</div>
       <div class="text-center mt-12">{{ model.name }}</div>
-      <div class="text-18 font-semibold mt-12">{{ price }}</div>
-      <BaseButton class="my-32 mt-20" @click.prevent="addToBasket()">В корзину</BaseButton>
+      <div class="text-18 font-semibold mt-10 md:mt-12">{{ price }}</div>
+      <BaseButton class="mt-14 md:mt-20" @click.prevent="addToBasket()">В корзину</BaseButton>
     </nuxt-link>
   </LazyHydrate>
 </template>

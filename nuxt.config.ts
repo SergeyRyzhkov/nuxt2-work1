@@ -99,10 +99,6 @@ const nuxtConfig: NuxtConfig = {
   ],
 
   build: {
-    cache: true,
-
-    vendor: ["axios", "imask", "vue-functional-calendar", "vue-js-modal", "vue-multiselect"],
-
     optimizeCSS: true,
 
     extractCSS: {
