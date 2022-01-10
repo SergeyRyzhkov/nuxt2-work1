@@ -9,11 +9,9 @@
     </BaseStaticBanner>
 
     <!-- content.new_products -->
-    <LazyHydrate when-visible>
-      <section class="container mt-40 md:mt-100">
-        <h2 class="text-48 font-compact uppercase">Новые поступления</h2>
-      </section>
-    </LazyHydrate>
+    <section class="container mt-40 md:mt-100">
+      <h2 class="text-48 font-compact uppercase">Новые поступления</h2>
+    </section>
 
     <LazyHydrate when-visible>
       <section class="container mt-40 md:mt-100">
@@ -47,29 +45,27 @@
       </section>
     </LazyHydrate>
 
-    <LazyHydrate when-visible>
-      <section class="container mt-40 md:mt-100 flex flex-col md:flex-row">
-        <div class="w-full md:w-1/2 bg-primary flex flex-col">
-          <div class="my-auto mx-12 md:mx-60">
-            <h2 class="text-78 md:text-89 font-compact uppercase text-white">
-              KayPro-всегда доступен для<br />
-              новых свершений
-            </h2>
-            <span class="mt-20 md:mt-28 text-white"
-              >Мобильное приложение уже доступно <br />
-              для скачивания.</span
-            >
-            <div class="mt-32 md:mt-60 flex items-center">
-              <img v-lozad="'/images/app_store.svg'" alt=" " width="140" height="42" />
-              <img v-lozad="'/images/google_play.svg'" class="ml-16" alt=" " width="140" height="42" />
-            </div>
+    <section class="container mt-40 md:mt-100 flex flex-col md:flex-row">
+      <div class="w-full md:w-1/2 bg-primary flex flex-col">
+        <div class="my-auto mx-12 md:mx-60">
+          <h2 class="text-78 md:text-89 font-compact uppercase text-white">
+            KayPro-всегда доступен для<br />
+            новых свершений
+          </h2>
+          <span class="mt-20 md:mt-28 text-white"
+            >Мобильное приложение уже доступно <br />
+            для скачивания.</span
+          >
+          <div class="mt-32 md:mt-60 flex items-center">
+            <img v-lozad="'/images/app_store.svg'" alt=" " width="140" height="42" />
+            <img v-lozad="'/images/google_play.svg'" class="ml-16" alt=" " width="140" height="42" />
           </div>
         </div>
-        <div class="w-full md:w-1/2 bg-nude">
-          <img v-lozad="'/images/main-apps.png'" alt=" " />
-        </div>
-      </section>
-    </LazyHydrate>
+      </div>
+      <div class="w-full md:w-1/2 bg-nude">
+        <img v-lozad="'/images/main-apps.png'" alt=" " />
+      </div>
+    </section>
 
     <LazyHydrate when-visible>
       <!-- instagram -->

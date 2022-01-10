@@ -16,14 +16,21 @@
       <li><nuxt-link :to="{ name: 'news' }">Новости</nuxt-link></li>
       <li><nuxt-link :to="{ name: 'contacts' }">Контакты</nuxt-link></li>
     </ul>
-    <CatalogMenu :menu-visible="isOpened"></CatalogMenu>
+    <LazyHydrate when-visible>
+      <CatalogMenu :menu-visible="isOpened"></CatalogMenu>
+    </LazyHydrate>
   </nav>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
+import LazyHydrate from "vue-lazy-hydration";
 
-@Component
+@Component({
+  components: {
+    LazyHydrate,
+  },
+})
 export default class HeaderMenu extends Vue {
   isOpened = false;
 
