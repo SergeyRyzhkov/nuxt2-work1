@@ -11,7 +11,7 @@
 //     },
 // },
 import path from "path";
-import LRU from "lru-cache";
+// import LRU from "lru-cache";
 import { NuxtConfig } from "@nuxt/types";
 
 const SRC_DIR: NuxtConfig["srcDir"] = "src/";
@@ -20,7 +20,7 @@ const nuxtConfig: NuxtConfig = {
   modern: process.env.NODE_ENV === "production",
   srcDir: SRC_DIR,
 
-  cache: true,
+  // cache: true,
 
   components: [
     { path: "@/components", pathPrefix: false },
@@ -41,7 +41,8 @@ const nuxtConfig: NuxtConfig = {
       },
       {
         name: "viewport",
-        content: "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no",
+        content:
+          "width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no",
       },
     ],
 
@@ -122,6 +123,8 @@ const nuxtConfig: NuxtConfig = {
       }
     },
 
+    transpile: ["vue-lazy-hydration"],
+
     // @ts-ignore
     postcss: {
       plugins: {
@@ -140,13 +143,13 @@ const nuxtConfig: NuxtConfig = {
     compressor: false,
     resourceHints: false,
     crossorigin: "anonymous",
-
-    bundleRenderer: {
-      cache: new LRU({
-        max: 10000,
-        maxAge: 1000 * 60 * 15,
-      }),
-    },
+    etag: false,
+    // bundleRenderer: {
+    //   cache: new LRU({
+    //     max: 10000,
+    //     maxAge: 1000 * 60 * 15,
+    //   }),
+    // },
   },
 
   tailwindcss: {
