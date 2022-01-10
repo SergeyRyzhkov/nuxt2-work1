@@ -163,7 +163,8 @@ export default class ProductPage extends Vue {
 
   head() {
     if (!!this.model?.meta_slug) {
-      this.model.meta_image = this.model.logo?.url || this.model.banner?.url || undefined;
+      this.model.meta_image =
+        !!this.model.logo && this.model.logo.length ? this.model.logo[0].url : this.model.banner?.url || undefined;
     }
     return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(this.model, this.$route.fullPath);
   }
