@@ -1,14 +1,21 @@
 <template>
   <div>
     <div class="bg-primary container-fluid text-sm z-50 h-[43px]"></div>
-    <header class="flex p-16 items-center h-[63px]">
-      <div class="menu-toogler" :class="{ active: menuOpened }" @click="menuToggle()">
-        <span></span>
-        <span></span>
-        <span></span>
+    <header class="flex p-16 items-center justify-between h-[63px]">
+      <div class="flex items-center">
+        <div class="menu-toogler" :class="{ active: menuOpened }" @click="menuToggle()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <header-logo class="ml-20"></header-logo>
       </div>
-      <header-logo class="ml-20"></header-logo>
-      <HeaderUser class="ml-auto flex-shrink-0"></HeaderUser>
+      <div class="flex items-center">
+        <div @click="mobileSearch">
+          <img src="/images/mobile-search.svg" width="28" height="28" class="cursor-pointer" />
+        </div>
+        <HeaderUser class="ml-20 flex-shrink-0"></HeaderUser>
+      </div>
     </header>
     <div class="mobile-menu-list w-screen" :class="{ active: menuOpened === true }">
       <ul class="mt-10">
@@ -19,6 +26,9 @@
         <li><nuxt-link :to="{ name: 'contacts' }">Контакты</nuxt-link></li>
       </ul>
     </div>
+    <div class="mobile-block" :class="{active: searchOpened}">
+      <HeaderSearchInput class="mt-16" />
+    </div>
   </div>
 </template>
 
@@ -28,11 +38,16 @@ import { Component, Vue } from "nuxt-property-decorator";
 @Component
 export default class TheMobileHeader extends Vue {
   menuOpened = false;
+  searchOpened = false
 
-  menuToggle() {
-    this.menuOpened = !this.menuOpened;
+  mobileSearch(){
+    this.searchOpened = !this.searchOpened
+    this.changeOverflow(this.searchOpened)
+  }
+
+  changeOverflow(value:boolean){
     const overflow = document.getElementsByTagName("html")[0];
-    if (this.menuOpened) {
+    if (value) {
       overflow.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
     } else {
@@ -40,10 +55,33 @@ export default class TheMobileHeader extends Vue {
       document.body.style.overflow = "auto";
     }
   }
+
+
+  menuToggle() {
+    this.menuOpened = !this.menuOpened;
+    this.changeOverflow(this.menuOpened)
+  }
 }
 </script>
 
 <style lang="scss">
+.mobile-block{
+  background: #ffffff;
+  position: fixed;
+  border-top: 1px solid #F5F5F5;
+  top: 106px;
+  left: 0;
+  height: 0;
+  overflow: hidden;
+  transition: 0.2s ease;
+  z-index: 1;
+  width: 100%;
+  visibility: hidden;
+  &.active {
+    visibility: visible;
+    height: calc(100vh - 106px);
+  }
+}
 .menu-toogler {
   cursor: pointer;
   &.active {

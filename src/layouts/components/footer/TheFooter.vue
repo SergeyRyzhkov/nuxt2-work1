@@ -6,7 +6,7 @@
         <footer-subscribe class="mt-22 lg:mt-45" />
       </div>
       <div class="w-full flex lg:justify-end">
-        <div class="flex w-full flex-col lg:flex-row lg:w-11/12 items-start justify-between md:w-11/12 xl:w-10/12 mt-40 lg:mt-0">
+        <div class="flex w-full flex-col lg:flex-row lg:w-11/12 items-start justify-between xl:w-10/12 mt-40 lg:mt-0">
           <footer-about></footer-about>
           <footer-info class="lg:ml-20"></footer-info>
           <footer-contacts class="lg:ml-20 flex-shrink-0"></footer-contacts>

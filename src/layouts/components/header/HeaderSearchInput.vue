@@ -11,7 +11,7 @@
       <circle cx="10.4298" cy="11" r="6.575" transform="rotate(-45 10.4298 11)" stroke="#16192C" stroke-width="1.6" />
       <path d="M15.1144 15.6846L18.9151 19.4853" stroke="#16192C" stroke-width="1.6" />
     </svg>
-    <div v-if="search.length > 3" class="header-search-input-dropdown">
+    <div v-if="search.length > 3" class="header-search-input-dropdown hidden lg:block">
       <div class="dropdown-no-results hidden">
         <div class="request-string">По запросу "{{ search }}"</div>
         <div class="no-results">Нет результатов</div>
@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <div v-if="search.length > 3" class="dark"></div>
+    <div v-if="search.length > 3" class="dark hidden lg:block"></div>
   </BaseInput>
 </template>
 
