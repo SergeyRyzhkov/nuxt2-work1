@@ -11,7 +11,7 @@
           Отмененные
         </button>
       </div>
-      <base-calendar
+      <LazyBaseCalendar
         v-model="daysRange"
         :config="{
           isMultiple: true,
