@@ -8,7 +8,7 @@
         <span></span>
       </div>
       <header-logo class="ml-20"></header-logo>
-      <div class="ml-auto">icons</div>
+      <HeaderUser class="ml-auto flex-shrink-0"></HeaderUser>
     </header>
     <div class="mobile-menu-list w-screen" :class="{ active: menuOpened === true }">
       <ul class="mt-10">
@@ -34,8 +34,10 @@ export default class TheMobileHeader extends Vue {
     const overflow = document.getElementsByTagName("html")[0];
     if (this.menuOpened) {
       overflow.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
     } else {
       overflow.style.overflow = "auto";
+      document.body.style.overflow = "auto";
     }
   }
 }
