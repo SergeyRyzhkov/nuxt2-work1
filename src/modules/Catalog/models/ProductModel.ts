@@ -20,6 +20,6 @@ export default class ProductModel extends SeoModel {
   title: string;
   subtitle: string;
   banner: { url: string };
-  logo: { url: string };
+  logo: { url: string }[];
   video: { url: string };
 }

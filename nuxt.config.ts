@@ -16,10 +16,10 @@ import { NuxtConfig } from "@nuxt/types";
 
 const SRC_DIR: NuxtConfig["srcDir"] = "src/";
 
-const isDev = process.env.NODE_ENV === "development";
+// const isDev = process.env.NODE_ENV === "development";
 
 const nuxtConfig: NuxtConfig = {
-  modern: !isDev,
+  modern: true,
   srcDir: SRC_DIR,
 
   components: [
@@ -99,7 +99,7 @@ const nuxtConfig: NuxtConfig = {
   ],
 
   build: {
-    optimizeCSS: !isDev,
+    optimizeCSS: true,
 
     extractCSS: {
       ignoreOrder: true,
