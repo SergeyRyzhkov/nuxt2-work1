@@ -20,8 +20,6 @@ const nuxtConfig: NuxtConfig = {
   modern: process.env.NODE_ENV === "production",
   srcDir: SRC_DIR,
 
-  // cache: true,
-
   components: [
     { path: "@/components", pathPrefix: false },
     { path: "@/pages", pathPrefix: false },
@@ -122,8 +120,6 @@ const nuxtConfig: NuxtConfig = {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
       }
     },
-
-    transpile: ["vue-lazy-hydration"],
 
     // @ts-ignore
     postcss: {
