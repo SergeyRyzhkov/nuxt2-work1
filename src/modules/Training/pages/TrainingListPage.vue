@@ -45,6 +45,14 @@ import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import AppStore from "@/modules/Root/store/AppStore";
 import { DaysRangeModel } from "@/components/forms/BaseCalendar.vue";
 
+// FIXME:
+// сделать модельку банер, красткое описаниен и полное описание
+// Тут В фетче дернуть this.arendaModel = await this.$serviceLocator.getService(PagesContentService).getArendaPage() - там нет еще
+// Из полученного подставить наименование заголовка и краткое описание
+// При клике на кнопку мы сейчас дергаем маршрут. В маршрут передать параметром модкль (чтоб потмо не дергать еще раз) @click="$router.push({ name: 'training-arenda-card',params.... })
+// На странице @/modules/Training/pages/ArendaPage.vue сделать @Prop() - наименование такое же как папраметр, который ты укажешь выше....
+// Ну и на странице уже каке обвчно с пропсом работать (выставить банер и текст)
+
 @Component
 export default class TrainingListPage extends Vue {
   trainingList: TrainingModel[] = [];

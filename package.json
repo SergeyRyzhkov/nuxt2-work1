@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
-    "@types/lru-cache": "^5.1.1",
     "axios": "^0.21.1",
     "class-transformer": "latest",
     "cookie-universal-nuxt": "^2.1.5",
@@ -30,7 +29,6 @@
     "vuelidate": "^0.7.6"
   },
   "devDependencies": {
-    "lru-cache": "^6.0.0",
     "@nuxt/config": "^2.15.8",
     "@nuxt/types": "^2.15.8",
     "@nuxt/typescript-build": "^2.1.0",
