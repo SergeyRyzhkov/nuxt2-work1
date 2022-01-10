@@ -82,9 +82,11 @@
       </div>
     </section>
 
-    <section class="mt-40 md:mt-100">
-      <SnakeComponent />
-    </section>
+    <LazyHydrate when-visible>
+      <section class="mt-40 md:mt-100">
+        <SnakeComponent />
+      </section>
+    </LazyHydrate>
   </main>
 </template>
 

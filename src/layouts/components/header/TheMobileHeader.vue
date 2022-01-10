@@ -12,7 +12,7 @@
       </div>
       <div class="flex items-center">
         <div @click="mobileSearch">
-          <img src="/images/mobile-search.svg" width="28" height="28" class="cursor-pointer" />
+          <img v-lozad="'/images/mobile-search.svg'" width="28" height="28" class="cursor-pointer" />
         </div>
         <HeaderUser class="ml-20 flex-shrink-0"></HeaderUser>
       </div>
@@ -26,7 +26,7 @@
         <li><nuxt-link :to="{ name: 'contacts' }">Контакты</nuxt-link></li>
       </ul>
     </div>
-    <div class="mobile-block" :class="{active: searchOpened}">
+    <div class="mobile-block" :class="{ active: searchOpened }">
       <HeaderSearchInput class="mt-16" />
     </div>
   </div>
@@ -38,14 +38,14 @@ import { Component, Vue } from "nuxt-property-decorator";
 @Component
 export default class TheMobileHeader extends Vue {
   menuOpened = false;
-  searchOpened = false
+  searchOpened = false;
 
-  mobileSearch(){
-    this.searchOpened = !this.searchOpened
-    this.changeOverflow(this.searchOpened)
+  mobileSearch() {
+    this.searchOpened = !this.searchOpened;
+    this.changeOverflow(this.searchOpened);
   }
 
-  changeOverflow(value:boolean){
+  changeOverflow(value: boolean) {
     const overflow = document.getElementsByTagName("html")[0];
     if (value) {
       overflow.style.overflow = "hidden";
@@ -56,19 +56,18 @@ export default class TheMobileHeader extends Vue {
     }
   }
 
-
   menuToggle() {
     this.menuOpened = !this.menuOpened;
-    this.changeOverflow(this.menuOpened)
+    this.changeOverflow(this.menuOpened);
   }
 }
 </script>
 
 <style lang="scss">
-.mobile-block{
+.mobile-block {
   background: #ffffff;
   position: fixed;
-  border-top: 1px solid #F5F5F5;
+  border-top: 1px solid #f5f5f5;
   top: 106px;
   left: 0;
   height: 0;
