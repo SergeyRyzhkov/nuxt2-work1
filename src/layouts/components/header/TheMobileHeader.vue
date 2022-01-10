@@ -42,18 +42,24 @@ export default class TheMobileHeader extends Vue {
 
   mobileSearch(){
     this.searchOpened = !this.searchOpened
+    this.changeOverflow(this.searchOpened)
   }
 
-  menuToggle() {
-    this.menuOpened = !this.menuOpened;
+  changeOverflow(value:boolean){
     const overflow = document.getElementsByTagName("html")[0];
-    if (this.menuOpened) {
+    if (value) {
       overflow.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
     } else {
       overflow.style.overflow = "auto";
       document.body.style.overflow = "auto";
     }
+  }
+
+
+  menuToggle() {
+    this.menuOpened = !this.menuOpened;
+    this.changeOverflow(this.menuOpened)
   }
 }
 </script>
@@ -65,9 +71,16 @@ export default class TheMobileHeader extends Vue {
   border-top: 1px solid #F5F5F5;
   top: 106px;
   left: 0;
+  height: 0;
+  overflow: hidden;
+  transition: 0.2s ease;
   z-index: 1;
-  height: calc(100vh - 106px);
   width: 100%;
+  visibility: hidden;
+  &.active {
+    visibility: visible;
+    height: calc(100vh - 106px);
+  }
 }
 .menu-toogler {
   cursor: pointer;

@@ -1,6 +1,6 @@
 <template>
   <section class="relative snake">
-    <div class="snake-first snake-el mt-40 lg:mt-80">
+    <div class="snake-first snake-el mt-40 xl:mt-80">
       <div>
         <svg width="65" height="134" viewBox="0 0 65 134" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -67,7 +67,7 @@
       </div>
     </div>
 
-    <div class="snake-second snake-el mt-40 lg:mt-185">
+    <div class="snake-second snake-el mt-40 xl:mt-185">
       <div>
         <svg width="65" height="134" viewBox="0 0 65 134" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -119,7 +119,7 @@
       </div>
     </div>
 
-    <div class="snake-third snake-el mt-35 lg:mt-185">
+    <div class="snake-third snake-el mt-35 xl:mt-185">
       <div>
         <svg width="65" height="134" viewBox="0 0 65 134" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -184,7 +184,7 @@
       </div>
     </div>
 
-    <div class="snake-fourth snake-el lg:mt-90 mt-24">
+    <div class="snake-fourth snake-el xl:mt-90 mt-24">
       <div>
         <svg width="65" height="134" viewBox="0 0 65 134" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -294,7 +294,7 @@ export default class SnakeComponent extends Vue {
     width: 25%;
 
     + div {
-      @include tablet {
+      @include desktop {
         margin-left: 100px;
       }
     }
@@ -310,6 +310,16 @@ export default class SnakeComponent extends Vue {
   }
 
   &-first {
+    transform: scale(0.2) translateX(-136px);
+    @include mobile-small{
+      transform: scale(0.3) translateX(-136px);
+    }
+    @include tablet{
+      transform: scale(0.5) translateX(-106px);
+    }
+    @include desktop {
+      transform: scale(1);
+    }
     div {
       &:nth-child(1) {
         transform: rotate(4deg) translateX(-34px) translateY(6px);
@@ -338,6 +348,17 @@ export default class SnakeComponent extends Vue {
   }
 
   &-second {
+    transform: scale(0.2) translateY(109px) translateX(-69px);
+    @include mobile-small{
+      transform: scale(0.3) translateY(129px) translateX(-69px);
+    }
+    @include tablet{
+      transform: scale(0.5) translateY(140px) translateX(-62px);
+    }
+    @include desktop {
+      transform: scale(1);
+    }
+
     div {
       &:nth-child(1) {
         transform: rotate(45deg) translateX(-34px) translateY(6px);
@@ -366,6 +387,16 @@ export default class SnakeComponent extends Vue {
   }
 
   &-third {
+    transform: scale(0.2) translateY(120px) translateX(-17px);
+    @include mobile-small{
+      transform: scale(0.3) translateY(136px) translateX(-17px);
+    }
+    @include tablet{
+      transform: scale(0.5) translateY(136px) ;
+    }
+    @include desktop {
+      transform: scale(1);
+    }
     div {
       &:nth-child(1) {
         transform: rotate(2deg) translateX(-10px) translateY(61px);
@@ -394,6 +425,17 @@ export default class SnakeComponent extends Vue {
   }
 
   &-fourth {
+    transform: scale(0.2) translateY(54px);
+    @include mobile-small{
+      transform: scale(0.3) translateY(54px);
+    }
+    @include tablet{
+      transform: scale(0.5) translateX(38px) translateY(19px);
+    }
+    @include desktop{
+      transform: scale(1);
+    }
+
     div {
       &:nth-child(1) {
         transform: rotate(1deg) translateX(0px) translateY(6px);

@@ -1,43 +1,39 @@
 <template>
-  <main>
+  <main v-if="!$fetchState.pending">
     <div class="arenda-page container-fluid flex items-end h-400 relative">
       <div class="container relative w-full md:w-8/12 xl:w-1/2 mb-32 md:mb-55">
-        <h1>Аренда студии</h1>
+        <h1>{{ model.content.title }}</h1>
       </div>
     </div>
-    <div class="container page-wrapper mt-32 md:mt-55 w-full md:w-8/12 xl:w-1/2 ml-auto mr-auto">
-      <p class="text-24 font-semibold">
-        Итальянское совершенство, передовые технологии и инновации в beauty-индустрии и исключительно натуральные компоненты
-        позволяют нам создавать идеальные продукты для красоты ваших волос!
-      </p>
-      <section class="text-14 mt-28">
-        <p>
-          В современном мире мы всё чаще задумываемся о защите окружающей среды. Это не только забота об экологии, но и
-          собственная безопасность.
-        </p>
-
-        <p class="mt-28">Все больше людей выбирают средства ухода, содержащие компоненты растительного происхождения.</p>
-
-        <p class="mt-28">Бренд KAYPRO представляет серию средств натуральной косметики Natural Kay.</p>
-        Производство и утилизация этой продукции не вредит окружающей среде, и дарит вам максимальный эффект при использовании.
-
-        <p class="mt-28">
-          Натуральные масла и экстракты растений насыщают волосы необходимыми витаминами и микроэлементами. Они становятся
-          эластичными, увлажненными и дольше сохраняют цвет.
-        </p>
-      </section>
-    </div>
+    <section
+      class="container page-wrapper mt-32 md:mt-55 w-full md:w-8/12 xl:w-1/2 ml-auto mr-auto"
+      v-html="model.content.description"
+    ></section>
   </main>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
+import { EmptyService } from "@/_core/service/EmptyService";
+import SeoModel from "@/_core/models/SeoModel";
+
+class RentContentModel extends SeoModel {
+  content: { title: string; description: string };
+}
 
 @Component
 export default class ArendaPage extends Vue {
+  model = new RentContentModel();
+
+  async fetch() {
+    this.model = await this.$serviceLocator.getService(EmptyService).getAnyOrNull("users/pages/studio_rent");
+  }
+
   head() {
-    return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(undefined, this.$route.fullPath);
+    if (!!this.model) {
+      return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(this.model, this.$route.fullPath);
+    }
   }
 }
 </script>

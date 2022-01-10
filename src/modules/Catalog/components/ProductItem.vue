@@ -41,7 +41,7 @@ export default class ProductItem extends Vue {
   }
 
   get imageSrc() {
-    return this.model.logo[0]?.url || "/images/product-no-photo.jpg";
+    return this.model?.logo && this.model?.logo.length ? this.model.logo[0].url : "/images/product-no-photo.jpg";
   }
 
   add2Favor() {

@@ -30,4 +30,3 @@ export default class BaseNotify extends Vue {
   }
 }
 </script>
-
