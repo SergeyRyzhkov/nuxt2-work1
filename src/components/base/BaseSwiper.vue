@@ -63,7 +63,7 @@ export default class BaseSwiper extends Vue {
   defaultSettings = {
     slidesPerView: "auto",
     // centeredSlides: true,
-    spaceBetween: 30,
+    spaceBetween: 16,
     // simulateTouch: true,
     // watchSlidesVisibility: true,
     watchSlidesProgress: true,
@@ -100,13 +100,14 @@ export default class BaseSwiper extends Vue {
 <style lang="scss">
 .swiper-slide {
   // flex-shrink: 0;
+  // min-width: 100%;
   width: auto;
 }
 
 .swiper-navigation {
   position: absolute;
   width: 100%;
-  top: 50%;
+  top: 45%;
   display: flex;
   justify-content: space-between;
   z-index: 100;
@@ -115,9 +116,8 @@ export default class BaseSwiper extends Vue {
 .swiper-button-prev {
   width: 34px;
   height: 34px;
-  background-color: transparent;
+  background-color: white;
   z-index: 50;
-  border: none;
   padding: 10px;
   margin: 0;
   display: flex;
@@ -129,10 +129,14 @@ export default class BaseSwiper extends Vue {
 }
 
 .swiper-button-next {
-  right: 0px;
+  margin-left: auto;
 }
 .swiper-button-prev {
   transform: scaleX(-1);
+}
+
+.swiper-button-disabled {
+  display: none;
 }
 
 .swiper-pagination {

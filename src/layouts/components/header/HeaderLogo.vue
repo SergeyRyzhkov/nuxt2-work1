@@ -4,6 +4,7 @@
     class="cursor-pointer w-[112px] lg:w-[132px]"
     width="132"
     height="50"
+    alt=" "
     @click="goToMainPage()"
   />
 </template>

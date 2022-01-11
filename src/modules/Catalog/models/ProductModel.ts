@@ -14,6 +14,7 @@ export default class ProductModel extends SeoModel {
   name: string;
   unit: number;
   category: string;
+  category_slug: string;
   volume: number;
   weight: number;
   dimension: string;

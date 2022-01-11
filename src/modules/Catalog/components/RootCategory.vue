@@ -10,9 +10,13 @@
 
     <section v-if="!!popular" class="mt-40 md:mt-60">
       <h2 class="text-42 font-compact uppercase">Популярное</h2>
-      <div class="mt-16 md:mt-32 flex flex-nowrap overflow-x-auto">
-        <ProductItem v-for="iter in popular" :key="iter.id" :model="iter" class="first:ml-0 ml-16 md:ml-32" />
-      </div>
+      <LazyHydrate when-visible>
+        <LazyBaseSwiper :slides="popular" class="mt-32">
+          <template #slide="{ slide }">
+            <ProductItem :model="slide" class="w-max"></ProductItem>
+          </template>
+        </LazyBaseSwiper>
+      </LazyHydrate>
     </section>
 
     <section class="mt-40 md:mt-60 flex flex-col md:flex-row w-full justify-between">
@@ -46,15 +50,20 @@
     </section>
     <section v-if="!!bestSellers" class="mt-40 md:mt-60">
       <h2 class="text-42 font-compact uppercase">Хиты продаж</h2>
-      <div class="mt-16 md:mt-32 flex flex-nowrap overflow-x-auto">
-        <ProductItem v-for="iter in bestSellers" :key="iter.id" :model="iter" class="first:ml-0 ml-16 md:ml-32" />
-      </div>
+      <LazyHydrate when-visible>
+        <LazyBaseSwiper :slides="bestSellers" class="mt-32">
+          <template #slide="{ slide }">
+            <ProductItem :model="slide" class="w-max"></ProductItem>
+          </template>
+        </LazyBaseSwiper>
+      </LazyHydrate>
     </section>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
+import LazyHydrate from "vue-lazy-hydration";
 import ProductModel from "../models/ProductModel";
 import { EmptyService } from "@/_core/service/EmptyService";
 import SeoModel from "@/_core/models/SeoModel";
@@ -74,7 +83,11 @@ class CatalogDescription extends SeoModel {
   };
 }
 
-@Component
+@Component({
+  components: {
+    LazyHydrate,
+  },
+})
 export default class RootCategory extends Vue {
   model: CatalogDescription | null = null;
 

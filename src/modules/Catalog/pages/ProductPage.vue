@@ -131,7 +131,7 @@
     <section v-if="!!popular" class="mt-40 md:mt-60 container">
       <h2 class="text-42 font-compact uppercase">Рекомендуем</h2>
       <LazyHydrate when-visible>
-        <LazyBaseSwiper :slides="popular" class="mt-32">
+        <LazyBaseSwiper :slides="popular" class="mt-32" :settings="{ spaceBetween: 32 }">
           <template #slide="{ slide }">
             <ProductItem :model="slide" class="w-max"></ProductItem>
           </template>
@@ -185,7 +185,7 @@ export default class ProductPage extends Vue {
     const breadCrumbList = [
       { linkName: "Главная", name: "main" },
       { linkName: "Каталог", name: "catalog-root" },
-      // { linkName: this.model.category, name: this.model.category },
+      { linkName: this.model.category, name: this.model.category_slug },
       { linkName: `${this.model.title || this.model.meta_slug}` },
     ];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);

@@ -3,8 +3,29 @@
     <BreadCrumbs />
     <div class="flex">
       <div class="w-1/4">
-        <h1 class="mb-22">{{ h1Text }}</h1>
-        <CatalogNavigator class="mt-22" @category-clicked="onCategoryClicked"></CatalogNavigator>
+        <div v-if="!isLeafCategory">
+          <h1 class="mb-22">{{ h1Text }}</h1>
+          <CatalogNavigator class="mt-22" @category-clicked="onCategoryClicked"></CatalogNavigator>
+        </div>
+        <div v-if="isLeafCategory" class="flex flex-col">
+          <h1 class="mb-28">{{ selectedModel.title }}</h1>
+          <div v-if="!!selectedModel.parent">
+            <div class="font-semibold mb-16 text-18">Категория</div>
+            <nuxt-link :to="parentCategoryRoute" class="flex items-center">
+              <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M5.99316 9.9873L1.98621 5.98035L5.99316 1.97339"
+                  stroke="#16192C"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+              <span class="ml-4 text-14">
+                {{ parentCategoryName }}
+              </span>
+            </nuxt-link>
+          </div>
+        </div>
       </div>
       <div class="w-3/4 ml-40">
         <nuxt-child keep-alive :model="selectedModel"></nuxt-child>
@@ -35,6 +56,18 @@ export default class CatalogPage extends Vue {
 
   get h1Text() {
     return !!this.selectedModel?.id && !this.selectedModel?.subcategory?.length ? this.selectedModel?.title : "Каталог";
+  }
+
+  get isLeafCategory() {
+    return !!this.selectedModel?.id && !this.selectedModel?.subcategory?.length;
+  }
+
+  get parentCategoryName() {
+    return this.selectedModel?.parent?.title;
+  }
+
+  get parentCategoryRoute() {
+    return this.$serviceLocator.getService(CatalogService).getRouteLocation(this.selectedModel?.parent);
   }
 
   async updateData() {

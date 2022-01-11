@@ -65,8 +65,8 @@ export class CatalogService extends BaseService {
 
   getRouteLocation(model: CategoryModel) {
     return {
-      name: model.meta_slug,
-      params: { slug: model.meta_slug },
+      name: model?.meta_slug,
+      params: { slug: model?.meta_slug },
     };
   }
 

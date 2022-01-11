@@ -18,7 +18,7 @@
         <div>Ожидается оплата</div>
         <div class="underline">Подробнее</div>
       </div>
-      <div class="mt-24 flex flex-col md:flex-row flex md:justify-between">
+      <div class="mt-24 flex flex-col md:flex-row md:justify-between">
         <div class="flex items-center order-item-products">
           <div class="first:ml-0 ml-8 flex flex-col max-w-[95px] lg:max-w-[132px]">
             <figure class="order-item-product-image">

@@ -17,7 +17,7 @@ export default class CategoryModel extends SeoModel {
   logo: { url: string };
   banner: { url: string };
   banner_menu: { url: string };
-  slider: { url: string };
+  slider: { url: string }[];
   // eslint-disable-next-line no-use-before-define
   parent: CategoryModel;
 

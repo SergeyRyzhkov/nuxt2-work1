@@ -24,6 +24,8 @@ export default async (ctx: Context, inject: Inject) => {
   inject("serviceLocator", ServiceLocator.instance);
 };
 
+// const cache = new WeakMap<String, any>();
+
 const configAxios = (ctx: Context) => {
   ctx.$axios.onRequest((config) => {
     const accessToken = ServiceLocator.instance.getService(AuthService).getAccessToken();
