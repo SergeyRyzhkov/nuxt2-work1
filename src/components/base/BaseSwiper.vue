@@ -102,6 +102,7 @@ export default class BaseSwiper extends Vue {
   // flex-shrink: 0;
   // min-width: 100%;
   width: auto;
+  cursor: pointer;
 }
 
 .swiper-navigation {

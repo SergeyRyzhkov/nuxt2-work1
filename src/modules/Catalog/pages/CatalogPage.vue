@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="w-3/4 ml-40">
-        <nuxt-child keep-alive :model="selectedModel"></nuxt-child>
+        <nuxt-child :model="selectedModel"></nuxt-child>
       </div>
     </div>
   </main>
