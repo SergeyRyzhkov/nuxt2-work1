@@ -5,8 +5,6 @@ import { AuthService } from "@/modules/Auth/AuthService";
 import { CatalogService } from "@/modules/Catalog/CatalogService";
 
 export default async (ctx: Context, inject: Inject) => {
-  ctx.app.fetchDelay = 1;
-
   configAxios(ctx);
 
   ServiceLocator.createFreshServiceLocator();

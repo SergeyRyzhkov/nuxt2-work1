@@ -28,7 +28,7 @@ const nuxtConfig: NuxtConfig = {
     { path: "@/layouts", pathPrefix: false },
   ],
 
-  loading: { color: "#ef8532" },
+  loading: { color: "red", height: "5px" },
 
   head: {
     htmlAttrs: {
@@ -118,11 +118,9 @@ const nuxtConfig: NuxtConfig = {
       commons: true,
     },
 
-    // extend(config, ctx) {
-    //   if (ctx.isDev) {
-    //     config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
-    //   }
-    // },
+    //
+    vendor: ["axios"],
+    transpile: ["swiper", "lozad"],
 
     // @ts-ignore
     postcss: {
@@ -141,6 +139,7 @@ const nuxtConfig: NuxtConfig = {
   render: {
     compressor: false,
     resourceHints: false,
+    asyncScripts: true,
     crossorigin: "anonymous",
     etag: false,
     // bundleRenderer: {
