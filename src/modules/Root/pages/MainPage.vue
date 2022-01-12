@@ -11,13 +11,11 @@
     <!-- content.new_products -->
     <section v-if="!!newProducts" class="container mt-40 md:mt-100">
       <h2 class="text-48 font-compact uppercase">Новые поступления</h2>
-      <LazyHydrate when-visible>
-        <LazyBaseSwiper :slides="newProducts" class="mt-16 md:mt-32" :settings="{ spaceBetween: 32 }">
-          <template #slide="{ slide }">
-            <ProductItem :model="slide" class="w-max"></ProductItem>
-          </template>
-        </LazyBaseSwiper>
-      </LazyHydrate>
+      <LazyBaseSwiper :slides="newProducts" class="mt-16 md:mt-32" :settings="{ spaceBetween: 32 }">
+        <template #slide="{ slide }">
+          <ProductItem :model="slide" class="w-max"></ProductItem>
+        </template>
+      </LazyBaseSwiper>
     </section>
 
     <LazyHydrate when-visible>

@@ -4,6 +4,10 @@ import type { Module } from "@nuxt/types";
 const cache = {};
 
 const rendererCacheModule: Module = function (_moduleOptions) {
+  if (!this.nuxt.renderer) {
+    return;
+  }
+
   const renderer = this.nuxt.renderer;
 
   const renderRoute = renderer.renderRoute.bind(renderer);
