@@ -81,7 +81,6 @@ const nuxtConfig: NuxtConfig = {
     prefetchLinks: false,
     // middleware: ["requiresAuthorize"],
   },
-  types: ["cookie-universal-nuxt"],
 
   modules: ["@nuxtjs/axios", "cookie-universal-nuxt", "./render-cache-module"],
 
