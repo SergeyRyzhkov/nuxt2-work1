@@ -1,13 +1,13 @@
 <template>
   <client-only>
-    <div class="swiper-container" :class="swiperRootClassName">
+    <div class="swiper-container" :class="[swiperRootClassName, swiperContainerClasses]">
       <div class="swiper-wrapper">
         <div v-for="(slide, index) in slides" :key="index" :class="silderClasses">
           <slot name="slide" :slide="slide"></slot>
         </div>
       </div>
 
-      <div v-show="!!slides && slides.length" class="swiper-navigation">
+      <div v-show="!!slides && slides.length && arrows" class="swiper-navigation">
         <button type="button" class="swiper-button-prev">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
             <path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path>
@@ -20,7 +20,7 @@
         </button>
       </div>
 
-      <div class="swiper-pagination"></div>
+      <div class="swiper-pagination" v-if="pagination"></div>
     </div>
   </client-only>
 </template>
@@ -28,7 +28,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 
-import { Swiper, Navigation, Pagination, Autoplay, SwiperOptions } from "swiper";
+import { Swiper, Navigation, Pagination, Autoplay, SwiperOptions  } from "swiper";
 import { Guid } from "@/utils/Guid";
 
 import "swiper/swiper.scss";
@@ -43,8 +43,17 @@ export default class BaseSwiper extends Vue {
   @Prop()
   slides: any[];
 
+  @Prop({default:true})
+  pagination: boolean;
+
+  @Prop({default:true})
+  arrows: boolean;
+
   @Prop()
   slidersClasses: string;
+
+  @Prop()
+  swiperContainerClasses: any[];
 
   @Prop({ default: true })
   dontShrinkSlider: boolean;
@@ -93,6 +102,33 @@ export default class BaseSwiper extends Vue {
     const combinedSettings = { ...this.defaultSettings, ...this.settings };
     // eslint-disable-next-line no-new
     this.swiperInstance = new Swiper(`.${this.swiperRootClassName}`, combinedSettings as any);
+    // var swiper = this.swiperInstance;
+    // var interleaveOffset = 0.5;
+    // this.swiperInstance.on('touchStart', () => {
+    //     swiper.slides[swiper.activeIndex].style.transition = "";
+    // })
+    //
+    // this.swiperInstance.on('progress', () => {
+    //   var index = this.swiperInstance.activeIndex + 1
+    //
+    //       var slideProgress = swiper.slides[index].progress;
+    //       var innerOffset = swiper.height * interleaveOffset;
+    //       var innerTranslate = slideProgress * innerOffset;
+    //       // eslint-disable-next-line no-new
+    //       swiper.slides[index].style.transition = '.3s'
+    //       swiper.slides[index].style.transform =
+    //         `translate(0px, ${innerTranslate}px)`
+    // });
+    // this.swiperInstance.on('touchStart', () => {
+    //   for (let i in swiper.slides){
+    //     if (Number(i) !== Number(index)){
+    //       swiper.slides[index].style.transition = '0s'
+    //       swiper.slides[index].style.transform = "translate(0px, 0px)"
+    //     }
+    //   }
+    // })
+
+
   }
 }
 </script>
