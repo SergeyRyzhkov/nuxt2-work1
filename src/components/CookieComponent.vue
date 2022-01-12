@@ -26,18 +26,20 @@ export default  class CookieComponent extends Vue{
   visible: boolean = false
 
   get isVisible(){
-    const isAccepted = this.$cookies.get('useCookies')
-    return this.visible && !isAccepted
+    // const isAccepted = this.$cookies.get('useCookies')
+    // return this.visible && !isAccepted
+    return false;
   }
+
   fetch() {
-    const isAccepted = this.$cookies.get('useCookies')
-    if (!isAccepted){
-      this.visible = true
-    }
+    // const isAccepted = this.$cookies.get('useCookies')
+    // if (!isAccepted){
+    //   this.visible = true
+    // }
   }
 
   setCookie(){
-      this.$cookies.set('useCookies', true)
+      // this.$cookies.set('useCookies', true)
     this.visible = false
   }
 }
