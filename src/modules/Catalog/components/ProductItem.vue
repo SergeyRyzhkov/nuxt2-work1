@@ -2,8 +2,7 @@
   <LazyHydrate when-visible>
     <nuxt-link v-show="!!model" :to="routeLink" class="relative flex flex-col items-center hover:scale-105 transition-all">
       <BaseHeartButton class="absolute top-10 right-5" :is-red="true" @click.prevent="add2Favor()"></BaseHeartButton>
-      <img v-lozad="imageSrc" height="270" width="120" alt=" " class="w-120 h-270 object-scale-down" />
-      <!-- <div class="text-14 text-gray-color uppercase font-semibold">{{ model.title }}</div> -->
+      <img v-lozad="imageSrc" height="286" width="247" alt=" " class="w-247 h-286 object-scale-down" />
       <div class="text-center mt-30 md:mt-42">{{ model.name }}</div>
       <div class="font-semibold mt-10 md:mt-12">{{ price }}</div>
       <BaseButton class="mt-14 md:mt-20" @click.prevent="addToBasket()">В корзину</BaseButton>
