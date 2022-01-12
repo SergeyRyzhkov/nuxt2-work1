@@ -59,7 +59,7 @@ export default class BreadCrumbs extends Vue {
     display: inline-flex;
     align-items: center;
     &::after {
-      content: "/";
+      content: ">";
       font-size: 12px;
       color: #9495a6;
       padding: 0 3px;

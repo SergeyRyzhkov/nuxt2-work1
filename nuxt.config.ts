@@ -54,7 +54,7 @@ const nuxtConfig: NuxtConfig = {
       },
 
       {
-        rel: "preload",
+        rel: "prefetch",
         href: "/fonts/compact/compact.woff2",
         as: "font",
         crossorigin: "anonymous",
@@ -82,12 +82,13 @@ const nuxtConfig: NuxtConfig = {
     // middleware: ["requiresAuthorize"],
   },
 
-  modules: ["@nuxtjs/axios", "cookie-universal-nuxt", "nuxt-webfontloader"],
+  modules: ["@nuxtjs/axios", "cookie-universal-nuxt", "@/_core/nuxt_modules/render-cache-module"],
 
   buildModules: [
     "@/_core/nuxt_modules/init-router-store.module.ts",
     "@nuxtjs/tailwindcss",
     "@nuxtjs/style-resources",
+    "nuxt-webfontloader",
     [
       "@nuxt/typescript-build",
       {
@@ -118,8 +119,6 @@ const nuxtConfig: NuxtConfig = {
       commons: true,
     },
 
-    //
-    vendor: ["axios"],
     transpile: ["swiper", "lozad"],
 
     // @ts-ignore

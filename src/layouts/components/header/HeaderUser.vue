@@ -1,9 +1,17 @@
 <template>
   <div class="flex items-center">
-    <img v-lozad="'/images/header_heart.svg'" width="24" height="24" class="cursor-pointer" @click="gotoFavor()" />
-    <img v-lozad="'/images/header_shop.svg'" width="22" height="22" class="ml-24 lg:ml-48 cursor-pointer" @click="cartModal()" />
+    <img src="/images/header_heart.svg" width="24" height="24" class="cursor-pointer" alt=" " @click="gotoFavor()" />
     <img
-      v-lozad="'/images/header_user.svg'"
+      src="/images/header_shop.svg"
+      width="22"
+      height="22"
+      class="ml-24 lg:ml-48 cursor-pointer"
+      alt=" "
+      @click="cartModal()"
+    />
+    <img
+      src="/images/header_user.svg"
+      alt=" "
       width="19"
       height="19"
       class="ml-24 lg:ml-48 cursor-pointer"

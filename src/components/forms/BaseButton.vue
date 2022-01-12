@@ -23,7 +23,7 @@ export default class BaseButton extends Vue {
 
 <style lang="scss" scoped>
 .base-button {
-  @apply md:px-68 md:py-16 px-40 py-13;
+  @apply md:px-68 py-14 px-40;
   white-space: nowrap;
   font-size: 14px;
   font-weight: 500;

@@ -29,7 +29,7 @@
       ></base-calendar>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-y-40 gap-x-30 mt-30 md:mt-40">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-30 gap-x-30 mt-30 md:mt-40">
       <TrainingItem v-for="iter in trainingList" :key="iter.meta_slug" :item="iter"> </TrainingItem>
     </div>
     <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>

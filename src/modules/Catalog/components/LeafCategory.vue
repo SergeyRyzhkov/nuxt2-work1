@@ -4,7 +4,7 @@
       ><h1 v-if="!bannerSrc" class="absolute bottom-30 md:bottom-60 left-60 text-white" v-html="model.title"></h1
     ></BaseStaticBanner>
     <section v-if="!!model && !!model.products" class="mt-40 md:mt-60">
-      <div class="text-14 text-text-gray mb-24">{{ productCountText }}</div>
+      <div class="text-14 text-text-gray mb-28">{{ productCountText }}</div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-40 gap-x-30">
         <ProductItem v-for="iter in model.products" :key="iter.id" :model="iter"> </ProductItem>
       </div>

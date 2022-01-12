@@ -4,7 +4,7 @@
     <div class="flex">
       <div class="w-1/4">
         <div v-if="!isLeafCategory">
-          <h1 class="mb-22">{{ h1Text }}</h1>
+          <h1 class="mb-22">Каталог</h1>
           <CatalogNavigator class="mt-22" @category-clicked="onCategoryClicked"></CatalogNavigator>
         </div>
         <div v-if="isLeafCategory" class="flex flex-col">
@@ -52,10 +52,6 @@ export default class CatalogPage extends Vue {
   @Watch("$route.path")
   async onRoutePathChanged() {
     await this.updateData();
-  }
-
-  get h1Text() {
-    return !!this.selectedModel?.id && !this.selectedModel?.subcategory?.length ? this.selectedModel?.title : "Каталог";
   }
 
   get isLeafCategory() {

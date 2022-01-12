@@ -15,7 +15,6 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Model } from "nuxt-property-decorator";
-import { Guid } from "@/utils/Guid";
 
 @Component
 export default class BaseCheckbox extends Vue {

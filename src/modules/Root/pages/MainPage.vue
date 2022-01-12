@@ -9,8 +9,15 @@
     </BaseStaticBanner>
 
     <!-- content.new_products -->
-    <section class="container mt-40 md:mt-100">
+    <section v-if="!!newProducts" class="container mt-40 md:mt-100">
       <h2 class="text-48 font-compact uppercase">Новые поступления</h2>
+      <LazyHydrate when-visible>
+        <LazyBaseSwiper :slides="newProducts" class="mt-16 md:mt-32" :settings="{ spaceBetween: 32 }">
+          <template #slide="{ slide }">
+            <ProductItem :model="slide" class="w-max"></ProductItem>
+          </template>
+        </LazyBaseSwiper>
+      </LazyHydrate>
     </section>
 
     <LazyHydrate when-visible>
@@ -23,6 +30,13 @@
       <!-- content.bestsellers -->
       <section class="container mt-40 md:mt-100">
         <h2 class="text-48 font-compact uppercase">Хиты продаж</h2>
+        <LazyHydrate when-visible>
+          <LazyBaseSwiper :slides="bestSellers" class="mt-16 md:mt-32" :settings="{ spaceBetween: 32 }">
+            <template #slide="{ slide }">
+              <ProductItem :model="slide" class="w-max"></ProductItem>
+            </template>
+          </LazyBaseSwiper>
+        </LazyHydrate>
       </section>
     </LazyHydrate>
 
@@ -36,6 +50,13 @@
       <!-- content.popular -->
       <section class="container mt-40 md:mt-100">
         <h2 class="text-48 font-compact uppercase">Популярное</h2>
+        <LazyHydrate when-visible>
+          <LazyBaseSwiper :slides="populars" class="mt-16 md:mt-32" :settings="{ spaceBetween: 32 }">
+            <template #slide="{ slide }">
+              <ProductItem :model="slide" class="w-max"></ProductItem>
+            </template>
+          </LazyBaseSwiper>
+        </LazyHydrate>
       </section>
     </LazyHydrate>
 
@@ -93,31 +114,10 @@
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 import LazyHydrate from "vue-lazy-hydration";
+import MainPageModel from "../models/MainPageModel";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import CooperationForm from "@/components/CooperationForm.vue";
 import { EmptyService } from "@/_core/service/EmptyService";
-import SeoModel from "@/_core/models/SeoModel";
-import ProductModel from "@/modules/Catalog/models/ProductModel";
-
-class MainPageModel extends SeoModel {
-  content: {
-    line: { title: string; description: string };
-    line_2: { title: string }[];
-    product: ProductModel[];
-    bestsellers: ProductModel[];
-    new_products: ProductModel[];
-    instagram: [];
-  };
-
-  slider: {
-    id: number;
-    title: string;
-    subtitle: string;
-    link: string;
-    button_text: string;
-    image: { url: string };
-  }[];
-}
 
 @Component({
   components: {
@@ -145,6 +145,18 @@ export default class MainPage extends Vue {
 
   get bannerButtonText() {
     return null;
+  }
+
+  get newProducts() {
+    return this.model.content?.new_products;
+  }
+
+  get populars() {
+    return this.model.content?.popular;
+  }
+
+  get bestSellers() {
+    return this.model.content?.bestsellers;
   }
 
   head() {
