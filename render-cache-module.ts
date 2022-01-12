@@ -4,6 +4,10 @@ import type { Module } from "@nuxt/types";
 const cache = {};
 
 const rendererCacheModule: Module = function (_moduleOptions) {
+  // if (process.env.NODE_ENV === "development") {
+  //   return;
+  // }
+
   if (!this.nuxt.renderer) {
     return;
   }
@@ -58,3 +62,4 @@ export default rendererCacheModule;
 //     return value;
 //   });
 // };
+// module.exports.meta = require("./package.json");

@@ -82,7 +82,7 @@ const nuxtConfig: NuxtConfig = {
     // middleware: ["requiresAuthorize"],
   },
 
-  modules: ["@nuxtjs/axios", "cookie-universal-nuxt", "@/_core/nuxt_modules/render-cache-module"],
+  modules: ["@nuxtjs/axios", "cookie-universal-nuxt", "./render-cache-module"],
 
   buildModules: [
     "@/_core/nuxt_modules/init-router-store.module.ts",

@@ -28,6 +28,6 @@
     "tests/**/*.tsx",
     "src/**/*.d.ts",
     "/**/*.d.ts"
-  ],
+, "render-cache-module.ts"  ],
   "exclude": ["node_modules", ".nuxt", "dist"]
 }
