@@ -1,11 +1,12 @@
 import type { Module } from "@nuxt/types";
+import MemoryCache from "./src/_core/MemoryCache";
 
-const cache = {};
+const cache = new MemoryCache();
 
 const rendererCacheModule: Module = function (_moduleOptions) {
-  // if (process.env.NODE_ENV === "development") {
-  //   return;
-  // }
+  if (process.env.NODE_ENV === "development") {
+    return;
+  }
 
   // Fix for build
   if (!this.nuxt.renderer) {
@@ -19,10 +20,10 @@ const rendererCacheModule: Module = function (_moduleOptions) {
   renderer.renderRoute = async function (route, context) {
     if (!cache[route]) {
       const result = await renderRoute(route, context);
-      cache[route] = result;
+      cache.set(route, result);
       return result;
     } else {
-      return cache[route];
+      return cache.get(route);
     }
   };
 };

@@ -22,8 +22,6 @@ import { Component, Prop, Vue } from "nuxt-property-decorator";
 import { CatalogService } from "../CatalogService";
 import CategoryModel from "../models/CategoryModel";
 
-// FIXME почему при кеше идет запрос?
-
 @Component
 export default class CatalogMenu extends Vue {
   @Prop({ default: false })

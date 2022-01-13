@@ -4,16 +4,20 @@ import { BaseService } from "@/_core/service/BaseService";
 import { RouteLink } from "@/_core/models/RouteLink";
 import { lazyLoad } from "@/utils/Common";
 import { decOfNum } from "@/utils/Formaters";
+import Cacheable from "@/_core/MethodCacheDecorator";
 
 export class CatalogService extends BaseService {
+  @Cacheable(5 * 60 * 1000)
   getProduct(slug: string) {
     return this.getOneOrDefault(ProductModel, `users/products/${slug}`);
   }
 
+  @Cacheable(5 * 60 * 1000)
   async getRoot() {
     return await this.getArrayOrEmpty(CategoryModel, "users/product-categories-menu");
   }
 
+  @Cacheable(5 * 60 * 1000)
   async getBySlug(slug: string) {
     return await this.getOneOrDefault(CategoryModel, `users/product-categories/${slug}`);
   }
