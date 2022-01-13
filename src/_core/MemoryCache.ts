@@ -34,4 +34,8 @@ export default class MemoryCache {
     }
     return null;
   }
+
+  static clear() {
+    MemoryCache.entriesMap = new Map<string, CacheEntry>();
+  }
 }

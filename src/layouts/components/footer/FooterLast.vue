@@ -1,15 +1,20 @@
 <template>
   <div class="footer-bottom flex flex-col-reverse md:flex-row items-center justify-between">
-    <div class="footer-bottom-text mt-18 md:mt-0">© {{ new Date().getFullYear() }} kaypro.ru</div>
+    <div class="footer-bottom-text mt-18 md:mt-0" @click="clearCache()">© {{ new Date().getFullYear() }} kaypro.ru</div>
     <FooterPayments />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
+import MemoryCache from "@/_core/MemoryCache";
 
 @Component
-export default class FooterLast extends Vue {}
+export default class FooterLast extends Vue {
+  clearCache() {
+    MemoryCache.clear();
+  }
+}
 </script>
 
 <style lang="scss">
