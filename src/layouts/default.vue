@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-wrapper">
+  <div class="layout-wrapper relative">
     <TheHeader class="hidden lg:block"> </TheHeader>
     <TheMobileHeader class="block lg:hidden"></TheMobileHeader>
     <nuxt />
@@ -7,16 +7,21 @@
       <TheFooter class="mt-40 md:mt-60"></TheFooter>
     </LazyHydrate>
     <client-only><BaseBackToTop></BaseBackToTop></client-only>
+    <client-only>
+      <cookie-component />
+    </client-only>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 import LazyHydrate from "vue-lazy-hydration";
+import CookieComponent from "@/components/CookieComponent.vue";
 
 @Component({
   components: {
     LazyHydrate,
+    CookieComponent
   },
 })
 export default class DefaultLayout extends Vue {

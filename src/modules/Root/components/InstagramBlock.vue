@@ -14,6 +14,16 @@
         </h2>
       </div>
     </div>
+    <div>
+<!--      <LazyBaseSwiper :slides="['second.png', 'first.png', 'second.png', 'second.png']" class="mt-32" :slidersClasses="['slider-item']" :pagination="false" :arrows="false" :settings="{createElements:false, grabCursor: true, watchSlidesProgress:true, spaceBetween: 114, slidesPerView: 4, loop: true }" :swiperContainerClasses="'InstagramSwiperContainer'">-->
+<!--        <template #slide="{ slide, isActive }" >-->
+<!--          <div>-->
+<!--            <img :src="`/sliderInst/${slide}`" width="307" height="307" alt="">-->
+<!--          </div>-->
+<!--        </template>-->
+
+<!--      </LazyBaseSwiper>-->
+    </div>
   </div>
 </template>
 
@@ -21,7 +31,18 @@
 import { Vue, Component } from "nuxt-property-decorator";
 
 @Component
-export default class InstagramBlock extends Vue {}
+export default class InstagramBlock extends Vue {
+}
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.InstagramSwiperContainer{
+  overflow: inherit !important;
+}
+.slider-item{
+  >div, img{
+    width: 100%;
+    height: 100%;
+  }
+}
+</style>
