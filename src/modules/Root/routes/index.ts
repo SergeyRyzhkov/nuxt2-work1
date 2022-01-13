@@ -41,6 +41,19 @@ const routes = [
     props: { isFaq: false },
     component: () => lazyLoad(import("@/modules/Root/pages/FaqPage.vue")),
   },
+
+  {
+    name: "error-page",
+    path: "/app/error",
+    component: () => lazyLoad(import("@/components/base/BaseNotFound.vue")),
+    props: true,
+  },
+  {
+    name: "not-found",
+    path: "*",
+    component: () => lazyLoad(import("@/components/base/BaseNotFound.vue")),
+    props: { status: 404 },
+  },
 ];
 
 export default routes;

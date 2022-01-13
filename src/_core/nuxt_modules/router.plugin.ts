@@ -52,24 +52,6 @@ const getRoutes = async () => {
   return routes;
 };
 
-// const getStandartRoutes () {
-// return [
-//   {
-//     name: "error-page",
-//     path: "/app/error",
-//     component: BaseError,
-//     props: true,
-//   },
-//   {
-//     name: "not-found",
-//     path: "*",
-//     component: BaseError,
-//     props: { status: 404 },
-//     },
-// ]
-
-// }
-
 export const lazyLoad = (promise) => {
   return promise.then((m) => m.default || m);
 };
