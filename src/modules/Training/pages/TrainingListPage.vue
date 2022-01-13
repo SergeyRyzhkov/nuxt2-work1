@@ -1,5 +1,5 @@
 <template>
-  <main v-if="!$fetchState.pending" class="page-wrapper container">
+  <main class="page-wrapper container">
     <BreadCrumbs />
     <div class="arenda-banner flex flex-col justify-between lg:flex-row lg:items-center p-16 md:p-40">
       <div class="flex flex-col md:flex-row md:items-center">
@@ -53,8 +53,8 @@ export default class TrainingListPage extends Vue {
   daysRange: DaysRangeModel = new DaysRangeModel();
 
   async fetch() {
-    await this.updateData();
     this.updateBreadCrumbs();
+    await this.updateData();
   }
 
   @Watch("daysRange", { deep: true })

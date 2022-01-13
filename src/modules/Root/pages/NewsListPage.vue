@@ -23,8 +23,8 @@ export default class NewsListPage extends Vue {
   pagination: Pagination = new Pagination();
 
   async fetch() {
-    await this.updateData();
     this.updateBreadCrumbs();
+    await this.updateData();
   }
 
   async updateData() {

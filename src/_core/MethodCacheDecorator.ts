@@ -1,7 +1,5 @@
 import MemoryCache from "./MemoryCache";
 
-const cache = new MemoryCache();
-
 const Cacheable =
   (maxAge = 2000) =>
   (_target: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
@@ -9,10 +7,10 @@ const Cacheable =
 
     descriptor.value = async function (...args) {
       const key = `${propertyKey}-${!!args ? JSON.stringify(args) : ""}`;
-      const val = cache.get(key);
+      const val = MemoryCache.get(key);
       if (!val) {
         const originVal = await originalMethod.apply(this, args);
-        cache.set(key, originVal, maxAge);
+        MemoryCache.set(key, originVal, maxAge);
         return originVal;
       } else {
         return val;
