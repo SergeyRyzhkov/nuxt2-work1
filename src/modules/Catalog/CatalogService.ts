@@ -8,6 +8,12 @@ import { decOfNum } from "@/utils/Formaters";
 import Cacheable from "@/_core/MethodCacheDecorator";
 
 export class CatalogService extends BaseService {
+
+  @Cacheable(0)
+  async getSearchProducts(name: string, search: string) {
+    return await this.getArrayOrEmpty(ProductModel, "users/products", {params: {name, search}});
+  }
+
   @Cacheable(0)
   async getCatalog() {
     return await this.getOneOrDefault(CatalogModel, "users/pages/catalog");
@@ -29,7 +35,7 @@ export class CatalogService extends BaseService {
   }
 
   add2Favorites(product: ProductModel) {
-    return this.apiRequest.post(`users/favorites`, { product_id: product.id });
+    return this.apiRequest.post(`users/favorites`, {product_id: product.id});
   }
 
   removeFromFavorites(product: ProductModel) {
@@ -41,14 +47,14 @@ export class CatalogService extends BaseService {
     if (!!model && model.id > 0) {
       this._buildBreadCrumb(breadCrumbList, model);
     }
-    breadCrumbList.push({ linkName: "Каталог", name: "catalog-root" }, { linkName: "Главная", name: "main" });
+    breadCrumbList.push({linkName: "Каталог", name: "catalog-root"}, {linkName: "Главная", name: "main"});
     breadCrumbList.reverse();
     return breadCrumbList;
   }
 
   _buildBreadCrumb(breadCrumbList: RouteLink[], model: CategoryModel | null) {
     if (!!model && !!model.id) {
-      breadCrumbList.push({ linkName: model.title, name: model.meta_slug });
+      breadCrumbList.push({linkName: model.title, name: model.meta_slug});
       if (!!model.parent) {
         this._buildBreadCrumb(breadCrumbList, model.parent);
       }
@@ -67,7 +73,7 @@ export class CatalogService extends BaseService {
       const config = {
         name: model.meta_slug,
         path: this.getRoutePath(model),
-        props: { slug: model.meta_slug },
+        props: {slug: model.meta_slug},
         component: () => lazyLoad(import("@/modules/Catalog/components/CategoryContent.vue")),
       };
       this.ctx.app.router?.addRoute("catalog", config);
@@ -84,14 +90,14 @@ export class CatalogService extends BaseService {
   getRouteLocation(model: CategoryModel) {
     return {
       name: model?.meta_slug,
-      params: { slug: model?.meta_slug },
+      params: {slug: model?.meta_slug},
     };
   }
 
   getProductRouteLocation(model: ProductModel) {
     return {
       name: "product",
-      params: { slug: model.meta_slug },
+      params: {slug: model.meta_slug},
     };
   }
 
