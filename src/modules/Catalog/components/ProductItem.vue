@@ -52,7 +52,7 @@ export default class ProductItem extends Vue {
     } else {
       this.$serviceLocator.getService(CatalogService).add2Favorites(this.model);
     }
-    this.model.favor = !this.model.favor;
+    this.$nuxt.$set(this.model, "favor", !this.model.favor);
   }
 
   addToBasket() {

@@ -13,8 +13,8 @@ export default class ResetPassword extends Vue {
 
   async mounted() {
     try {
-      const result = await this.$serviceLocator.getService(EmptyService).getAnyOrFail(`users/password/recover/${this.code}`);
-      console.log(result);
+      await this.$serviceLocator.getService(EmptyService).getAnyOrFail(`users/password/recover/${this.code}`);
+      this.$modalManager.showNotify("Новый пароль отправлен Вам на почту !");
       this.$router.push({ name: "personal" });
     } catch (err) {
       this.$modalManager.showNotify("Не удалсоь восстановить пароль !");
