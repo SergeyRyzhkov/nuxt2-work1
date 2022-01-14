@@ -164,6 +164,7 @@ module.exports = {
         "footer-color": "var(--footer-color)",
         "section-gray": "#F2F0F3",
         "gray-color": "#9D9D9D",
+        green: "#4BC967",
       },
       fontFamily: {
         compact: ["Compact"],
