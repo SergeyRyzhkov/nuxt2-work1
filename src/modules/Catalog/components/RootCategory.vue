@@ -11,7 +11,7 @@
     <section v-if="!!popular" class="mt-40 md:mt-60">
       <h2 class="text-42 font-compact uppercase">Популярное</h2>
       <LazyHydrate when-visible>
-        <LazyBaseSwiper :slides="popular" class="mt-32" :settings="{ spaceBetween: 32 }">
+        <LazyBaseSwiper :slides="popular" class="mt-32" :settings="sliderSettings">
           <template #slide="{ slide }">
             <ProductItem :model="slide" class="w-max"><span class="text-secondary">популярное</span></ProductItem>
           </template>
@@ -145,6 +145,25 @@ export default class RootCategory extends Vue {
 
   get bestSellers() {
     return this.model?.content?.bestsellers || null;
+  }
+
+  get sliderSettings() {
+    return {
+      breakpoints: {
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        480: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+        640: {
+          slidesPerView: 4,
+          spaceBetween: 40,
+        },
+      },
+    };
   }
 }
 </script>
