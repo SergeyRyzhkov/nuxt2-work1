@@ -102,23 +102,27 @@ export default class BaseSwiper extends Vue {
     const combinedSettings = { ...this.defaultSettings, ...this.settings };
     // eslint-disable-next-line no-new
     this.swiperInstance = new Swiper(`.${this.swiperRootClassName}`, combinedSettings as any);
-    // var swiper = this.swiperInstance;
-    // var interleaveOffset = 0.5;
-    // this.swiperInstance.on('touchStart', () => {
-    //     swiper.slides[swiper.activeIndex].style.transition = "";
-    // })
-    //
-    // this.swiperInstance.on('progress', () => {
-    //   var index = this.swiperInstance.activeIndex + 1
-    //
-    //       var slideProgress = swiper.slides[index].progress;
-    //       var innerOffset = swiper.height * interleaveOffset;
-    //       var innerTranslate = slideProgress * innerOffset;
-    //       // eslint-disable-next-line no-new
-    //       swiper.slides[index].style.transition = '.3s'
-    //       swiper.slides[index].style.transform =
-    //         `translate(0px, ${innerTranslate}px)`
-    // });
+    var swiper = this.swiperInstance;
+    var interleaveOffset = 0.5;
+    this.swiperInstance.on('touchStart', () => {
+      swiper.update()
+      swiper.updateProgress()
+        swiper.slides[swiper.activeIndex].style.transition = "";
+    })
+    swiper.translateTo(300, 100, false, false)
+    this.swiperInstance.on('progress', () => {
+          let index = swiper.activeIndex + 1
+          var slideProgress = swiper.slides[index].progress;
+          var innerOffset = swiper.height * interleaveOffset;
+          var innerTranslate = slideProgress * innerOffset;
+          // eslint-disable-next-line no-new
+      console.log(swiper.slides);
+      swiper.slides[index].style.width = innerTranslate + 'px !important'
+          swiper.slides[index].style.height = innerTranslate + 'px !important'
+          swiper.slides[index].style.transform =
+            `translate(0px, ${innerTranslate}px)`
+
+    });
     // this.swiperInstance.on('touchStart', () => {
     //   for (let i in swiper.slides){
     //     if (Number(i) !== Number(index)){
@@ -134,6 +138,12 @@ export default class BaseSwiper extends Vue {
 </script>
 
 <style lang="scss">
+.swiper-slide{
+  transition: .3s;
+}
+.swiper-slide-next{
+  transition: .3s;
+}
 .swiper-slide {
   // flex-shrink: 0;
   // min-width: 100%;
