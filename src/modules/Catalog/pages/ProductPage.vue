@@ -131,7 +131,7 @@
     <section v-if="!!popular" class="mt-40 md:mt-60 container">
       <h2 class="text-42 font-compact uppercase">Рекомендуем</h2>
       <LazyHydrate when-visible>
-        <LazyBaseSwiper :slides="popular" class="mt-32" :settings="{ spaceBetween: 32 }">
+        <LazyBaseSwiper :slides="popular" class="mt-32" :settings="sliderSettings">
           <template #slide="{ slide }">
             <ProductItem :model="slide" class="w-max"></ProductItem>
           </template>
@@ -169,6 +169,25 @@ export default class ProductPage extends Vue {
   get popular() {
     // return null;
     return this.$serviceLocator.getService(ProfileService).getFavorites();
+  }
+
+  get sliderSettings() {
+    return {
+      breakpoints: {
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        480: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+        640: {
+          slidesPerView: 4,
+          spaceBetween: 40,
+        },
+      },
+    };
   }
 
   add2Favor() {}

@@ -22,9 +22,9 @@ export default class FavoritesPage extends Vue {
   productList: ProductModel[] = [];
   pagination: Pagination = new Pagination();
 
-  fetch() {
+  async fetch() {
     this.updateBreadCrumbs();
-    this.updateData();
+    await this.updateData();
   }
 
   updateBreadCrumbs() {
@@ -36,13 +36,13 @@ export default class FavoritesPage extends Vue {
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
   }
 
-  updateData() {
+  async updateData() {
     // const result = this.$serviceLocator.getService(ProfileService).getFavorites(this.pagination);
     // this.model = result.data;
     // this.pagination = result.pagination;
 
     this.pagination.total = 100;
-    this.productList = this.$serviceLocator.getService(ProfileService).getFavorites();
+    this.productList = await this.$serviceLocator.getService(ProfileService).getFavorites();
   }
 
   onUpdatePagination(pageNmb: number) {

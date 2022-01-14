@@ -28,6 +28,14 @@ export class CatalogService extends BaseService {
     return await this.getOneOrDefault(CategoryModel, `users/product-categories/${slug}`);
   }
 
+  add2Favorites(product: ProductModel) {
+    return this.apiRequest.post(`users/favorites`, { product_id: product.id });
+  }
+
+  removeFromFavorites(product: ProductModel) {
+    return this.apiRequest.delete(`users/favorites/${product.id}`);
+  }
+
   buildBreadCrumb(model: CategoryModel | null) {
     const breadCrumbList: RouteLink[] = [];
     if (!!model && model.id > 0) {

@@ -11,9 +11,9 @@
     <section v-if="!!popular" class="mt-40 md:mt-60">
       <h2 class="text-42 font-compact uppercase">Популярное</h2>
       <LazyHydrate when-visible>
-        <LazyBaseSwiper :slides="popular" class="mt-32">
+        <LazyBaseSwiper :slides="popular" class="mt-32" :settings="sliderSettings">
           <template #slide="{ slide }">
-            <ProductItem :model="slide" class="w-max"></ProductItem>
+            <ProductItem :model="slide" class="w-max"><span class="text-secondary">популярное</span></ProductItem>
           </template>
         </LazyBaseSwiper>
       </LazyHydrate>
@@ -21,14 +21,19 @@
 
     <section class="mt-40 md:mt-60 flex flex-col md:flex-row w-full justify-between">
       <div class="w-full md:w-1/2">
-        <img v-lozad="lineImg1" alt=" " class="object-cover object-top w-full h-200 md:h-300" height="300" />
+        <img
+          v-lozad="lineImg1"
+          alt=" "
+          class="object-scale-down hover:scale-105 transition-all w-full h-200 md:h-300"
+          height="300"
+        />
         <div class="text-18 mt-16 font-semibold uppercase">{{ lineText1 }}</div>
       </div>
       <div class="w-full md:w-1/2 md:ml-32">
         <img
           v-lozad="lineImg2"
           alt=" "
-          class="object-cover object-top w-full h-200 md:h-300 mt-32 md:mt-0 ml-0 md:ml-32"
+          class="object-scale-down hover:scale-105 transition-all w-full h-200 md:h-300 mt-32 md:mt-0 ml-0 md:ml-32"
           height="300"
         />
         <div class="text-18 mt-16 font-semibold uppercase">{{ lineText2 }}</div>
@@ -51,9 +56,9 @@
     <section v-if="!!bestSellers" class="mt-40 md:mt-60">
       <h2 class="text-42 font-compact uppercase">Хиты продаж</h2>
       <LazyHydrate when-visible>
-        <LazyBaseSwiper :slides="bestSellers" class="mt-32">
+        <LazyBaseSwiper :slides="bestSellers" class="mt-32" :settings="{ spaceBetween: 32 }">
           <template #slide="{ slide }">
-            <ProductItem :model="slide" class="w-max"></ProductItem>
+            <ProductItem :model="slide" class="w-max"><span>HIT</span></ProductItem>
           </template>
         </LazyBaseSwiper>
       </LazyHydrate>
@@ -140,6 +145,25 @@ export default class RootCategory extends Vue {
 
   get bestSellers() {
     return this.model?.content?.bestsellers || null;
+  }
+
+  get sliderSettings() {
+    return {
+      breakpoints: {
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        480: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+        640: {
+          slidesPerView: 4,
+          spaceBetween: 40,
+        },
+      },
+    };
   }
 }
 </script>

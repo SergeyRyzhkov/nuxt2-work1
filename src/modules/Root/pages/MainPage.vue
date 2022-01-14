@@ -11,9 +11,9 @@
     <!-- content.new_products -->
     <section v-if="!!newProducts" class="container mt-40 md:mt-100">
       <h2 class="text-48 font-compact uppercase">Новые поступления</h2>
-      <LazyBaseSwiper :slides="newProducts" class="mt-16 md:mt-32" :settings="{ spaceBetween: 32 }">
+      <LazyBaseSwiper :slides="newProducts" class="mt-16 md:mt-32" :settings="sliderSettings">
         <template #slide="{ slide }">
-          <ProductItem :model="slide" class="w-max"></ProductItem>
+          <ProductItem :model="slide" class="w-max"><span class="text-green">Новое</span></ProductItem>
         </template>
       </LazyBaseSwiper>
     </section>
@@ -29,9 +29,9 @@
       <section class="container mt-40 md:mt-100">
         <h2 class="text-48 font-compact uppercase">Хиты продаж</h2>
         <LazyHydrate when-visible>
-          <LazyBaseSwiper :slides="bestSellers" class="mt-16 md:mt-32" :settings="{ spaceBetween: 32 }">
+          <LazyBaseSwiper :slides="bestSellers" class="mt-16 md:mt-32" :settings="sliderSettings">
             <template #slide="{ slide }">
-              <ProductItem :model="slide" class="w-max"></ProductItem>
+              <ProductItem :model="slide" class="w-max"><span>HIT</span></ProductItem>
             </template>
           </LazyBaseSwiper>
         </LazyHydrate>
@@ -49,9 +49,9 @@
       <section class="container mt-40 md:mt-100">
         <h2 class="text-48 font-compact uppercase">Популярное</h2>
         <LazyHydrate when-visible>
-          <LazyBaseSwiper :slides="populars" class="mt-16 md:mt-32" :settings="{ spaceBetween: 32 }">
+          <LazyBaseSwiper :slides="populars" class="mt-16 md:mt-32" :settings="sliderSettings">
             <template #slide="{ slide }">
-              <ProductItem :model="slide" class="w-max"></ProductItem>
+              <ProductItem :model="slide" class="w-max"><span class="text-secondary">популярное</span></ProductItem>
             </template>
           </LazyBaseSwiper>
         </LazyHydrate>
@@ -155,6 +155,26 @@ export default class MainPage extends Vue {
 
   get bestSellers() {
     return this.model.content?.bestsellers;
+  }
+
+  get sliderSettings() {
+    return {
+      breakpoints: {
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        480: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+        // when window width is >= 640px
+        640: {
+          slidesPerView: 4,
+          spaceBetween: 40,
+        },
+      },
+    };
   }
 
   head() {

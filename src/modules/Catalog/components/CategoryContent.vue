@@ -5,7 +5,7 @@
     <div v-if="isNotLeafCategory">
       <section>
         <LazyHydrate when-visible>
-          <LazyBaseSwiper :slides="subCategories">
+          <LazyBaseSwiper :slides="subCategories" :settings="sliderSettings">
             <template #slide="{ slide }">
               <nuxt-link class="flex flex-col w-226" :to="getSubCategoryRoute(slide)">
                 <img
@@ -99,6 +99,25 @@ export default class CategoryContent extends Vue {
 
   getSubCategoryRoute(cat: CategoryModel) {
     return this.$serviceLocator.getService(CatalogService).getRouteLocation(cat);
+  }
+
+  get sliderSettings() {
+    return {
+      breakpoints: {
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        480: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+        640: {
+          slidesPerView: 4,
+          spaceBetween: 40,
+        },
+      },
+    };
   }
 }
 </script>
