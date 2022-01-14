@@ -1,7 +1,7 @@
 <template>
   <LazyHydrate when-visible>
     <nuxt-link v-show="!!model" :to="routeLink" class="relative flex flex-col items-center">
-      <BaseHeartButton class="absolute top-10 right-0" :is-red="true" @click.prevent="add2Favor()"></BaseHeartButton>
+      <BaseHeartButton class="absolute top-0 right-0" :is-red="true" @click.prevent="add2Favor()"></BaseHeartButton>
       <img
         v-lozad="imageSrc"
         height="286"

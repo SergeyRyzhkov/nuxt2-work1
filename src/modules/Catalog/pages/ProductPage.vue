@@ -1,5 +1,5 @@
 <template>
-  <main v-show="!!slug && !$fetchState.pending" class="page-wrapper">
+  <main class="page-wrapper">
     <div class="container">
       <BreadCrumbs />
       <section class="flex flex-col md:flex-row md:items-start">

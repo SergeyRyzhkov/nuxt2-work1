@@ -64,24 +64,9 @@
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 import LazyHydrate from "vue-lazy-hydration";
-import ProductModel from "../models/ProductModel";
-import { EmptyService } from "@/_core/service/EmptyService";
-import SeoModel from "@/_core/models/SeoModel";
+import { CatalogService } from "../CatalogService";
+import CatalogModel from "../models/CatalogModel";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
-
-class CatalogDescription extends SeoModel {
-  banner: { url: string };
-  banner2: { url: string };
-  content_image_1: { url: string };
-  content_image_2: { url: string };
-  content: {
-    banner1: { title: string; description: string; button_text: string };
-    banner2: { title: string; description: string; button_text: string };
-    bestsellers: ProductModel[];
-    line: { title: string }[];
-    popular: ProductModel[];
-  };
-}
 
 @Component({
   components: {
@@ -89,10 +74,10 @@ class CatalogDescription extends SeoModel {
   },
 })
 export default class RootCategory extends Vue {
-  model: CatalogDescription | null = null;
+  model: CatalogModel = new CatalogModel();
 
   async fetch() {
-    this.model = await this.$serviceLocator.getService(EmptyService).getAnyOrNull("users/pages/catalog");
+    this.model = await this.$serviceLocator.getService(CatalogService).getCatalog();
   }
 
   head() {

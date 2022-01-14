@@ -20,7 +20,7 @@
         </button>
       </div>
 
-      <div class="swiper-pagination" v-if="pagination"></div>
+      <div v-if="pagination" class="swiper-pagination"></div>
     </div>
   </client-only>
 </template>
@@ -28,7 +28,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 
-import { Swiper, Navigation, Pagination, Autoplay, SwiperOptions  } from "swiper";
+import { Swiper, Navigation, Pagination, Autoplay, SwiperOptions } from "swiper";
 import { Guid } from "@/utils/Guid";
 
 import "swiper/swiper.scss";
@@ -43,10 +43,10 @@ export default class BaseSwiper extends Vue {
   @Prop()
   slides: any[];
 
-  @Prop({default:true})
+  @Prop({ default: true })
   pagination: boolean;
 
-  @Prop({default:true})
+  @Prop({ default: true })
   arrows: boolean;
 
   @Prop()
@@ -131,8 +131,6 @@ export default class BaseSwiper extends Vue {
     //     }
     //   }
     // })
-
-
   }
 }
 </script>

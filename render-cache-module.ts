@@ -1,65 +1,29 @@
-// import fs from "fs";
 import type { Module } from "@nuxt/types";
-
-const cache = {};
+import MemoryCache from "./src/_core/MemoryCache";
 
 const rendererCacheModule: Module = function (_moduleOptions) {
-  // if (process.env.NODE_ENV === "development") {
-  //   return;
-  // }
+  if (process.env.NODE_ENV === "development") {
+    return;
+  }
 
+  // Fix for build
   if (!this.nuxt.renderer) {
     return;
   }
 
   const renderer = this.nuxt.renderer;
-
+  // Save original
   const renderRoute = renderer.renderRoute.bind(renderer);
 
   renderer.renderRoute = async function (route, context) {
-    if (!cache[route]) {
+    if (!MemoryCache.get(route)) {
       const result = await renderRoute(route, context);
-      cache[route] = result;
-
-      // fs.appendFileSync("test.txt", serialize(result));
-
+      MemoryCache.set(route, result);
       return result;
     } else {
-      // fs.appendFileSync("test.txt", "    found  ");
-      return cache[route];
+      return MemoryCache.get(route);
     }
   };
 };
 
 export default rendererCacheModule;
-
-// const serialize = (result) => {
-//   return JSON.stringify(result, (_key, value) => {
-//     if (typeof value === "object" && value instanceof Set) {
-//       return { _t: "set", _v: [...value] };
-//     }
-
-//     if (typeof value === "function") {
-//       return { _t: "func", _v: value() };
-//     }
-
-//     return value;
-//   });
-// };
-// const deserialize = (jsoned) => {
-//   return JSON.parse(jsoned, (_key, value) => {
-//     if (value && value._v) {
-//       if (value._t === "set") {
-//         return new Set(value._v);
-//       }
-
-//       if (value._t === "func") {
-//         const result = value._v;
-//         return () => result;
-//       }
-//     }
-
-//     return value;
-//   });
-// };
-// module.exports.meta = require("./package.json");

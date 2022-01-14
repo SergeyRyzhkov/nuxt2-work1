@@ -1,5 +1,5 @@
 <template>
-  <div v-show="!$fetchState.pending" class="catalog-top-menu" :class="[menuVisible ? 'active' : '']">
+  <div v-show="menuVisible" class="catalog-top-menu" :class="[menuVisible ? 'active' : '']">
     <div class="container flex justify-between">
       <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-y-24 gap-x-24 py-40 w-2/3">
         <div v-for="iter in list" :key="iter.id" @mouseover="categoryOver(iter)">

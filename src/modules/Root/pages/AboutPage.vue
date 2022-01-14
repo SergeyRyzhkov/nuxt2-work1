@@ -22,15 +22,15 @@
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 import AboutPageModel from "../models/AboutPageModel";
-import { PagesContentService } from "../PagesContentService";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
+import { EmptyService } from "@/_core/service/EmptyService";
 
 @Component
 export default class AboutPage extends Vue {
   aboutModel: AboutPageModel = new AboutPageModel();
 
   async created() {
-    this.aboutModel = await this.$serviceLocator.getService(PagesContentService).getMainPage();
+    this.aboutModel = await this.$serviceLocator.getService(EmptyService).getAnyOrNull("users/pages/about");
   }
 
   get bannerUrl() {
