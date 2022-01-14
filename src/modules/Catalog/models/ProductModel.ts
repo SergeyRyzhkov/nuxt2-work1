@@ -28,4 +28,6 @@ export default class ProductModel extends SeoModel {
   banner: { url: string };
   logo: { url: string }[];
   video: { url: string };
+
+  favor = false;
 }
