@@ -4,23 +4,23 @@
       <img v-lozad="'/images/tmp_product.jpg'" alt="" itemprop="image" class="" />
       <figcaption></figcaption>
     </figure>
-    <div class="pl-16 md:pl-26" :class="{ 'flex justify-between md:items-center flex-col md:flex-row w-full': isOrdering }">
+    <div class="pl-16 md:pl-26 w-full" :class="{ 'flex justify-between md:items-center flex-col md:flex-row w-full': isOrdering }">
       <div>
         <div class="cart-item-title" :class="{ 'cart-item-title-ordering': isOrdering }">
-          Спрей KAYPRO Botu-Cure восстанавливающий - 200 мл.
+          {{ cartItem.product.meta_title }}
         </div>
-        <div class="cart-item-id">Артикул: 12345678</div>
+        <div class="cart-item-id">Артикул: {{ cartItem.product.vendor_code }}</div>
       </div>
       <div v-if="isOrdering">1 шт.</div>
       <div class="flex md:items-center md:flex-row flex-col justify-between">
         <div v-if="!isOrdering" class="cart-item-products_counter flex items-center">
-          <button class="cart-item-product_action">
+          <button class="cart-item-product_action" @click="changeCountItem(cartItem.product_id, cartItem.count - 1)">
             <svg width="12" height="4" viewBox="0 0 12 4" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect y="0.956543" width="12" height="2.08696" rx="1.04348" fill="#EF8532" />
             </svg>
           </button>
-          <div class="number">1</div>
-          <button class="cart-item-product_action">
+          <div class="number">{{ cartItem.count }}</div>
+          <button class="cart-item-product_action" @click="changeCountItem(cartItem.product_id, cartItem.count + 1)">
             <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect y="5.95654" width="12" height="2.08696" rx="1.04348" fill="#EF8532" />
               <rect x="7" y="0.739258" width="12.5217" height="2" rx="1" transform="rotate(90 7 0.739258)" fill="#EF8532" />
@@ -34,12 +34,22 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "nuxt-property-decorator";
-
+import {Component, Vue, Prop, getModule} from "nuxt-property-decorator";
+import ProductModel from "@/modules/Catalog/models/ProductModel";
+import { ProfileService } from "@/modules/Profile/ProfileService";
+import CartStore from "@/modules/Profile/store/CartStore";
 @Component
 export default class CartItem extends Vue {
   @Prop({ default: false })
   isOrdering: boolean;
+
+  @Prop()
+  cartItem: ProductModel;
+
+  changeCountItem(product_id: number, count: number) {
+    // this.$serviceLocator.getService(AuthService).isAuthenticated
+    this.$serviceLocator.getService(ProfileService).changeCountCartItem(product_id, count)
+  }
 }
 </script>
 

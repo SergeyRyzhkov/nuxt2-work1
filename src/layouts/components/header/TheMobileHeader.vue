@@ -79,6 +79,7 @@ export default class TheMobileHeader extends Vue {
   &.active {
     visibility: visible;
     height: calc(100vh - 106px);
+    z-index: 1000;
   }
 }
 .menu-toogler {

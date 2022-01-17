@@ -1,8 +1,7 @@
 <template>
   <div v-click-outside="closeDropDown" class="w-full">
-    <BaseInput v-model="search"  placeholder="Искать товар" @keyup.enter="searchProducts" @focus="focused = true" classes="header-search-input">
+    <BaseInput v-model="search"  placeholder="Искать товар" @input="searchProducts" @focus="focused = true" classes="header-search-input">
       <svg
-        @click="searchProducts"
         class="header-search-input__icon"
         width="25"
         height="25"
@@ -13,12 +12,12 @@
         <circle cx="10.4298" cy="11" r="6.575" transform="rotate(-45 10.4298 11)" stroke="#16192C" stroke-width="1.6" />
         <path d="M15.1144 15.6846L18.9151 19.4853" stroke="#16192C" stroke-width="1.6" />
       </svg>
-      <div  class="header-search-input-dropdown hidden lg:block" v-if="products !== null && focused && search.length > strLength">
-        <div class="dropdown-no-results" v-if="products !== null && products.length === 0">
+      <div  class="header-search-input-dropdown" v-if="products !== null && focused && search.length > strLength">
+        <div class="dropdown-no-results" v-if="products.length === 0">
           <div class="request-string">По запросу "{{ search }}"</div>
           <div class="no-results">Нет результатов</div>
         </div>
-        <div class="dropdown-results flex-wrap justify-between flex" v-if="products !== null && products.length > 0">
+        <div class="dropdown-results flex-wrap justify-between flex flex-col lg:flex-row" v-if="products !== null && products.length > 0">
           <nuxt-link :to="routeLink(product)" v-for="(product, index) in products" :key="index" class="flex items-center">
             <figure class="dropdown-img">
               <img :src="product.logo[0].url" :alt="product.meta_title" itemprop="image" width="78" height="78" loading="lazy" />
@@ -58,9 +57,15 @@ export default class HeaderSearchInput extends Vue {
   }
 
   async searchProducts() {
-    if (this.search.length > this.strLength) {
-      this.products = await this.$serviceLocator.getService(CatalogService).getSearchProducts('', this.search)
-    }
+    const timeout = 1000
+      if (this.search.length > this.strLength) {
+        let str = this.search;
+        setTimeout(async () => {
+          if (str === this.search && this.search.length > this.strLength) {
+            this.products = await this.$serviceLocator.getService(CatalogService).getSearchProducts('', this.search)
+          }
+        }, timeout)
+      }
   }
 }
 </script>
@@ -94,7 +99,9 @@ export default class HeaderSearchInput extends Vue {
   padding: 8px 23px 8px 23px;
   border: 1px solid #dfdfdf !important;
   &-dropdown {
-    border-top: 2px solid $primary;
+    @include tablet{
+      border-top: 2px solid $primary;
+    }
     position: absolute;
     height: auto;
     width: 100%;
@@ -108,7 +115,7 @@ export default class HeaderSearchInput extends Vue {
     }
     .dropdown-results {
       > a {
-        width: calc(50% - 24px);
+        width: 100%;
         font-weight: normal;
         cursor: pointer;
         > figure {
@@ -118,6 +125,12 @@ export default class HeaderSearchInput extends Vue {
             object-fit: contain;
           }
         }
+      }
+      @include tablet{
+        > a {
+          width: calc(50% - 24px);
+        }
+
       }
       > a {
         margin-bottom: 16px;

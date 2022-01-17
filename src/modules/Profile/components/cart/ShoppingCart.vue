@@ -4,15 +4,13 @@
       <div class="shopping-cart-title">
         <div class="flex items-end relative">
           <h2>Корзина</h2>
-          <div class="shopping-cart-counter">3</div>
+          <div class="shopping-cart-counter">{{cartItemsCount}}</div>
         </div>
         <button>Очистить</button>
       </div>
       <div class="mt-24 md:mt-42 flex flex-col h-full justify-between">
         <div class="flex flex-col pr-6 shopping-cart-items">
-          <CartItem />
-          <CartItem />
-          <CartItem />
+          <CartItem v-for="(item, index) in cartItems" :cartItem="item" :key="index"/>
         </div>
 
         <div class="w-full mt-40 mb-100">
@@ -36,15 +34,25 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator";
+import {Vue, Component, getModule} from "nuxt-property-decorator";
+import CartStore from "@/modules/Profile/store/CartStore";
 
 @Component
 export default class ShoppingCart extends Vue {
+
   gotoOrdering() {
     this.$emit("close");
     if (this.$route.name !== "ordering") {
       this.$router.push({ name: "ordering" });
     }
+  }
+
+  get cartItems () {
+    return getModule(CartStore, this.$store).userCart;
+  }
+
+  get cartItemsCount() {
+    return getModule(CartStore, this.$store).userCartCount;
   }
 }
 </script>
@@ -53,7 +61,6 @@ export default class ShoppingCart extends Vue {
 .shopping-cart {
   &-items {
     border-top: 1px solid #c9c9c9;
-
     max-height: calc(100% - 300px);
     overflow-y: auto;
     &::-webkit-scrollbar {
