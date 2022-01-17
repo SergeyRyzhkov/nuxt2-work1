@@ -25,7 +25,7 @@
               </div>
             </div>
             <div class="mt-32 flex items-center justify-between md:justify-start">
-              <BaseButton>Добавить в корзину</BaseButton>
+              <BaseButton @click="addToCart">Добавить в корзину</BaseButton>
               <BaseHeartButton
                 class="ml-14 rounded-full flex items-cenetr justify-center w-52 h-52 border border-primary"
                 :is-red="false"
@@ -165,6 +165,11 @@ export default class ProductPage extends Vue {
     this.model = await this.$serviceLocator.getService(CatalogService).getProduct(this.slug);
     this.updateBreadCrumbs();
   }
+
+  addToCart(){
+    this.$serviceLocator.getService(ProfileService).AddToCart(this.model.id);
+  }
+
 
   get popular() {
     // return null;
