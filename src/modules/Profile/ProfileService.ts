@@ -43,22 +43,22 @@ export class ProfileService extends BaseService {
     this.getUserCart();
   }
 
-  deleteFromCart(product_id: number) {
+  async deleteFromCart(id: number) {
     if (this.isAuthenticated) {
-       this.apiRequest.delete(`users/carts/${product_id}`);
+      await this.apiRequest.delete(`users/carts/${id}`);
     } else if (!this.isAuthenticated && this.userHash) {
-       this.apiRequest.delete(`users/carts/${product_id}`, {params:{guest_hash: this.userHash}});
+      await this.apiRequest.delete(`users/carts/${id}`, {params:{guest_hash: this.userHash}});
     }
     this.getUserCart();
   }
 
-  changeCountCartItem(product_id: number, count: number) {
+ async changeCountCartItem(id: number, count: number) {
     const formData = new FormData();
     formData.append('_method', "PUT")
     if (!this.isAuthenticated && this.userHash) {
       formData.append('guest_hash', this.userHash)
     }
-    this.apiRequest.post(`users/carts/${product_id}`, formData);
+   await this.apiRequest.post(`users/carts/${id}`, formData);
     this.getUserCart();
   }
 
