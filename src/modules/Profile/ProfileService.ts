@@ -16,35 +16,57 @@ export class ProfileService extends BaseService {
   }
 
   async getUserCart() {
-    let params;
-    if (!this.isAuthenticated && this.userHash) {
-        params.guest_hash = this.userHash
+    if (this.isAuthenticated) {
+      const cart = await this.getArrayOrEmpty(CartModel, "users/carts");
+      this.CartStore.setUserCart(cart);
+    } else if ( !this.isAuthenticated && this.userHash) {
+      const cart = await this.getArrayOrEmpty(CartModel, "users/carts", {params: {guest_hash: this.userHash}});
+      this.CartStore.setUserCart(cart);
+    } else {
+      return;
     }
-      const cart = await this.getArrayOrEmpty(CartModel, "users/carts", {params});
-    this.CartStore.setUserCart(cart)
   }
 
   get isAuthenticated() {
     return this.nuxtContext.$serviceLocator.getService(AuthService).isAuthenticated;
   }
 
- async AddToCart(product_id: number) {
-    const result = await this.apiRequest.post(`users/carts`, {product_id});
-    if (!this.userHash) {
-      this.setUserHash(result.data.guest_hash)
+  async AddToCart(product_id: number) {
+    if (this.isAuthenticated) {
+      await this.apiRequest.post(`users/carts`, {product_id});
+    } else if (!this.isAuthenticated && this.userHash) {
+      await this.apiRequest.post(`users/carts`, {product_id, guest_hash: this.userHash});
+    } else {
+      const result = await this.apiRequest.post(`users/carts`, {product_id});
+      this.setUserHash(result.data.guest_hash);
     }
+    this.getUserCart();
   }
 
-  changeCountCartItem(product_id: number, count: number){
-    this.apiRequest.post(`users/carts/${product_id}`);
-    this.getUserCart()
+  deleteFromCart(product_id: number) {
+    if (this.isAuthenticated) {
+       this.apiRequest.delete(`users/carts/${product_id}`);
+    } else if (!this.isAuthenticated && this.userHash) {
+       this.apiRequest.delete(`users/carts/${product_id}`, {params:{guest_hash: this.userHash}});
+    }
+    this.getUserCart();
+  }
+
+  changeCountCartItem(product_id: number, count: number) {
+    const formData = new FormData();
+    formData.append('_method', "PUT")
+    if (!this.isAuthenticated && this.userHash) {
+      formData.append('guest_hash', this.userHash)
+    }
+    this.apiRequest.post(`users/carts/${product_id}`, formData);
+    this.getUserCart();
   }
 
   setUserHash(guest_hash: string) {
-    this.nuxtContext.app.$cookies.set('guest_hash', guest_hash)
+    this.nuxtContext.app.$cookies.set("guest_hash", guest_hash);
   }
 
   get userHash() {
-    return this.nuxtContext.app.$cookies.get('guest_hash') || null
+    return this.nuxtContext.app.$cookies.get("guest_hash") || null;
   }
 }

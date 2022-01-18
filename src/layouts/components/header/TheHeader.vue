@@ -31,7 +31,6 @@ export default class TheHeader extends Vue {
 
   async fetch(){
     await this.$serviceLocator.getService(ProfileService).getUserCart();
-    await this.$serviceLocator.getService(ProfileService).getUserCart();
   }
 
   get cartItemsCount() {

@@ -7,7 +7,7 @@
     <div class="pl-16 md:pl-26 w-full" :class="{ 'flex justify-between md:items-center flex-col md:flex-row w-full': isOrdering }">
       <div>
         <div class="cart-item-title" :class="{ 'cart-item-title-ordering': isOrdering }">
-          {{ cartItem.product.meta_title }}
+          {{ cartItem.product.meta_title }} {{cartItem.product_id}}
         </div>
         <div class="cart-item-id">Артикул: {{ cartItem.product.vendor_code }}</div>
       </div>
@@ -34,10 +34,9 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Prop, getModule} from "nuxt-property-decorator";
+import {Component, Vue, Prop} from "nuxt-property-decorator";
 import ProductModel from "@/modules/Catalog/models/ProductModel";
 import { ProfileService } from "@/modules/Profile/ProfileService";
-import CartStore from "@/modules/Profile/store/CartStore";
 @Component
 export default class CartItem extends Vue {
   @Prop({ default: false })
@@ -47,7 +46,6 @@ export default class CartItem extends Vue {
   cartItem: ProductModel;
 
   changeCountItem(product_id: number, count: number) {
-    // this.$serviceLocator.getService(AuthService).isAuthenticated
     this.$serviceLocator.getService(ProfileService).changeCountCartItem(product_id, count)
   }
 }
