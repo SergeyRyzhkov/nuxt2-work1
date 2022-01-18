@@ -1,3 +1,4 @@
+import { ProfileService } from "@/modules/Profile/ProfileService";
 import { getModule } from "vuex-module-decorators";
 import LoginData from "./models/LoginData";
 import { LogonResult, LogonStatus } from "./models/LogonResult";
@@ -47,10 +48,10 @@ export class AuthService extends BaseService {
 
   public async login(loginData: LoginData) {
     const logonResult = new LogonResult();
-
+    const guest_hash = this.nuxtContext.$serviceLocator.getService(ProfileService).userHash;
     try {
       await this.tryGetCsfrCookie();
-      const response = await this.apiRequest.post("users/login", loginData);
+      const response = await this.apiRequest.post("users/login", {...loginData, guest_hash});
 
       if (response.status === 200) {
         const accessToken = response?.data?.access_token;

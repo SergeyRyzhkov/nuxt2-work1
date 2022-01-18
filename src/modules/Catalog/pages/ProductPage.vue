@@ -10,7 +10,7 @@
           <div class="text-gray-color mt-16 text-14">Артикул: {{ model.vendor_code }}</div>
           <div class="mt-32">
             <div class="flex flex-row md:flex-col items-center md:items-start justify-between">
-              <div class="text-28 font-semibold">2 815 ₽</div>
+              <div class="text-28 font-semibold">{{ model.price }} ₽</div>
               <div class="md:mt-32 flex items-center">
                 <div class="flex items-center">
                   <BaseButton class="rounded-full w-36 h-36 border-counter" :padding-empty="true" :class="{disabled: productCount === 1}" @click="productCounter(productCount - 1)"

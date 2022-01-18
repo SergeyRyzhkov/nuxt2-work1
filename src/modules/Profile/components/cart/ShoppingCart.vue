@@ -24,7 +24,7 @@
           </div>
           <div class="flex items-center justify-between text-24 mt-25">
             <div>Итого</div>
-            <div>2 000 ₽</div>
+            <div>{{cartPrice}} ₽</div>
           </div>
           <BaseButton class="w-full mt-32" @click="gotoOrdering()">Перейти к оформлению</BaseButton>
         </div>
@@ -49,6 +49,16 @@ export default class ShoppingCart extends Vue {
 
   get cartItems () {
     return getModule(CartStore, this.$store).userCart;
+  }
+
+  get cartPrice() {
+    let price = 0
+    this.cartItems.forEach(el =>{
+      if (el.product.price){
+        price = el.product.price * el.count + price;
+      }
+    })
+    return price;
   }
 
   get cartItemsCount() {

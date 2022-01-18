@@ -54,15 +54,17 @@ export class ProfileService extends BaseService {
 
  async changeCountCartItem(id: number, count: number) {
     if (count < 1){
+     await this.deleteFromCart(id)
       return;
+    } else {
+      const formData = new FormData();
+      formData.append('_method', "PUT")
+      formData.append('count', String(count))
+      if (!this.isAuthenticated && this.userHash) {
+        formData.append('guest_hash', this.userHash)
+      }
+      await this.apiRequest.post(`users/carts/${id}`, formData);
     }
-    const formData = new FormData();
-    formData.append('_method', "PUT")
-    formData.append('count', String(count))
-    if (!this.isAuthenticated && this.userHash) {
-      formData.append('guest_hash', this.userHash)
-    }
-   await this.apiRequest.post(`users/carts/${id}`, formData);
     this.getUserCart();
   }
 

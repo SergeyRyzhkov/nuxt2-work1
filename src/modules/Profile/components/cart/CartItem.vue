@@ -27,7 +27,7 @@
             </svg>
           </button>
         </div>
-        <div class="cart-item-price whitespace-nowrap">1 905 ₽</div>
+        <div class="cart-item-price whitespace-nowrap">{{ price }} ₽</div>
       </div>
     </div>
   </section>
@@ -35,15 +35,15 @@
 
 <script lang="ts">
 import {Component, Vue, Prop} from "nuxt-property-decorator";
-import ProductModel from "@/modules/Catalog/models/ProductModel";
 import { ProfileService } from "@/modules/Profile/ProfileService";
+import CartModel from "@/modules/Profile/models/CartModel";
 @Component
 export default class CartItem extends Vue {
   @Prop({ default: false })
   isOrdering: boolean;
 
   @Prop()
-  cartItem: ProductModel;
+  cartItem: CartModel;
 
   changeCountItem(id: number, count: number) {
     this.$serviceLocator.getService(ProfileService).changeCountCartItem(id, count)
@@ -51,7 +51,15 @@ export default class CartItem extends Vue {
   }
 
   get imageSrc() {
-    return this.cartItem?.logo && this.cartItem?.logo.length ? this.cartItem.logo[0].url : "/images/product-no-photo.jpg";
+    return this.cartItem?.product.logo && this.cartItem?.product.logo.length ? this.cartItem.product.logo[0].url : "/images/product-no-photo.jpg";
+  }
+
+  get price() {
+    if (this.cartItem.product.price){
+      return this.cartItem.product.price * this.cartItem.count
+    } else {
+      return 0
+    }
   }
 
 }
