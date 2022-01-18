@@ -31,13 +31,13 @@ export class ProfileService extends BaseService {
     return this.nuxtContext.$serviceLocator.getService(AuthService).isAuthenticated;
   }
 
-  async AddToCart(product_id: number) {
+  async AddToCart(product_id: number, count: number) {
     if (this.isAuthenticated) {
-      await this.apiRequest.post(`users/carts`, {product_id});
+      await this.apiRequest.post(`users/carts`, {product_id, count});
     } else if (!this.isAuthenticated && this.userHash) {
-      await this.apiRequest.post(`users/carts`, {product_id, guest_hash: this.userHash});
+      await this.apiRequest.post(`users/carts`, {product_id, count, guest_hash: this.userHash});
     } else {
-      const result = await this.apiRequest.post(`users/carts`, {product_id});
+      const result = await this.apiRequest.post(`users/carts`, {product_id, count});
       this.setUserHash(result.data.guest_hash);
     }
     this.getUserCart();
@@ -53,8 +53,12 @@ export class ProfileService extends BaseService {
   }
 
  async changeCountCartItem(id: number, count: number) {
+    if (count < 1){
+      return;
+    }
     const formData = new FormData();
     formData.append('_method', "PUT")
+    formData.append('count', String(count))
     if (!this.isAuthenticated && this.userHash) {
       formData.append('guest_hash', this.userHash)
     }

@@ -13,12 +13,21 @@
               <div class="text-28 font-semibold">2 815 ₽</div>
               <div class="md:mt-32 flex items-center">
                 <div class="flex items-center">
-                  <BaseButton class="rounded-full w-36 h-36" :padding-empty="true"
-                    ><span class="text-28 font-normal">+</span>
+                  <BaseButton class="rounded-full w-36 h-36 border-counter" :padding-empty="true" :class="{disabled: productCount === 1}" @click="productCounter(productCount - 1)"
+                    ><span class="text-28 font-normal">
+                       <svg width="12" height="4" viewBox="0 0 12 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect y="0.956543" width="12" height="2.08696" rx="1.04348" fill="#131313" />
+                       </svg>
+                  </span>
                   </BaseButton>
-                  <div class="text-14 mx-12">1</div>
-                  <BaseButton class="rounded-full w-36 h-36" :padding-empty="true"
-                    ><span class="text-28 font-normal">-</span></BaseButton
+                  <div class="text-14 mx-12"> {{ productCount }}</div>
+                  <BaseButton class="rounded-full w-36 h-36 border-counter" :padding-empty="true" @click="productCounter(productCount + 1)"
+                    ><span class="text-28 font-normal">
+                         <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect y="5.95654" width="12" height="2.08696" rx="1.04348" fill="#131313" />
+                            <rect x="7" y="0.739258" width="12.5217" height="2" rx="1" transform="rotate(90 7 0.739258)" fill="#131313" />
+                        </svg>
+                  </span></BaseButton
                   >
                 </div>
                 <div class="text-[#4BC967] ml-24 text-14 hidden md:block">В наличии на складе</div>
@@ -159,6 +168,7 @@ export default class ProductPage extends Vue {
   @Prop()
   slug: string;
 
+  productCount: number = 1;
   model: ProductModel = new ProductModel();
 
   async fetch() {
@@ -167,7 +177,14 @@ export default class ProductPage extends Vue {
   }
 
   addToCart(){
-    this.$serviceLocator.getService(ProfileService).AddToCart(this.model.id);
+    this.$serviceLocator.getService(ProfileService).AddToCart(this.model.id, this.productCount);
+  }
+
+  productCounter(count: number) {
+    if (count < 1){
+      return;
+    }
+    this.productCount = count;
   }
 
 
@@ -216,3 +233,24 @@ export default class ProductPage extends Vue {
   }
 }
 </script>
+<style lang="scss">
+.border-counter{
+  border: 1px solid #c9c9c9 !important;
+  &.disabled{
+    pointer-events: none;
+    svg {
+      rect {
+        fill: #c9c9c9;
+      }
+    }
+  }
+  &:hover {
+    border: 1px solid transparent !important;
+    svg {
+      rect {
+        fill: white;
+      }
+    }
+  }
+}
+</style>
