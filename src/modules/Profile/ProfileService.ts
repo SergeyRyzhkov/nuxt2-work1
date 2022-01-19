@@ -54,7 +54,6 @@ export class ProfileService extends BaseService {
 
  async changeCountCartItem(id: number, count: number) {
     if (count < 1){
-     await this.deleteFromCart(id)
       return;
     } else {
       const formData = new FormData();
@@ -69,7 +68,7 @@ export class ProfileService extends BaseService {
   }
 
   setUserHash(guest_hash: string) {
-    this.nuxtContext.app.$cookies.set("guest_hash", guest_hash);
+    this.nuxtContext.app.$cookies.set("guest_hash", guest_hash, {maxAge: 60 * 60 * 24 * 30});
   }
 
   get userHash() {

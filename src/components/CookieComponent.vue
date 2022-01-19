@@ -63,7 +63,7 @@ export default class CookieComponent extends Vue {
 
   setCookie() {
     // @ts-ignore
-    this.$cookies.set("useCookies", true);
+    this.$cookies.set("useCookies", true, {maxAge: 60 * 60 *24 * 365});
     this.visible = false;
   }
 }

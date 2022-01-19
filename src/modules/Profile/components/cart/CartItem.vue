@@ -14,7 +14,7 @@
       <div v-if="isOrdering">1 шт.</div>
       <div class="flex md:items-center md:flex-row flex-col justify-between">
         <div v-if="!isOrdering" class="cart-item-products_counter flex items-center">
-          <button class="cart-item-product_action" @click="changeCountItem(cartItem.id, cartItem.count - 1)">
+          <button class="cart-item-product_action" :class="{ cartBtnDisable: cartItem.count === 1 }" @click="changeCountItem(cartItem.id, cartItem.count - 1)">
             <svg width="12" height="4" viewBox="0 0 12 4" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect y="0.956543" width="12" height="2.08696" rx="1.04348" fill="#EF8532" />
             </svg>
@@ -30,6 +30,12 @@
         <div class="cart-item-price whitespace-nowrap">{{ price }} ₽</div>
       </div>
     </div>
+    <button class="remove-cart-item" @click="deleteCartItem">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="15.1591" height="1.51591" rx="0.757954" transform="matrix(0.701006 0.713155 -0.701006 0.713155 1.0625 0.108887)" fill="#9D9D9D"/>
+        <rect width="15.1591" height="1.51591" rx="0.757954" transform="matrix(0.701006 -0.713155 0.701006 0.713155 0.310547 10.8105)" fill="#9D9D9D"/>
+      </svg>
+    </button>
   </section>
 </template>
 
@@ -47,7 +53,10 @@ export default class CartItem extends Vue {
 
   changeCountItem(id: number, count: number) {
     this.$serviceLocator.getService(ProfileService).changeCountCartItem(id, count)
-    // this.$serviceLocator.getService(ProfileService).deleteFromCart(id) // delete item
+  }
+
+  deleteCartItem() {
+    this.$serviceLocator.getService(ProfileService).deleteFromCart(this.cartItem.id)
   }
 
   get imageSrc() {
@@ -67,12 +76,26 @@ export default class CartItem extends Vue {
 
 <style lang="scss">
 .cart-item {
-  @apply pt-23 pb-30 flex md:items-center items-start;
+  @apply pt-23 pb-30 flex md:items-center items-start relative;
   &-products_counter {
     .number {
       @apply px-5 text-center;
       width: 37px;
     }
+  }
+  .cartBtnDisable {
+    pointer-events: none;
+    border-color: #c9c9c9 !important;
+    svg {
+      rect {
+        fill: #c9c9c9;
+      }
+    }
+  }
+  .remove-cart-item {
+    position: absolute;
+    top: 27px;
+    right: 0;
   }
   &-product_action {
     width: 36px;
