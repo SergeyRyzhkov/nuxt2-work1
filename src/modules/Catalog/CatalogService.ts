@@ -19,7 +19,8 @@ export class CatalogService extends BaseService {
   }
 
   @Cacheable(0)
-  getProduct(id: number) {
+  getProductBySlug(slug: string) {
+    const id = this.getIdBySlug(slug);
     return this.getOneOrDefault(ProductModel, `users/products/${id}`);
   }
 
@@ -92,7 +93,7 @@ export class CatalogService extends BaseService {
   getProductRouteLocation(model: ProductModel) {
     return {
       name: "product",
-      params: { id: model.id },
+      params: { slug: `${model.meta_slug}-${model.id}` },
     };
   }
 

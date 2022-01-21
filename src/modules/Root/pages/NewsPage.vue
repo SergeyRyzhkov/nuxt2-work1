@@ -32,12 +32,13 @@ import { EmptyService } from "@/_core/service/EmptyService";
 })
 export default class NewsPage extends Vue {
   @Prop()
-  id: number;
+  slug: string;
 
   newsModel: NewsModel = new NewsModel();
 
   async fetch() {
-    this.newsModel = await this.$serviceLocator.getService(EmptyService).getOneOrDefault(NewsModel, `users/news/${this.id}`);
+    const id = this.$serviceLocator.getService(EmptyService).getIdBySlug(this.slug);
+    this.newsModel = await this.$serviceLocator.getService(EmptyService).getOneOrDefault(NewsModel, `users/news/${id}`);
     this.updateBreadCrumbs();
   }
 

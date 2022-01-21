@@ -1,6 +1,10 @@
 <template>
   <LazyHydrate when-visible>
-    <section v-if="!!item && !!item.meta_slug" class="flex flex-col cursor-pointer" @click="goToCard()">
+    <nuxt-link
+      v-if="!!item"
+      :to="{ name: 'training-card', params: { slug: `${item.meta_slug}-${item.id}` } }"
+      class="flex flex-col cursor-pointer"
+    >
       <div class="relative">
         <img v-lozad="imageSrc" width="300" height="160" class="h-160 hover:scale-105 transition-all" alt=" " />
         <div class="absolute top-16 left-16 bg-primary px-16 py-8 rounded-full text-14 text-white">{{ statusName }}</div>
@@ -11,7 +15,7 @@
       </div>
       <div class="text-22 mt-12">{{ item.name }}</div>
       <div class="mt-12 text-14">{{ item.lecturer }}</div>
-    </section>
+    </nuxt-link>
   </LazyHydrate>
 </template>
 
@@ -33,11 +37,6 @@ export default class TrainingItem extends Vue {
 
   get imageSrc() {
     return this.item?.logo?.url || null;
-  }
-
-  goToCard() {
-    // @ts-ignore
-    this.$router.push({ name: "training-card", params: { id: this.item.id } });
   }
 
   get priceFormatted() {

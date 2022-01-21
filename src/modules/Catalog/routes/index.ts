@@ -22,7 +22,7 @@ const routes = [
 
   {
     name: "product",
-    path: "/products/:id",
+    path: "/products/:slug",
     component: () => lazyLoad(import("@/modules/Catalog/pages/ProductPage.vue")),
     props: true,
   },

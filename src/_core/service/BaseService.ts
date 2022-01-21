@@ -5,8 +5,9 @@ import { DataWithPagination } from "../models/DataWithPagination";
 
 export class BaseService {
   getFavorites() {
-    throw new Error('Method not implemented.');
+    throw new Error("Method not implemented.");
   }
+
   protected ctx: Context;
 
   public set nuxtContext(ctx: Context) {
@@ -171,7 +172,7 @@ export class BaseService {
     return paginCollection;
   }
 
-  protected getIdBySlug(slug: string) {
+  public getIdBySlug(slug: string) {
     let result = 0;
 
     if (!!slug && slug.toString().includes("-")) {

@@ -46,14 +46,14 @@ import AppStore from "@/modules/Root/store/AppStore";
 @Component
 export default class TrainingPage extends Vue {
   @Prop()
-  id: number;
+  slug: string;
 
   @Ref() readonly enrollTraining!: EnrollTraining;
 
   model: TrainingModel = new TrainingModel();
 
   async fetch() {
-    this.model = await this.$serviceLocator.getService(TrainingService).getById(this.id);
+    this.model = await this.$serviceLocator.getService(TrainingService).getBySlug(this.slug);
     this.updateBreadCrumbs();
   }
 

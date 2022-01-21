@@ -15,7 +15,8 @@ export class TrainingService extends BaseService {
   }
 
   @Cacheable(0)
-  async getById(id: number) {
-    return await this.getOneOrDefault(TrainingModel, `users/trainings/${id}`);
+  getBySlug(slug: string) {
+    const id = this.getIdBySlug(slug);
+    return id ? this.getOneOrDefault(TrainingModel, `users/trainings/${id}`) : new TrainingModel();
   }
 }

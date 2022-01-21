@@ -180,13 +180,13 @@ import { ProfileService } from "@/modules/Profile/ProfileService";
 })
 export default class ProductPage extends Vue {
   @Prop()
-  id: number;
+  slug: string;
 
   productCount: number = 1;
   model: ProductModel = new ProductModel();
 
   async fetch() {
-    this.model = await this.$serviceLocator.getService(CatalogService).getProduct(this.id);
+    this.model = await this.$serviceLocator.getService(CatalogService).getProductBySlug(this.slug);
     this.updateBreadCrumbs();
   }
 

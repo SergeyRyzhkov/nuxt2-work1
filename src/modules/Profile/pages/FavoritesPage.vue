@@ -37,11 +37,6 @@ export default class FavoritesPage extends Vue {
   }
 
   async updateData() {
-    // const result = this.$serviceLocator.getService(ProfileService).getFavorites(this.pagination);
-    // this.model = result.data;
-    // this.pagination = result.pagination;
-
-    this.pagination.total = 100;
     this.productList = await this.$serviceLocator.getService(ProfileService).getFavorites();
   }
 
@@ -55,4 +50,3 @@ export default class FavoritesPage extends Vue {
   }
 }
 </script>
-<style lang="scss"></style>
