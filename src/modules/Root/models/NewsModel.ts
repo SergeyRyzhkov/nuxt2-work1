@@ -1,6 +1,7 @@
 import SeoModel from "@/_core/models/SeoModel";
 
 export default class NewsModel extends SeoModel {
+  id: number;
   title: string;
   text: string;
   logo: { url: string };

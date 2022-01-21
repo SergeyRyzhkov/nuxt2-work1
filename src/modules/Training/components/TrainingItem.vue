@@ -37,7 +37,7 @@ export default class TrainingItem extends Vue {
 
   goToCard() {
     // @ts-ignore
-    this.$router.push({ name: "training-card", params: { slug: this.item.meta_slug } });
+    this.$router.push({ name: "training-card", params: { id: this.item.id } });
   }
 
   get priceFormatted() {

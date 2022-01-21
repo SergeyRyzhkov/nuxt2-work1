@@ -15,7 +15,7 @@ export class TrainingService extends BaseService {
   }
 
   @Cacheable(0)
-  async getBySlug(slug: string) {
-    return await this.getOneOrDefault(TrainingModel, `users/trainings/${slug}`);
+  async getById(id: number) {
+    return await this.getOneOrDefault(TrainingModel, `users/trainings/${id}`);
   }
 }

@@ -11,7 +11,7 @@ const routes = [
   },
   {
     name: "news-card",
-    path: "/news/:slug",
+    path: "/news/:id",
     props: true,
     component: () => lazyLoad(import("@/modules/Root/pages/NewsPage.vue")),
   },

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!!newsModel.meta_slug" class="page-wrapper">
+  <div class="page-wrapper">
     <BaseStaticBanner v-if="bannerSrc" :image-src="bannerSrc" />
     <main class="container mt-40">
       <div class="flex flex-col-reverse md:flex-row">
@@ -32,12 +32,12 @@ import { EmptyService } from "@/_core/service/EmptyService";
 })
 export default class NewsPage extends Vue {
   @Prop()
-  slug: string;
+  id: number;
 
   newsModel: NewsModel = new NewsModel();
 
   async fetch() {
-    this.newsModel = await this.$serviceLocator.getService(EmptyService).getOneOrDefault(NewsModel, `users/news/${this.slug}`);
+    this.newsModel = await this.$serviceLocator.getService(EmptyService).getOneOrDefault(NewsModel, `users/news/${this.id}`);
     this.updateBreadCrumbs();
   }
 

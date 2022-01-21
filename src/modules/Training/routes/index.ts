@@ -13,7 +13,7 @@ const routes = [
   },
   {
     name: "training-card",
-    path: "/training/:slug",
+    path: "/training/:id",
     props: true,
     component: () => lazyLoad(import("@/modules/Training/pages/TrainingPage.vue")),
   },

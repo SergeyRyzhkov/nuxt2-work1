@@ -30,5 +30,5 @@ export default class ProductModel extends SeoModel {
   logo: { url: string }[];
   video: { url: string };
 
-  favor = false;
+  favorites = false;
 }

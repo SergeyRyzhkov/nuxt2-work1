@@ -3,7 +3,7 @@
     <BreadCrumbs />
     <h1>Новости</h1>
     <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-30 gap-x-30 mt-40">
-      <NewsItem v-for="iter in newsList" :key="iter.meta_slug" :article-model="iter"> </NewsItem>
+      <NewsItem v-for="iter in newsList" :key="iter.id" :article-model="iter"> </NewsItem>
     </section>
     <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>
   </main>
