@@ -1,15 +1,7 @@
 <template>
   <div class="flex items-center">
-    <img
-      v-if="isAuthenticated"
-      src="/images/header_heart.svg"
-      width="24"
-      height="24"
-      class="cursor-pointer"
-      alt=""
-      @click="gotoFavor()"
-    />
-    <div v-if="isAuthenticated" class="relative">
+    <img src="/images/header_heart.svg" width="24" height="24" class="cursor-pointer" alt="" @click="gotoFavor()" />
+    <div class="relative">
       <img
         src="/images/header_shop.svg"
         width="22"
@@ -61,8 +53,12 @@ export default class HeaderUser extends Vue {
   }
 
   gotoFavor() {
-    if (this.$route.name !== "favorites") {
-      this.$router.push({ name: "favorites" });
+    if (this.isAuthenticated) {
+      if (this.$route.name !== "favorites") {
+        this.$router.push({ name: "favorites" });
+      }
+    } else {
+      this.$modalManager.showNotify("Ввойдите в свой аккаунт или зарегистрируйтесь !");
     }
   }
 
