@@ -3,6 +3,7 @@ import { Inject } from "@nuxt/types/app";
 import { ServiceLocator } from "@/_core/service/ServiceLocator";
 import { AuthService } from "@/modules/Auth/AuthService";
 import { CatalogService } from "@/modules/Catalog/CatalogService";
+import { ProfileService } from "@/modules/Profile/ProfileService";
 
 export default async (ctx: Context, inject: Inject) => {
   configAxios(ctx);
@@ -13,6 +14,7 @@ export default async (ctx: Context, inject: Inject) => {
   if (process.server) {
     await ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
     await ServiceLocator.instance.getService(AuthService).tryRestoreSessionUser();
+    await ServiceLocator.instance.getService(ProfileService).updateUserCartState();
   }
 
   if (process.client) {

@@ -24,16 +24,17 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "nuxt-property-decorator";
+import { Component, getModule, Vue } from "nuxt-property-decorator";
 import AuthForm from "@/modules/Auth/components/AuthForm.vue";
 import CartModal from "@/modules/Profile/components/cart/CartModal.vue";
 import { AuthService } from "@/modules/Auth/AuthService";
+import CartStore from "@/modules/Profile/store/CartStore";
 
 @Component({ components: { AuthForm } })
 export default class HeaderUser extends Vue {
-
-  @Prop({default: 0})
-  cartItemsCount: number;
+  get cartItemsCount() {
+    return getModule(CartStore, this.$store).userCartCount;
+  }
 
   authModalOrProfile() {
     if (this.$serviceLocator.getService(AuthService).isAuthenticated) {

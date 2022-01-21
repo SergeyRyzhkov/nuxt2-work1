@@ -12,7 +12,7 @@
         <div class="container py-34 flex items-center">
           <HeaderLogo></HeaderLogo>
           <HeaderSearchInput class="mx-24 lg:mx-48"></HeaderSearchInput>
-          <HeaderUser :cartItemsCount="cartItemsCount" class="ml-auto flex-shrink-0"></HeaderUser>
+          <HeaderUser class="ml-auto flex-shrink-0"></HeaderUser>
         </div>
       </div>
       <div class="container-fluid bg-primary relative">
@@ -23,19 +23,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, getModule } from "nuxt-property-decorator";
-import { ProfileService } from "@/modules/Profile/ProfileService";
-import CartStore from "@/modules/Profile/store/CartStore";
+import { Component, Vue } from "nuxt-property-decorator";
 @Component
-export default class TheHeader extends Vue {
-
-  async fetch(){
-    await this.$serviceLocator.getService(ProfileService).getUserCart();
-  }
-
-  get cartItemsCount() {
-    return getModule(CartStore, this.$store).userCartCount;
-  }
-
-}
+export default class TheHeader extends Vue {}
 </script>

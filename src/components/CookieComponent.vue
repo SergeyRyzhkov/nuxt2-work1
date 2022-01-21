@@ -3,7 +3,7 @@
     <div v-if="isVisible" class="cookie-component flex sm:items-center sm:justify-between pr-23 pl-21 py-19">
       <figure class="cookie-image mt-[-8px] sm:mt-0">
         <picture>
-          <img v-lozad="'/images/cookie.png'" width="40" height="40px" alt="cookie"/>
+          <img v-lozad="'/images/cookie.png'" width="40" height="40px" alt="cookie" />
         </picture>
       </figure>
       <div class="ml-14 flex flex-col sm:flex-row sm:items-center">
@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "nuxt-property-decorator";
+import { Component, Vue } from "nuxt-property-decorator";
 
 @Component
 export default class CookieComponent extends Vue {
@@ -63,7 +63,7 @@ export default class CookieComponent extends Vue {
 
   setCookie() {
     // @ts-ignore
-    this.$cookies.set("useCookies", true, {maxAge: 60 * 60 *24 * 365});
+    this.$cookies.set("useCookies", true, { maxAge: 60 * 60 * 24 * 365 });
     this.visible = false;
   }
 }

@@ -1,22 +1,7 @@
-﻿//  hooks: {
-//     render: {
-//       errorMiddleware(app) {
-//         app.use((error, req, res, next) => {
-//           res.writeHead(307, {
-//             Location: '/network-error',
-//           })
-//           res.end()
-//         })
-//       },
-//     },
-// },
-import path from "path";
-// import LRU from "lru-cache";
+﻿import path from "path";
 import { NuxtConfig } from "@nuxt/types";
 
 const SRC_DIR: NuxtConfig["srcDir"] = "src/";
-
-// const isDev = process.env.NODE_ENV === "development";
 
 const nuxtConfig: NuxtConfig = {
   modern: true,
@@ -119,7 +104,7 @@ const nuxtConfig: NuxtConfig = {
       commons: true,
     },
 
-    transpile: ["swiper", "lozad"],
+    // transpile: ["swiper", "lozad"],
 
     // @ts-ignore
     postcss: {
@@ -141,12 +126,6 @@ const nuxtConfig: NuxtConfig = {
     asyncScripts: true,
     crossorigin: "anonymous",
     etag: false,
-    // bundleRenderer: {
-    //   cache: new LRU({
-    //     max: 10000,
-    //     maxAge: 1000 * 60 * 15,
-    //   }),
-    // },
   },
 
   tailwindcss: {

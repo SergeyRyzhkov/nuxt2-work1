@@ -165,7 +165,7 @@ export default class MainPage extends Vue {
           spaceBetween: 20,
         },
         480: {
-          slidesPerView: 3,
+          slidesPerView: 2,
           spaceBetween: 30,
         },
         // when window width is >= 640px
