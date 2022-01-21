@@ -1,7 +1,11 @@
 <template>
   <LazyHydrate when-visible>
     <nuxt-link v-show="!!model" :to="routeLink" class="relative flex flex-col items-center">
-      <BaseHeartButton class="absolute top-0 right-0" :is-red="model.isFavorite" @click.prevent="toogleFavor()"></BaseHeartButton>
+      <BaseHeartButton
+        class="absolute top-0 right-0"
+        :is-red="model.is_favorite"
+        @click.prevent="toogleFavor()"
+      ></BaseHeartButton>
       <img
         v-lozad="imageSrc"
         height="286"
@@ -35,7 +39,7 @@ export default class ProductItem extends Vue {
   model: ProductModel;
 
   get price() {
-    return "10 000 ₽";
+    return (this.model?.price?.toLocaleString() || 0) + " ₽";
   }
 
   get routeLink() {
@@ -48,7 +52,7 @@ export default class ProductItem extends Vue {
 
   toogleFavor() {
     this.$serviceLocator.getService(CatalogService).toogleFavorites(this.model);
-    this.model.isFavorite = !this.model.isFavorite;
+    this.model.is_favorite = !this.model.is_favorite;
   }
 
   addToBasket() {
