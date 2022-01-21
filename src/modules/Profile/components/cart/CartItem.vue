@@ -14,13 +14,13 @@
       <div v-if="isOrdering">1 шт.</div>
       <div class="flex md:items-center md:flex-row flex-col justify-between">
         <div v-if="!isOrdering" class="cart-item-products_counter flex items-center">
-          <button class="cart-item-product_action" :class="{ cartBtnDisable: cartItem.count === 1 }" @click="changeCountItem(cartItem.id, cartItem.count - 1)">
+          <button class="cart-item-product_action" :class="{ cartBtnDisable: cartItem.count === 1 }" @click="changeCountItem(cartItem.product_id, cartItem.count - 1)">
             <svg width="12" height="4" viewBox="0 0 12 4" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect y="0.956543" width="12" height="2.08696" rx="1.04348" fill="#EF8532" />
             </svg>
           </button>
           <div class="number">{{ cartItem.count }}</div>
-          <button class="cart-item-product_action" @click="changeCountItem(cartItem.id, cartItem.count + 1)">
+          <button class="cart-item-product_action" @click="changeCountItem(cartItem.product_id, cartItem.count + 1)">
             <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect y="5.95654" width="12" height="2.08696" rx="1.04348" fill="#EF8532" />
               <rect x="7" y="0.739258" width="12.5217" height="2" rx="1" transform="rotate(90 7 0.739258)" fill="#EF8532" />
@@ -56,7 +56,7 @@ export default class CartItem extends Vue {
   }
 
   deleteCartItem() {
-    this.$serviceLocator.getService(ProfileService).deleteFromCart(this.cartItem.id)
+    this.$serviceLocator.getService(ProfileService).deleteFromCart(this.cartItem.product_id)
   }
 
   get imageSrc() {

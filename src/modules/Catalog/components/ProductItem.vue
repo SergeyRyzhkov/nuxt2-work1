@@ -28,6 +28,7 @@ import { Component, Prop, Vue } from "nuxt-property-decorator";
 import LazyHydrate from "vue-lazy-hydration";
 import { CatalogService } from "../CatalogService";
 import ProductModel from "../models/ProductModel";
+import {ProfileService} from "@/modules/Profile/ProfileService";
 
 @Component({
   components: {
@@ -55,7 +56,8 @@ export default class ProductItem extends Vue {
     this.model.is_favorite = !this.model.is_favorite;
   }
 
-  addToBasket() {
+ async addToBasket() {
+   await this.$serviceLocator.getService(ProfileService).addToCart(this.model.id, 1);
     this.$modalManager.showNotify("Добавлено. Можете оформить заказ!");
   }
 }

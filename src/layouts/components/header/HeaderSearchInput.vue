@@ -99,8 +99,11 @@ export default class HeaderSearchInput extends Vue {
   padding: 8px 23px 8px 23px;
   border: 1px solid #dfdfdf !important;
   &-dropdown {
+    max-height: 100vh;
+    overflow: auto;
     @include tablet{
       border-top: 2px solid $primary;
+      max-height: 600px;
     }
     position: absolute;
     height: auto;
