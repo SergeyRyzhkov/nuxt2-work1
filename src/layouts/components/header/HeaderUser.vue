@@ -1,7 +1,15 @@
 <template>
   <div class="flex items-center">
-    <img src="/images/header_heart.svg" width="24" height="24" class="cursor-pointer" alt="" @click="gotoFavor()" />
-    <div class="relative">
+    <img
+      v-if="isAuthenticated"
+      src="/images/header_heart.svg"
+      width="24"
+      height="24"
+      class="cursor-pointer"
+      alt=""
+      @click="gotoFavor()"
+    />
+    <div v-if="isAuthenticated" class="relative">
       <img
         src="/images/header_shop.svg"
         width="22"
@@ -36,8 +44,12 @@ export default class HeaderUser extends Vue {
     return getModule(CartStore, this.$store).userCartCount;
   }
 
+  get isAuthenticated() {
+    return this.$serviceLocator.getService(AuthService).isAuthenticated;
+  }
+
   authModalOrProfile() {
-    if (this.$serviceLocator.getService(AuthService).isAuthenticated) {
+    if (this.isAuthenticated) {
       this.$router.push({ name: "profile" });
     } else {
       this.$modalManager.modalShowFullScreen(AuthForm);

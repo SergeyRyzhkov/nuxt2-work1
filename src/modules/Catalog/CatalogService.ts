@@ -30,7 +30,8 @@ export class CatalogService extends BaseService {
   }
 
   @Cacheable(0)
-  async getById(id: number) {
+  async getCategoryBySlug(slug: string) {
+    const id = this.getIdBySlug(slug);
     return await this.getOneOrDefault(CategoryModel, `users/product-categories/${id}`);
   }
 

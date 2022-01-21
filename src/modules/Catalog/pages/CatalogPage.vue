@@ -71,7 +71,7 @@ export default class CatalogPage extends Vue {
 
     this.selectedModel =
       !!lastSlug && lastSlug !== "catalog"
-        ? await this.$serviceLocator.getService(CatalogService).getBySlug(lastSlug)
+        ? await this.$serviceLocator.getService(CatalogService).getCategoryBySlug(lastSlug)
         : new CategoryModel();
 
     this.updateBreadCrumbs(this.selectedModel);

@@ -14,7 +14,7 @@
         <div @click="mobileSearch">
           <img v-lozad="'/images/mobile-search.svg'" width="28" height="28" class="cursor-pointer" />
         </div>
-        <HeaderUser class="ml-20 flex-shrink-0" :cartItemsCount="cartItemsCount"></HeaderUser>
+        <HeaderUser class="ml-20 flex-shrink-0"></HeaderUser>
       </div>
     </header>
     <div class="mobile-menu-list w-screen" :class="{ active: menuOpened === true }">
@@ -33,8 +33,7 @@
 </template>
 
 <script lang="ts">
-import {Component, getModule, Vue} from "nuxt-property-decorator";
-import CartStore from "@/modules/Profile/store/CartStore";
+import { Component, Vue } from "nuxt-property-decorator";
 
 @Component
 export default class TheMobileHeader extends Vue {
@@ -44,11 +43,6 @@ export default class TheMobileHeader extends Vue {
   mobileSearch() {
     this.searchOpened = !this.searchOpened;
     this.changeOverflow(this.searchOpened);
-  }
-
-
-  get cartItemsCount() {
-    return getModule(CartStore, this.$store).userCartCount;
   }
 
   changeOverflow(value: boolean) {
