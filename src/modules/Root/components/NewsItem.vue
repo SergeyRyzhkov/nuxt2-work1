@@ -44,7 +44,7 @@ export default class NewsItem extends Vue {
 
   goToCard() {
     // @ts-ignore
-    this.$router.push({ name: "news-card", params: { slug: `${this.articleModel.meta_slug}"-"${this.articleModel.id}` } });
+    this.$router.push({ name: "news-card", params: { slug: `${this.articleModel.meta_slug}-${this.articleModel.id}` } });
   }
 
   get dateFormatted() {

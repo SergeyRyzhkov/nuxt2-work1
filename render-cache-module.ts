@@ -2,8 +2,6 @@ import type { Module } from "@nuxt/types";
 import MemoryCache from "./src/_core/MemoryCache";
 
 const rendererCacheModule: Module = function (_moduleOptions) {
-  console.log(process.env.NODE_ENV);
-
   if (process.env.NODE_ENV === "development") {
     return;
   }
