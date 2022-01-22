@@ -45,12 +45,16 @@
     />
     <BaseButton type="submit" class="mt-20 md:mt-40">Отправить</BaseButton>
 
-    <div class="text-12 text-gray-color mt-8 md:mt-16 flex flex-wrap">
-      <span>Защита от спама reCAPTCHA </span>
-      <a class="underline focus:no-underline" href="https://policies.google.com/privacy" target="_blank">Конфиденциальность </a>
-      <span> и </span>
-      <a class="underline focus:no-underline" href="https://policies.google.com/terms" target="_blank">Условия использования</a>
-    </div>
+    <p class="text-12 text-gray-color mt-16 md:mt-32 -mb-32">
+      Защита от спама reCAPTCHA
+      <a class="underline focus:no-underline inline" href="https://policies.google.com/privacy" target="_blank"
+        >Конфиденциальность
+      </a>
+      и
+      <a class="underline focus:no-underline inline" href="https://policies.google.com/terms" target="_blank"
+        >Условия использования</a
+      >
+    </p>
   </form>
 </template>
 
