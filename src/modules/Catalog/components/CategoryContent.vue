@@ -109,7 +109,7 @@ export default class CategoryContent extends Vue {
           spaceBetween: 20,
         },
         480: {
-          slidesPerView: 3,
+          slidesPerView: 2,
           spaceBetween: 30,
         },
         640: {

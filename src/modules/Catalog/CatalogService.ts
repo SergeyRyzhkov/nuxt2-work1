@@ -70,7 +70,7 @@ export class CatalogService extends BaseService {
       const config = {
         name: model.meta_slug,
         path: this.getRoutePath(model),
-        props: { slug: model.meta_slug },
+        props: { slug: `${model.meta_slug}-${model.id}` },
         component: () => lazyLoad(import("@/modules/Catalog/components/CategoryContent.vue")),
       };
       this.ctx.app.router?.addRoute("catalog", config);
@@ -81,13 +81,16 @@ export class CatalogService extends BaseService {
   }
 
   getRoutePath(model: CategoryModel) {
-    return !!model.parent ? `${this.getRoutePath(model.parent)}/${model.meta_slug}` : `/catalog/${model.meta_slug}`;
+    return !!model.parent
+      ? `${this.getRoutePath(model.parent)}/${model.meta_slug}-${model.id}`
+      : `/catalog/${model.meta_slug}-${model.id}`;
   }
 
   getRouteLocation(model: CategoryModel) {
     return {
       name: model?.meta_slug,
-      params: { slug: model?.meta_slug },
+      params: { slug: `${model?.meta_slug}-${model?.id}` },
+      props: { slug: `${model.meta_slug}-${model.id}` },
     };
   }
 
