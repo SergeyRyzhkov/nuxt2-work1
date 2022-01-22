@@ -9,6 +9,7 @@ export default class TrainingModel extends SeoModel {
   date: string;
   duration?: any;
   price: number;
+  price_description: string;
   seats?: any;
   empty_seats?: any;
   status: string;
