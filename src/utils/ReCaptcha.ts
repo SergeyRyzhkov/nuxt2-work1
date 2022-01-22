@@ -19,7 +19,7 @@ export const loadReCaptchaScript = async (siteKey: string) => {
 };
 
 export const executeAction = async (siteKey: string, actionName: string): Promise<string | null> => {
-  await loadScript(siteKey);
+  await loadReCaptchaScript(siteKey);
   return new Promise((resolve, _reject) => {
     if (scriptLoaded && !!window.grecaptcha) {
       try {
