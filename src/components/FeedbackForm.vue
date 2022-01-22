@@ -32,13 +32,8 @@
 
     <div class="flex flex-col md:flex-row">
       <BaseInput v-model="formModel.city" placeholder="Из какого вы города*" class="mb-27" />
-      <LazyBaseMultiSelect
-        v-model="formModel.area"
-        placeholder="Сфера деятельности*"
-        :options="areaOptions"
-        class="mb-27 md:ml-32"
-      >
-      </LazyBaseMultiSelect>
+      <BaseMultiSelect v-model="formModel.area" placeholder="Сфера деятельности*" :options="areaOptions" class="mb-27 md:ml-32">
+      </BaseMultiSelect>
     </div>
 
     <BaseInput
@@ -50,9 +45,12 @@
     />
     <BaseButton type="submit" class="mt-20 md:mt-40">Отправить</BaseButton>
 
-    This site is protected by reCAPTCHA and the Google
-    <a href="https://policies.google.com/privacy">Privacy Policy</a>
-    and <a href="https://policies.google.com/terms">Terms of Service</a>
+    <div class="text-12 text-gray-color mt-8 md:mt-16 flex flex-wrap">
+      <span>Защита от спама reCAPTCHA </span>
+      <a class="underline focus:no-underline" href="https://policies.google.com/privacy" target="_blank">Конфиденциальность </a>
+      <span> и </span>
+      <a class="underline focus:no-underline" href="https://policies.google.com/terms" target="_blank">Условия использования</a>
+    </div>
   </form>
 </template>
 
@@ -62,6 +60,7 @@ import { email, required } from "vuelidate/lib/validators";
 import { phoneMask } from "@/utils/InputMaskDefinitions";
 import { EmptyService } from "@/_core/service/EmptyService";
 import { BaseViewModel } from "@/_core/models/BaseViewModel";
+import { executeAction, loadReCaptchaScript } from "@/utils/ReCaptcha";
 
 const validations = () => {
   return {
@@ -94,21 +93,29 @@ export default class FeedbackForm extends Vue {
   @Prop({ default: false })
   radio: boolean;
 
+  mounted() {
+    loadReCaptchaScript(this.$config.reCaptchaSiteKey);
+  }
+
   async send() {
     this.$v.$touch();
     if (this.$v.$invalid) {
       return;
     }
 
-    try {
-      if (await this.$recaptchaLoaded()) {
-        this.formModel.recaptchaToken = await this.$recaptcha("FeedbackForm");
-        this.formModel.area = this.formModel?.area.name;
+    const recaptchaToken = await executeAction(this.$config.reCaptchaSiteKey, "FeedbackForm");
+    if (!!recaptchaToken) {
+      this.formModel.recaptchaToken = recaptchaToken;
+      this.formModel.area = this.formModel?.area?.name;
+      try {
         await this.$serviceLocator.getService(EmptyService).apiRequest.post("/users/feedback", this.formModel);
+      } catch (err: any) {
+        this.$modalManager.showError("Не удалось отправть сообщение!");
       }
-    } catch (err) {
-      console.log(err);
+    } else {
+      this.$modalManager.showError("Вы бот !");
     }
+    this.$emit("close");
   }
 
   areaOptions = [

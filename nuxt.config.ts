@@ -60,7 +60,6 @@ const nuxtConfig: NuxtConfig = {
     { src: "@/plugins/vuelidate" },
     { src: "@/plugins/dayjs" },
     { src: "@/plugins/modal-manager.client" },
-    { src: "@/plugins/reCaptcha3.client" },
   ],
 
   router: {
@@ -160,6 +159,7 @@ const nuxtConfig: NuxtConfig = {
     apiUrl: "https://api.kaypro.plenexy.digital/api",
     baseUrl: "https://api.kaypro.plenexy.digital",
     siteUrl: "https://kaypro.plenexy.digital",
+    reCaptchaSiteKey: "6LdlTwYeAAAAAAS-LIlq3AkEloETxcV0CBsCMl5X",
 
     defaultMetaDescription:
       "Эксклюзивный представитель итальянского бренда KAYPRO в России. Широкий ассортимент продукции, удобные способы оплаты, быстрая доставка.",

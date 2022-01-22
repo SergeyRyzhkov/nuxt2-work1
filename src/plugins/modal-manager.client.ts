@@ -93,6 +93,10 @@ class ModalManager {
   showNotify(text: string) {
     this.modalShow(BaseNotify, { text });
   }
+
+  showError(text: string) {
+    this.modalShow(BaseNotify, { text });
+  }
 }
 
 const initModals: Plugin = (_ctx: Context, inject: Inject) => {

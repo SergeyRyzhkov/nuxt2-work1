@@ -6,7 +6,7 @@
       профессиональной косметики для волос KAYPRO на территории РФ. <br />Для каждого из Вас у нас есть особые условия
       сотрудничества!
     </p>
-    <FeedbackForm class="mt-20 md:mt-40"></FeedbackForm>
+    <FeedbackForm class="mt-20 md:mt-40" @close="$emit('close')"></FeedbackForm>
   </base-modal>
 </template>
 
