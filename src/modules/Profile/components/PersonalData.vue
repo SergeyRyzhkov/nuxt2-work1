@@ -6,11 +6,25 @@
       <div class="mt-33">
         <form @submit.prevent="savePersonal">
           <BaseInput
-            v-model="registrationData.fio"
-            placeholder="ФИО*"
+            v-model="registrationData.last_name"
+            placeholder="Фамилия*"
             class="mb-27"
-            :has-error="$v.registrationData.fio.$error"
-            @blur="$v.registrationData.fio.$touch()"
+            :has-error="$v.registrationData.last_name.$error"
+            @blur="$v.registrationData.last_name.$touch()"
+          />
+          <BaseInput
+            v-model="registrationData.first_name"
+            placeholder="Имя*"
+            class="mb-27"
+            :has-error="$v.registrationData.first_name.$error"
+            @blur="$v.registrationData.first_name.$touch()"
+          />
+          <BaseInput
+            v-model="registrationData.patronymic"
+            placeholder="Отчество*"
+            class="mb-27"
+            :has-error="$v.registrationData.patronymic.$error"
+            @blur="$v.registrationData.patronymic.$touch()"
           />
           <div class="flex items-center">
             <BaseInput
@@ -55,7 +69,9 @@ import RegistrationData from "@/modules/Auth/models/RegistrationData";
 const validations = () => {
   return {
     registrationData: {
-      fio: { required },
+      first_name: { required },
+      last_name: { required },
+      patronymic: { required },
       phone: { required },
       email: { required, email },
       address: { required },
@@ -77,7 +93,6 @@ export default class PersonalData extends Vue {
     if (this.$v.$invalid) {
       return;
     }
-    RegistrationData.buildFirstSecondPatrFromFio(this.registrationData);
     this.$serviceLocator.getService(AuthService).updateProfile(this.registrationData);
   }
 }

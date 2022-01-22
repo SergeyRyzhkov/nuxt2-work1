@@ -153,7 +153,7 @@ export default class BaseInput extends Vue {
   }
 
   &__input {
-    border-bottom: 1px solid $light-gray;
+    border-bottom: 1px solid #c9c9c9;
     box-sizing: border-box;
     width: 100%;
     outline: none;

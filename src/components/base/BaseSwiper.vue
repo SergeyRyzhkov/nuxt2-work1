@@ -128,11 +128,11 @@ export default class BaseSwiper extends Vue {
 </script>
 
 <style lang="scss">
-.swiper-slide{
-  transition: .3s;
+.swiper-slide {
+  transition: 0.3s;
 }
-.swiper-slide-next{
-  transition: .3s;
+.swiper-slide-next {
+  transition: 0.3s;
 }
 .swiper-slide {
   // flex-shrink: 0;

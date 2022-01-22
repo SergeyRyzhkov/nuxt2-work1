@@ -86,7 +86,7 @@ export class AuthService extends BaseService {
 
     try {
       const response = await this.apiRequest.post("users/register", registrationData);
-      if (response.status === 201) {
+      if (response.status === 204) {
         result.registrationStatus = RegistrationStatus.OK;
       }
     } catch (err: any) {

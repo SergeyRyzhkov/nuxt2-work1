@@ -1,11 +1,25 @@
 <template>
   <form @submit.prevent="register">
     <BaseInput
-      v-model="registrationData.fio"
-      placeholder="ФИО*"
-      :has-error="$v.registrationData.fio.$error"
+      v-model="registrationData.last_name"
+      placeholder="Фамилия*"
+      :has-error="$v.registrationData.last_name.$error"
       class="mb-27"
-      @blur="$v.registrationData.fio.$touch()"
+      @blur="$v.registrationData.last_name.$touch()"
+    />
+    <BaseInput
+      v-model="registrationData.first_name"
+      placeholder="Имя*"
+      :has-error="$v.registrationData.first_name.$error"
+      class="mb-27"
+      @blur="$v.registrationData.first_name.$touch()"
+    />
+    <BaseInput
+      v-model="registrationData.patronymic"
+      placeholder="Отчество*"
+      :has-error="$v.registrationData.patronymic.$error"
+      class="mb-27"
+      @blur="$v.registrationData.patronymic.$touch()"
     />
     <BaseInput
       v-model="registrationData.phone"
@@ -72,7 +86,9 @@ import { phoneMask } from "@/utils/InputMaskDefinitions";
 const validations = () => {
   return {
     registrationData: {
-      fio: { required },
+      first_name: { required },
+      last_name: { required },
+      patronymic: { required },
       phone: { required },
       email: { required, email },
       password: { required },
@@ -94,8 +110,6 @@ export default class RegistrationComponent extends Vue {
     if (this.$v.$invalid) {
       return;
     }
-    RegistrationData.buildFirstSecondPatrFromFio(this.registrationData);
-
     const result = await this.$serviceLocator.getService(AuthService).register(this.registrationData);
     if (result.registrationStatus === RegistrationStatus.OK) {
       this.$emit(

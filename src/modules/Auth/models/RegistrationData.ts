@@ -23,22 +23,4 @@ export default class RegistrationData extends BaseViewModel {
   ITN: string | undefined | null = null;
   PSRN: string | undefined | null = null;
   entity_address: string | undefined | null = null;
-
-  static buildFirstSecondPatrFromFio(data: RegistrationData) {
-    data.first_name = null;
-    data.patronymic = null;
-
-    if (!!data && !!data.fio) {
-      const arr = data.fio.trim().split(" ");
-      const cleanArr = arr.filter((iter) => !!iter && iter.trim().length > 0);
-
-      data.last_name = cleanArr[0];
-      if (arr.length > 1) {
-        data.first_name = cleanArr[1];
-      }
-      if (arr.length > 2) {
-        data.patronymic = cleanArr[2];
-      }
-    }
-  }
 }
