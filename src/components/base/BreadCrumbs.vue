@@ -27,14 +27,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, getModule } from "nuxt-property-decorator";
+import { Component, Vue, getModule, Prop } from "nuxt-property-decorator";
 
 import AppStore from "@/modules/Root/store/AppStore";
+import { RouteLink } from "@/_core/models/RouteLink";
 
 @Component
 export default class BreadCrumbs extends Vue {
+  @Prop()
+  links: RouteLink[];
+
   get breadCrumbs() {
-    return getModule(AppStore, this.$store).breadCrumbs;
+    return this.links || getModule(AppStore, this.$store).breadCrumbs;
   }
 
   get shouldShow() {

@@ -60,6 +60,7 @@ const nuxtConfig: NuxtConfig = {
     { src: "@/plugins/vuelidate" },
     { src: "@/plugins/dayjs" },
     { src: "@/plugins/modal-manager.client" },
+    { src: "@/plugins/reCaptcha3.client" },
   ],
 
   router: {

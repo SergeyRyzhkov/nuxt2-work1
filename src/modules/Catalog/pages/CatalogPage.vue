@@ -1,6 +1,6 @@
 <template>
   <main class="page-wrapper container">
-    <BreadCrumbs />
+    <BreadCrumbs :links="breadCrumbs" />
     <div class="flex">
       <div class="w-1/4">
         <div v-if="!isLeafCategory">
@@ -35,15 +35,16 @@
 </template>
 
 <script lang="ts">
-import { Component, getModule, Vue, Watch } from "nuxt-property-decorator";
+import { Component, Vue, Watch } from "nuxt-property-decorator";
 import { CatalogService } from "../CatalogService";
 import CategoryModel from "../models/CategoryModel";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
-import AppStore from "@/modules/Root/store/AppStore";
+import { RouteLink } from "@/_core/models/RouteLink";
 
 @Component
 export default class CatalogPage extends Vue {
   selectedModel: CategoryModel = new CategoryModel();
+  breadCrumbs: RouteLink[] = [];
 
   async fetch() {
     await this.updateData();
@@ -85,7 +86,8 @@ export default class CatalogPage extends Vue {
   }
 
   updateBreadCrumbs(model: CategoryModel) {
-    getModule(AppStore, this.$store).updateBreadCrumbList(this.$serviceLocator.getService(CatalogService).buildBreadCrumb(model));
+    this.breadCrumbs = this.$serviceLocator.getService(CatalogService).buildBreadCrumb(model);
+    // getModule(AppStore, this.$store).updateBreadCrumbList(this.$serviceLocator.getService(CatalogService).buildBreadCrumb(model));
   }
 
   head() {

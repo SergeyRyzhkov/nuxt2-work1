@@ -13,7 +13,7 @@
           Заполните форму для сотрудничества с KAYPRO <br />
           и мы с Вами свяжемся!
         </div>
-        <LazyFeedbackForm class="mt-40 md:mt-60"></LazyFeedbackForm>
+        <FeedbackForm class="mt-40 md:mt-60"></FeedbackForm>
       </section>
     </main>
   </div>

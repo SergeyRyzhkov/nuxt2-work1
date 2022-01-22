@@ -4,7 +4,7 @@
       Записаться на курс или <br />
       получить бесплатную консультацию
     </div>
-    <LazyFeedbackForm class="mt-40 md:mt-60"></LazyFeedbackForm>
+    <FeedbackForm class="mt-40 md:mt-60"></FeedbackForm>
   </div>
 </template>
 

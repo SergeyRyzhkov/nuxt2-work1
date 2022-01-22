@@ -49,6 +49,10 @@
       @blur="$v.formModel.comment.$touch()"
     />
     <BaseButton type="submit" class="mt-20 md:mt-40">Отправить</BaseButton>
+
+    This site is protected by reCAPTCHA and the Google
+    <a href="https://policies.google.com/privacy">Privacy Policy</a>
+    and <a href="https://policies.google.com/terms">Terms of Service</a>
   </form>
 </template>
 
@@ -79,6 +83,7 @@ class FeedbackModel extends BaseViewModel {
   area: any = null;
   city = "";
   type: "support" | "appeal" | "request" | "cooperation" = "appeal";
+  recaptchaToken = "";
 }
 
 @Component({ validations })
@@ -89,13 +94,21 @@ export default class FeedbackForm extends Vue {
   @Prop({ default: false })
   radio: boolean;
 
-  send() {
+  async send() {
     this.$v.$touch();
     if (this.$v.$invalid) {
       return;
     }
-    this.formModel.area = this.formModel?.area.name;
-    this.$serviceLocator.getService(EmptyService).apiRequest.post("/users/feedback", this.formModel);
+
+    try {
+      if (await this.$recaptchaLoaded()) {
+        this.formModel.recaptchaToken = await this.$recaptcha("FeedbackForm");
+        this.formModel.area = this.formModel?.area.name;
+        await this.$serviceLocator.getService(EmptyService).apiRequest.post("/users/feedback", this.formModel);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   areaOptions = [
