@@ -27,7 +27,6 @@
             <div>{{ cartPrice }} ₽</div>
           </div>
           <BaseButton class="w-full mt-32" @click="gotoOrdering()">Перейти к оформлению</BaseButton>
-          {{ cartItems }}
         </div>
       </div>
     </div>
