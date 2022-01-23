@@ -3,14 +3,45 @@
     <div class="container">
       <BreadCrumbs />
       <section class="flex flex-col md:flex-row md:items-start">
-        <div class="md:w-1/2 lg:w-7/12"></div>
-        <div class="lg:w-5/12 md:w-1/2">
+        <div class="md:w-1/2 lg:w-7/12">
+          <LazyBaseSwiper
+            :slides="images"
+            :settings="{ slidesPerView: 1, spaceBetween: 0 }"
+            :show-thumbs="true"
+            :pagination="false"
+            :navigation="false"
+            container-classes="w-full order-1 bg-[#F5F5F5]"
+            thumbs-container-classes="h-400 order-0 mr-38 overflow-hidden product-slider-thumbs"
+            thumbs-slider-classes="w-116 min-w-[116px] h-127 max-h-127"
+            :thumbs-settings="{ slidesPerView: 3, spaceBetween: 16, direction: 'vertical' }"
+            class="flex"
+          >
+            <template #slide="{ slide }">
+              <div class="flex flex-col w-full p-44 md:p-68">
+                <img v-lozad="slide" height="500" width="260" alt=" " class="w-full h-300 md:h-500 object-scale-down" />
+              </div>
+            </template>
+
+            <template #thumbs-slide="{ slide }">
+              <div class="flex flex-col w-full p-16 bg-[#F5F5F5] h-full">
+                <img v-lozad="slide" height="127" width="116" alt=" " class="object-scale-down h-full" />
+              </div>
+            </template>
+
+            <template #after-thumbs-slides>
+              <div class="absolute mt-16 w-116 h-127 flex items-center justify-between bg-[#F5F5F5]">
+                <img v-lozad="'/icons/play.png'" class="m-auto" alt=" " width="45" height="45" />
+              </div>
+            </template>
+          </LazyBaseSwiper>
+        </div>
+        <div class="lg:w-5/12 md:w-1/2 ml-0 lg:ml-80">
           <div class="text-[#4BC967] text-14 block md:hidden">В наличии на складе</div>
           <h2 class="text-24 font-semibold">{{ model.name }}</h2>
           <div class="text-gray-color mt-16 text-14">Артикул: {{ model.vendor_code }}</div>
           <div class="mt-32">
             <div class="flex flex-row md:flex-col items-center md:items-start justify-between">
-              <div class="text-28 font-semibold">{{ model.price }} ₽</div>
+              <div class="text-28 font-semibold">{{ price }} ₽</div>
               <div class="md:mt-32 flex items-center">
                 <div class="flex items-center">
                   <BaseButton
@@ -50,9 +81,9 @@
             <div class="mt-32 flex items-center justify-between md:justify-start">
               <BaseButton @click="addToCart">Добавить в корзину</BaseButton>
               <BaseHeartButton
-                class="ml-14 rounded-full flex items-cenetr justify-center w-52 h-52 border border-primary"
-                :is-red="false"
-                @click.prevent="add2Favor()"
+                class="ml-14 rounded-full flex items-center justify-center w-52 h-52 border border-primary"
+                :is-red="model.is_favorite"
+                @click.prevent="toogleFavor()"
               ></BaseHeartButton>
             </div>
           </div>
@@ -151,7 +182,7 @@
       </div>
     </section>
 
-    <section v-if="!!popular" class="mt-40 md:mt-60 container">
+    <section v-if="!!popular && popular.length" class="mt-40 md:mt-60 container">
       <h2 class="text-42 font-compact uppercase">Рекомендуем</h2>
       <LazyHydrate when-visible>
         <LazyBaseSwiper :slides="popular" class="mt-32" :settings="sliderSettings">
@@ -190,6 +221,14 @@ export default class ProductPage extends Vue {
     this.updateBreadCrumbs();
   }
 
+  get price() {
+    return this.model.price?.toLocaleString("ru-RU") || 0;
+  }
+
+  get images() {
+    return this.model?.logo?.map((iter) => iter.url);
+  }
+
   addToCart() {
     this.$serviceLocator.getService(ProfileService).addToCart(this.model.id, this.productCount);
   }
@@ -201,9 +240,13 @@ export default class ProductPage extends Vue {
     this.productCount = count;
   }
 
-  get popular() {
-    // return null;
-    return this.$serviceLocator.getService(ProfileService).getFavorites();
+  async popular() {
+    return await this.$serviceLocator.getService(ProfileService).getFavorites();
+  }
+
+  toogleFavor() {
+    this.$serviceLocator.getService(CatalogService).toogleFavorites(this.model);
+    this.model.is_favorite = !this.model.is_favorite;
   }
 
   get sliderSettings() {
@@ -213,19 +256,13 @@ export default class ProductPage extends Vue {
           slidesPerView: 2,
           spaceBetween: 20,
         },
-        480: {
-          slidesPerView: 2,
-          spaceBetween: 30,
-        },
-        640: {
+        1024: {
           slidesPerView: 4,
           spaceBetween: 40,
         },
       },
     };
   }
-
-  add2Favor() {}
 
   head() {
     if (!!this.model?.meta_slug) {
@@ -247,6 +284,12 @@ export default class ProductPage extends Vue {
 }
 </script>
 <style lang="scss">
+.product-slider-thumbs {
+  .swiper-slide-thumb-active {
+    border: 1px solid $secondary;
+  }
+}
+
 .border-counter {
   border: 1px solid #c9c9c9 !important;
   &.disabled {

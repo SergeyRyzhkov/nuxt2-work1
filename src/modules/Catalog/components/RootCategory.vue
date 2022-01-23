@@ -154,11 +154,7 @@ export default class RootCategory extends Vue {
           slidesPerView: 2,
           spaceBetween: 20,
         },
-        480: {
-          slidesPerView: 3,
-          spaceBetween: 30,
-        },
-        640: {
+        1024: {
           slidesPerView: 4,
           spaceBetween: 40,
         },

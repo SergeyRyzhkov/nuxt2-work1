@@ -1,26 +1,39 @@
 <template>
   <client-only>
-    <div class="swiper-container" :class="[swiperRootClassName, swiperContainerClasses]">
-      <div class="swiper-wrapper">
-        <div v-for="(slide, index) in slides" :key="index" :class="silderClasses">
-          <slot name="slide" :slide="slide"></slot>
+    <div>
+      <div class="swiper-container" :class="[swiperRootClassName, containerClasses]">
+        <div class="swiper-wrapper">
+          <div v-for="(slide, index) in slides" :key="index" :class="sldClasses">
+            <slot name="slide" :slide="slide"></slot>
+          </div>
         </div>
+
+        <div v-show="navigation && !!slides && slides.length && arrows" class="swiper-navigation">
+          <button type="button" class="swiper-button-prev">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+              <path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path>
+            </svg>
+          </button>
+          <button type="button" class="swiper-button-next">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+              <path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div v-if="pagination" class="swiper-pagination"></div>
       </div>
 
-      <div v-show="!!slides && slides.length && arrows" class="swiper-navigation">
-        <button type="button" class="swiper-button-prev">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
-            <path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path>
-          </svg>
-        </button>
-        <button type="button" class="swiper-button-next">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
-            <path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path>
-          </svg>
-        </button>
+      <div v-if="showThumbs" class="swiper-container-thumbs" :class="[swiperThumbsClassName, thumbsContainerClasses]">
+        <div class="swiper-wrapper">
+          <div v-for="(slide, index) in slides" :key="index + 100" :class="thumbsSldClasses">
+            <slot name="thumbs-slide" :slide="slide">
+              <slot name="slide" :slide="slide"></slot>
+            </slot>
+          </div>
+        </div>
+        <slot name="after-thumbs-slides"></slot>
       </div>
-
-      <div v-if="pagination" class="swiper-pagination"></div>
     </div>
   </client-only>
 </template>
@@ -28,12 +41,12 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 
-import { Swiper, Navigation, Pagination, Autoplay, SwiperOptions } from "swiper";
+import { Swiper, Navigation, Pagination, Autoplay, Thumbs, SwiperOptions } from "swiper";
 import { Guid } from "@/utils/Guid";
 
 import "swiper/swiper.scss";
 import "swiper/components/pagination/pagination.scss";
-Swiper.use([Navigation, Pagination, Autoplay]);
+Swiper.use([Navigation, Pagination, Autoplay, Thumbs]);
 
 @Component
 export default class BaseSwiper extends Vue {
@@ -47,19 +60,35 @@ export default class BaseSwiper extends Vue {
   pagination: boolean;
 
   @Prop({ default: true })
+  navigation: boolean;
+
+  @Prop({ default: true })
   arrows: boolean;
 
   @Prop()
-  slidersClasses: string;
+  sliderClasses: string;
 
   @Prop()
-  swiperContainerClasses: any[];
+  containerClasses: any[];
 
-  @Prop({ default: true })
-  dontShrinkSlider: boolean;
+  @Prop({ default: false })
+  showThumbs: boolean;
 
-  get silderClasses() {
-    return ["swiper-slide", this.slidersClasses];
+  @Prop()
+  thumbsSettings: SwiperOptions;
+
+  @Prop()
+  thumbsContainerClasses;
+
+  @Prop()
+  thumbsSliderClasses: string;
+
+  get sldClasses() {
+    return ["swiper-slide", this.sliderClasses];
+  }
+
+  get thumbsSldClasses() {
+    return ["swiper-slide", this.thumbsSliderClasses];
   }
 
   id: string = Guid.newGuid();
@@ -67,17 +96,20 @@ export default class BaseSwiper extends Vue {
     return `swiper-${this.id}`;
   }
 
-  swiperInstance: Swiper = {} as Swiper;
+  thumbsId: string = Guid.newGuid();
+  get swiperThumbsClassName() {
+    return `gallery-thumbs-${this.thumbsId}`;
+  }
 
   defaultSettings = {
     slidesPerView: "auto",
-    // centeredSlides: true,
     spaceBetween: 16,
-    // simulateTouch: true,
-    // watchSlidesVisibility: true,
+    grabCursor: true,
+    watchSlidesVisibility: true,
     watchSlidesProgress: true,
     observer: true,
     observeParents: true,
+    mousewheel: true,
 
     pagination: {
       el: ".swiper-pagination",
@@ -91,6 +123,17 @@ export default class BaseSwiper extends Vue {
     },
   };
 
+  defaultThumbsSettings = {
+    spaceBetween: 0,
+    slidesPerView: 2,
+    freeMode: true,
+    watchSlidesProgress: true,
+    grabCursor: true,
+    watchSlidesVisibility: true,
+    observer: true,
+    observeParents: true,
+  };
+
   async mounted() {
     await this.$nextTick();
     this.initSwiper();
@@ -99,30 +142,27 @@ export default class BaseSwiper extends Vue {
   async initSwiper() {
     await this.$nextTick();
     await this.$nextTick();
-    const combinedSettings = { ...this.defaultSettings, ...this.settings };
+
+    const combinedSettings = {
+      ...this.defaultSettings,
+      ...this.settings,
+    };
+
+    if (this.showThumbs) {
+      const combinedThumbsSettings = {
+        ...this.defaultThumbsSettings,
+        ...this.thumbsSettings,
+      };
+
+      const galleryThumbs = new Swiper(`.${this.swiperThumbsClassName}`, combinedThumbsSettings as any);
+
+      combinedSettings.thumbs = {
+        swiper: galleryThumbs,
+      };
+    }
+
     // eslint-disable-next-line no-new
-    this.swiperInstance = new Swiper(`.${this.swiperRootClassName}`, combinedSettings as any);
-    // var swiper = this.swiperInstance;
-    // var interleaveOffset = 0.5;
-    // this.swiperInstance.on('touchStart', () => {
-    //   swiper.update()
-    //   swiper.updateProgress()
-    //     swiper.slides[swiper.activeIndex].style.transition = "";
-    // })
-    // swiper.translateTo(300, 100, false, false)
-    // this.swiperInstance.on('progress', () => {
-    //       let index = swiper.activeIndex + 1
-    //       var slideProgress = swiper.slides[index].progress;
-    //       var innerOffset = swiper.height * interleaveOffset;
-    //       var innerTranslate = slideProgress * innerOffset;
-    //       // eslint-disable-next-line no-new
-    //   console.log(swiper.slides);
-    //   swiper.slides[index].style.width = innerTranslate + 'px !important'
-    //       swiper.slides[index].style.height = innerTranslate + 'px !important'
-    //       swiper.slides[index].style.transform =
-    //         `translate(0px, ${innerTranslate}px)`
-    //
-    // });
+    new Swiper(`.${this.swiperRootClassName}`, combinedSettings as any);
   }
 }
 </script>
@@ -137,14 +177,15 @@ export default class BaseSwiper extends Vue {
 .swiper-slide {
   // flex-shrink: 0;
   // min-width: 100%;
-  width: auto;
-  cursor: pointer;
+  // width: auto;
+  // cursor: pointer;
 }
 
 .swiper-navigation {
   position: absolute;
   width: 100%;
   top: 45%;
+  left: 0px;
   display: flex;
   justify-content: space-between;
   z-index: 100;

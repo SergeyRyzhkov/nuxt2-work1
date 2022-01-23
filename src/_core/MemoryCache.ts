@@ -23,14 +23,14 @@ export default class MemoryCache {
   }
 
   static get(key: string) {
-    const val = this.entriesMap.get(key);
-    if (!!val) {
-      if (val.isExpaired()) {
-        val.value = null;
+    const entry = this.entriesMap.get(key);
+    if (!!entry) {
+      if (entry.isExpaired()) {
+        entry.value = null;
         this.entriesMap.delete(key);
         return null;
       }
-      return val.value;
+      return entry.value;
     }
     return null;
   }

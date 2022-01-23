@@ -15,11 +15,29 @@
       </div>
     </div>
     <div>
-      <LazyBaseSwiper :slides="['second.png', 'first.png', 'second.png', 'second.png']" class="mt-32" :slidersClasses="['slider-item']" :pagination="false" :arrows="false"
-                      :settings="{createElements:false, observer: true, observeParents: true, freeMode: true,  grabCursor: true, watchSlidesVisibility:true, watchSlidesProgress:true, spaceBetween: 114, slidesPerView: 'auto', loop: true }" :swiperContainerClasses="'InstagramSwiperContainer'">
-        <template #slide="{ slide }" >
+      <LazyBaseSwiper
+        :slides="['second.png', 'first.png', 'second.png', 'second.png']"
+        class="mt-32"
+        :sliders-classes="['slider-item']"
+        :pagination="false"
+        :arrows="false"
+        :settings="{
+          createElements: false,
+          observer: true,
+          observeParents: true,
+          freeMode: true,
+          grabCursor: true,
+          watchSlidesVisibility: true,
+          watchSlidesProgress: true,
+          spaceBetween: 114,
+          slidesPerView: 'auto',
+          loop: true,
+        }"
+        :container-classes="'InstagramSwiperContainer'"
+      >
+        <template #slide="{ slide }">
           <div>
-            <img :src="`/sliderInst/${slide}`"  alt="">
+            <img :src="`/sliderInst/${slide}`" alt="" />
           </div>
         </template>
       </LazyBaseSwiper>
@@ -31,16 +49,16 @@
 import { Vue, Component } from "nuxt-property-decorator";
 
 @Component
-export default class InstagramBlock extends Vue {
-}
+export default class InstagramBlock extends Vue {}
 </script>
 
 <style lang="scss">
-.InstagramSwiperContainer{
+.InstagramSwiperContainer {
   overflow: inherit !important;
 }
-.slider-item{
-  >div, img{
+.slider-item {
+  > div,
+  img {
     width: 100%;
     height: 100%;
   }
