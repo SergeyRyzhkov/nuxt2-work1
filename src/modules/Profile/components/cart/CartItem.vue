@@ -4,17 +4,24 @@
       <img v-lozad="imageSrc" alt="" itemprop="image" class="" />
       <figcaption></figcaption>
     </figure>
-    <div class="pl-16 md:pl-26 w-full" :class="{ 'flex justify-between md:items-center flex-col md:flex-row w-full': isOrdering }">
+    <div
+      class="pl-16 md:pl-26 w-full"
+      :class="{ 'flex justify-between md:items-center flex-col md:flex-row w-full': isOrdering }"
+    >
       <div>
         <div class="cart-item-title" :class="{ 'cart-item-title-ordering': isOrdering }">
-          {{ cartItem.product.meta_title }} {{cartItem.product_id}}
+          {{ cartItem.product.meta_title }} {{ cartItem.product_id }}
         </div>
         <div class="cart-item-id">Артикул: {{ cartItem.product.vendor_code }}</div>
       </div>
       <div v-if="isOrdering">1 шт.</div>
       <div class="flex md:items-center md:flex-row flex-col justify-between">
         <div v-if="!isOrdering" class="cart-item-products_counter flex items-center">
-          <button class="cart-item-product_action" :class="{ cartBtnDisable: cartItem.count === 1 }" @click="changeCountItem(cartItem.product_id, cartItem.count - 1)">
+          <button
+            class="cart-item-product_action"
+            :class="{ cartBtnDisable: cartItem.count === 1 }"
+            @click="changeCountItem(cartItem.product_id, cartItem.count - 1)"
+          >
             <svg width="12" height="4" viewBox="0 0 12 4" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect y="0.956543" width="12" height="2.08696" rx="1.04348" fill="#EF8532" />
             </svg>
@@ -32,15 +39,27 @@
     </div>
     <button class="remove-cart-item" @click="deleteCartItem">
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="15.1591" height="1.51591" rx="0.757954" transform="matrix(0.701006 0.713155 -0.701006 0.713155 1.0625 0.108887)" fill="#9D9D9D"/>
-        <rect width="15.1591" height="1.51591" rx="0.757954" transform="matrix(0.701006 -0.713155 0.701006 0.713155 0.310547 10.8105)" fill="#9D9D9D"/>
+        <rect
+          width="15.1591"
+          height="1.51591"
+          rx="0.757954"
+          transform="matrix(0.701006 0.713155 -0.701006 0.713155 1.0625 0.108887)"
+          fill="#9D9D9D"
+        />
+        <rect
+          width="15.1591"
+          height="1.51591"
+          rx="0.757954"
+          transform="matrix(0.701006 -0.713155 0.701006 0.713155 0.310547 10.8105)"
+          fill="#9D9D9D"
+        />
       </svg>
     </button>
   </section>
 </template>
 
 <script lang="ts">
-import {Component, Vue, Prop} from "nuxt-property-decorator";
+import { Component, Vue, Prop } from "nuxt-property-decorator";
 import { ProfileService } from "@/modules/Profile/ProfileService";
 import CartModel from "@/modules/Profile/models/CartModel";
 @Component
@@ -52,25 +71,26 @@ export default class CartItem extends Vue {
   cartItem: CartModel;
 
   changeCountItem(id: number, count: number) {
-    this.$serviceLocator.getService(ProfileService).changeCountCartItem(id, count)
+    this.$serviceLocator.getService(ProfileService).changeCountCartItem(id, count);
   }
 
   deleteCartItem() {
-    this.$serviceLocator.getService(ProfileService).deleteFromCart(this.cartItem.product_id)
+    this.$serviceLocator.getService(ProfileService).deleteFromCart(this.cartItem.product_id);
   }
 
   get imageSrc() {
-    return this.cartItem?.product.logo && this.cartItem?.product.logo.length ? this.cartItem.product.logo[0].url : "/images/product-no-photo.jpg";
+    return this.cartItem?.product.logo && this.cartItem?.product.logo.length
+      ? this.cartItem.product.logo[0].url
+      : "/images/product-no-photo.jpg";
   }
 
   get price() {
-    if (this.cartItem.product.price){
-      return this.cartItem.product.price * this.cartItem.count
+    if (this.cartItem.product.price) {
+      return this.cartItem.product.price * this.cartItem.count;
     } else {
-      return 0
+      return 0;
     }
   }
-
 }
 </script>
 

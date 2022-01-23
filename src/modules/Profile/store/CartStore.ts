@@ -1,4 +1,4 @@
-import { Module, VuexModule, VuexMutation } from "nuxt-property-decorator";
+import { Module, VuexAction, VuexModule, VuexMutation } from "nuxt-property-decorator";
 import CartModel from "@/modules/Profile/models/CartModel";
 
 @Module({
@@ -7,27 +7,32 @@ import CartModel from "@/modules/Profile/models/CartModel";
   namespaced: true,
 })
 export default class CartStore extends VuexModule {
-    private cart: CartModel[] = [];
-    private userHash: string = '732bfa6bc0224eee8467de517fe0058a';
+  private cart: CartModel[] = [];
+  // private userHash: string = "732bfa6bc0224eee8467de517fe0058a";
 
   @VuexMutation
-  setUserCart(cartItems: CartModel[]) {
+  private setUserCart(cartItems: CartModel[]) {
     this.cart = cartItems;
   }
 
-  get userCart() {
-      return this.cart;
+  @VuexAction
+  updateUserCart(cartItems: CartModel[]) {
+    this.setUserCart(cartItems);
   }
 
-  get getUserHash() {
-      return this.userHash;
+  get userCart() {
+    return this.cart;
   }
+
+  // get getUserHash() {
+  //   return this.userHash;
+  // }
 
   get userCartCount() {
-    let count = 0
-    this.cart.map(el => {
-      count += el.count
-    })
-    return count
+    let count = 0;
+    this.cart.forEach((el) => {
+      count += el.count;
+    });
+    return count;
   }
 }

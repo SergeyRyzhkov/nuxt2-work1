@@ -114,7 +114,7 @@ export default class FeedbackForm extends Vue {
       try {
         await this.$serviceLocator.getService(EmptyService).apiRequest.post("/users/feedback", this.formModel);
       } catch (err: any) {
-        this.$modalManager.showError("Не удалось отправть сообщение!");
+        this.$modalManager.showError("Не удалось отправить сообщение!");
       }
     } else {
       this.$modalManager.showError("Вы бот !");

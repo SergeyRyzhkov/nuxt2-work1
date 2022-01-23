@@ -4,19 +4,19 @@
       <div class="shopping-cart-title">
         <div class="flex items-end relative">
           <h2>Корзина</h2>
-          <div class="shopping-cart-counter">{{cartItemsCount}}</div>
+          <div class="shopping-cart-counter">{{ cartItemsCount }}</div>
         </div>
-        <button>Очистить</button>
+        <button @click="clearCart()">Очистить</button>
       </div>
       <div class="mt-24 md:mt-42 flex flex-col h-full justify-between">
         <div class="flex flex-col pr-6 shopping-cart-items">
-          <CartItem v-for="(item, index) in cartItems" :cartItem="item" :key="index"/>
+          <CartItem v-for="(item, index) in cartItems" :key="index" :cart-item="item" />
         </div>
 
         <div class="w-full mt-40 mb-100">
           <div class="flex items-center justify-between text-14">
             <div>Общий вес</div>
-            <div>200 г</div>
+            <div>{{ cartWeight }} г</div>
           </div>
           <div class="flex items-center justify-between mt-8 text-14">
             <div>НДС</div>
@@ -24,9 +24,10 @@
           </div>
           <div class="flex items-center justify-between text-24 mt-25">
             <div>Итого</div>
-            <div>{{cartPrice}} ₽</div>
+            <div>{{ cartPrice }} ₽</div>
           </div>
           <BaseButton class="w-full mt-32" @click="gotoOrdering()">Перейти к оформлению</BaseButton>
+          {{ cartItems }}
         </div>
       </div>
     </div>
@@ -34,12 +35,12 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, getModule} from "nuxt-property-decorator";
+import { Vue, Component, getModule } from "nuxt-property-decorator";
+import { ProfileService } from "../../ProfileService";
 import CartStore from "@/modules/Profile/store/CartStore";
 
 @Component
 export default class ShoppingCart extends Vue {
-
   gotoOrdering() {
     this.$emit("close");
     if (this.$route.name !== "ordering") {
@@ -47,22 +48,26 @@ export default class ShoppingCart extends Vue {
     }
   }
 
-  get cartItems () {
+  get cartItems() {
     return getModule(CartStore, this.$store).userCart;
   }
 
   get cartPrice() {
-    let price = 0
-    this.cartItems.forEach(el =>{
-      if (el.product.price){
-        price = el.product.price * el.count + price;
-      }
-    })
-    return price;
+    const sum = this.cartItems.reduce((sum, iterCart) => sum + (iterCart.product.price || 0) * iterCart.count, 0);
+    return sum.toLocaleString("ru-RU");
+  }
+
+  get cartWeight() {
+    const sum = this.cartItems.reduce((sum, iterCart) => sum + (iterCart.product.weight || 0) * iterCart.count, 0);
+    return sum.toLocaleString("ru-RU");
   }
 
   get cartItemsCount() {
     return getModule(CartStore, this.$store).userCartCount;
+  }
+
+  clearCart() {
+    this.$serviceLocator.getService(ProfileService).clearCart();
   }
 }
 </script>

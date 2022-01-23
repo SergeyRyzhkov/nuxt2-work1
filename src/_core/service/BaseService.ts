@@ -86,6 +86,17 @@ export class BaseService {
     return await this.getArrayOrEmptyWithPaginationAny(ctor, url, params, pagination, true, postData);
   }
 
+  // public postForm(url: string, config?: any, formData?: FormData): Promise<ApiResponse> {
+  //   config.headers = {
+  //     ...config.headers,
+  //     ...{
+  //       "Content-Type": "multipart/form-data",
+  //     },
+  //   };
+
+  //   return this.post(url, { ...config }, formData);
+  // }
+
   private async getAnyOrNullOrFail(isSendError = false, url: string, config?: any) {
     try {
       const response = await this.apiRequest.get(url, config);

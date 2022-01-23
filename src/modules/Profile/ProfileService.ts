@@ -18,11 +18,11 @@ export class ProfileService extends BaseService {
   async updateUserCartState() {
     if (this.isAuthenticated) {
       const cart = await this.getArrayOrEmpty(CartModel, "users/carts");
-      this.сartStore.setUserCart(cart);
+      this.сartStore.updateUserCart(cart);
     }
     if (!this.isAuthenticated && this.getUserHash()) {
       const cart = await this.getArrayOrEmpty(CartModel, "users/carts", { params: { guest_hash: this.getUserHash() } });
-      this.сartStore.setUserCart(cart);
+      this.сartStore.updateUserCart(cart);
     }
   }
 
@@ -49,6 +49,14 @@ export class ProfileService extends BaseService {
       await this.apiRequest.delete(`users/carts/${id}`, { params: { guest_hash: this.getUserHash() } });
     }
     this.updateUserCartState();
+  }
+
+  clearCart() {
+    const cart = this.сartStore.userCart;
+    if (!!cart) {
+      const deletePromises = cart.map((iter) => this.deleteFromCart(iter.product_id));
+      Promise.all(deletePromises);
+    }
   }
 
   async changeCountCartItem(id: number, count: number) {
