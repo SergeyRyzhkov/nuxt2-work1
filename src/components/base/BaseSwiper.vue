@@ -2,6 +2,7 @@
   <client-only>
     <div>
       <div class="swiper-container" :class="[swiperRootClassName, containerClasses]">
+        <slot name="before-main-swiper-wrapper" />
         <div class="swiper-wrapper">
           <div v-for="(slide, index) in slides" :key="index" :class="sldClasses">
             <slot name="slide" :slide="slide"></slot>
@@ -32,7 +33,6 @@
             </slot>
           </div>
         </div>
-        <slot name="after-thumbs-slides"></slot>
       </div>
     </div>
   </client-only>
@@ -132,6 +132,7 @@ export default class BaseSwiper extends Vue {
     watchSlidesVisibility: true,
     observer: true,
     observeParents: true,
+    mousewheel: true,
   };
 
   async mounted() {

@@ -2,8 +2,8 @@
   <main class="page-wrapper">
     <div class="container">
       <BreadCrumbs />
-      <section class="flex flex-col md:flex-row md:items-start">
-        <div class="md:w-1/2 lg:w-7/12">
+      <section class="flex flex-col lg:flex-row lg:items-start">
+        <div class="lg:w-7/12 relative">
           <LazyBaseSwiper
             :slides="images"
             :settings="{ slidesPerView: 1, spaceBetween: 0 }"
@@ -11,11 +11,21 @@
             :pagination="false"
             :navigation="false"
             container-classes="w-full order-1 bg-[#F5F5F5]"
-            thumbs-container-classes="h-400 order-0 mr-38 overflow-hidden product-slider-thumbs"
+            thumbs-container-classes="hidden lg:block h-400 order-0 mr-38 overflow-hidden product-slider-thumbs"
             thumbs-slider-classes="w-116 min-w-[116px] h-127 max-h-127"
             :thumbs-settings="{ slidesPerView: 3, spaceBetween: 16, direction: 'vertical' }"
             class="flex"
+            :show-alternative-main-slider="showVideo"
           >
+            <template v-if="showVideo" #before-main-swiper-wrapper>
+              <LazyBaseVideoPlayer
+                v-if="video && showVideo"
+                :src="video"
+                class="w-full h-full order-1 bg-[#F5F5F5] absolute z-50"
+                controls
+              ></LazyBaseVideoPlayer>
+            </template>
+
             <template #slide="{ slide }">
               <div class="flex flex-col w-full p-44 md:p-68">
                 <img v-lozad="slide" height="500" width="260" alt=" " class="w-full h-300 md:h-500 object-scale-down" />
@@ -23,17 +33,19 @@
             </template>
 
             <template #thumbs-slide="{ slide }">
-              <div class="flex flex-col w-full p-16 bg-[#F5F5F5] h-full">
+              <div class="flex flex-col w-full p-16 bg-[#F5F5F5] h-full" @click="showVideo = false">
                 <img v-lozad="slide" height="127" width="116" alt=" " class="object-scale-down h-full" />
               </div>
             </template>
-
-            <template #after-thumbs-slides>
-              <div class="absolute mt-16 w-116 h-127 flex items-center justify-between bg-[#F5F5F5]">
-                <img v-lozad="'/icons/play.png'" class="m-auto" alt=" " width="45" height="45" />
-              </div>
-            </template>
           </LazyBaseSwiper>
+
+          <div
+            v-if="video"
+            class="absolute mt-16 w-116 h-127 flex items-center justify-between bg-[#F5F5F5] bottom-0 z-50"
+            @click="showVideo = true"
+          >
+            <img src="/icons/play.png" class="m-auto" alt=" " width="45" height="45" />
+          </div>
         </div>
         <div class="lg:w-5/12 md:w-1/2 ml-0 lg:ml-80">
           <div class="text-[#4BC967] text-14 block md:hidden">В наличии на складе</div>
@@ -213,8 +225,10 @@ export default class ProductPage extends Vue {
   @Prop()
   slug: string;
 
-  productCount: number = 1;
   model: ProductModel = new ProductModel();
+
+  productCount: number = 1;
+  showVideo = false;
 
   async fetch() {
     this.model = await this.$serviceLocator.getService(CatalogService).getProductBySlug(this.slug);
@@ -227,6 +241,10 @@ export default class ProductPage extends Vue {
 
   get images() {
     return this.model?.logo?.map((iter) => iter.url);
+  }
+
+  get video() {
+    return this.model?.video?.url || null;
   }
 
   addToCart() {
