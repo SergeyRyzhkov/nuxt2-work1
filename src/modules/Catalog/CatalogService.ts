@@ -1,3 +1,4 @@
+import { AuthService } from "../Auth/AuthService";
 import CategoryModel from "./models/CategoryModel";
 import ProductModel from "./models/ProductModel";
 import CatalogModel from "./models/CatalogModel";
@@ -6,6 +7,7 @@ import { RouteLink } from "@/_core/models/RouteLink";
 import { lazyLoad } from "@/utils/Common";
 import { decOfNum } from "@/utils/Formaters";
 import Cacheable from "@/_core/MethodCacheDecorator";
+import { ServiceLocator } from "@/_core/service/ServiceLocator";
 
 export class CatalogService extends BaseService {
   @Cacheable(0)
@@ -35,8 +37,13 @@ export class CatalogService extends BaseService {
     return await this.getOneOrDefault(CategoryModel, `users/product-categories/${id}`);
   }
 
-  toogleFavorites(product: ProductModel) {
-    return this.apiRequest.post(`users/products/${product.id}/favorites`, { product_id: product.id });
+  toogleFavorites(product: ProductModel): Promise<boolean> {
+    if (!ServiceLocator.instance.getService(AuthService).isAuthenticated) {
+      this.nuxtContext.$modalManager.showNotify("Для добавления в избранное вводитй в свой аккаунт !");
+      return Promise.resolve(false);
+    } else {
+      return this.apiRequest.post(`users/products/${product.id}/favorites`, { product_id: product.id });
+    }
   }
 
   buildBreadCrumb(model: CategoryModel | null) {

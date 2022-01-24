@@ -51,9 +51,8 @@ export default class ProductItem extends Vue {
     return this.model?.logo && this.model?.logo.length ? this.model.logo[0].url : "/images/product-no-photo.jpg";
   }
 
-  toogleFavor() {
-    this.$serviceLocator.getService(CatalogService).toogleFavorites(this.model);
-    this.model.is_favorite = !this.model.is_favorite;
+  async toogleFavor() {
+    this.model.is_favorite = await this.$serviceLocator.getService(CatalogService).toogleFavorites(this.model);
   }
 
   async addToBasket() {

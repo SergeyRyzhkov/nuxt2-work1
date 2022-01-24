@@ -10,6 +10,16 @@ declare module "vue/types/vue" {
   }
 }
 
+declare module "@nuxt/types" {
+  interface NuxtAppOptions {
+    $modalManager: ModalManager;
+  }
+
+  interface Context {
+    $modalManager: ModalManager;
+  }
+}
+
 Vue.use(VModal, {
   dynamic: true,
   injectModalsContainer: true,

@@ -264,9 +264,8 @@ export default class ProductPage extends Vue {
     return await this.$serviceLocator.getService(ProfileService).getFavorites();
   }
 
-  toogleFavor() {
-    this.$serviceLocator.getService(CatalogService).toogleFavorites(this.model);
-    this.model.is_favorite = !this.model.is_favorite;
+  async toogleFavor() {
+    this.model.is_favorite = await this.$serviceLocator.getService(CatalogService).toogleFavorites(this.model);
   }
 
   get sliderSettings() {

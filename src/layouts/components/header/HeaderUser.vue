@@ -58,7 +58,7 @@ export default class HeaderUser extends Vue {
         this.$router.push({ name: "favorites" });
       }
     } else {
-      this.$modalManager.showNotify("Ввойдите в свой аккаунт или зарегистрируйтесь !");
+      this.$modalManager.showNotify("Войдите в свой аккаунт или зарегистрируйтесь !");
     }
   }
 
