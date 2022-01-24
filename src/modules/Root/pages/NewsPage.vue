@@ -24,6 +24,7 @@ import NewsModel from "../models/NewsModel";
 import AppStore from "../store/AppStore";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import { EmptyService } from "@/_core/service/EmptyService";
+import Cacheable from "@/_core/MethodCacheDecorator";
 
 @Component({
   components: {
@@ -37,9 +38,14 @@ export default class NewsPage extends Vue {
   newsModel: NewsModel = new NewsModel();
 
   async fetch() {
+    await this.updateNewsModelById();
+    this.updateBreadCrumbs();
+  }
+
+  @Cacheable(0)
+  async updateNewsModelById() {
     const id = this.$serviceLocator.getService(EmptyService).getIdBySlug(this.slug);
     this.newsModel = await this.$serviceLocator.getService(EmptyService).getOneOrDefault(NewsModel, `users/news/${id}`);
-    this.updateBreadCrumbs();
   }
 
   updateBreadCrumbs() {

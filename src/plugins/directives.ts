@@ -21,6 +21,7 @@ const ClickOutsideDirective = {
     document.body.removeEventListener("click", (e) => ClickOutsideDirective.onClickHandler(e, el, binding.value));
   },
 };
+// el.$destroy = () => el.removeEventListener
 
 const LozadDirective = {
   bind(el, binding) {

@@ -1,6 +1,5 @@
 import { getModule } from "vuex-module-decorators";
 import { AuthService } from "@/modules/Auth/AuthService";
-import ProductModel from "@/modules/Catalog/models/ProductModel";
 import { BaseService } from "@/_core/service/BaseService";
 import CartModel from "@/modules/Profile/models/CartModel";
 import CartStore from "@/modules/Profile/store/CartStore";
@@ -11,8 +10,12 @@ export class ProfileService extends BaseService {
     return getModule(CartStore, this.nuxtContext.store);
   }
 
-  getFavorites() {
-    return this.getArrayOrEmpty(ProductModel, "users/favorites");
+  async getFavorites() {
+    const favorites = await this.getAnyOrNull("users/favorites");
+    if (!!favorites) {
+      return favorites.map((iter) => iter.product);
+    }
+    return [];
   }
 
   async updateUserCartState() {

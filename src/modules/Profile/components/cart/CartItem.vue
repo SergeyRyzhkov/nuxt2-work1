@@ -1,9 +1,6 @@
 <template>
-  <section class="cart-item">
-    <figure class="cart-item-image">
-      <img v-lozad="imageSrc" alt="" itemprop="image" class="" />
-      <figcaption></figcaption>
-    </figure>
+  <section class="cart-item pr-16">
+    <img v-lozad="imageSrc" alt=" " class="object-scale-down hover:scale-105 h-86 w-86 md:w-127 md:h-127" />
     <div
       class="pl-16 md:pl-26 w-full"
       :class="{ 'flex justify-between md:items-center flex-col md:flex-row w-full': isOrdering }"
@@ -115,7 +112,7 @@ export default class CartItem extends Vue {
   .remove-cart-item {
     position: absolute;
     top: 27px;
-    right: 0;
+    right: 16px;
   }
   &-product_action {
     width: 36px;
