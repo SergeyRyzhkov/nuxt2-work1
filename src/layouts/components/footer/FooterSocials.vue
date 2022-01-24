@@ -7,7 +7,7 @@
       target="_blank"
       class="w-37 h-37 flex items-center justify-center first:ml-0 ml-12 rounded-full border border-footer-color border-solid"
     >
-      <img v-lozad="item.icon" alt=" " width="16" height="16" class="w-16 h-16" />
+      <img v-lazyimg="item.icon" alt=" " width="16" height="16" class="w-16 h-16" />
     </a>
   </section>
 </template>

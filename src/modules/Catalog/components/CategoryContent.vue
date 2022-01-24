@@ -9,7 +9,7 @@
             <template #slide="{ slide }">
               <nuxt-link class="flex flex-col w-226" :to="getSubCategoryRoute(slide)">
                 <img
-                  v-lozad="getSubCategoryLogo(slide)"
+                  v-lazyimg="getSubCategoryLogo(slide)"
                   height="226"
                   width="226"
                   alt=" "
@@ -28,7 +28,7 @@
           <LazyBaseSwiper :slides="sliders" :settings="{ slidesPerView: 1, spaceBetween: 0 }">
             <template #slide="{ slide }">
               <div class="flex flex-col w-full">
-                <img v-lozad="slide.url" height="400" width="400" alt=" " class="w-full h-400 object-cover object-top" />
+                <img v-lazyimg="slide.url" height="400" width="400" alt=" " class="w-full h-400 object-cover object-top" />
               </div>
             </template>
           </LazyBaseSwiper>

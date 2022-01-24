@@ -3,7 +3,7 @@
     <article v-if="!!articleModel && !!articleModel.meta_slug" class="article-smallitem" @click="goToCard()">
       <figure class="article-smallitem__preview">
         <img
-          v-lozad="imageSrc"
+          v-lazyimg="imageSrc"
           alt=" "
           itemprop="image"
           class="article-smallitem__preview-img hover:scale-105 transition-all"

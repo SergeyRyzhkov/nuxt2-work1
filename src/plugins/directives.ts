@@ -1,5 +1,5 @@
 import Vue from "vue";
-import lozad from "lozad";
+import { observeImage } from "../utils/ImageLazyLoad";
 import ImaskDirective from "./vue-imask-directive";
 
 const ClickOutsideDirective = {
@@ -23,7 +23,7 @@ const ClickOutsideDirective = {
 };
 // el.$destroy = () => el.removeEventListener
 
-const LozadDirective = {
+const LazyImg = {
   bind(el, binding) {
     el.decoding = "async";
     if (el.setAttribute) {
@@ -34,21 +34,10 @@ const LozadDirective = {
         el.setAttribute("data-src", binding.value);
       }
     }
-
-    const observer = lozad(el);
-    observer.observe();
-  },
-
-  update(el, binding) {
-    if (binding.oldValue !== binding.value) {
-      el.setAttribute("data-src", binding.value);
-      if (el.getAttribute("data-loaded") === "true") {
-        el.setAttribute("src", binding.value);
-      }
-    }
+    observeImage(el);
   },
 };
 
+Vue.directive("lazyimg", LazyImg);
 Vue.directive("imask", ImaskDirective);
 Vue.directive("click-outside", ClickOutsideDirective);
-Vue.directive("lozad", LozadDirective);

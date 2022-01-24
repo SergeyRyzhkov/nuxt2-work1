@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="w-1/3 py-40">
-        <img v-lozad="banerSrc" alt=" " width="400" height="240" class="w-400 h-240 object-cover object-left-top" />
+        <img v-lazyimg="banerSrc" alt=" " width="400" height="240" class="w-400 h-240 object-cover object-left-top" />
       </div>
     </div>
     <div

@@ -76,13 +76,13 @@
             для скачивания.</span
           >
           <div class="mt-32 md:mt-60 flex items-center">
-            <img v-lozad="'/images/app_store.svg'" alt=" " width="140" height="42" />
-            <img v-lozad="'/images/google_play.svg'" class="ml-16" alt=" " width="140" height="42" />
+            <img v-lazyimg="'/images/app_store.svg'" alt=" " width="140" height="42" />
+            <img v-lazyimg="'/images/google_play.svg'" class="ml-16" alt=" " width="140" height="42" />
           </div>
         </div>
       </div>
       <div class="w-full md:w-1/2 bg-nude">
-        <img v-lozad="'/images/main-apps.png'" alt=" " height="680" width="630" />
+        <img v-lazyimg="'/images/main-apps.png'" alt=" " height="680" width="630" />
       </div>
     </section>
 

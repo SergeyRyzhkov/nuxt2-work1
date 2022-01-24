@@ -1,7 +1,7 @@
 <template>
   <div class="w-[124px] sm:w-[153px]">
     <img
-      v-lozad="'/images/footer-logo.svg'"
+      v-lazyimg="'/images/footer-logo.svg'"
       alt=" "
       class="cursor-pointer w-full"
       width="152"

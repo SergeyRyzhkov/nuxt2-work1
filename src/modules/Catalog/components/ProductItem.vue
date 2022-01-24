@@ -7,7 +7,7 @@
         @click.prevent="toogleFavor()"
       ></BaseHeartButton>
       <img
-        v-lozad="imageSrc"
+        v-lazyimg="imageSrc"
         height="286"
         width="226"
         alt=" "

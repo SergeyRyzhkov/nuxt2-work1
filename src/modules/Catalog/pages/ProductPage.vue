@@ -29,13 +29,13 @@
 
             <template #slide="{ slide }">
               <div class="flex flex-col w-full p-44 md:p-68">
-                <img v-lozad="slide" height="500" width="260" alt=" " class="w-full h-300 md:h-500 object-scale-down" />
+                <img v-lazyimg="slide" height="500" width="260" alt=" " class="w-full h-300 md:h-500 object-scale-down" />
               </div>
             </template>
 
             <template #thumbs-slide="{ slide }">
               <div class="flex flex-col w-full p-16 bg-[#F5F5F5] h-full" @click="showVideo = false">
-                <img v-lozad="slide" height="127" width="116" alt=" " class="object-scale-down h-full" />
+                <img v-lazyimg="slide" height="127" width="116" alt=" " class="object-scale-down h-full" />
               </div>
             </template>
           </LazyBaseSwiper>
