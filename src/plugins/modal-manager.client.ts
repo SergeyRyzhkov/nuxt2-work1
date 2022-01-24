@@ -93,8 +93,16 @@ class ModalManager {
         // { ...options, ...{ transition: "nice-modal-fade", overlayTransition: "overlay-fade" } },
         {
           ...events,
-          ...{ "before-open": (_event) => (document.documentElement.style.overflowY = "hidden") },
-          ...{ "before-close": (_event) => (document.documentElement.style.overflowY = "auto") },
+          ...{
+            "before-open": (_event) => {
+              document.documentElement.style.overflowY = "hidden";
+            },
+          },
+          ...{
+            "before-close": (_event) => {
+              document.documentElement.style.overflowY = "auto";
+            },
+          },
         }
       );
     });

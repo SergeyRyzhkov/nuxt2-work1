@@ -30,7 +30,7 @@
 
 .vue-dialog-w-max {
   width: max-content !important;
-  max-width: 95vw !important;
+  // max-width: 95vw !important;
 }
 
 .vue-dialog_close-button {
@@ -130,23 +130,12 @@
 
 .overlay-fade-enter-active,
 .overlay-fade-leave-active {
-  transition: all 0.2s;
+  transition: all 0.1s;
 }
 
 .overlay-fade-enter,
 .overlay-fade-leave-active {
   opacity: 0;
-}
-
-.nice-modal-fade-enter-active,
-.nice-modal-fade-leave-active {
-  transition: all 0.4s;
-}
-
-.nice-modal-fade-enter,
-.nice-modal-fade-leave-active {
-  opacity: 0;
-  transform: translateY(-20px);
 }
 
 .vue-dialog {
