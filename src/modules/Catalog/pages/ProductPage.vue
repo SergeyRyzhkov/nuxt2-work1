@@ -22,6 +22,7 @@
                 v-if="video && showVideo"
                 :src="video"
                 class="w-full h-full order-1 bg-[#F5F5F5] absolute z-50"
+                video-classes="w-full h-full"
                 controls
               ></LazyBaseVideoPlayer>
             </template>
@@ -41,7 +42,8 @@
 
           <div
             v-if="video"
-            class="absolute mt-16 w-116 h-127 flex items-center justify-between bg-[#F5F5F5] bottom-0 z-50"
+            class="absolute mt-16 w-116 h-127 flex items-center justify-between bg-[#F5F5F5] bottom-0 z-50 cursor-pointer"
+            :class="showVideo ? 'border' : ''"
             @click="showVideo = true"
           >
             <img src="/icons/play.png" class="m-auto" alt=" " width="45" height="45" />
