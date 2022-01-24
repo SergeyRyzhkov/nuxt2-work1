@@ -2,8 +2,7 @@ import { AxiosInstance } from "axios";
 
 export const geolocationCoordinates = () => {
   if (!!navigator.geolocation) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, _reject) => {
       navigator.geolocation.getCurrentPosition(({ coords }) => {
         resolve([coords.latitude, coords.longitude]);
       });

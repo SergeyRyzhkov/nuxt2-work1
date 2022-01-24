@@ -42,7 +42,7 @@ export default class HeaderUser extends Vue {
 
   authModalOrProfile() {
     if (this.isAuthenticated) {
-      this.$router.push({ name: "profile" });
+      this.$router.push({ name: "personal" });
     } else {
       this.$modalManager.modalShowFullScreen(AuthForm);
     }
