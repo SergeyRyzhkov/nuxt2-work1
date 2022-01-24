@@ -1,7 +1,7 @@
 <template>
   <LazyHydrate when-visible>
     <article v-if="!!articleModel && !!articleModel.meta_slug" class="article-smallitem" @click="goToCard()">
-      <figure class="article-smallitem__preview rsn-skeleton">
+      <figure class="article-smallitem__preview">
         <img
           v-lazyimg="imageSrc"
           alt=" "
