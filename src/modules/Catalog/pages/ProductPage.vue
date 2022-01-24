@@ -2,6 +2,8 @@
   <main class="page-wrapper">
     <div class="container">
       <BreadCrumbs />
+      <ProductPageSkeleton v-if="$fetchState.pending"></ProductPageSkeleton>
+
       <section class="flex flex-col lg:flex-row lg:items-start">
         <div class="lg:w-7/12 relative">
           <LazyBaseSwiper
@@ -41,7 +43,7 @@
           </LazyBaseSwiper>
 
           <div
-            v-if="video"
+            v-if="video && !$fetchState.pending"
             class="absolute mt-16 w-116 h-127 flex items-center justify-between bg-[#F5F5F5] bottom-0 z-50 cursor-pointer"
             :class="showVideo ? 'border' : ''"
             @click="showVideo = true"
