@@ -29,6 +29,7 @@ export default class ProductModel extends SeoModel {
   banner: { url: string };
   logo: { url: string }[];
   video: { url: string };
-
   is_favorite = false;
+  // eslint-disable-next-line no-use-before-define
+  recommended_products: ProductModel[];
 }

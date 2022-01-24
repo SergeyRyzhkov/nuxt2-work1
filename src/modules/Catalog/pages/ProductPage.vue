@@ -196,10 +196,10 @@
       </div>
     </section>
 
-    <section v-if="!!popular && popular.length" class="mt-40 md:mt-60 container">
+    <section v-if="!!recommendation && recommendation.length" class="mt-40 md:mt-60 container">
       <h2 class="text-42 font-compact uppercase">Рекомендуем</h2>
       <LazyHydrate when-visible>
-        <LazyBaseSwiper :slides="popular" class="mt-32" :settings="sliderSettings">
+        <LazyBaseSwiper :slides="recommendation" class="mt-32" :settings="sliderSettings">
           <template #slide="{ slide }">
             <ProductItem :model="slide" class="w-max"></ProductItem>
           </template>
@@ -260,8 +260,8 @@ export default class ProductPage extends Vue {
     this.productCount = count;
   }
 
-  async popular() {
-    return await this.$serviceLocator.getService(ProfileService).getFavorites();
+  get recommendation() {
+    return this.model?.recommended_products;
   }
 
   async toogleFavor() {

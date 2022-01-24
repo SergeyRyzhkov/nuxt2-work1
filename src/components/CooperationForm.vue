@@ -9,10 +9,3 @@
     <FeedbackForm class="mt-20 md:mt-40" @close="$emit('close')"></FeedbackForm>
   </base-modal>
 </template>
-
-<script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
-
-@Component
-export default class CooperationForm extends Vue {}
-</script>

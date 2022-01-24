@@ -1,6 +1,7 @@
 <template>
   <main class="page-wrapper container">
     <BreadCrumbs />
+
     <div class="arenda-banner flex flex-col justify-between lg:flex-row lg:items-center p-16 md:p-40">
       <div class="flex flex-col md:flex-row md:items-center">
         <h1 class="grow flex-shrink-0">Аренда студии</h1>
@@ -29,6 +30,11 @@
       ></base-calendar>
     </div>
 
+    <div v-if="$fetchState.pending" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-30 gap-x-30 mt-30 md:mt-40">
+      <template v-for="index in 6">
+        <SkeletonTrainingItem :key="index"> </SkeletonTrainingItem>
+      </template>
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-30 gap-x-30 mt-30 md:mt-40">
       <TrainingItem v-for="iter in trainingList" :key="iter.id" :item="iter"> </TrainingItem>
     </div>
