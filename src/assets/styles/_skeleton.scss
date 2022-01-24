@@ -1,0 +1,71 @@
+/*! purgecss start ignore */
+.rsn-skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.12);
+  mask-image: radial-gradient(#fff, #000);
+}
+
+.rsn-animate-wave::after,
+.rsn-animate-pulse::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  background: linear-gradient(90deg, transparent, hsla(0, 0%, 100%, 0.4), transparent);
+}
+
+.rsn-animate {
+  &-wave::after {
+    animation: skeleton-effect-wave 1s linear infinite;
+  }
+
+  &-pulse::after {
+    animation: skeleton-effect-pulse 1s linear infinite;
+  }
+
+  &-fade::after {
+    animation: skeleton-effect-fade 1s linear infinite;
+  }
+}
+
+@keyframes skeleton-effect-wave {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes skeleton-effect-fade {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes skeleton-effect-pulse {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.975);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/*! purgecss end ignore */

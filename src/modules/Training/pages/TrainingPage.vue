@@ -42,6 +42,7 @@ import { TrainingService } from "../TrainingService";
 import EnrollTraining from "../components/EnrollTraining.vue";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import AppStore from "@/modules/Root/store/AppStore";
+import Cacheable from "@/_core/MethodCacheDecorator";
 
 @Component
 export default class TrainingPage extends Vue {
@@ -53,8 +54,13 @@ export default class TrainingPage extends Vue {
   model: TrainingModel = new TrainingModel();
 
   async fetch() {
-    this.model = await this.$serviceLocator.getService(TrainingService).getBySlug(this.slug);
+    this.model = await this.getModelById(this.slug);
     this.updateBreadCrumbs();
+  }
+
+  @Cacheable(0)
+  async getModelById(slug: string) {
+    return await this.$serviceLocator.getService(TrainingService).getBySlug(slug);
   }
 
   get bannerSrc() {

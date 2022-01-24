@@ -1,8 +1,9 @@
+const loadClassesName = ["rsn-skeleton", "rsn-animate-wave"];
+
 const options = {
   root: null,
   rootMargin: "0px",
-  // процент пересечения - половина изображения
-  threshold: 0.5,
+  threshold: 0.1,
 };
 
 let observer = {
@@ -16,6 +17,11 @@ if (process.client) {
         const lazyImg = iter.target;
         if (!!lazyImg) {
           lazyImg.setAttribute("src", lazyImg.getAttribute("data-src") || "");
+
+          lazyImg.addEventListener("load", () => {
+            lazyImg.setAttribute("data-loaded", "true");
+            lazyImg.classList.remove(...loadClassesName);
+          });
         }
         observer.unobserve(lazyImg);
       }
@@ -24,5 +30,6 @@ if (process.client) {
 }
 
 export const observeImage = (target: HTMLElement) => {
+  target.classList.add(...loadClassesName);
   observer.observe(target);
 };

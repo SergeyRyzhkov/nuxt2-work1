@@ -2,8 +2,9 @@
 @import "layouts";
 @import "media";
 @import "typography";
+@import "_skeleton";
 
-:root {
+:root  {
   --primary: #{$primary};
   --secondary: #{$secondary};
   --light-gray: #{$light-gray};

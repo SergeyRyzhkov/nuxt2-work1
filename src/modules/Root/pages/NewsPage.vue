@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrapper">
-    <BaseStaticBanner v-if="bannerSrc" :image-src="bannerSrc" />
+    <BaseStaticBanner :image-src="bannerSrc" />
     <main class="container mt-40">
       <div class="flex flex-col-reverse md:flex-row">
         <div class="w-full mt-32 md:mt-0 md:w-1/4">
@@ -38,14 +38,14 @@ export default class NewsPage extends Vue {
   newsModel: NewsModel = new NewsModel();
 
   async fetch() {
-    await this.updateNewsModelById();
+    const id = this.$serviceLocator.getService(EmptyService).getIdBySlug(this.slug);
+    this.newsModel = await this.getNewsModelById(id);
     this.updateBreadCrumbs();
   }
 
   @Cacheable(0)
-  async updateNewsModelById() {
-    const id = this.$serviceLocator.getService(EmptyService).getIdBySlug(this.slug);
-    this.newsModel = await this.$serviceLocator.getService(EmptyService).getOneOrDefault(NewsModel, `users/news/${id}`);
+  async getNewsModelById(id: number) {
+    return await this.$serviceLocator.getService(EmptyService).getOneOrDefault(NewsModel, `users/news/${id}`);
   }
 
   updateBreadCrumbs() {
@@ -65,7 +65,7 @@ export default class NewsPage extends Vue {
   }
 
   get bannerSrc() {
-    return this.newsModel.banner?.url || undefined;
+    return this.newsModel.banner?.url || "/images/default-banner-black.jpg";
   }
 
   get newsDate() {

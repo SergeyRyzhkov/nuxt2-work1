@@ -175,12 +175,6 @@ export default class BaseSwiper extends Vue {
 .swiper-slide-next {
   transition: 0.3s;
 }
-.swiper-slide {
-  // flex-shrink: 0;
-  // min-width: 100%;
-  // width: auto;
-  // cursor: pointer;
-}
 
 .swiper-navigation {
   position: absolute;
@@ -202,7 +196,7 @@ export default class BaseSwiper extends Vue {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 99999px;
+  border-radius: 50%;
   border: 1px solid $primary;
   cursor: pointer;
 }

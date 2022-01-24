@@ -4,6 +4,7 @@
     :class="[!isContainer ? 'w-screen' : '', wide ? 'h-400 md:h-600' : 'h-200 md:h-400']"
   >
     <img
+      v-if="image"
       :src="image"
       :height="height"
       alt=" "

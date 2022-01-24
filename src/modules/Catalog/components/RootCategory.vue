@@ -56,7 +56,7 @@
     <section v-if="!!bestSellers" class="mt-40 md:mt-60">
       <h2 class="text-42 font-compact uppercase">Хиты продаж</h2>
       <LazyHydrate when-visible>
-        <LazyBaseSwiper :slides="bestSellers" class="mt-32" :settings="{ spaceBetween: 32 }">
+        <LazyBaseSwiper :slides="bestSellers" class="mt-32" :settings="sliderSettings">
           <template #slide="{ slide }">
             <ProductItem :model="slide" class="w-max"><span>HIT</span></ProductItem>
           </template>
