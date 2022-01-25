@@ -2,9 +2,11 @@
   <main class="page-wrapper">
     <div class="container">
       <BreadCrumbs />
-      <ProductPageSkeleton v-if="$fetchState.pending"></ProductPageSkeleton>
+      <template v-if="!model || !model.id">
+        <ProductPageSkeleton></ProductPageSkeleton>
+      </template>
 
-      <section class="flex flex-col lg:flex-row lg:items-start">
+      <section v-else class="flex flex-col lg:flex-row lg:items-start">
         <div class="lg:w-7/12 relative">
           <LazyBaseSwiper
             :slides="images"
@@ -200,7 +202,7 @@
       </div>
     </section>
 
-    <section v-if="!!recommendation && recommendation.length" class="mt-40 md:mt-60 container">
+    <section v-if="!!model && model.id > 0 && !!recommendation && recommendation.length" class="mt-40 md:mt-60 container">
       <h2 class="text-42 font-compact uppercase">Рекомендуем</h2>
       <LazyHydrate when-visible>
         <LazyBaseSwiper :slides="recommendation" class="mt-32" :settings="sliderSettings">
