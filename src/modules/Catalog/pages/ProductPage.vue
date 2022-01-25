@@ -42,16 +42,18 @@
             </template>
           </LazyBaseSwiper>
 
-          <div
-            v-if="video && !$fetchState.pending"
-            class="absolute mt-16 w-116 h-127 flex items-center justify-between bg-[#F5F5F5] bottom-0 z-50 cursor-pointer"
-            :class="showVideo ? 'border' : ''"
-            @click="showVideo = true"
-          >
-            <img src="/icons/play.png" class="m-auto" alt=" " width="45" height="45" />
-          </div>
+          <client-only>
+            <div
+              v-if="video && !$fetchState.pending"
+              class="hidden md:flex absolute mt-16 w-116 h-127 items-center justify-between bg-[#F5F5F5] bottom-0 z-50 cursor-pointer"
+              :class="showVideo ? 'border' : ''"
+              @click="showVideo = true"
+            >
+              <img src="/icons/play.png" class="m-auto" alt=" " width="45" height="45" />
+            </div>
+          </client-only>
         </div>
-        <div class="lg:w-5/12 md:w-1/2 ml-0 lg:ml-80">
+        <div class="lg:w-5/12 ml-0 lg:ml-80">
           <div class="text-[#4BC967] text-14 block md:hidden">В наличии на складе</div>
           <h2 class="text-24 font-semibold">{{ model.name }}</h2>
           <div class="text-gray-color mt-16 text-14">Артикул: {{ model.vendor_code }}</div>

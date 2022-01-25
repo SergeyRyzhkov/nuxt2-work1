@@ -1,4 +1,4 @@
-const loadClassesName = ["rsn-skeleton", "rsn-animate-wave"];
+const loadClassesName = ["skeleton", "skeleton--wave"];
 
 const options = {
   root: null,
