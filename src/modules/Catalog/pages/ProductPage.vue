@@ -10,7 +10,7 @@
         <div class="lg:w-7/12 relative">
           <LazyBaseSwiper
             :slides="images"
-            :settings="{ slidesPerView: 1, spaceBetween: 0 }"
+            :settings="{ slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 }"
             :show-thumbs="true"
             :pagination="false"
             :navigation="false"

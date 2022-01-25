@@ -25,7 +25,7 @@
 
       <section v-if="!!sliders && sliders.length" class="mt-32 md:mt-50">
         <LazyHydrate when-visible>
-          <LazyBaseSwiper :slides="sliders" :settings="{ slidesPerView: 1, spaceBetween: 0 }">
+          <LazyBaseSwiper :slides="sliders" :settings="{ slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 }">
             <template #slide="{ slide }">
               <div class="flex flex-col w-full">
                 <img v-lazyimg="slide.url" height="400" width="400" alt=" " class="w-full h-400 object-cover object-top" />

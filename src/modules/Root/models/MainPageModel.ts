@@ -19,5 +19,11 @@ export default class MainPageModel extends SeoModel {
     link: string;
     button_text: string;
     image: { url: string };
+
+    description: string;
+    title_color: string;
+    subtitle_color: string;
+    button: boolean;
+    media: string;
   }[];
 }
