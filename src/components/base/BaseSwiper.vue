@@ -27,7 +27,7 @@
 
       <div v-if="showThumbs" class="swiper-container-thumbs" :class="[swiperThumbsClassName, thumbsContainerClasses]">
         <div class="swiper-wrapper">
-          <div v-for="(slide, index) in slides" :key="index + 100" :class="thumbsSldClasses">
+          <div v-for="(slide, index) in slides" :key="index + 1000" :class="thumbsSldClasses">
             <slot name="thumbs-slide" :slide="slide">
               <slot name="slide" :slide="slide"></slot>
             </slot>
@@ -103,6 +103,7 @@ export default class BaseSwiper extends Vue {
 
   defaultSettings = {
     slidesPerView: "auto",
+    slidesPerGroup: 4,
     spaceBetween: 16,
     grabCursor: true,
     watchSlidesVisibility: true,
@@ -161,7 +162,6 @@ export default class BaseSwiper extends Vue {
         swiper: galleryThumbs,
       };
     }
-
     // eslint-disable-next-line no-new
     new Swiper(`.${this.swiperRootClassName}`, combinedSettings as any);
   }
