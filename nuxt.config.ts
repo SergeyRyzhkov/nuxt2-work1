@@ -104,8 +104,6 @@ const nuxtConfig: NuxtConfig = {
       commons: true,
     },
 
-    // transpile: ["swiper", "lozad"],
-
     // @ts-ignore
     postcss: {
       plugins: {

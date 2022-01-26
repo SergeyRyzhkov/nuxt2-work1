@@ -36,6 +36,14 @@ const LazyImg = {
     }
     observeImage(el);
   },
+  update(el, binding) {
+    if (binding.oldValue !== binding.value) {
+      el.setAttribute("data-src", binding.value);
+      if (el.getAttribute("data-loaded") === "true") {
+        el.setAttribute("src", binding.value);
+      }
+    }
+  },
 };
 
 Vue.directive("lazyimg", LazyImg);

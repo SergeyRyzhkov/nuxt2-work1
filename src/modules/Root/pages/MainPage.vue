@@ -33,7 +33,7 @@
 
     <LazyHydrate when-visible>
       <section class="container mt-40 md:mt-100">
-        <h2 class="text-48 font-compact uppercase">Вторая линейка</h2>
+        <MainPageProduct :model="model"></MainPageProduct>
       </section>
     </LazyHydrate>
 

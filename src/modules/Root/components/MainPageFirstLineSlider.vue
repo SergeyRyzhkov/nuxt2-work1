@@ -18,7 +18,7 @@
             <div :style="getTitleColor(slide)" class="mt-27">
               {{ slide.title }}
             </div>
-            <div :style="getSubTitleColor(slide)" class="mt-18">
+            <div :style="getSubTitleColor(slide)" class="mt-18 text-center">
               {{ slide.description }}
             </div>
             <base-button v-if="slide.button" class="bg-white w-max mt-30" @click="goTo(slide)">{{

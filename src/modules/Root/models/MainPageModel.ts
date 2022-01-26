@@ -6,12 +6,20 @@ export default class MainPageModel extends SeoModel {
   content: {
     line: { title: string; description: string };
     line_2: { title: string }[];
-    product: ProductModel[];
+    product: {
+      color: string;
+      background_color: string;
+      title: string;
+      description: string;
+      product: ProductModel;
+    };
     bestsellers: ProductModel[];
     new_products: ProductModel[];
     popular: ProductModel[];
     instagram: { url: string }[];
   };
+
+  banner: { url: string };
 
   slider: {
     id: number;
