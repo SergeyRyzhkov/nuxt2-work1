@@ -1,5 +1,16 @@
 <template>
-  <LazyBaseSwiper :slides="slideList" :arrows="false" :settings="{ slidesPerView: 1, spaceBetween: 0, slidesPerGroup: 1 }">
+  <LazyBaseSwiper
+    :slides="slideList"
+    :arrows="false"
+    :settings="{
+      slidesPerView: 1,
+      spaceBetween: 0,
+      slidesPerGroup: 1,
+      autoplay: {
+        delay: 5000,
+      },
+    }"
+  >
     <template #slide="{ slide }">
       <div class="w-screen relative">
         <img

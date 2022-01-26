@@ -1,7 +1,7 @@
 <template>
   <main class="page-wrapper">
-    <MainPageTopBanner v-show="isLoaded" :model="model"></MainPageTopBanner>
     <MainPageTopBannerSkeleton v-show="!isLoaded"></MainPageTopBannerSkeleton>
+    <MainPageTopBanner v-show="isLoaded" :model="model"></MainPageTopBanner>
 
     <!-- content.new_products -->
     <section v-if="!!newProducts" class="container mt-40 md:mt-100">

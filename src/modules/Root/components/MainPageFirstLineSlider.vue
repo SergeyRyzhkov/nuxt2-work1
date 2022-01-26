@@ -1,5 +1,16 @@
 <template>
-  <LazyBaseSwiper :slides="slideList" :arrows="false" :settings="{ slidesPerView: 1, spaceBetween: 0, slidesPerGroup: 1 }">
+  <LazyBaseSwiper
+    :slides="slideList"
+    :arrows="false"
+    :settings="{
+      slidesPerView: 1,
+      spaceBetween: 0,
+      slidesPerGroup: 1,
+      autoplay: {
+        delay: 5000,
+      },
+    }"
+  >
     <template #slide="{ slide }">
       <div class="flex flex-col lg:flex-row">
         <div class="w-full lg:w-1/2 h-300 lg:h-600 border-r-2 border-secondary">
