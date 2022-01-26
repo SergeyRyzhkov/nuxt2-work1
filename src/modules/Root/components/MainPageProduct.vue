@@ -3,10 +3,10 @@
     <div class="w-full lg:w-1/2 h-380 lg:h-600 bg-[#F5F5F5] flex">
       <img
         v-lazysrc="leftIamgeSrc"
-        height="500"
+        height="570"
         width="300"
         alt=" "
-        class="w-150 h-250 lg:w-300 lg:h-500 object-scale-down px-30 pt-15 m-auto"
+        class="w-150 h-250 lg:w-300 lg:h-570 object-scale-down px-30 pt-15 m-auto"
       />
     </div>
     <div class="w-full lg:w-1/2 h-full lg:h-600 flex" :style="bgColor">
