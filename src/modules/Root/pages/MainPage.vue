@@ -1,6 +1,7 @@
 <template>
   <main class="page-wrapper">
-    <MainPageTopBanner :model="model" class=""></MainPageTopBanner>
+    <MainPageTopBanner v-show="isLoaded" :model="model"></MainPageTopBanner>
+    <MainPageTopBannerSkeleton v-show="!isLoaded"></MainPageTopBannerSkeleton>
 
     <!-- content.new_products -->
     <section v-if="!!newProducts" class="container mt-40 md:mt-100">
@@ -117,6 +118,11 @@ export default class MainPage extends Vue {
 
   async fetch() {
     this.model = await this.$serviceLocator.getService(EmptyService).getAnyOrNull("users/pages/home");
+    this.model.loaded = true;
+  }
+
+  get isLoaded() {
+    return !!this.model && this.model.loaded;
   }
 
   get bannerSrc() {
