@@ -53,11 +53,11 @@
       <section class="container mt-40 md:mt-100">
         <div class="flex flex-col lg:flex-row h-210 lg:h-400">
           <div class="w-full lg:w-1/2 cursor-pointer" @click="goToLine21">
-            <img v-lazysrc="line2ImgSrc1" class="h-full w-full object-cover object-left-top" />
+            <img v-lazysrc="line2ImgSrc1" height="500" width="300" class="h-full w-full object-cover object-left-top" />
             <div class="mt-16 lg:mt-26 text-18 font-semibold uppercase">{{ line2Title1 }}</div>
           </div>
           <div class="w-full lg:w-1/2 ml-0 lg:ml-20 cursor-pointer" @click="goToLine22">
-            <img v-lazysrc="line2ImgSrc2" class="h-full w-full object-cover object-left-top" />
+            <img v-lazysrc="line2ImgSrc2" height="500" width="300" class="h-full w-full object-cover object-left-top" />
             <div class="mt-16 lg:mt-26 text-18 font-semibold uppercase">{{ line2Title2 }}</div>
           </div>
         </div>
@@ -103,7 +103,7 @@
 
     <LazyHydrate when-visible>
       <section class="mt-40 md:mt-100">
-        <SnakeComponent />
+        <LazySnakeComponent />
       </section>
     </LazyHydrate>
   </main>
