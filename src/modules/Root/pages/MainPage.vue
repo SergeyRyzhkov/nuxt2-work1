@@ -15,7 +15,7 @@
 
     <LazyHydrate when-visible>
       <section class="container mt-40 md:mt-100">
-        <h2 class="text-48 font-compact uppercase">Первая линейка - НЕ ПОНЯТНО !</h2>
+        <MainPageFirstLineSlider :model="model"></MainPageFirstLineSlider>
       </section>
     </LazyHydrate>
 

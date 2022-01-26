@@ -27,4 +27,17 @@ export default class MainPageModel extends SeoModel {
     button: boolean;
     media: string;
   }[];
+
+  slider_line: {
+    id: number;
+    title: string;
+    description: string;
+    title_color: string;
+    subtitle_color: string;
+    link: string;
+    button: boolean;
+    button_text: string;
+    image: { url: string };
+    media: { url: string };
+  }[];
 }
