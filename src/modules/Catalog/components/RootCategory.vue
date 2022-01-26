@@ -22,7 +22,7 @@
     <section class="mt-40 md:mt-60 flex flex-col md:flex-row w-full justify-between">
       <div class="w-full md:w-1/2">
         <img
-          v-lazyimg="lineImg1"
+          v-lazysrc="lineImg1"
           alt=" "
           class="object-scale-down hover:scale-105 transition-all w-full h-200 md:h-300"
           height="300"
@@ -31,7 +31,7 @@
       </div>
       <div class="w-full md:w-1/2 md:ml-32">
         <img
-          v-lazyimg="lineImg2"
+          v-lazysrc="lineImg2"
           alt=" "
           class="object-scale-down hover:scale-105 transition-all w-full h-200 md:h-300 mt-32 md:mt-0 ml-0 md:ml-32"
           height="300"

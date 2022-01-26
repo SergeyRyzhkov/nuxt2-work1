@@ -7,7 +7,7 @@
       :value="value"
       :class="[currentClasses, 'base-input__input', classes, type === 'password' ? 'pr-16 md:pr-30' : '']"
       :type="type === 'password' && showPassword ? '' : type"
-      v-bind="{ ...$attrs }"
+      v-bind="$attrs"
       v-on="{
         ...$listeners,
         input: (event) => onInput(event),

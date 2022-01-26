@@ -12,7 +12,7 @@
       </div>
       <div class="flex items-center">
         <div @click="mobileSearch">
-          <img v-lazyimg="'/images/mobile-search.svg'" width="28" height="28" class="cursor-pointer" />
+          <img v-lazysrc="'/images/mobile-search.svg'" width="28" height="28" class="cursor-pointer" />
         </div>
         <HeaderUser class="ml-20 flex-shrink-0"></HeaderUser>
       </div>

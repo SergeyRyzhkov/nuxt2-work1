@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen relative h-300 lg:h-770">
+  <div class="w-screen relative h-300 lg:h-770 bg-[#F5F5F5]">
     <div class="absolute w-screen left-0 top-40 lg:top-185">
       <div class="container">
         <div class="ml-0 lg:ml-100">

@@ -21,7 +21,7 @@ import CookieComponent from "@/components/CookieComponent.vue";
 @Component({
   components: {
     LazyHydrate,
-    CookieComponent
+    CookieComponent,
   },
 })
 export default class DefaultLayout extends Vue {

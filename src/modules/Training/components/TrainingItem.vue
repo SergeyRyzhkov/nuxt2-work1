@@ -6,7 +6,7 @@
       class="flex flex-col cursor-pointer"
     >
       <div class="relative">
-        <img v-lazyimg="imageSrc" width="300" height="160" class="h-160 hover:scale-105 transition-all" alt=" " />
+        <img v-lazysrc="imageSrc" width="300" height="160" class="h-160 hover:scale-105 transition-all" alt=" " />
         <div class="absolute top-16 left-16 bg-primary px-16 py-8 rounded-full text-14 text-white">{{ statusName }}</div>
       </div>
       <div class="flex items-center justify-between mt-16">

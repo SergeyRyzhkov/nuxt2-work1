@@ -3,7 +3,7 @@
     <div v-if="isVisible" class="cookie-component flex sm:items-center sm:justify-between pr-23 pl-21 py-19">
       <figure class="cookie-image mt-[-8px] sm:mt-0">
         <picture>
-          <img v-lazyimg="'/images/cookie.png'" width="40" height="40px" alt="cookie" />
+          <img v-lazysrc="'/images/cookie.png'" width="40" height="40px" alt="cookie" />
         </picture>
       </figure>
       <div class="ml-14 flex flex-col sm:flex-row sm:items-center">

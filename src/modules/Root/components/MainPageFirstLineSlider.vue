@@ -10,11 +10,11 @@
             video-classes="w-full h-full"
             controls
           ></LazyBaseVideoPlayer>
-          <img v-if="!isVideo(slide)" v-lazyimg="getLeftIamgeSrc(slide)" class="h-full w-full object-cover object-left-top" />
+          <img v-if="!isVideo(slide)" v-lazysrc="getLeftIamgeSrc(slide)" class="h-full w-full object-cover object-left-top" />
         </div>
         <div class="w-full lg:w-1/2 h-full lg:h-600">
           <div class="bg-[#F5F5F5] h-full flex flex-col items-center py-50 px-16">
-            <img v-lazyimg="getSliderImage(slide)" height="300" width="250" alt=" " class="h-300 object-scale-down w-250" />
+            <img v-lazysrc="getSliderImage(slide)" height="300" width="250" alt=" " class="h-300 object-scale-down w-250" />
             <div :style="getTitleColor(slide)" class="mt-27">
               {{ slide.title }}
             </div>

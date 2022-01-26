@@ -1,6 +1,12 @@
 <template>
   <div v-click-outside="closeDropDown" class="w-full">
-    <BaseInput v-model="search"  placeholder="Искать товар" @input="searchProducts" @focus="focused = true" classes="header-search-input">
+    <BaseInput
+      v-model="search"
+      placeholder="Искать товар"
+      classes="header-search-input"
+      @input="searchProducts"
+      @focus="focused = true"
+    >
       <svg
         class="header-search-input__icon"
         width="25"
@@ -12,13 +18,16 @@
         <circle cx="10.4298" cy="11" r="6.575" transform="rotate(-45 10.4298 11)" stroke="#16192C" stroke-width="1.6" />
         <path d="M15.1144 15.6846L18.9151 19.4853" stroke="#16192C" stroke-width="1.6" />
       </svg>
-      <div  class="header-search-input-dropdown" v-if="products !== null && focused && search.length > strLength">
-        <div class="dropdown-no-results" v-if="products.length === 0">
+      <div v-if="products !== null && focused && search.length > strLength" class="header-search-input-dropdown">
+        <div v-if="products.length === 0" class="dropdown-no-results">
           <div class="request-string">По запросу "{{ search }}"</div>
           <div class="no-results">Нет результатов</div>
         </div>
-        <div class="dropdown-results flex-wrap justify-between flex flex-col lg:flex-row" v-if="products !== null && products.length > 0">
-          <nuxt-link :to="routeLink(product)" v-for="(product, index) in products" :key="index" class="flex items-center">
+        <div
+          v-if="products !== null && products.length > 0"
+          class="dropdown-results flex-wrap justify-between flex flex-col lg:flex-row"
+        >
+          <nuxt-link v-for="(product, index) in products" :key="index" :to="routeLink(product)" class="flex items-center">
             <figure class="dropdown-img">
               <img :src="product.logo[0].url" :alt="product.meta_title" itemprop="image" width="78" height="78" loading="lazy" />
               <figcaption></figcaption>
@@ -27,14 +36,18 @@
           </nuxt-link>
         </div>
       </div>
-      <div v-if="products !== null && focused && search.length > strLength"  class="dark hidden lg:block" @click="closeDropDown"></div>
+      <div
+        v-if="products !== null && focused && search.length > strLength"
+        class="dark hidden lg:block"
+        @click="closeDropDown"
+      ></div>
     </BaseInput>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from "nuxt-property-decorator";
-import {CatalogService} from "@/modules/Catalog/CatalogService";
+import { CatalogService } from "@/modules/Catalog/CatalogService";
 import ProductModel from "@/modules/Catalog/models/ProductModel";
 
 @Component
@@ -44,28 +57,29 @@ export default class HeaderSearchInput extends Vue {
   products: null | ProductModel[] = null;
   strLength: number = 3;
 
-  @Watch('$route.path')
-  watchRoute(){
-    this.closeDropDown()
+  @Watch("$route.path")
+  watchRoute() {
+    this.closeDropDown();
   }
 
-   routeLink(product) {
+  routeLink(product) {
     return this.$serviceLocator.getService(CatalogService).getProductRouteLocation(product);
   }
-  closeDropDown(){
-     this.focused = false
+
+  closeDropDown() {
+    this.focused = false;
   }
 
   async searchProducts() {
-    const timeout = 1000
-      if (this.search.length > this.strLength) {
-        let str = this.search;
-        setTimeout(async () => {
-          if (str === this.search && this.search.length > this.strLength) {
-            this.products = await this.$serviceLocator.getService(CatalogService).getSearchProducts('', this.search)
-          }
-        }, timeout)
-      }
+    const timeout = 1000;
+    if (this.search.length > this.strLength) {
+      const str = this.search;
+      setTimeout(async () => {
+        if (str === this.search && this.search.length > this.strLength) {
+          this.products = await this.$serviceLocator.getService(CatalogService).getSearchProducts("", this.search);
+        }
+      }, timeout);
+    }
   }
 }
 </script>
@@ -101,7 +115,7 @@ export default class HeaderSearchInput extends Vue {
   &-dropdown {
     max-height: 100vh;
     overflow: auto;
-    @include tablet{
+    @include tablet {
       border-top: 2px solid $primary;
       max-height: 600px;
     }
@@ -129,11 +143,10 @@ export default class HeaderSearchInput extends Vue {
           }
         }
       }
-      @include tablet{
+      @include tablet {
         > a {
           width: calc(50% - 24px);
         }
-
       }
       > a {
         margin-bottom: 16px;

@@ -1,7 +1,7 @@
 <template>
   <div class="w-[124px] sm:w-[153px]">
     <img
-      v-lazyimg="'/images/footer-logo.svg'"
+      v-lazysrc="'/images/footer-logo.svg'"
       alt=" "
       class="cursor-pointer w-full"
       width="152"

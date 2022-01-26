@@ -53,11 +53,11 @@
       <section class="container mt-40 md:mt-100">
         <div class="flex flex-col lg:flex-row h-210 lg:h-400">
           <div class="w-full lg:w-1/2 cursor-pointer" @click="goToLine21">
-            <img v-lazyimg="line2ImgSrc1" class="h-full w-full object-cover object-left-top" />
+            <img v-lazysrc="line2ImgSrc1" class="h-full w-full object-cover object-left-top" />
             <div class="mt-16 lg:mt-26 text-18 font-semibold uppercase">{{ line2Title1 }}</div>
           </div>
           <div class="w-full lg:w-1/2 ml-0 lg:ml-20 cursor-pointer" @click="goToLine22">
-            <img v-lazyimg="line2ImgSrc2" class="h-full w-full object-cover object-left-top" />
+            <img v-lazysrc="line2ImgSrc2" class="h-full w-full object-cover object-left-top" />
             <div class="mt-16 lg:mt-26 text-18 font-semibold uppercase">{{ line2Title2 }}</div>
           </div>
         </div>
@@ -76,13 +76,13 @@
             для скачивания.</span
           >
           <div class="mt-32 md:mt-60 flex items-center">
-            <img v-lazyimg="'/images/app_store.svg'" alt=" " width="140" height="42" />
-            <img v-lazyimg="'/images/google_play.svg'" class="ml-16" alt=" " width="140" height="42" />
+            <img v-lazysrc="'/images/app_store.svg'" alt=" " width="140" height="42" />
+            <img v-lazysrc="'/images/google_play.svg'" class="ml-16" alt=" " width="140" height="42" />
           </div>
         </div>
       </div>
       <div class="w-full md:w-1/2 bg-nude">
-        <img v-lazyimg="'/images/main-apps.png'" alt=" " height="680" width="630" />
+        <img v-lazysrc="'/images/main-apps.png'" alt=" " height="680" width="630" />
       </div>
     </section>
 

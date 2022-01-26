@@ -2,7 +2,7 @@
   <div class="flex flex-col lg:flex-row">
     <div class="w-full lg:w-1/2 h-380 lg:h-600 bg-[#F5F5F5] flex">
       <img
-        v-lazyimg="leftIamgeSrc"
+        v-lazysrc="leftIamgeSrc"
         height="500"
         width="300"
         alt=" "

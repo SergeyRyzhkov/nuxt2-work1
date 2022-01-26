@@ -18,10 +18,13 @@ if (process.client) {
         if (!!lazyImg) {
           lazyImg.setAttribute("src", lazyImg.getAttribute("data-src") || "");
 
-          lazyImg.addEventListener("load", () => {
+          const onLoaded = () => {
             lazyImg.setAttribute("data-loaded", "true");
             lazyImg.classList.remove(...loadClassesName);
-          });
+          };
+
+          lazyImg.addEventListener("load", onLoaded);
+          lazyImg.addEventListener("loadeddata", onLoaded);
         }
         observer.unobserve(lazyImg);
       }
@@ -29,7 +32,7 @@ if (process.client) {
   }, options);
 }
 
-export const observeImage = (target: HTMLElement) => {
+export const observe = (target: HTMLElement) => {
   target.classList.add(...loadClassesName);
   observer.observe(target);
 };

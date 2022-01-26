@@ -3,7 +3,7 @@
     <template #slide="{ slide }">
       <div class="w-screen relative">
         <img
-          v-lazyimg="getSliderImage(slide)"
+          v-lazysrc="getSliderImage(slide)"
           height="770"
           width="1600"
           alt=" "

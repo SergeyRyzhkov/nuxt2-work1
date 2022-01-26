@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { observeImage } from "../utils/ImageLazyLoad";
+import { observe } from "../utils/LazyLoad";
 import ImaskDirective from "./vue-imask-directive";
 
 const ClickOutsideDirective = {
@@ -34,7 +34,7 @@ const LazyImg = {
         el.setAttribute("data-src", binding.value);
       }
     }
-    observeImage(el);
+    observe(el);
   },
   update(el, binding) {
     if (binding.oldValue !== binding.value) {
@@ -46,6 +46,6 @@ const LazyImg = {
   },
 };
 
-Vue.directive("lazyimg", LazyImg);
+Vue.directive("lazysrc", LazyImg);
 Vue.directive("imask", ImaskDirective);
 Vue.directive("click-outside", ClickOutsideDirective);

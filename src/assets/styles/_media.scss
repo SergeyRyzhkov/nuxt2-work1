@@ -62,13 +62,13 @@ $screen-fullhd: 1920px;
 }
 
 @mixin rwd($screen) {
-  @media (max-width: $screen + 'px') {
+  @media (max-width: $screen + "px") {
     @content;
   }
 }
 
 @mixin nwd($screen) {
-  @media (min-width: $screen + 'px') {
+  @media (min-width: $screen + "px") {
     @content;
   }
 }
