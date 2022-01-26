@@ -51,11 +51,20 @@
 
     <LazyHydrate when-visible>
       <section class="container mt-40 md:mt-100">
-        <h2 class="text-48 font-compact uppercase">Трейтья линейка</h2>
+        <div class="flex flex-col lg:flex-row h-210 lg:h-400">
+          <div class="w-full lg:w-1/2 cursor-pointer" @click="goToLine21">
+            <img v-lazyimg="line2ImgSrc1" class="h-full w-full object-cover object-left-top" />
+            <div class="mt-16 lg:mt-26 text-18 font-semibold uppercase">{{ line2Title1 }}</div>
+          </div>
+          <div class="w-full lg:w-1/2 ml-0 lg:ml-20 cursor-pointer" @click="goToLine22">
+            <img v-lazyimg="line2ImgSrc2" class="h-full w-full object-cover object-left-top" />
+            <div class="mt-16 lg:mt-26 text-18 font-semibold uppercase">{{ line2Title2 }}</div>
+          </div>
+        </div>
       </section>
     </LazyHydrate>
 
-    <section class="container mt-40 md:mt-100 flex flex-col md:flex-row">
+    <section class="container mt-70 md:mt-130 flex flex-col md:flex-row">
       <div class="w-full md:w-1/2 bg-primary flex flex-col">
         <div class="my-auto mx-12 md:mx-60">
           <h2 class="text-78 md:text-89 font-compact uppercase text-white">
@@ -151,6 +160,42 @@ export default class MainPage extends Vue {
 
   get bestSellers() {
     return this.model.content?.bestsellers;
+  }
+
+  get line2Title1() {
+    return this.model.content?.line_2 && this.model.content?.line_2.length && this.model.content?.line_2.length > 0
+      ? this.model.content.line_2[0].title
+      : "";
+  }
+
+  get line2Title2() {
+    return this.model.content?.line_2 && this.model.content?.line_2.length && this.model.content?.line_2.length > 1
+      ? this.model.content.line_2[1].title
+      : "";
+  }
+
+  get line2ImgSrc1() {
+    return this.model.content_image_1?.url;
+  }
+
+  get line2ImgSrc2() {
+    return this.model.content_image_2?.url;
+  }
+
+  goToLine21() {
+    const url =
+      this.model.content?.line_2 && this.model.content?.line_2.length && this.model.content?.line_2.length > 1
+        ? this.model.content.line_2[0].link
+        : "";
+    window.open(url, "_blank");
+  }
+
+  goToLine22() {
+    const url =
+      this.model.content?.line_2 && this.model.content?.line_2.length && this.model.content?.line_2.length > 1
+        ? this.model.content.line_2[1].link
+        : "";
+    window.open(url, "_blank");
   }
 
   get sliderSettings() {

@@ -3,9 +3,13 @@ import ProductModel from "@/modules/Catalog/models/ProductModel";
 
 export default class MainPageModel extends SeoModel {
   loaded = false;
+
+  content_image_1: { url: string };
+  content_image_2: { url: string };
+
   content: {
     line: { title: string; description: string };
-    line_2: { title: string }[];
+    line_2: { title: string; link: string }[];
     product: {
       color: string;
       background_color: string;

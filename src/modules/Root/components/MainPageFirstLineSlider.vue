@@ -3,13 +3,13 @@
     <template #slide="{ slide }">
       <div class="flex flex-col lg:flex-row">
         <div class="w-full lg:w-1/2 h-300 lg:h-600 border-r-2 border-secondary">
-          <BaseVideoPlayer
+          <LazyBaseVideoPlayer
             v-if="getVideo(slide) && isVideo(slide)"
             :src="getVideo(slide)"
             class="w-full h-full bg-[#F5F5F5]"
             video-classes="w-full h-full"
             controls
-          ></BaseVideoPlayer>
+          ></LazyBaseVideoPlayer>
           <img v-if="!isVideo(slide)" v-lazyimg="getLeftIamgeSrc(slide)" class="h-full w-full object-cover object-left-top" />
         </div>
         <div class="w-full lg:w-1/2 h-full lg:h-600">
