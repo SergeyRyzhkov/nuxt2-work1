@@ -1,16 +1,16 @@
 <template>
   <div class="flex flex-col lg:flex-row">
-    <div class="w-full lg:w-1/2 h-380 lg:h-600 bg-[#F5F5F5] flex">
+    <div class="w-full lg:w-1/2 bg-[#F5F5F5] flex max-h-380 lg:max-h-600">
       <img
         v-lazysrc="leftIamgeSrc"
         height="570"
         width="300"
         alt=" "
-        class="w-150 h-250 lg:w-300 lg:h-570 object-scale-down px-30 pt-15 m-auto"
+        class="w-150 h-247 lg:w-300 lg:h-570 object-scale-down px-30 pt-15 m-auto"
       />
     </div>
-    <div class="w-full lg:w-1/2 h-full lg:h-600 flex" :style="bgColor">
-      <div class="h-full flex flex-col items-center py:50 lg:py-100 px-16 lg:px-70 m-auto">
+    <div class="w-full lg:w-1/2 flex" :style="bgColor">
+      <div class="h-full flex flex-col items-center py-30 lg:py-100 px-16 lg:px-70 m-auto">
         <div :style="color" class="mt-27 font-compact text-89">
           {{ title }}
         </div>

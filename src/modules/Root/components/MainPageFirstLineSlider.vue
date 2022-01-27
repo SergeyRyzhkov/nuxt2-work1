@@ -13,7 +13,7 @@
   >
     <template #slide="{ slide }">
       <div class="flex flex-col lg:flex-row">
-        <div class="w-full lg:w-1/2 h-300 lg:h-600 border-r-2 border-secondary">
+        <div class="w-full lg:w-1/2 h-300 lg:h-600 border-b-2 border-r-0 lg:border-r-2 lg:border-b-0 border-secondary">
           <LazyBaseVideoPlayer
             v-if="getVideo(slide) && isVideo(slide)"
             :src="getVideo(slide)"
