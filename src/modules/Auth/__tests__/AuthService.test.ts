@@ -4,7 +4,5 @@ import ResetPassword from "@/modules/Auth/pages/ResetPassword.vue";
 describe("Greeting.vue", () => {
   it("отрисовывает приветствие", () => {
     const wrapper = mount(ResetPassword);
-
-    console.log(wrapper.html());
   });
 });

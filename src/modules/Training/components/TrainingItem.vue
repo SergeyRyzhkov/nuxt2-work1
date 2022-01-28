@@ -6,15 +6,21 @@
       class="flex flex-col cursor-pointer"
     >
       <div class="relative">
-        <img v-lazysrc="imageSrc" width="300" height="160" class="h-160 hover:scale-105 transition-all" alt=" " />
+        <img
+          v-lazysrc="imageSrc"
+          width="420"
+          height="223"
+          class="h-223 w-full object-cover hover:scale-105 transition-all"
+          alt=" "
+        />
         <div class="absolute top-16 left-16 bg-primary px-16 py-8 rounded-full text-14 text-white">{{ statusName }}</div>
       </div>
-      <div class="flex items-center justify-between mt-16">
+      <div class="flex items-center justify-between mt-18">
         <div class="text-14">{{ dateTypeAddress }}</div>
         <div class="font-semibold">{{ priceFormatted }}</div>
       </div>
-      <div class="text-22 mt-12">{{ item.name }}</div>
-      <div class="mt-12 text-14">{{ item.lecturer }}</div>
+      <div class="text-18 mt-14">{{ item.name }}</div>
+      <div class="mt-16 text-14">{{ item.lecturer }}</div>
     </nuxt-link>
   </LazyHydrate>
 </template>
