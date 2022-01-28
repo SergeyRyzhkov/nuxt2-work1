@@ -16,3 +16,6 @@ npm-debug.log
 .vscode
 /.vscode
 
+coverage
+.nuxt-build-jest
+

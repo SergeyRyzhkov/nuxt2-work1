@@ -104,12 +104,11 @@ const nuxtConfig: NuxtConfig = {
       commons: true,
     },
 
-    // @ts-ignore
     postcss: {
       plugins: {
         "postcss-import": {},
         "tailwindcss/nesting": {},
-        tailwindcss: path.resolve(__dirname, "./tailwind.config.js"),
+        tailwindcss: path.resolve(__dirname, "./tailwind.config.js") as any,
         autoprefixer: {},
       },
       preset: {

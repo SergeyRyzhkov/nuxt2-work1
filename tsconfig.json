@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2018",
-    "module": "esnext",
+    "module": "ESNext",
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -13,11 +13,12 @@
     "baseUrl": ".",
     "strictPropertyInitialization": false,
     "noEmit": true,
+    "jsx": "preserve",
     "paths": {
       "@/*": ["src/*"]
     },
-    "lib": ["esnext", "esnext.asynciterable", "dom"],
-    "types": ["@types/node", "@nuxt/types", "@nuxtjs/axios"]
+    "lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
+    "types": ["@types/node", "@nuxt/types", "@types/jest", "@nuxtjs/axios"]
   },
   "include": [
     "src/**/*.js",
@@ -29,6 +30,5 @@
     "src/**/*.d.ts",
     "/**/*.d.ts"
   ],
-  // , "render-cache-module.ts"  ],
   "exclude": ["node_modules", ".nuxt", "dist"]
 }
