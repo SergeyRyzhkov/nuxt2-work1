@@ -9,9 +9,10 @@
     "@nuxtjs/eslint-config-typescript",
     "prettier",
     "plugin:prettier/recommended",
-    "plugin:nuxt/recommended"
+    "plugin:nuxt/recommended",
+    "plugin:tailwindcss/recommended"
   ],
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "tailwindcss"],
   "rules": {
     "@typescript-eslint/explicit-module-boundary-types": 0,
     "@typescript-eslint/no-explicit-any": 0,
@@ -24,6 +25,12 @@
       {
         "endOfLine": "auto"
       }
-    ]
+    ],
+    "tailwindcss/classnames-order": "off",
+    "tailwindcss/enforces-shorthand": "warn",
+    "tailwindcss/migration-from-tailwind-2": "warn",
+    "tailwindcss/no-arbitrary-value": "off",
+    "tailwindcss/no-custom-classname": "off",
+    "tailwindcss/no-contradicting-classname": "error"
   }
 }

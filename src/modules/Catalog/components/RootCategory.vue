@@ -4,7 +4,7 @@
       <div class="absolute flex h-full w-full flex-col items-center justify-between p-20 md:p-60">
         <div class="font-compact text-60 md:text-100 uppercase">{{ bannerTitle }}</div>
         <div class="text-18" v-html="bannerDescription"></div>
-        <base-button class="mt-18 w-max flex-shrink-0 grow bg-white lg:mt-0">{{ bannerButtonText }}</base-button>
+        <base-button class="mt-18 w-max flex-shrink-0 bg-white lg:mt-0">{{ bannerButtonText }}</base-button>
       </div>
     </BaseStaticBanner>
 
@@ -47,7 +47,7 @@
         <div class="absolute flex h-full w-full flex-col items-center pt-20 md:pt-60">
           <div class="font-compact text-48 uppercase" v-html="bannerTitle2"></div>
           <div class="mt-32 md:mt-44" v-html="bannerDescription2"></div>
-          <base-button class="mt-18 w-max flex-shrink-0 grow bg-white lg:mt-24">{{ bannerButtonText2 }}</base-button>
+          <base-button class="mt-18 w-max flex-shrink-0 bg-white lg:mt-24">{{ bannerButtonText2 }}</base-button>
         </div>
       </BaseStaticBanner>
     </section>
