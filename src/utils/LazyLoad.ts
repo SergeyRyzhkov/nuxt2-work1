@@ -20,6 +20,7 @@ if (process.client) {
 
           const onLoaded = () => {
             lazyImg.setAttribute("data-loaded", "true");
+            lazyImg.removeAttribute("data-src");
             lazyImg.classList.remove(...loadClassesName);
           };
 

@@ -1,10 +1,39 @@
 <template>
   <main class="page-wrapper">
-    <BaseStaticBanner :image-src="bannerSrc" style="max-height: max-content" :wide="true">
-      <div class="absolute w-screen" :class="[!bannerSrc ? 'top-0 py-24 md:py-40' : 'top-16 md:top-32']">
-        <BannerAbsoluteItem class="container" :model="model" @subscribe-clicked="onSubscribeClicked()"></BannerAbsoluteItem>
+    <section class="container-fluid relative min-h-[max-content] overflow-hidden">
+      <img
+        v-show="!!bannerSrc"
+        :src="bannerSrc"
+        class="absolute top-0 left-0 h-full w-full object-cover"
+        height="600"
+        width="1440"
+      />
+      <div class="relative z-50 w-full">
+        <div class="md:my-70 container z-50 my-60 flex flex-col">
+          <div class="bg-primary text-14 w-max rounded-full px-16 py-8 text-white">{{ statusName }}</div>
+          <div class="mb:mt-60 mt-40 font-normal">{{ dateType }}</div>
+          <h1 class="font-compact text-60 mt-24 uppercase">{{ model.name }}</h1>
+          <base-button class="base-button mt-18 w-max flex-shrink-0 grow bg-white lg:mt-40" @click="onSubscribeClicked">
+            Записаться на курс
+          </base-button>
+          <div class="text-14 mt-32 flex font-normal md:mt-60">
+            <div>
+              <div>Спикер</div>
+              <div class="text-18 mt-6 font-semibold">{{ model.lecturer }}</div>
+            </div>
+            <div class="md:ml-70 ml-40">
+              <div>Длительность</div>
+              <div class="text-18 mt-6 font-semibold">{{ model.duration }}</div>
+            </div>
+            <div class="md:ml-70 ml-40">
+              <div>Город</div>
+              <div class="text-18 mt-6 font-semibold">{{ model.city }}</div>
+            </div>
+          </div>
+        </div>
       </div>
-    </BaseStaticBanner>
+    </section>
+
     <section class="container-fluid">
       <div class="training-section-wrapper">
         <h2 class="training-section__caption">ПРОГРАММА</h2>
@@ -22,7 +51,7 @@
         <h2 class="training-section__caption">СТОИМОСТЬ КУРСА</h2>
         <div class="training-section__content text-48 font-semibold">
           <div>{{ priceFormatted }}</div>
-          <div class="mt-16 text-14 font-semibold">{{ model.price_description }}</div>
+          <div class="text-14 mt-16 font-semibold">{{ model.price_description }}</div>
         </div>
       </div>
     </section>
@@ -37,6 +66,7 @@
 
 <script lang="ts">
 import { Component, getModule, Prop, Ref, Vue } from "nuxt-property-decorator";
+import dayjs from "dayjs";
 import TrainingModel from "../models/TrainingModel";
 import { TrainingService } from "../TrainingService";
 import EnrollTraining from "../components/EnrollTraining.vue";
@@ -71,6 +101,14 @@ export default class TrainingPage extends Vue {
     return !!this.model.price ? this.model.price.toLocaleString("ru-RU") + " ₽" : "Бесплатно";
   }
 
+  get dateType() {
+    return `${dayjs(this.model.date?.split("T")[0]).format("DD MMMM YYYY")} | ${this.model.is_online ? "онлайн" : "оффлайн"}`;
+  }
+
+  get statusName() {
+    return this.model.status === "completed" ? "Завершено" : "Планируется";
+  }
+
   head() {
     if (!!this.model.meta_slug) {
       this.model.meta_image = this.model.logo?.url || this.model.banner?.url || undefined;
@@ -95,7 +133,7 @@ export default class TrainingPage extends Vue {
 
 <style lang="scss">
 .training-section-wrapper {
-  @apply container flex flex-col pt-20 pb-40 md:flex-row md:pt-40 md:pb-60;
+  @apply container flex flex-col pt-20 pb-40 md:flex-row md:pb-60 md:pt-40;
 
   .training-section__caption {
     @apply w-full font-semibold md:w-3/12;

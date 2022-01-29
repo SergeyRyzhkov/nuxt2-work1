@@ -23,7 +23,7 @@ const ClickOutsideDirective = {
 };
 // el.$destroy = () => el.removeEventListener
 
-const LazyImg = {
+const LazySrc = {
   bind(el, binding) {
     el.decoding = "async";
     if (el.setAttribute) {
@@ -39,13 +39,11 @@ const LazyImg = {
   update(el, binding) {
     if (binding.oldValue !== binding.value) {
       el.setAttribute("data-src", binding.value);
-      if (el.getAttribute("data-loaded") === "true") {
-        el.setAttribute("src", binding.value);
-      }
+      el.setAttribute("src", binding.value);
     }
   },
 };
 
-Vue.directive("lazysrc", LazyImg);
+Vue.directive("lazysrc", LazySrc);
 Vue.directive("imask", ImaskDirective);
 Vue.directive("click-outside", ClickOutsideDirective);

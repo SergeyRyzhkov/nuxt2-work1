@@ -33,8 +33,6 @@
     "vue-lazy-hydration": "^2.0.0-beta.4",
     "vue-multiselect": "^2.1.6",
     "vue-router": "3.5.3",
-    "vue-server-renderer": "^2.6.14",
-    "vue-template-compiler": "^2.6.14",
     "vue-yandex-maps": "^0.11.1",
     "vuelidate": "^0.7.6"
   },

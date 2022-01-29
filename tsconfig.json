@@ -13,6 +13,7 @@
     "baseUrl": ".",
     "strictPropertyInitialization": false,
     "noEmit": true,
+    "resolveJsonModule": true,
     "jsx": "preserve",
     "paths": {
       "@/*": ["src/*"]
@@ -20,15 +21,6 @@
     "lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
     "types": ["@types/node", "@nuxt/types", "@types/jest", "@nuxtjs/axios"]
   },
-  "include": [
-    "src/**/*.js",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx",
-    "src/**/*.d.ts",
-    "/**/*.d.ts"
-  ],
+  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
   "exclude": ["node_modules", ".nuxt", "dist"]
 }
