@@ -25,7 +25,7 @@ const ClickOutsideDirective = {
 
 const LazySrc = {
   bind(el, binding) {
-    el.decoding = "async";
+    // el.decoding = "async";
     if (el.setAttribute) {
       if (!el.getAttribute("alt")) {
         el.setAttribute("alt", " ");

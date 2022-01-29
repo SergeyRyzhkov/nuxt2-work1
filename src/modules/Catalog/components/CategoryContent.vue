@@ -12,7 +12,7 @@
                 height="226"
                 width="226"
                 alt=" "
-                class="w-226 h-226 object-cover object-top transition-all hover:scale-105"
+                class="h-226 w-226 object-cover object-top transition-all hover:scale-105"
               />
               <span class="mt-16">{{ slide.title }}</span>
               <span class="text-12 text-text-gray mt-6">{{ slide.subtitle }}</span>

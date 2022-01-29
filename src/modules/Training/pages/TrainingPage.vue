@@ -8,7 +8,7 @@
         height="600"
         width="1440"
       />
-      <div class="relative z-50 w-full">
+      <div class="relative w-full">
         <div class="md:my-70 container z-50 my-60 flex flex-col">
           <div class="bg-primary text-14 w-max rounded-full px-16 py-8 text-white">{{ statusName }}</div>
           <div class="mb:mt-60 mt-40 font-normal">{{ dateType }}</div>

@@ -1,10 +1,5 @@
 <template>
-  <BaseModal :back-enabled="false" class="flex" @close="$emit('close')">
-    <div class="m-auto mt-24 flex flex-col items-center">
-      <img src="/icons/alert_check.svg" width="74" height="74" />
-      <div class="m-auto mb-40 mt-60 text-24">{{ text }}</div>
-    </div>
-  </BaseModal>
+  <div class="text-14 my-auto p-16 font-semibold">{{ text }}</div>
 </template>
 
 <script lang="ts">

@@ -66,7 +66,7 @@ class ModalManager {
     options: ModalOptions = {},
     events: any = {}
   ) {
-    return this.modalShow(modal, props, { ...{ classes: "w--modal vue-dialog__full" }, ...options }, events);
+    return this.modalShow(modal, props, { ...{ classes: "vue-dialog__full" }, ...options }, events);
   }
 
   modalShow(
@@ -109,11 +109,11 @@ class ModalManager {
   }
 
   showNotify(text: string) {
-    this.modalShow(BaseNotify, { text });
+    Vue.prototype.$modal.show(BaseNotify, { text }, { classes: "v--modal vue-dialog-toast--top-right vue-dialog-toast--notify" });
   }
 
   showError(text: string) {
-    this.modalShow(BaseNotify, { text });
+    Vue.prototype.$modal.show(BaseNotify, { text }, { classes: "v--modal vue-dialog-toast--top-right vue-dialog-toast--danger" });
   }
 }
 

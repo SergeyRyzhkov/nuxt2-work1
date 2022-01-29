@@ -177,7 +177,6 @@ export class BaseService {
 
       paginCollection.seo = response?.data?.seo || {};
     } catch (err) {
-      console.log(err);
       return paginCollection;
     }
     return paginCollection;

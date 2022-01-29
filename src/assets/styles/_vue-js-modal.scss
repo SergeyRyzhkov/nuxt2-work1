@@ -28,6 +28,37 @@
   left: 0px !important;
 }
 
+.vue-dialog-toast {
+  &--top-right {
+    margin-left: auto !important;
+    margin-right: 16px !important;
+    margin-top: 16px !important;
+    margin-bottom: auto !important;
+    top: 0px !important;
+    right: 0px !important;
+    padding: 0px !important;
+    border: none !important;
+
+    width: fit-content !important;
+    max-width: 300px !important;
+    min-height: 100px !important;
+    max-height: 150px !important;
+    display: flex !important;
+  }
+
+  &--danger {
+    border-left-style: solid !important;
+    border-left-color: $red-color !important;
+    border-left-width: 3px !important;
+  }
+
+  &--notify {
+    border-left-style: solid !important;
+    border-left-color: $secondary !important;
+    border-left-width: 3px !important;
+  }
+}
+
 .vue-dialog-w-max {
   width: max-content !important;
   // max-width: 95vw !important;
