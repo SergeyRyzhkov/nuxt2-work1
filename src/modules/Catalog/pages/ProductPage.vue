@@ -7,7 +7,7 @@
       </template>
 
       <section v-else class="flex flex-col lg:flex-row lg:items-start">
-        <div class="lg:w-7/12 relative">
+        <div class="relative lg:w-7/12">
           <LazyBaseSwiper
             :slides="images"
             :settings="{ slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 }"
@@ -25,21 +25,21 @@
               <LazyBaseVideoPlayer
                 v-if="video && showVideo"
                 :src="video"
-                class="w-full h-full order-1 bg-[#F5F5F5] absolute z-50"
+                class="absolute z-50 order-1 h-full w-full bg-[#F5F5F5]"
                 video-classes="w-full h-full"
                 controls
               ></LazyBaseVideoPlayer>
             </template>
 
             <template #slide="{ slide }">
-              <div class="flex flex-col w-full p-44 md:p-68">
-                <img v-lazysrc="slide" height="500" width="260" alt=" " class="w-full h-300 md:h-500 object-scale-down" />
+              <div class="flex w-full flex-col p-44 md:p-68">
+                <img v-lazysrc="slide" height="500" width="260" alt=" " class="h-300 w-full object-scale-down md:h-500" />
               </div>
             </template>
 
             <template #thumbs-slide="{ slide }">
-              <div class="flex flex-col w-full p-16 bg-[#F5F5F5] h-full" @click="showVideo = false">
-                <img v-lazysrc="slide" height="127" width="116" alt=" " class="object-scale-down h-full" />
+              <div class="flex h-full w-full flex-col bg-[#F5F5F5] p-16" @click="showVideo = false">
+                <img v-lazysrc="slide" height="127" width="116" alt=" " class="h-full object-scale-down" />
               </div>
             </template>
           </LazyBaseSwiper>
@@ -47,7 +47,7 @@
           <client-only>
             <div
               v-if="video && !$fetchState.pending"
-              class="hidden md:flex absolute mt-16 w-116 h-127 items-center justify-between bg-[#F5F5F5] bottom-0 z-50 cursor-pointer"
+              class="absolute bottom-0 z-50 mt-16 hidden h-127 w-116 cursor-pointer items-center justify-between bg-[#F5F5F5] md:flex"
               :class="showVideo ? 'border' : ''"
               @click="showVideo = true"
             >
@@ -55,17 +55,17 @@
             </div>
           </client-only>
         </div>
-        <div class="lg:w-5/12 ml-0 lg:ml-80">
-          <div class="text-[#4BC967] text-14 block md:hidden">В наличии на складе</div>
+        <div class="ml-0 lg:ml-80 lg:w-5/12">
+          <div class="block text-14 text-[#4BC967] md:hidden">В наличии на складе</div>
           <h2 class="text-24 font-semibold">{{ model.name }}</h2>
-          <div class="text-gray-color mt-16 text-14">Артикул: {{ model.vendor_code }}</div>
+          <div class="mt-16 text-14 text-gray-color">Артикул: {{ model.vendor_code }}</div>
           <div class="mt-32">
-            <div class="flex flex-row md:flex-col items-center md:items-start justify-between">
+            <div class="flex flex-row items-center justify-between md:flex-col md:items-start">
               <div class="text-28 font-semibold">{{ price }} ₽</div>
-              <div class="md:mt-32 flex items-center">
+              <div class="flex items-center md:mt-32">
                 <div class="flex items-center">
                   <BaseButton
-                    class="rounded-full w-36 h-36 border-counter"
+                    class="border-counter h-36 w-36 rounded-full"
                     :padding-empty="true"
                     :class="{ disabled: productCount === 1 }"
                     @click="productCounter(productCount - 1)"
@@ -75,9 +75,9 @@
                       </svg>
                     </span>
                   </BaseButton>
-                  <div class="text-14 mx-12">{{ productCount }}</div>
+                  <div class="mx-12 text-14">{{ productCount }}</div>
                   <BaseButton
-                    class="rounded-full w-36 h-36 border-counter"
+                    class="border-counter h-36 w-36 rounded-full"
                     :padding-empty="true"
                     @click="productCounter(productCount + 1)"
                     ><span class="text-28 font-normal">
@@ -95,13 +95,13 @@
                       </svg> </span
                   ></BaseButton>
                 </div>
-                <div class="text-[#4BC967] ml-24 text-14 hidden md:block">В наличии на складе</div>
+                <div class="ml-24 hidden text-14 text-[#4BC967] md:block">В наличии на складе</div>
               </div>
             </div>
             <div class="mt-32 flex items-center justify-between md:justify-start">
               <BaseButton @click="addToCart">Добавить в корзину</BaseButton>
               <BaseHeartButton
-                class="ml-14 rounded-full flex items-center justify-center w-52 h-52 border border-primary"
+                class="ml-14 flex h-52 w-52 items-center justify-center rounded-full border border-primary"
                 :is-red="model.is_favorite"
                 @click.prevent="toogleFavor()"
               ></BaseHeartButton>
@@ -109,7 +109,7 @@
           </div>
           <div class="mt-32">
             <div class="text-16 font-semibold">Доставка</div>
-            <div class="flex items-center mt-18">
+            <div class="mt-18 flex items-center">
               <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fill-rule="evenodd"
@@ -148,15 +148,15 @@
               </svg>
               <div class="ml-12 text-14">в <span class="text-secondary">Москву</span> бесплатно</div>
             </div>
-            <div class="text-gray-color mt-16 text-12">
+            <div class="mt-16 text-12 text-gray-color">
               Цена действительна только для интернет-магазина и может отличаться от цен в розничных магазинах
             </div>
           </div>
-          <div class="mt-32 p-24 bg-nude rounded-[20px]">
+          <div class="mt-32 rounded-[20px] bg-nude p-24">
             <div class="text-14 font-semibold">
               Доставка до двери по Москве - на следующий рабочий день. При заказе от 3000 рублей - бесплатно!
             </div>
-            <div class="text-12 mt-8">
+            <div class="mt-8 text-12">
               Для заказов по Москве доступна бесплатная доставка курьерами фирмы при заказе от 3000 рублей. Желаем приятных
               покупок!
             </div>
@@ -165,9 +165,9 @@
       </section>
     </div>
 
-    <section class="bg-nude container-fluid">
+    <section class="container-fluid bg-nude">
       <div class="container">
-        <div class="md:w-1/2 lg:w-7/12 mt-40 md:mt-60 py-32 md:py-64">
+        <div class="mt-40 py-32 md:mt-60 md:w-1/2 md:py-64 lg:w-7/12">
           <BaseAccordion>
             <template #header>
               <span class="font-semibold">Описание</span>
@@ -196,8 +196,8 @@
       </div>
     </section>
 
-    <section v-if="!!model && model.id > 0 && !!recommendation && recommendation.length" class="mt-40 md:mt-60 container">
-      <h2 class="text-42 font-compact uppercase">Рекомендуем</h2>
+    <section v-if="!!model && model.id > 0 && !!recommendation && recommendation.length" class="container mt-40 md:mt-60">
+      <h2 class="font-compact text-42 uppercase">Рекомендуем</h2>
       <LazyBaseSwiper :slides="recommendation" class="mt-32" :settings="sliderSettings">
         <template #slide="{ slide }">
           <ProductItem :model="slide" class="w-max"></ProductItem>

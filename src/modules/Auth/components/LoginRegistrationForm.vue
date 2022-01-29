@@ -1,7 +1,7 @@
 <template>
   <section>
-    <h1 class="uppercase mb-40 md:mb-60">{{ title }}</h1>
-    <div class="auth-logon-tabs mb-40 md:mb-60 w-full md:w-1/2">
+    <h1 class="mb-40 uppercase md:mb-60">{{ title }}</h1>
+    <div class="auth-logon-tabs mb-40 w-full md:mb-60 md:w-1/2">
       <button
         type="button"
         class="auth-logon__tab"

@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col footer-subscribe">
+  <div class="footer-subscribe flex flex-col">
     <div>ПОДПИСАТЬСЯ</div>
     <div class="mt-1">Будьте всегда в курсе!</div>
-    <div class="mt-20 lg:mt-40 footer-subscribe-input">
+    <div class="footer-subscribe-input mt-20 lg:mt-40">
       <BaseInput placeholder="E-mail" />
       <button>
         <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">

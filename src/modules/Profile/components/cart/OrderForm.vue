@@ -1,9 +1,9 @@
 <template>
-  <section class="pt-22 md:pr-76 order-form">
+  <section class="order-form pt-22 md:pr-76">
     <h2>Контактная информация</h2>
     <form class="mt-30" @submit.prevent="">
       <BaseInput placeholder="ФИО*" class="mb-27" />
-      <div class="lg:flex justify-between lg:mb-27">
+      <div class="justify-between lg:mb-27 lg:flex">
         <BaseInput placeholder="Телефон*" class="mb-27 lg:mb-0 lg:w-1/2 lg:pr-16" />
         <BaseInput placeholder="Email*" class="mb-27 lg:mb-0 lg:w-1/2 lg:pl-16" />
       </div>
@@ -13,19 +13,19 @@
         <div class="mt-30">
           <div class="mb-16">
             <BaseRadioButton label="Доставка до двери курьером СДЭК" />
-            <div class="pl-30 del-info mt-9">275₽, 14-16 декабря</div>
+            <div class="del-info mt-9 pl-30">275₽, 14-16 декабря</div>
           </div>
           <div class="mb-16">
             <BaseRadioButton label="Доставка до пункта выдачи СДЭК" />
-            <div class="pl-30 del-info mt-9">135₽, 20-22 декабря</div>
+            <div class="del-info mt-9 pl-30">135₽, 20-22 декабря</div>
           </div>
           <div class="mb-16">
             <BaseRadioButton label="Самовывоз из офиса г. Москва" />
-            <div class="pl-30 del-info mt-9">0₽, 14-16 декабря</div>
+            <div class="del-info mt-9 pl-30">0₽, 14-16 декабря</div>
           </div>
           <div>
             <BaseRadioButton label="Самовывоз из офиса г. Москва" />
-            <div class="pl-30 del-info mt-9">0₽, 14-16 декабря</div>
+            <div class="del-info mt-9 pl-30">0₽, 14-16 декабря</div>
           </div>
         </div>
       </div>

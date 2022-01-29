@@ -1,26 +1,26 @@
 <template>
   <div class="order-item mb-25">
-    <div class="order-item-header flex flex-col md:flex-row md:items-center justify-between px-20 pt-16 pb-12">
+    <div class="order-item-header flex flex-col justify-between px-20 pt-16 pb-12 md:flex-row md:items-center">
       <div class="flex flex-col md:flex-row md:items-center">
         <div>
           <div class="order-item-id">Заказ №: <span class="font-semibold">12233445667</span></div>
           <div class="order-item-date">Дата создания: 25 июля 2021, 19:30</div>
         </div>
-        <div class="md:pl-67 order-item-status">В обработке</div>
+        <div class="order-item-status md:pl-67">В обработке</div>
       </div>
-      <div class="flex flex-row md:flex-col justify-between mt-5 md:mt-0">
+      <div class="mt-5 flex flex-row justify-between md:mt-0 md:flex-col">
         <div class="order-item-price">3 700 ₽</div>
         <div class="order-item-count">3 товара</div>
       </div>
     </div>
     <div class="order-item-body">
-      <div class="order-item-info flex justify-between items-center">
+      <div class="order-item-info flex items-center justify-between">
         <div>Ожидается оплата</div>
         <div class="underline">Подробнее</div>
       </div>
       <div class="mt-24 flex flex-col md:flex-row md:justify-between">
-        <div class="flex items-center order-item-products">
-          <div class="first:ml-0 ml-8 flex flex-col max-w-[95px] lg:max-w-[132px]">
+        <div class="order-item-products flex items-center">
+          <div class="ml-8 flex max-w-[95px] flex-col first:ml-0 lg:max-w-[132px]">
             <figure class="order-item-product-image">
               <img src="/images/tmp_product.jpg" alt="" itemprop="image" class="" loading="lazy" />
               <figcaption></figcaption>
@@ -28,7 +28,7 @@
             <div class="order-item-product-title mt-8 md:mt-12">Маска KAYPRO Botu-Cure</div>
             <div class="order-item-product-price mt-6">2 000 ₽</div>
           </div>
-          <div class="ml-8 flex flex-col max-w-[95px] lg:max-w-[132px]">
+          <div class="ml-8 flex max-w-[95px] flex-col lg:max-w-[132px]">
             <figure class="order-item-product-image">
               <img src="/images/tmp_product.jpg" alt="" itemprop="image" class="" loading="lazy" />
               <figcaption></figcaption>
@@ -37,12 +37,12 @@
             <div class="order-item-product-price mt-6">2 000 ₽</div>
           </div>
         </div>
-        <div class="flex flex-col items-center md:items-end order-item-pay mt-21 md:mt-0">
+        <div class="order-item-pay mt-21 flex flex-col items-center md:mt-0 md:items-end">
           <div>
             <BaseButton class="order-item-btn">Оплатить заказ</BaseButton>
           </div>
-          <div class="mt-16 order-item-pay-cancel">Отменить заказ</div>
-          <div class="mt-12 order-item-pay-info text-center md:text-right">
+          <div class="order-item-pay-cancel mt-16">Отменить заказ</div>
+          <div class="order-item-pay-info mt-12 text-center md:text-right">
             Не прошла оплата-онлайн, повторите попытку или заказ будет отменен через 00:29 минут
           </div>
         </div>
@@ -93,7 +93,7 @@ export default class OrderItem extends Vue {}
     }
   }
   &-body {
-    @apply pt-24 pb-20 px-21;
+    @apply px-21 pt-24 pb-20;
   }
   &-info {
     font-size: 12px;

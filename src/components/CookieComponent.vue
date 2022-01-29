@@ -1,18 +1,18 @@
 <template>
   <div class="container">
-    <div v-if="isVisible" class="cookie-component flex sm:items-center sm:justify-between pr-23 pl-21 py-19">
+    <div v-if="isVisible" class="cookie-component flex py-19 pr-23 pl-21 sm:items-center sm:justify-between">
       <figure class="cookie-image mt-[-8px] sm:mt-0">
         <picture>
           <img v-lazysrc="'/images/cookie.png'" width="40" height="40px" alt="cookie" />
         </picture>
       </figure>
       <div class="ml-14 flex flex-col sm:flex-row sm:items-center">
-        <div class="whitespace-nowrap flex-col sm:flex-row flex text-16 tracking-wide">
+        <div class="flex flex-col whitespace-nowrap text-16 tracking-wide sm:flex-row">
           Мы используем Cookies. <a href="javascript:void(0)" class="link-hover ml-4"> Читать далее</a>
         </div>
-        <BaseButton class="sm:ml-20 mt-16 sm:mt-0 cookie-btn" @click="setCookie">я согласен</BaseButton>
+        <BaseButton class="cookie-btn mt-16 sm:ml-20 sm:mt-0" @click="setCookie">я согласен</BaseButton>
         <svg
-          class="sm:ml-18 close-icon"
+          class="close-icon sm:ml-18"
           width="12"
           height="12"
           viewBox="0 0 12 12"

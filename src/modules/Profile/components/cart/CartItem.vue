@@ -1,9 +1,9 @@
 <template>
   <section class="cart-item pr-16">
-    <img v-lazysrc="imageSrc" alt=" " class="object-scale-down hover:scale-105 h-86 w-86 md:w-127 md:h-127" />
+    <img v-lazysrc="imageSrc" alt=" " class="h-86 w-86 object-scale-down hover:scale-105 md:h-127 md:w-127" />
     <div
-      class="pl-16 md:pl-26 w-full"
-      :class="{ 'flex justify-between md:items-center flex-col md:flex-row w-full': isOrdering }"
+      class="w-full pl-16 md:pl-26"
+      :class="{ 'flex w-full flex-col justify-between md:flex-row md:items-center': isOrdering }"
     >
       <div>
         <div class="cart-item-title" :class="{ 'cart-item-title-ordering': isOrdering }">
@@ -12,7 +12,7 @@
         <div class="cart-item-id">Артикул: {{ cartItem.product.vendor_code }}</div>
       </div>
       <div v-if="isOrdering">1 шт.</div>
-      <div class="flex md:items-center md:flex-row flex-col justify-between">
+      <div class="flex flex-col justify-between md:flex-row md:items-center">
         <div v-if="!isOrdering" class="cart-item-products_counter flex items-center">
           <button
             class="cart-item-product_action"
@@ -93,7 +93,7 @@ export default class CartItem extends Vue {
 
 <style lang="scss">
 .cart-item {
-  @apply pt-23 pb-30 flex md:items-center items-start relative;
+  @apply relative flex items-start pt-23 pb-30 md:items-center;
   &-products_counter {
     .number {
       @apply px-5 text-center;

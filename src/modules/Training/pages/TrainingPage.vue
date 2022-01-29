@@ -22,7 +22,7 @@
         <h2 class="training-section__caption">СТОИМОСТЬ КУРСА</h2>
         <div class="training-section__content text-48 font-semibold">
           <div>{{ priceFormatted }}</div>
-          <div class="text-14 mt-16 font-semibold">{{ model.price_description }}</div>
+          <div class="mt-16 text-14 font-semibold">{{ model.price_description }}</div>
         </div>
       </div>
     </section>

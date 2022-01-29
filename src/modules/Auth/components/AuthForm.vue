@@ -1,12 +1,12 @@
 <template>
   <BaseModalFullScreen :back-enabled="!loginRegFormVisible" @go-back="onGoBack()" @close="$emit('close')">
     <template #header-center>
-      <div v-show="errorMessage" class="ml-auto border-secondary border border-solid text-secondary p-20 text-14">
+      <div v-show="errorMessage" class="ml-auto border border-solid border-secondary p-20 text-14 text-secondary">
         <span>{{ errorMessage }}</span>
       </div>
     </template>
     <template #right-side>
-      <div class="xl:px-40 pb-20 h-full overflow-y-auto">
+      <div class="h-full overflow-y-auto pb-20 xl:px-40">
         <LoginRegistrationForm
           v-show="loginRegFormVisible"
           @reset-clicked="resetPasswordClicked()"

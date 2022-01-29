@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center relative">
+  <div class="relative flex items-center">
     <input
       type="checkbox"
       v-bind="$attrs"

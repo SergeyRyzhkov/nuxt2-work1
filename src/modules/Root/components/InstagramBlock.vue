@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex justify-end container">
+    <div class="container flex justify-end">
       <div class="mt-82 mr-100">
         <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -8,7 +8,7 @@
             fill="#131313"
           />
         </svg>
-        <h2 class="font-compact text-43 mt-35">
+        <h2 class="mt-35 font-compact text-43">
           Заходите к нам <br />
           в <span class="text-secondary">@kaypro_moscow</span>
         </h2>

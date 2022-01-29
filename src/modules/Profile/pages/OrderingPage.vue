@@ -1,13 +1,13 @@
 <template>
   <main class="page-wrapper linear-order">
     <div class="container flex flex-col md:flex-row">
-      <section class="w-full md:w-1/2 pt-60 line-half">
+      <section class="line-half w-full pt-60 md:w-1/2">
         <h1>Оформление заказа</h1>
         <BreadCrumbs />
         <OrderForm />
       </section>
-      <section class="w-full xl:px-40 md:w-1/2 pt-60">
-        <div class="flex flex-col shopping-cart-items">
+      <section class="w-full pt-60 md:w-1/2 xl:px-40">
+        <div class="shopping-cart-items flex flex-col">
           <CartItem :is-ordering="true" />
           <CartItem :is-ordering="true" />
           <CartItem :is-ordering="true" />
@@ -18,27 +18,27 @@
             <div>Общий вес</div>
             <div>200 г</div>
           </div>
-          <div class="flex items-center justify-between mt-8 text-14">
+          <div class="mt-8 flex items-center justify-between text-14">
             <div>Количество</div>
             <div>1</div>
           </div>
         </div>
-        <div class="py-26 cost-border">
-          <div class="flex items-center justify-between mt-8 text-14">
+        <div class="cost-border py-26">
+          <div class="mt-8 flex items-center justify-between text-14">
             <div>НДС</div>
             <div>0 ₽</div>
           </div>
-          <div class="flex items-center justify-between mt-8 text-14">
+          <div class="mt-8 flex items-center justify-between text-14">
             <div>Доставка</div>
             <div>0 ₽</div>
           </div>
-          <div class="flex items-center justify-between mt-8 text-14">
+          <div class="mt-8 flex items-center justify-between text-14">
             <div>Скидка</div>
             <div>0 ₽</div>
           </div>
         </div>
 
-        <div class="flex items-center justify-between text-24 mt-25">
+        <div class="mt-25 flex items-center justify-between text-24">
           <div>Итого</div>
           <div>2 000 ₽</div>
         </div>

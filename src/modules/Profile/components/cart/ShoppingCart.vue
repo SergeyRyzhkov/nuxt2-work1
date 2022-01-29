@@ -1,32 +1,32 @@
 <template>
-  <div class="xl:px-40 h-full mt-7 shopping-cart">
+  <div class="mt-7 shopping-cart h-full xl:px-40">
     <div class="relative h-full">
       <div class="shopping-cart-title">
-        <div class="flex items-end relative">
+        <div class="relative flex items-end">
           <h2>Корзина</h2>
           <div class="shopping-cart-counter">{{ cartItemsCount }}</div>
         </div>
         <button @click="clearCart()">Очистить</button>
       </div>
-      <div class="mt-24 md:mt-42 flex flex-col h-full justify-between">
-        <div class="flex flex-col pr-6 shopping-cart-items">
+      <div class="mt-24 flex h-full flex-col justify-between md:mt-42">
+        <div class="shopping-cart-items flex flex-col pr-6">
           <CartItem v-for="(item, index) in cartItems" :key="index" :cart-item="item" />
         </div>
 
-        <div class="w-full mt-40 mb-100">
+        <div class="mt-40 mb-100 w-full">
           <div class="flex items-center justify-between text-14">
             <div>Общий вес</div>
             <div>{{ cartWeight }} г</div>
           </div>
-          <div class="flex items-center justify-between mt-8 text-14">
+          <div class="mt-8 flex items-center justify-between text-14">
             <div>НДС</div>
             <div>0 ₽</div>
           </div>
-          <div class="flex items-center justify-between text-24 mt-25">
+          <div class="mt-25 flex items-center justify-between text-24">
             <div>Итого</div>
             <div>{{ cartPrice }} ₽</div>
           </div>
-          <BaseButton class="w-full mt-32" @click="gotoOrdering()">Перейти к оформлению</BaseButton>
+          <BaseButton class="mt-32 w-full" @click="gotoOrdering()">Перейти к оформлению</BaseButton>
         </div>
       </div>
     </div>
@@ -113,7 +113,7 @@ export default class ShoppingCart extends Vue {
     > button {
       font-size: 14px;
       line-height: 17px;
-      @apply text-gray-color mb-6 ml-32 outline-none;
+      @apply outline-none mb-6 ml-32 text-gray-color;
     }
   }
 

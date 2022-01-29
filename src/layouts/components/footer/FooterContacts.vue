@@ -1,5 +1,5 @@
 <template>
-  <div class="lg:w-auto w-full flex flex-col lg:items-start items-center">
+  <div class="flex w-full flex-col items-center lg:w-auto lg:items-start">
     <div class="footer-menu-list">
       <div class="footer-title flex items-center justify-between" @click="openList">
         КОНТАКТЫ
@@ -34,8 +34,8 @@
         <li>Москва, Остаповский проезд, 5, стр. 1, оф. 801</li>
       </ul>
     </div>
-    <FooterSocials class="lg:mt-20 lg:py-0 pt-32 pb-22" />
-    <div class="flex items-center mb-24 lg:mb-0 lg:mt-40">
+    <FooterSocials class="pt-32 pb-22 lg:mt-20 lg:py-0" />
+    <div class="mb-24 flex items-center lg:mb-0 lg:mt-40">
       <a href="" target="_blank">
         <img v-lazysrc="'/images/app_store.svg'" alt=" " width="140" height="42" />
       </a>

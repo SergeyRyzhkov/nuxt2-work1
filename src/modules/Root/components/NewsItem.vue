@@ -5,7 +5,7 @@
         v-lazysrc="imageSrc"
         alt=" "
         itemprop="image"
-        class="article-smallitem__preview-img hover:scale-105 transition-all"
+        class="article-smallitem__preview-img transition-all hover:scale-105"
         width="400"
         height="280"
       />

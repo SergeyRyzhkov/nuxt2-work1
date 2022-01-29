@@ -1,20 +1,20 @@
 <template>
   <main class="page-wrapper">
     <BaseStaticBanner v-if="!!bannerUrl" :image-src="bannerUrl" default-image="/images/about_default_banner.jpg">
-      <div class="absolute w-screen bottom-30 md:bottom-60">
-        <h1 class="container w-full md:w-1/2 text-white">
+      <div class="absolute bottom-30 w-screen md:bottom-60">
+        <h1 class="container w-full text-white md:w-1/2">
           Добро пожаловать в <br />
           KAYPRO
         </h1>
       </div>
     </BaseStaticBanner>
     <main class="container flex flex-col">
-      <section class="w-auto xl:w-1/2 ml-auto mr-auto" v-html="firstContent"></section>
-      <section class="flex flex-col lg:flex-row mt-30 md:mt-60 w-auto lg:w-5/6 ml-auto mr-auto items-center justify-center">
+      <section class="ml-auto mr-auto w-auto xl:w-1/2" v-html="firstContent"></section>
+      <section class="mt-30 ml-auto mr-auto flex w-auto flex-col items-center justify-center md:mt-60 lg:w-5/6 lg:flex-row">
         <img v-lazysrc="firstImageSrc" class="w-full" />
-        <img v-lazysrc="secondImageSrc" class="w-full ml-0 lg:ml-20 mt-30 lg:mt-0" />
+        <img v-lazysrc="secondImageSrc" class="ml-0 mt-30 w-full lg:ml-20 lg:mt-0" />
       </section>
-      <section class="mt-30 lg:mt-60 w-auto xl:w-1/2 ml-auto mr-auto" v-html="lastContent"></section>
+      <section class="mt-30 ml-auto mr-auto w-auto lg:mt-60 xl:w-1/2" v-html="lastContent"></section>
     </main>
   </main>
 </template>

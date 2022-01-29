@@ -46,7 +46,7 @@ export default class HeaderMenu extends Vue {
 
 <style lang="scss">
 .header-menu-list {
-  @apply text-white text-14 font-semibold;
+  @apply text-14 font-semibold text-white;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;

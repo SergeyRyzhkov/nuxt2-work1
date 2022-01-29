@@ -1,17 +1,17 @@
 <template>
   <div v-show="menuVisible" class="catalog-top-menu" :class="[menuVisible ? 'active' : '']">
     <div class="container flex justify-between">
-      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-y-24 gap-x-24 py-40 w-2/3">
+      <div class="grid w-2/3 grid-cols-1 gap-y-24 gap-x-24 py-40 md:grid-cols-3 lg:grid-cols-4">
         <div v-for="iter in list" :key="iter.id" @mouseover="categoryOver(iter)">
           <span class="catalog-top-menu__title" @click="goToCatalog(iter)">{{ iter.title }}</span>
         </div>
       </div>
       <div class="w-1/3 py-40">
-        <img v-lazysrc="banerSrc" alt=" " width="400" height="240" class="w-400 h-240 object-cover object-left-top" />
+        <img v-lazysrc="banerSrc" alt=" " width="400" height="240" class="h-240 w-400 object-cover object-left-top" />
       </div>
     </div>
     <div
-      class="fixed min-h-screen h-screen w-full bg-primary opacity-30 top-0 left-0 z-[-1]"
+      class="fixed top-0 left-0 z-[-1] h-screen min-h-screen w-full bg-primary opacity-30"
       :class="[!menuVisible ? 'hidden' : 'block']"
     ></div>
   </div>

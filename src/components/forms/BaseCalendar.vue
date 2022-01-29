@@ -30,7 +30,7 @@
     </template>
 
     <template #footer>
-      <div class="flex flex-col w-full">
+      <div class="flex w-full flex-col">
         <slot name="footer"></slot>
       </div>
     </template>

@@ -6,7 +6,7 @@
         src="/images/header_shop.svg"
         width="22"
         height="22"
-        class="ml-24 lg:ml-48 cursor-pointer"
+        class="ml-24 cursor-pointer lg:ml-48"
         alt=" "
         @click="cartModal()"
       />
@@ -17,7 +17,7 @@
       alt=" "
       width="19"
       height="19"
-      class="ml-24 lg:ml-48 cursor-pointer"
+      class="ml-24 cursor-pointer lg:ml-48"
       @click="authModalOrProfile()"
     />
   </div>

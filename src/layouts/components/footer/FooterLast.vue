@@ -1,5 +1,5 @@
 <template>
-  <div class="footer-bottom flex flex-col-reverse md:flex-row items-center justify-between">
+  <div class="footer-bottom flex flex-col-reverse items-center justify-between md:flex-row">
     <div class="footer-bottom-text mt-18 md:mt-0" @click="clearCache()">© {{ new Date().getFullYear() }} kaypro.ru</div>
     <FooterPayments />
   </div>

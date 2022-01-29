@@ -1,35 +1,35 @@
 <template>
   <section class="cart-total w-full">
     <div :class="{ 'order-total': isOrdering }">
-      <div class="flex items-center justify-between cart-info">
+      <div class="cart-info flex items-center justify-between">
         <div>Общий вес</div>
         <div>200 г</div>
       </div>
-      <div v-if="isOrdering" class="flex items-center justify-between mt-8 cart-info">
+      <div v-if="isOrdering" class="cart-info mt-8 flex items-center justify-between">
         <div>Количество</div>
         <div>1</div>
       </div>
     </div>
     <div :class="{ 'order-total': isOrdering }">
-      <div class="flex items-center justify-between mt-8 cart-info">
+      <div class="cart-info mt-8 flex items-center justify-between">
         <div>НДС</div>
         <div>0 ₽</div>
       </div>
-      <div v-if="isOrdering" class="flex items-center justify-between mt-8 cart-info">
+      <div v-if="isOrdering" class="cart-info mt-8 flex items-center justify-between">
         <div>Доставка</div>
         <div>0 ₽</div>
       </div>
-      <div v-if="isOrdering" class="flex items-center justify-between mt-8 cart-info">
+      <div v-if="isOrdering" class="cart-info mt-8 flex items-center justify-between">
         <div>Скидка</div>
         <div>0 ₽</div>
       </div>
     </div>
 
-    <div class="flex items-center justify-between cart-info-large">
+    <div class="cart-info-large flex items-center justify-between">
       <div>Итого</div>
       <div>2 000 ₽</div>
     </div>
-    <BaseButton class="w-full mt-32" :class="{ 'lg:hidden': isOrdering }">{{
+    <BaseButton class="mt-32 w-full" :class="{ 'lg:hidden': isOrdering }">{{
       isOrdering ? "Оформить" : "Перейти к оформлению"
     }}</BaseButton>
   </section>

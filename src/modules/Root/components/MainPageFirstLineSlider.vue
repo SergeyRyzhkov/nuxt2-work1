@@ -13,26 +13,26 @@
   >
     <template #slide="{ slide }">
       <div class="flex flex-col lg:flex-row">
-        <div class="w-full lg:w-1/2 h-300 lg:h-600 border-b-2 border-r-0 lg:border-r-2 lg:border-b-0 border-secondary">
+        <div class="h-300 w-full border-b-2 border-r-0 border-secondary lg:h-600 lg:w-1/2 lg:border-r-2 lg:border-b-0">
           <LazyBaseVideoPlayer
             v-if="getVideo(slide) && isVideo(slide)"
             :src="getVideo(slide)"
-            class="w-full h-full bg-[#F5F5F5]"
+            class="h-full w-full bg-[#F5F5F5]"
             video-classes="w-full h-full"
             controls
           ></LazyBaseVideoPlayer>
           <img v-if="!isVideo(slide)" v-lazysrc="getLeftIamgeSrc(slide)" class="h-full w-full object-cover object-left-top" />
         </div>
-        <div class="w-full lg:w-1/2 h-full lg:h-600">
-          <div class="bg-[#F5F5F5] h-full flex flex-col items-center py-50 px-16">
-            <img v-lazysrc="getSliderImage(slide)" height="300" width="250" alt=" " class="h-300 object-scale-down w-250" />
+        <div class="h-full w-full lg:h-600 lg:w-1/2">
+          <div class="flex h-full flex-col items-center bg-[#F5F5F5] py-50 px-16">
+            <img v-lazysrc="getSliderImage(slide)" height="300" width="250" alt=" " class="w-250 h-300 object-scale-down" />
             <div :style="getTitleColor(slide)" class="mt-27">
               {{ slide.title }}
             </div>
             <div :style="getSubTitleColor(slide)" class="mt-18 text-center">
               {{ slide.description }}
             </div>
-            <base-button v-if="slide.button" class="bg-white w-max mt-30" @click="goTo(slide)">{{
+            <base-button v-if="slide.button" class="mt-30 w-max bg-white" @click="goTo(slide)">{{
               slide.button_text
             }}</base-button>
           </div>

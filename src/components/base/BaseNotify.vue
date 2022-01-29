@@ -1,8 +1,8 @@
 <template>
   <BaseModal :back-enabled="false" class="flex" @close="$emit('close')">
-    <div class="mt-24 flex flex-col m-auto items-center">
+    <div class="m-auto mt-24 flex flex-col items-center">
       <img src="/icons/alert_check.svg" width="74" height="74" />
-      <div class="mb-40 mt-60 m-auto text-24">{{ text }}</div>
+      <div class="m-auto mb-40 mt-60 text-24">{{ text }}</div>
     </div>
   </BaseModal>
 </template>

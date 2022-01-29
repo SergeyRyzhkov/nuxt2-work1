@@ -1,12 +1,12 @@
 <template>
   <main v-if="!$fetchState.pending">
-    <div class="arenda-page container-fluid flex items-end h-400 relative">
-      <div class="container relative w-full md:w-8/12 xl:w-1/2 mb-32 md:mb-55">
+    <div class="arenda-page container-fluid relative flex h-400 items-end">
+      <div class="container relative mb-32 w-full md:mb-55 md:w-8/12 xl:w-1/2">
         <h1>{{ model.content.title }}</h1>
       </div>
     </div>
     <section
-      class="container page-wrapper mt-32 md:mt-55 w-full md:w-8/12 xl:w-1/2 ml-auto mr-auto"
+      class="page-wrapper container mt-32 ml-auto mr-auto w-full md:mt-55 md:w-8/12 xl:w-1/2"
       v-html="model.content.description"
     ></section>
   </main>

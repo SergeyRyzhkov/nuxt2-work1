@@ -25,14 +25,14 @@
         </div>
         <div
           v-if="products !== null && products.length > 0"
-          class="dropdown-results flex-wrap justify-between flex flex-col lg:flex-row"
+          class="dropdown-results flex flex-col flex-wrap justify-between lg:flex-row"
         >
           <nuxt-link v-for="(product, index) in products" :key="index" :to="routeLink(product)" class="flex items-center">
             <figure class="dropdown-img">
               <img :src="product.logo[0].url" :alt="product.meta_title" itemprop="image" width="78" height="78" loading="lazy" />
               <figcaption></figcaption>
             </figure>
-            <div class="pl-20 item-title">{{ product.meta_title }}</div>
+            <div class="item-title pl-20">{{ product.meta_title }}</div>
           </nuxt-link>
         </div>
       </div>

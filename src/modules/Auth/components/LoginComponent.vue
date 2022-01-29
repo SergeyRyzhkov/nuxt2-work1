@@ -18,7 +18,7 @@
     />
     <div class="mt-24 flex items-center justify-between">
       <BaseCheckbox id="remember-me" v-model="loginFormData.rememberMe" label="Запомнить меня" />
-      <div class="text-14 cursor-pointer text-secondary" @click="$emit('reset-clicked')">Забыли пароль ?</div>
+      <div class="cursor-pointer text-14 text-secondary" @click="$emit('reset-clicked')">Забыли пароль ?</div>
     </div>
     <BaseButton class="mt-40 md:mt-60" type="submit">Войти</BaseButton>
   </form>

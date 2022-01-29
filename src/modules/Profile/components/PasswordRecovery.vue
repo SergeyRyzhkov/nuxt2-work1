@@ -28,7 +28,7 @@
       />
       <BaseButton type="submit">Изменить</BaseButton>
     </form>
-    <div class="flex items-center mt-60">
+    <div class="mt-60 flex items-center">
       <BaseCheckbox id="subscribe" label="Получать информацию о новинках и акциях" />
     </div>
   </div>

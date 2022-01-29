@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full flex flex-col relative overflow-hidden mb-20 lg:mb-40 xl:mb-60"
+    class="relative mb-20 flex w-full flex-col overflow-hidden lg:mb-40 xl:mb-60"
     :class="[!isContainer ? 'w-screen' : '', wide ? 'h-400 md:h-600' : 'h-200 md:h-400']"
   >
     <img
@@ -8,7 +8,7 @@
       :src="image"
       :height="height"
       alt=" "
-      class="object-cover object-top w-full max-w-full"
+      class="w-full max-w-full object-cover object-top"
       :class="[wide ? 'h-400 md:h-600' : 'h-200 md:h-400']"
     />
     <slot></slot>

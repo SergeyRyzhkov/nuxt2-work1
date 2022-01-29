@@ -5,7 +5,7 @@
 
     <!-- content.new_products -->
     <section v-if="!!newProducts" class="container mt-40 md:mt-100">
-      <h2 class="text-48 font-compact uppercase">Новые поступления</h2>
+      <h2 class="font-compact text-48 uppercase">Новые поступления</h2>
       <LazyBaseSwiper :slides="newProducts" class="mt-16 md:mt-32" :settings="sliderSettings">
         <template #slide="{ slide }">
           <ProductItem :model="slide" class="w-max"><span class="text-green">Новое</span></ProductItem>
@@ -19,7 +19,7 @@
 
     <!-- content.bestsellers -->
     <section class="container mt-40 md:mt-100">
-      <h2 class="text-48 font-compact uppercase">Хиты продаж</h2>
+      <h2 class="font-compact text-48 uppercase">Хиты продаж</h2>
       <LazyBaseSwiper :slides="bestSellers" class="mt-16 md:mt-32" :settings="sliderSettings">
         <template #slide="{ slide }">
           <ProductItem :model="slide" class="w-max"><span>HIT</span></ProductItem>
@@ -33,7 +33,7 @@
 
     <!-- content.popular -->
     <section v-if="!!populars" class="container mt-40 md:mt-100">
-      <h2 class="text-48 font-compact uppercase">Популярное</h2>
+      <h2 class="font-compact text-48 uppercase">Популярное</h2>
       <LazyBaseSwiper :slides="populars" class="mt-16 md:mt-32" :settings="sliderSettings">
         <template #slide="{ slide }">
           <ProductItem :model="slide" class="w-max"><span class="text-secondary">популярное</span></ProductItem>
@@ -43,22 +43,22 @@
 
     <section class="container mt-40 md:mt-100">
       <div class="flex flex-col lg:flex-row">
-        <div class="w-full lg:w-1/2 cursor-pointer" @click="goToLine21">
-          <img v-lazysrc="line2ImgSrc1" height="500" width="300" class="h-210 lg:h-400 w-full object-cover object-left-top" />
-          <div class="mt-16 lg:mt-26 text-18 font-semibold uppercase">{{ line2Title1 }}</div>
+        <div class="w-full cursor-pointer lg:w-1/2" @click="goToLine21">
+          <img v-lazysrc="line2ImgSrc1" height="500" width="300" class="h-210 w-full object-cover object-left-top lg:h-400" />
+          <div class="mt-16 text-18 font-semibold uppercase lg:mt-26">{{ line2Title1 }}</div>
         </div>
-        <div class="w-full lg:w-1/2 ml-0 lg:ml-20 cursor-pointer mt-32 lg:mt-0" @click="goToLine22">
-          <img v-lazysrc="line2ImgSrc2" height="500" width="300" class="h-210 lg:h-400 w-full object-cover object-left-top" />
-          <div class="mt-16 lg:mt-26 text-18 font-semibold uppercase">{{ line2Title2 }}</div>
+        <div class="ml-0 mt-32 w-full cursor-pointer lg:ml-20 lg:mt-0 lg:w-1/2" @click="goToLine22">
+          <img v-lazysrc="line2ImgSrc2" height="500" width="300" class="h-210 w-full object-cover object-left-top lg:h-400" />
+          <div class="mt-16 text-18 font-semibold uppercase lg:mt-26">{{ line2Title2 }}</div>
         </div>
       </div>
     </section>
 
     <section class="container mt-40 md:mt-100">
       <div class="flex flex-col lg:flex-row">
-        <div class="w-full lg:w-1/2 bg-primary flex flex-col px-16 py-48">
-          <div class="lg:w-4/5 flex flex-col m-auto">
-            <h2 class="text-78 md:text-89 font-compact uppercase text-white">
+        <div class="flex w-full flex-col bg-primary px-16 py-48 lg:w-1/2">
+          <div class="m-auto flex flex-col lg:w-4/5">
+            <h2 class="font-compact text-78 uppercase text-white md:text-89">
               KayPro-всегда доступен для<br />
               новых свершений
             </h2>
@@ -66,13 +66,13 @@
               >Мобильное приложение уже доступно <br />
               для скачивания.</span
             >
-            <div class="mt-32 lg:mt-48 flex items-center">
-              <img v-lazysrc="'/images/app_store.svg'" class="w-140 h-42" alt=" " width="140" height="42" />
-              <img v-lazysrc="'/images/google_play.svg'" class="ml-16 w-140 h-42" alt=" " width="140" height="42" />
+            <div class="mt-32 flex items-center lg:mt-48">
+              <img v-lazysrc="'/images/app_store.svg'" class="h-42 w-140" alt=" " width="140" height="42" />
+              <img v-lazysrc="'/images/google_play.svg'" class="ml-16 h-42 w-140" alt=" " width="140" height="42" />
             </div>
           </div>
         </div>
-        <div class="w-full lg:w-1/2 bg-nude h-340 lg:h-full">
+        <div class="h-340 w-full bg-nude lg:h-full lg:w-1/2">
           <img
             v-lazysrc="'/images/main-apps.png'"
             class="h-full w-full object-cover object-left-top"
@@ -87,15 +87,15 @@
     <!-- instagram -->
     <section class="mt-40 md:mt-185">
       <LazyHydrate when-visible>
-      <InstagramBlock />
-       </LazyHydrate>
+        <InstagramBlock />
+      </LazyHydrate>
     </section>
 
-    <section class="container mt-40 md:mt-100 flex flex-col">
-      <div class="flex flex-col ml-auto mr-auto items-center">
-        <h2 class="text-62 font-compact">Доступ к оптовым ценам</h2>
+    <section class="container mt-40 flex flex-col md:mt-100">
+      <div class="ml-auto mr-auto flex flex-col items-center">
+        <h2 class="font-compact text-62">Доступ к оптовым ценам</h2>
         <span class="mt-14">Заполните заявку на сотрудничество</span>
-        <base-button class="mt-20 md:mt-40 w-max" @click="openForm()">Заполнить</base-button>
+        <base-button class="mt-20 w-max md:mt-40" @click="openForm()">Заполнить</base-button>
       </div>
     </section>
 

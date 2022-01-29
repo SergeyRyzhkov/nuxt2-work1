@@ -3,7 +3,7 @@
     <BaseStaticBanner :image-src="bannerSrc" />
     <main class="container mt-40">
       <div class="flex flex-col-reverse md:flex-row">
-        <div class="w-full mt-32 md:mt-0 md:w-1/4">
+        <div class="mt-32 w-full md:mt-0 md:w-1/4">
           {{ newsDate }}
         </div>
         <div class="w-full md:w-1/2">

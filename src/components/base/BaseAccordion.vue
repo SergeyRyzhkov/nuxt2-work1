@@ -1,6 +1,6 @@
 <template>
   <div class="base-accordion">
-    <div class="flex font-semibold text-18 justify-between items-center cursor-pointer" @click="toogle()">
+    <div class="flex cursor-pointer items-center justify-between text-18 font-semibold" @click="toogle()">
       <slot name="header"></slot>
       <span v-show="!isContentActive" class="text-34 font-normal">+</span>
       <span v-show="isContentActive" class="text-34 font-normal">-</span>

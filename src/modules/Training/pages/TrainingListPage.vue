@@ -2,19 +2,19 @@
   <main class="page-wrapper container">
     <BreadCrumbs />
 
-    <div class="arenda-banner flex flex-col justify-between lg:flex-row lg:items-center p-16 md:p-40">
+    <div class="arenda-banner flex flex-col justify-between p-16 md:p-40 lg:flex-row lg:items-center">
       <div class="flex flex-col md:flex-row md:items-center">
-        <h1 class="grow flex-shrink-0">Аренда студии</h1>
-        <p class="text-14 break-all md:ml-40 xl:ml-60 w-full lg:w-1/2">
+        <h1 class="flex-shrink-0 grow">Аренда студии</h1>
+        <p class="w-full break-all text-14 md:ml-40 lg:w-1/2 xl:ml-60">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
           aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
         </p>
       </div>
-      <BaseButton class="grow flex-shrink-0 mt-18 lg:mt-0 bg-white w-max" @click="$router.push({ name: 'training-arenda-card' })"
+      <BaseButton class="mt-18 w-max flex-shrink-0 grow bg-white lg:mt-0" @click="$router.push({ name: 'training-arenda-card' })"
         >Узнать больше</BaseButton
       >
     </div>
-    <div class="flex items-center justify-between mt-40 md:mt-60">
+    <div class="mt-40 flex items-center justify-between md:mt-60">
       <h1>Обучение</h1>
       <base-calendar
         v-model="daysRange"
@@ -30,12 +30,12 @@
       ></base-calendar>
     </div>
 
-    <div v-if="$fetchState.pending" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-30 gap-x-30 mt-30 md:mt-40">
+    <div v-if="$fetchState.pending" class="mt-30 grid grid-cols-1 gap-y-30 gap-x-30 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
       <template v-for="index in 6">
         <SkeletonTrainingItem :key="index"> </SkeletonTrainingItem>
       </template>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-30 gap-x-30 mt-30 md:mt-40">
+    <div class="mt-30 grid grid-cols-1 gap-y-30 gap-x-30 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
       <TrainingItem v-for="iter in trainingList" :key="iter.id" :item="iter"> </TrainingItem>
     </div>
     <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>

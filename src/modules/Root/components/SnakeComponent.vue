@@ -1,5 +1,5 @@
 <template>
-  <section class="relative snake">
+  <section class="snake relative">
     <div class="snake-first snake-el mt-40 xl:mt-80">
       <div>
         <svg width="65" height="134" viewBox="0 0 65 134" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -319,7 +319,7 @@
       </div>
     </div>
 
-    <div class="snake-fourth snake-el xl:mt-90 mt-24">
+    <div class="snake-fourth snake-el mt-24 xl:mt-90">
       <div>
         <svg width="65" height="134" viewBox="0 0 65 134" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path

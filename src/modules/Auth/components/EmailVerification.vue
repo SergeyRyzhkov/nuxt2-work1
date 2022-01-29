@@ -1,7 +1,7 @@
 <template>
   <section>
-    <h1 class="uppercase mb-20">Подтвердите почту</h1>
-    <div class="mb-20 mb:mb-40">{{ loginData.email }}</div>
+    <h1 class="mb-20 uppercase">Подтвердите почту</h1>
+    <div class="mb:mb-40 mb-20">{{ loginData.email }}</div>
     <BaseInput
       v-model="code"
       placeholder="Код из почты"
@@ -10,7 +10,7 @@
       @blur="$v.code.$touch()"
     ></BaseInput>
     <div v-show="!isSendEnabled" class="mt-20 text-14 text-gray-color">{{ resendDelayText }}</div>
-    <div v-show="isSendEnabled" class="mt-20 text-14 cursor-pointer text-secondary" @click="resendCode()">
+    <div v-show="isSendEnabled" class="mt-20 cursor-pointer text-14 text-secondary" @click="resendCode()">
       Отправить код повторно
     </div>
     <BaseButton v-show="isSendEnabled" class="mt-40 md:mt-60" @click="verifyEmail">Отправить</BaseButton>

@@ -60,7 +60,7 @@
       class="mb-27"
       @blur="$v.registrationData.password_confirmation.$touch()"
     />
-    <div class="flex flex-col mt-24">
+    <div class="mt-24 flex flex-col">
       <BaseCheckbox
         id="privacy"
         v-model="registrationData.agreement"

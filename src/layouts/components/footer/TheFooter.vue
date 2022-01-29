@@ -1,19 +1,19 @@
 <template>
-  <footer class="bg-primary container-fluid">
-    <div class="container flex flex-col lg:flex-row items-start justify-between pt-20 pb-10 lg:pt-40 lg:pb-20">
-      <div class="lg:w-auto flex flex-col w-full lg:min-w-[206px] xl:min-w-[306px]">
+  <footer class="container-fluid bg-primary">
+    <div class="container flex flex-col items-start justify-between pt-20 pb-10 lg:flex-row lg:pt-40 lg:pb-20">
+      <div class="flex w-full flex-col lg:w-auto lg:min-w-[206px] xl:min-w-[306px]">
         <footer-logo></footer-logo>
         <footer-subscribe class="mt-22 lg:mt-45" />
       </div>
-      <div class="w-full flex lg:justify-end">
-        <div class="flex w-full flex-col lg:flex-row lg:w-11/12 items-start justify-between xl:w-10/12 mt-40 lg:mt-0">
+      <div class="flex w-full lg:justify-end">
+        <div class="mt-40 flex w-full flex-col items-start justify-between lg:mt-0 lg:w-11/12 lg:flex-row xl:w-10/12">
           <footer-about></footer-about>
           <footer-info class="lg:ml-20"></footer-info>
-          <footer-contacts class="lg:ml-20 flex-shrink-0"></footer-contacts>
+          <footer-contacts class="flex-shrink-0 lg:ml-20"></footer-contacts>
         </div>
       </div>
     </div>
-    <div class="container-fluid border-b border-footer-color mt-0 md:mt-82"></div>
+    <div class="container-fluid mt-0 border-b border-footer-color md:mt-82"></div>
     <FooterLast class="container flex py-18 md:pt-22 md:pb-26"></FooterLast>
   </footer>
 </template>

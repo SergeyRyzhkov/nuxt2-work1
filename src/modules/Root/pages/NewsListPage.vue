@@ -3,13 +3,13 @@
     <BreadCrumbs />
     <h1>Новости</h1>
 
-    <section v-if="$fetchState.pending" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-30 gap-x-30 mt-40">
+    <section v-if="$fetchState.pending" class="mt-40 grid grid-cols-1 gap-y-30 gap-x-30 md:grid-cols-2 lg:grid-cols-3">
       <template v-for="index in 6">
         <SkeletonNewsItem :key="index"> </SkeletonNewsItem>
       </template>
     </section>
 
-    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-30 gap-x-30 mt-40">
+    <section class="mt-40 grid grid-cols-1 gap-y-30 gap-x-30 md:grid-cols-2 lg:grid-cols-3">
       <NewsItem v-for="iter in newsList" :key="iter.id" :article-model="iter"> </NewsItem>
     </section>
     <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>

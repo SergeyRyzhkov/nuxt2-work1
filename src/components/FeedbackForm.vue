@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="send">
-    <div v-if="radio" class="flex justify-between sm:justify-start w-full sm:w-auto mb-32">
+    <div v-if="radio" class="mb-32 flex w-full justify-between sm:w-auto sm:justify-start">
       <BaseRadioButton v-model="formModel.type" label="Обращение" value="appeal" />
       <BaseRadioButton v-model="formModel.type" class="sm:ml-74" label="Запрос технологу" value="request" />
     </div>
@@ -45,13 +45,13 @@
     />
     <BaseButton type="submit" class="mt-20 md:mt-40">Отправить</BaseButton>
 
-    <p class="text-12 text-gray-color mt-16 md:mt-32 -mb-32">
+    <p class="mt-16 -mb-32 text-12 text-gray-color md:mt-32">
       Защита от спама reCAPTCHA
-      <a class="underline focus:no-underline inline" href="https://policies.google.com/privacy" target="_blank"
+      <a class="inline underline focus:no-underline" href="https://policies.google.com/privacy" target="_blank"
         >Конфиденциальность
       </a>
       и
-      <a class="underline focus:no-underline inline" href="https://policies.google.com/terms" target="_blank"
+      <a class="inline underline focus:no-underline" href="https://policies.google.com/terms" target="_blank"
         >Условия использования</a
       >
     </p>

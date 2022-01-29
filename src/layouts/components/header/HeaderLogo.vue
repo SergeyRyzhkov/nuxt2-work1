@@ -1,7 +1,7 @@
 <template>
   <img
     src="/images/header_logo.png"
-    class="cursor-pointer w-[112px] lg:w-[132px]"
+    class="w-[112px] cursor-pointer lg:w-[132px]"
     width="132"
     height="50"
     alt=" "

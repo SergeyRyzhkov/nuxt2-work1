@@ -1,10 +1,10 @@
 <template>
   <div v-if="!!model" class="flex flex-col">
     <div class="flex flex-row align-baseline">
-      <img :src="imageSrc" class="rounded-full object-cover object-center w-80 h-80" width="80" height="80" />
+      <img :src="imageSrc" class="h-80 w-80 rounded-full object-cover object-center" width="80" height="80" />
       <div class="ml-18">
         <div class="text-18 font-semibold">{{ model.lecturer }}</div>
-        <div class="text-14 text-gray-color mt-10">{{ model.lecturer_position }}</div>
+        <div class="mt-10 text-14 text-gray-color">{{ model.lecturer_position }}</div>
       </div>
     </div>
     <div class="mt-18 text-14">{{ model.lecturer_description }}</div>

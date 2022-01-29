@@ -3,7 +3,7 @@
     <img
       v-lazysrc="'/images/footer-logo.svg'"
       alt=" "
-      class="cursor-pointer w-full"
+      class="w-full cursor-pointer"
       width="152"
       height="68"
       @click="goToMainPage()"

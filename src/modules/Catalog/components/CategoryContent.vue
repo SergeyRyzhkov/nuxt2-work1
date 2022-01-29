@@ -6,13 +6,13 @@
       <section>
         <LazyBaseSwiper :slides="subCategories" :settings="sliderSettings">
           <template #slide="{ slide }">
-            <nuxt-link class="flex flex-col w-226" :to="getSubCategoryRoute(slide)">
+            <nuxt-link class="flex w-226 flex-col" :to="getSubCategoryRoute(slide)">
               <img
                 v-lazysrc="getSubCategoryLogo(slide)"
                 height="226"
                 width="226"
                 alt=" "
-                class="w-226 h-226 object-cover object-top hover:scale-105 transition-all"
+                class="h-226 w-226 object-cover object-top transition-all hover:scale-105"
               />
               <span class="mt-16">{{ slide.title }}</span>
               <span class="mt-6 text-12 text-text-gray">{{ slide.subtitle }}</span>
@@ -24,16 +24,16 @@
       <section v-if="!!sliders && sliders.length" class="mt-32 md:mt-50">
         <LazyBaseSwiper :slides="sliders" :settings="{ slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 }">
           <template #slide="{ slide }">
-            <div class="flex flex-col w-full">
-              <img v-lazysrc="slide.url" height="400" width="400" alt=" " class="w-full h-400 object-cover object-top" />
+            <div class="flex w-full flex-col">
+              <img v-lazysrc="slide.url" height="400" width="400" alt=" " class="h-400 w-full object-cover object-top" />
             </div>
           </template>
         </LazyBaseSwiper>
       </section>
 
       <section v-if="!!model && !!model.products" class="mt-40 md:mt-60">
-        <div class="text-14 text-text-gray mb-28">{{ productCountText }}</div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-40 gap-x-30">
+        <div class="mb-28 text-14 text-text-gray">{{ productCountText }}</div>
+        <div class="grid grid-cols-1 gap-y-40 gap-x-30 md:grid-cols-2 lg:grid-cols-3">
           <ProductItem v-for="iter in model.products" :key="iter.id" :model="iter"> </ProductItem>
         </div>
       </section>

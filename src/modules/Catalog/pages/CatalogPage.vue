@@ -10,7 +10,7 @@
         <div v-if="isLeafCategory" class="flex flex-col">
           <h1 class="mb-28">{{ selectedModel.title }}</h1>
           <div v-if="!!selectedModel.parent">
-            <div class="font-semibold mb-16 text-18">Категория</div>
+            <div class="mb-16 text-18 font-semibold">Категория</div>
             <nuxt-link :to="parentCategoryRoute" class="flex items-center">
               <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -27,7 +27,7 @@
           </div>
         </div>
       </div>
-      <div class="w-3/4 ml-40">
+      <div class="ml-40 w-3/4">
         <nuxt-child :model="selectedModel"></nuxt-child>
       </div>
     </div>

@@ -16,7 +16,7 @@
       @complete="onComplete"
     />
 
-    <a v-if="type === 'password'" href="#" class="absolute top-0 right-0 z-100" @click.prevent="showPassword = !showPassword">
+    <a v-if="type === 'password'" href="#" class="z-100 absolute top-0 right-0" @click.prevent="showPassword = !showPassword">
       <img v-show="showPassword" src="/icons/eye-open.svg" width="32" height="32" />
       <img v-show="!showPassword" src="/icons/eye-close.svg" width="32" height="32" />
     </a>
