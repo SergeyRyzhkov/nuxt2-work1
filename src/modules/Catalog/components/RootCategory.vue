@@ -4,7 +4,9 @@
       <div class="absolute flex h-full w-full flex-col items-center justify-between p-20 md:p-60">
         <div class="font-compact text-60 md:text-100 uppercase">{{ bannerTitle }}</div>
         <div class="text-18" v-html="bannerDescription"></div>
-        <base-button class="mt-18 w-max flex-shrink-0 bg-white lg:mt-0">{{ bannerButtonText }}</base-button>
+        <base-button v-if="!!bannerButtonText" class="mt-18 w-max flex-shrink-0 bg-white lg:mt-0" @click="gotoFromBanner()">{{
+          bannerButtonText
+        }}</base-button>
       </div>
     </BaseStaticBanner>
 
@@ -18,7 +20,7 @@
     </section>
 
     <section class="mt-40 flex w-full flex-col justify-between md:mt-60 md:flex-row">
-      <div class="w-full md:w-1/2">
+      <div class="w-full cursor-pointer md:w-1/2" @click="gotoLine1()">
         <img
           v-lazysrc="lineImg1"
           alt=" "
@@ -27,7 +29,7 @@
         />
         <div class="text-18 mt-16 font-semibold uppercase">{{ lineText1 }}</div>
       </div>
-      <div class="w-full md:ml-32 md:w-1/2">
+      <div class="w-full cursor-pointer md:ml-32 md:w-1/2" @click="gotoLine2()">
         <img
           v-lazysrc="lineImg2"
           alt=" "
@@ -47,7 +49,12 @@
         <div class="absolute flex h-full w-full flex-col items-center pt-20 md:pt-60">
           <div class="font-compact text-48 uppercase" v-html="bannerTitle2"></div>
           <div class="mt-32 md:mt-44" v-html="bannerDescription2"></div>
-          <base-button class="mt-18 w-max flex-shrink-0 bg-white lg:mt-24">{{ bannerButtonText2 }}</base-button>
+          <base-button
+            v-if="!!bannerButtonText2"
+            class="mt-18 w-max flex-shrink-0 bg-white lg:mt-24"
+            @click="gotoFromBanner2()"
+            >{{ bannerButtonText2 }}</base-button
+          >
         </div>
       </BaseStaticBanner>
     </section>
@@ -79,6 +86,30 @@ export default class RootCategory extends Vue {
   head() {
     if (this.model) {
       return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(this.model, this.$route.fullPath);
+    }
+  }
+
+  gotoFromBanner() {
+    if (this.model?.content?.banner1?.link) {
+      window.open(this.model.content.banner1.link, "_blank");
+    }
+  }
+
+  gotoFromBanner2() {
+    if (this.model?.content?.banner2?.link) {
+      window.open(this.model.content.banner2.link, "_blank");
+    }
+  }
+
+  gotoLine1() {
+    if (this.model?.content?.line?.length > 0) {
+      window.open(this.model.content.line[1].link, "_blank");
+    }
+  }
+
+  gotoLine2() {
+    if (this.model?.content?.line?.length) {
+      window.open(this.model.content.line[0].link, "_blank");
     }
   }
 

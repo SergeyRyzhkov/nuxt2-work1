@@ -7,10 +7,10 @@ export default class CatalogModel extends SeoModel {
   content_image_1: { url: string };
   content_image_2: { url: string };
   content: {
-    banner1: { title: string; description: string; button_text: string };
-    banner2: { title: string; description: string; button_text: string };
+    banner1: { title: string; description: string; button_text: string; link: string };
+    banner2: { title: string; description: string; button_text: string; link: string };
     bestsellers: ProductModel[];
-    line: { title: string }[];
+    line: { title: string; link: string }[];
     popular: ProductModel[];
   };
 }
