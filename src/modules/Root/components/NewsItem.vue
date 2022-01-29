@@ -1,39 +1,32 @@
 <template>
-  <LazyHydrate when-visible>
-    <article v-if="!!articleModel && !!articleModel.meta_slug" class="article-smallitem" @click="goToCard()">
-      <figure class="article-smallitem__preview">
-        <img
-          v-lazysrc="imageSrc"
-          alt=" "
-          itemprop="image"
-          class="article-smallitem__preview-img hover:scale-105 transition-all"
-          width="400"
-          height="280"
-        />
-        <figcaption>{{ articleModel.title }}</figcaption>
-      </figure>
-      <header class="article-smallitem__header leading-20">
-        {{ articleModel.title }}
-      </header>
-      <div class="article-smallitem__stat-info">
-        <div class="article-smallitem__date">
-          <span itemprop="datePublished" :content="dateFormatted">{{ dateFormatted }}</span>
-        </div>
+  <article v-if="!!articleModel && !!articleModel.meta_slug" class="article-smallitem" @click="goToCard()">
+    <figure class="article-smallitem__preview">
+      <img
+        v-lazysrc="imageSrc"
+        alt=" "
+        itemprop="image"
+        class="article-smallitem__preview-img hover:scale-105 transition-all"
+        width="400"
+        height="280"
+      />
+      <figcaption>{{ articleModel.title }}</figcaption>
+    </figure>
+    <header class="article-smallitem__header leading-20">
+      {{ articleModel.title }}
+    </header>
+    <div class="article-smallitem__stat-info">
+      <div class="article-smallitem__date">
+        <span itemprop="datePublished" :content="dateFormatted">{{ dateFormatted }}</span>
       </div>
-    </article>
-  </LazyHydrate>
+    </div>
+  </article>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "nuxt-property-decorator";
-import LazyHydrate from "vue-lazy-hydration";
 import NewsModel from "../models/NewsModel";
 
-@Component({
-  components: {
-    LazyHydrate,
-  },
-})
+@Component
 export default class NewsItem extends Vue {
   @Prop()
   articleModel: NewsModel;

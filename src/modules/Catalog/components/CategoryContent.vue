@@ -4,35 +4,31 @@
 
     <div v-if="isNotLeafCategory">
       <section>
-        <LazyHydrate when-visible>
-          <LazyBaseSwiper :slides="subCategories" :settings="sliderSettings">
-            <template #slide="{ slide }">
-              <nuxt-link class="flex flex-col w-226" :to="getSubCategoryRoute(slide)">
-                <img
-                  v-lazysrc="getSubCategoryLogo(slide)"
-                  height="226"
-                  width="226"
-                  alt=" "
-                  class="w-226 h-226 object-cover object-top hover:scale-105 transition-all"
-                />
-                <span class="mt-16">{{ slide.title }}</span>
-                <span class="mt-6 text-12 text-text-gray">{{ slide.subtitle }}</span>
-              </nuxt-link>
-            </template>
-          </LazyBaseSwiper>
-        </LazyHydrate>
+        <LazyBaseSwiper :slides="subCategories" :settings="sliderSettings">
+          <template #slide="{ slide }">
+            <nuxt-link class="flex flex-col w-226" :to="getSubCategoryRoute(slide)">
+              <img
+                v-lazysrc="getSubCategoryLogo(slide)"
+                height="226"
+                width="226"
+                alt=" "
+                class="w-226 h-226 object-cover object-top hover:scale-105 transition-all"
+              />
+              <span class="mt-16">{{ slide.title }}</span>
+              <span class="mt-6 text-12 text-text-gray">{{ slide.subtitle }}</span>
+            </nuxt-link>
+          </template>
+        </LazyBaseSwiper>
       </section>
 
       <section v-if="!!sliders && sliders.length" class="mt-32 md:mt-50">
-        <LazyHydrate when-visible>
-          <LazyBaseSwiper :slides="sliders" :settings="{ slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 }">
-            <template #slide="{ slide }">
-              <div class="flex flex-col w-full">
-                <img v-lazysrc="slide.url" height="400" width="400" alt=" " class="w-full h-400 object-cover object-top" />
-              </div>
-            </template>
-          </LazyBaseSwiper>
-        </LazyHydrate>
+        <LazyBaseSwiper :slides="sliders" :settings="{ slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 }">
+          <template #slide="{ slide }">
+            <div class="flex flex-col w-full">
+              <img v-lazysrc="slide.url" height="400" width="400" alt=" " class="w-full h-400 object-cover object-top" />
+            </div>
+          </template>
+        </LazyBaseSwiper>
       </section>
 
       <section v-if="!!model && !!model.products" class="mt-40 md:mt-60">
@@ -49,15 +45,10 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "nuxt-property-decorator";
-import LazyHydrate from "vue-lazy-hydration";
 import { CatalogService } from "../CatalogService";
 import CategoryModel from "../models/CategoryModel";
 
-@Component({
-  components: {
-    LazyHydrate,
-  },
-})
+@Component
 export default class CategoryContent extends Vue {
   @Prop()
   model: CategoryModel;

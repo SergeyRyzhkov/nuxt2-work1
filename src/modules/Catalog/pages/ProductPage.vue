@@ -173,9 +173,7 @@
               <span class="font-semibold">Описание</span>
             </template>
             <template #content>
-              <LazyHydrate never>
-                <div class="text-14">{{ model.full_description }}</div>
-              </LazyHydrate>
+              <div class="text-14">{{ model.full_description }}</div>
             </template>
           </BaseAccordion>
           <BaseAccordion>
@@ -183,9 +181,7 @@
               <span class="font-semibold">Характеристики</span>
             </template>
             <template #content>
-              <LazyHydrate never>
-                <div class="text-14">{{ model.characteristic }}</div></LazyHydrate
-              >
+              <div class="text-14">{{ model.characteristic }}</div>
             </template>
           </BaseAccordion>
           <BaseAccordion>
@@ -193,9 +189,7 @@
               <span class="font-semibold">Состав</span>
             </template>
             <template #content
-              ><LazyHydrate never
-                ><div class="text-14">{{ model.composition }}</div></LazyHydrate
-              ></template
+              ><div class="text-14">{{ model.composition }}</div></template
             >
           </BaseAccordion>
         </div>
@@ -204,31 +198,24 @@
 
     <section v-if="!!model && model.id > 0 && !!recommendation && recommendation.length" class="mt-40 md:mt-60 container">
       <h2 class="text-42 font-compact uppercase">Рекомендуем</h2>
-      <LazyHydrate when-visible>
-        <LazyBaseSwiper :slides="recommendation" class="mt-32" :settings="sliderSettings">
-          <template #slide="{ slide }">
-            <ProductItem :model="slide" class="w-max"></ProductItem>
-          </template>
-        </LazyBaseSwiper>
-      </LazyHydrate>
+      <LazyBaseSwiper :slides="recommendation" class="mt-32" :settings="sliderSettings">
+        <template #slide="{ slide }">
+          <ProductItem :model="slide" class="w-max"></ProductItem>
+        </template>
+      </LazyBaseSwiper>
     </section>
   </main>
 </template>
 
 <script lang="ts">
 import { Component, getModule, Prop, Vue } from "nuxt-property-decorator";
-import LazyHydrate from "vue-lazy-hydration";
 import { CatalogService } from "../CatalogService";
 import ProductModel from "../models/ProductModel";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import AppStore from "@/modules/Root/store/AppStore";
 import { ProfileService } from "@/modules/Profile/ProfileService";
 
-@Component({
-  components: {
-    LazyHydrate,
-  },
-})
+@Component
 export default class ProductPage extends Vue {
   @Prop()
   slug: string;

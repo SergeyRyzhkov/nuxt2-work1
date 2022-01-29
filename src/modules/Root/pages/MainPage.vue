@@ -13,56 +13,46 @@
       </LazyBaseSwiper>
     </section>
 
-    <LazyHydrate when-visible>
-      <section class="container mt-40 md:mt-100">
-        <MainPageFirstLineSlider :model="model"></MainPageFirstLineSlider>
-      </section>
-    </LazyHydrate>
+    <section class="container mt-40 md:mt-100">
+      <MainPageFirstLineSlider :model="model"></MainPageFirstLineSlider>
+    </section>
 
-    <LazyHydrate when-visible>
-      <!-- content.bestsellers -->
-      <section class="container mt-40 md:mt-100">
-        <h2 class="text-48 font-compact uppercase">Хиты продаж</h2>
-        <LazyBaseSwiper :slides="bestSellers" class="mt-16 md:mt-32" :settings="sliderSettings">
-          <template #slide="{ slide }">
-            <ProductItem :model="slide" class="w-max"><span>HIT</span></ProductItem>
-          </template>
-        </LazyBaseSwiper>
-      </section>
-    </LazyHydrate>
+    <!-- content.bestsellers -->
+    <section class="container mt-40 md:mt-100">
+      <h2 class="text-48 font-compact uppercase">Хиты продаж</h2>
+      <LazyBaseSwiper :slides="bestSellers" class="mt-16 md:mt-32" :settings="sliderSettings">
+        <template #slide="{ slide }">
+          <ProductItem :model="slide" class="w-max"><span>HIT</span></ProductItem>
+        </template>
+      </LazyBaseSwiper>
+    </section>
 
-    <LazyHydrate when-visible>
-      <section class="container mt-40 md:mt-100">
-        <MainPageProduct :model="model"></MainPageProduct>
-      </section>
-    </LazyHydrate>
+    <section class="container mt-40 md:mt-100">
+      <MainPageProduct :model="model"></MainPageProduct>
+    </section>
 
-    <LazyHydrate when-visible>
-      <!-- content.popular -->
-      <section v-if="!!populars" class="container mt-40 md:mt-100">
-        <h2 class="text-48 font-compact uppercase">Популярное</h2>
-        <LazyBaseSwiper :slides="populars" class="mt-16 md:mt-32" :settings="sliderSettings">
-          <template #slide="{ slide }">
-            <ProductItem :model="slide" class="w-max"><span class="text-secondary">популярное</span></ProductItem>
-          </template>
-        </LazyBaseSwiper>
-      </section>
-    </LazyHydrate>
+    <!-- content.popular -->
+    <section v-if="!!populars" class="container mt-40 md:mt-100">
+      <h2 class="text-48 font-compact uppercase">Популярное</h2>
+      <LazyBaseSwiper :slides="populars" class="mt-16 md:mt-32" :settings="sliderSettings">
+        <template #slide="{ slide }">
+          <ProductItem :model="slide" class="w-max"><span class="text-secondary">популярное</span></ProductItem>
+        </template>
+      </LazyBaseSwiper>
+    </section>
 
-    <LazyHydrate when-visible>
-      <section class="container mt-40 md:mt-100">
-        <div class="flex flex-col lg:flex-row">
-          <div class="w-full lg:w-1/2 cursor-pointer" @click="goToLine21">
-            <img v-lazysrc="line2ImgSrc1" height="500" width="300" class="h-210 lg:h-400 w-full object-cover object-left-top" />
-            <div class="mt-16 lg:mt-26 text-18 font-semibold uppercase">{{ line2Title1 }}</div>
-          </div>
-          <div class="w-full lg:w-1/2 ml-0 lg:ml-20 cursor-pointer mt-32 lg:mt-0" @click="goToLine22">
-            <img v-lazysrc="line2ImgSrc2" height="500" width="300" class="h-210 lg:h-400 w-full object-cover object-left-top" />
-            <div class="mt-16 lg:mt-26 text-18 font-semibold uppercase">{{ line2Title2 }}</div>
-          </div>
+    <section class="container mt-40 md:mt-100">
+      <div class="flex flex-col lg:flex-row">
+        <div class="w-full lg:w-1/2 cursor-pointer" @click="goToLine21">
+          <img v-lazysrc="line2ImgSrc1" height="500" width="300" class="h-210 lg:h-400 w-full object-cover object-left-top" />
+          <div class="mt-16 lg:mt-26 text-18 font-semibold uppercase">{{ line2Title1 }}</div>
         </div>
-      </section>
-    </LazyHydrate>
+        <div class="w-full lg:w-1/2 ml-0 lg:ml-20 cursor-pointer mt-32 lg:mt-0" @click="goToLine22">
+          <img v-lazysrc="line2ImgSrc2" height="500" width="300" class="h-210 lg:h-400 w-full object-cover object-left-top" />
+          <div class="mt-16 lg:mt-26 text-18 font-semibold uppercase">{{ line2Title2 }}</div>
+        </div>
+      </div>
+    </section>
 
     <section class="container mt-40 md:mt-100">
       <div class="flex flex-col lg:flex-row">
@@ -94,12 +84,12 @@
       </div>
     </section>
 
-    <LazyHydrate when-visible>
-      <!-- instagram -->
-      <section class="mt-40 md:mt-185">
-        <InstagramBlock />
-      </section>
-    </LazyHydrate>
+    <!-- instagram -->
+    <section class="mt-40 md:mt-185">
+      <LazyHydrate when-visible>
+      <InstagramBlock />
+       </LazyHydrate>
+    </section>
 
     <section class="container mt-40 md:mt-100 flex flex-col">
       <div class="flex flex-col ml-auto mr-auto items-center">

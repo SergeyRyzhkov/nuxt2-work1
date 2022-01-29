@@ -1,7 +1,7 @@
 <template>
   <main class="page-wrapper">
-    <BaseStaticBanner :image-src="bannerSrc" class="bg-strong-nude mb-0">
-      <div class="absolute w-screen bg-strong-nude" :class="[!bannerSrc ? 'top-0 py-24 md:py-40' : 'top-16 md:top-32']">
+    <BaseStaticBanner :image-src="bannerSrc" style="max-height: max-content" :wide="true">
+      <div class="absolute w-screen" :class="[!bannerSrc ? 'top-0 py-24 md:py-40' : 'top-16 md:top-32']">
         <BannerAbsoluteItem class="container" :model="model" @subscribe-clicked="onSubscribeClicked()"></BannerAbsoluteItem>
       </div>
     </BaseStaticBanner>
@@ -22,7 +22,7 @@
         <h2 class="training-section__caption">СТОИМОСТЬ КУРСА</h2>
         <div class="training-section__content text-48 font-semibold">
           <div>{{ priceFormatted }}</div>
-          <div class="text-14 font-semibold mt-16">{{ model.price_description }}</div>
+          <div class="text-14 mt-16 font-semibold">{{ model.price_description }}</div>
         </div>
       </div>
     </section>
@@ -95,14 +95,14 @@ export default class TrainingPage extends Vue {
 
 <style lang="scss">
 .training-section-wrapper {
-  @apply flex flex-col md:flex-row py-40 md:py-60 container;
+  @apply container flex flex-col pt-20 pb-40 md:flex-row md:pt-40 md:pb-60;
 
   .training-section__caption {
-    @apply w-full md:w-3/12 font-semibold;
+    @apply w-full font-semibold md:w-3/12;
   }
 
   .training-section__content {
-    @apply w-full md:w-6/12 ml-0 md:ml-20 mt-20 md:mt-0;
+    @apply ml-0 mt-20 w-full md:ml-20 md:mt-0 md:w-6/12;
   }
 }
 </style>

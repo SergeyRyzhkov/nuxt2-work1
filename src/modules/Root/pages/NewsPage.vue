@@ -8,9 +8,7 @@
         </div>
         <div class="w-full md:w-1/2">
           <h1>{{ newsModel.title }}</h1>
-          <LazyHydrate never>
-            <section class="mt-30 md:mt-60" v-html="newsModel.text"></section>
-          </LazyHydrate>
+          <section class="mt-30 md:mt-60" v-html="newsModel.text"></section>
         </div>
       </div>
     </main>
@@ -19,18 +17,13 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, getModule } from "nuxt-property-decorator";
-import LazyHydrate from "vue-lazy-hydration";
 import NewsModel from "../models/NewsModel";
 import AppStore from "../store/AppStore";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import { EmptyService } from "@/_core/service/EmptyService";
 import Cacheable from "@/_core/MethodCacheDecorator";
 
-@Component({
-  components: {
-    LazyHydrate,
-  },
-})
+@Component
 export default class NewsPage extends Vue {
   @Prop()
   slug: string;

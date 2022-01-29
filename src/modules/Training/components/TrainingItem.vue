@@ -1,42 +1,34 @@
 <template>
-  <LazyHydrate when-visible>
-    <nuxt-link
-      v-if="!!item"
-      :to="{ name: 'training-card', params: { slug: `${item.meta_slug}-${item.id}` } }"
-      class="flex flex-col cursor-pointer"
-    >
-      <div class="relative">
-        <img
-          v-lazysrc="imageSrc"
-          width="420"
-          height="223"
-          class="h-223 w-full object-cover hover:scale-105 transition-all"
-          alt=" "
-        />
-        <div class="absolute top-16 left-16 bg-primary px-16 py-8 rounded-full text-14 text-white">{{ statusName }}</div>
-      </div>
-      <div class="flex items-center justify-between mt-18">
-        <div class="text-14">{{ dateTypeAddress }}</div>
-        <div class="font-semibold">{{ priceFormatted }}</div>
-      </div>
-      <div class="text-18 mt-14">{{ item.name }}</div>
-      <div class="mt-16 text-14">{{ item.lecturer }}</div>
-    </nuxt-link>
-  </LazyHydrate>
+  <nuxt-link
+    v-if="!!item"
+    :to="{ name: 'training-card', params: { slug: `${item.meta_slug}-${item.id}` } }"
+    class="flex flex-col cursor-pointer"
+  >
+    <div class="relative">
+      <img
+        v-lazysrc="imageSrc"
+        width="420"
+        height="223"
+        class="h-223 w-full object-cover hover:scale-105 transition-all"
+        alt=" "
+      />
+      <div class="absolute top-16 left-16 bg-primary px-16 py-8 rounded-full text-14 text-white">{{ statusName }}</div>
+    </div>
+    <div class="flex items-center justify-between mt-18">
+      <div class="text-14">{{ dateTypeAddress }}</div>
+      <div class="font-semibold">{{ priceFormatted }}</div>
+    </div>
+    <div class="text-18 mt-14">{{ item.name }}</div>
+    <div class="mt-16 text-14">{{ item.lecturer }}</div>
+  </nuxt-link>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 import dayjs from "dayjs";
-import LazyHydrate from "vue-lazy-hydration";
 import TrainingModel from "../models/TrainingModel";
 
-@Component({
-  name: "TrainingItem",
-  components: {
-    LazyHydrate,
-  },
-})
+@Component
 export default class TrainingItem extends Vue {
   @Prop()
   item: TrainingModel;

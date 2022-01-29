@@ -10,13 +10,11 @@
 
     <section v-if="!!popular" class="mt-40 md:mt-60">
       <h2 class="text-42 font-compact uppercase">Популярное</h2>
-      <LazyHydrate when-visible>
         <LazyBaseSwiper :slides="popular" class="mt-32" :settings="sliderSettings">
           <template #slide="{ slide }">
             <ProductItem :model="slide" class="w-max"><span class="text-secondary">популярное</span></ProductItem>
           </template>
         </LazyBaseSwiper>
-      </LazyHydrate>
     </section>
 
     <section class="mt-40 md:mt-60 flex flex-col md:flex-row w-full justify-between">
@@ -55,29 +53,22 @@
     </section>
     <section v-if="!!bestSellers" class="mt-40 md:mt-60">
       <h2 class="text-42 font-compact uppercase">Хиты продаж</h2>
-      <LazyHydrate when-visible>
         <LazyBaseSwiper :slides="bestSellers" class="mt-32" :settings="sliderSettings">
           <template #slide="{ slide }">
             <ProductItem :model="slide" class="w-max"><span>HIT</span></ProductItem>
           </template>
         </LazyBaseSwiper>
-      </LazyHydrate>
     </section>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
-import LazyHydrate from "vue-lazy-hydration";
 import { CatalogService } from "../CatalogService";
 import CatalogModel from "../models/CatalogModel";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 
-@Component({
-  components: {
-    LazyHydrate,
-  },
-})
+@Component
 export default class RootCategory extends Vue {
   model: CatalogModel = new CatalogModel();
 
