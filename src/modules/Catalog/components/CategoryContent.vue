@@ -12,7 +12,7 @@
                 height="226"
                 width="226"
                 alt=" "
-                class="h-226 w-226 object-cover object-top transition-all hover:scale-105"
+                class="h-226 w-226 object-scale-down transition-all hover:scale-105"
               />
               <span class="mt-16">{{ slide.title }}</span>
               <span class="text-12 text-text-gray mt-6">{{ slide.subtitle }}</span>
@@ -25,7 +25,7 @@
         <LazyBaseSwiper :slides="sliders" :settings="{ slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 0 }">
           <template #slide="{ slide }">
             <div class="flex w-full flex-col">
-              <img v-lazysrc="slide.url" height="400" width="400" alt=" " class="h-400 w-full object-cover object-top" />
+              <img v-lazysrc="slide.url" height="400" width="400" alt=" " class="h-400 w-full object-cover" />
             </div>
           </template>
         </LazyBaseSwiper>
@@ -96,9 +96,9 @@ export default class CategoryContent extends Vue {
     return {
       breakpoints: {
         320: {
-          slidesPerView: 2,
-          spaceBetween: 16,
-          slidesPerGroup: 2,
+          slidesPerView: 1,
+          spaceBetween: 30,
+          slidesPerGroup: 1,
         },
         1024: {
           slidesPerView: 3,

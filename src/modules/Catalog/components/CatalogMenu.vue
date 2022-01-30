@@ -11,7 +11,7 @@
       </div>
     </div>
     <div
-      class="fixed top-0 left-0 z-[-1] h-screen min-h-screen w-full bg-primary opacity-30"
+      class="bg-primary fixed top-0 left-0 z-[-1] h-screen min-h-screen w-full opacity-30"
       :class="[!menuVisible ? 'hidden' : 'block']"
     ></div>
   </div>

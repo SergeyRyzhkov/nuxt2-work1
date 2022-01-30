@@ -41,4 +41,9 @@ const buildNuxt = async () => {
   return nuxt;
 };
 
-export default buildNuxt;
+const exp = async () => {
+  const nuxt = await buildNuxt();
+  process.env.buildDir = nuxt.options.buildDir;
+};
+
+export default exp;

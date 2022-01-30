@@ -1,5 +1,5 @@
 <template>
-  <div v-if="shouldShow" class="breadcrumbs mt-28 mb-28">
+  <div v-if="shouldShow" class="breadcrumbs mt-18 mb-18 md:mt-28 md:mb-28">
     <ol class="breadcrumbs__list" itemscope="itemscope" itemtype="https://schema.org/BreadcrumbList">
       <li
         v-for="(bread, idx) in breadCrumbs"

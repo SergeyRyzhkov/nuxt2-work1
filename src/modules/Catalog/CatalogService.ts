@@ -121,6 +121,6 @@ export class CatalogService extends BaseService {
   }
 
   productCountText(model: CategoryModel) {
-    return `Найдено ${model?.products.length || 0} ${decOfNum(model?.products.length || 0, ["товар", "товара", "товаров"])}`;
+    return `Найдено: ${model?.products.length || 0} ${decOfNum(model?.products.length || 0, ["товар", "товара", "товаров"])}`;
   }
 }
