@@ -1,14 +1,16 @@
 <template>
   <main class="page-wrapper container">
-    <BreadCrumbs :links="breadCrumbs" />
+    <BreadCrumbs :links="breadCrumbs" class="lg:block" :class="[{ hidden: !isLeafCategory }]" />
 
     <!-- Для мобилы -->
-    <div v-if="mobileFilterVisible" class="fixed top-0 left-0 z-50 h-screen w-screen overflow-hidden bg-white px-12">
-      <div class="mb-26 mt-16 flex items-center justify-between">
+    <div v-if="mobileFilterVisible" class="fixed top-0 left-0 z-50 h-full w-screen overflow-hidden bg-white">
+      <div class="mb-26 mt-16 flex items-center justify-between px-12">
         <span class="text-24">Фильтр</span>
         <span class="text-32 cursor-pointer font-normal after:content-['\00d7']" @click="toogleMenu()"></span>
       </div>
-      <CatalogNavigator class="h-full overflow-y-auto" @category-clicked="onCategoryClicked"></CatalogNavigator>
+      <!-- <div class="h-full overflow-y-auto"> -->
+      <CatalogNavigator class="h-full overflow-y-auto p-12" @category-clicked="onCategoryClicked"></CatalogNavigator>
+      <!-- </div> -->
     </div>
     <!--  -->
 
@@ -40,8 +42,12 @@
       </div>
 
       <!-- Для мобилы -->
-      <div v-if="!isLeafCategory" class="mb-36 flex w-full items-center justify-between lg:hidden">
-        <button type="button" class="flex items-center">
+      <div
+        v-if="!isLeafCategory"
+        class="mb-36 flex w-full items-center justify-between lg:hidden"
+        :class="{ 'mt-22': !isLeafCategory }"
+      >
+        <button type="button" class="flex items-center" @click="goBack()">
           <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M5.99316 9.9873L1.98621 5.98035L5.99316 1.97339"
@@ -122,6 +128,11 @@ export default class CatalogPage extends Vue {
     const parms = this.$serviceLocator.getService(CatalogService).getRouteLocation(model);
     if (parms.name !== this.$route.name) {
       this.$router.push(parms);
+    }
+  }
+
+  goBack() {
+    if (this.isLeafCategory) {
     }
   }
 
