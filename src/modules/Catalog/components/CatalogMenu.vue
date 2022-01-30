@@ -1,6 +1,6 @@
 <template>
-  <div v-show="menuVisible" class="catalog-top-menu" :class="[menuVisible ? 'active' : '']">
-    <div class="container flex justify-between">
+  <div class="catalog-top-menu" :class="[menuVisible ? 'active' : '']">
+    <div class="container flex h-full justify-between overflow-x-auto">
       <div class="grid w-2/3 grid-cols-1 gap-y-24 gap-x-24 py-40 md:grid-cols-3 lg:grid-cols-4">
         <div v-for="iter in list" :key="iter.id" @mouseover="categoryOver(iter)">
           <span class="catalog-top-menu__title" @click="goToCatalog(iter)">{{ iter.title }}</span>
@@ -59,7 +59,7 @@ export default class CatalogMenu extends Vue {
   overflow: hidden;
   &.active {
     position: absolute;
-    height: max-content;
+    height: 35vh;
     max-height: 40vh;
   }
   .catalog-top-menu__title {

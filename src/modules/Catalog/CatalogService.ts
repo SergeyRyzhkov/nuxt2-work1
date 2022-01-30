@@ -37,12 +37,13 @@ export class CatalogService extends BaseService {
     return await this.getOneOrDefault(CategoryModel, `users/product-categories/${id}`);
   }
 
-  toogleFavorites(product: ProductModel): Promise<boolean> {
+  async toogleFavorites(product: ProductModel): Promise<boolean> {
     if (!ServiceLocator.instance.getService(AuthService).isAuthenticated) {
       this.nuxtContext.$modalManager.showNotify("Для добавления в избранное вводите в свой аккаунт !");
-      return Promise.resolve(false);
+      return product.is_favorite;
     } else {
-      return this.apiRequest.post(`users/products/${product.id}/favorites`, { product_id: product.id });
+      const res = await this.apiRequest.post(`users/products/${product.id}/favorites`, { product_id: product.id });
+      return res.data?.is_favorite || false;
     }
   }
 

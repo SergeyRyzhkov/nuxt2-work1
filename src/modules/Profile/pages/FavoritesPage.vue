@@ -2,8 +2,8 @@
   <main class="page-wrapper container">
     <BreadCrumbs />
     <h1>Избранное</h1>
-    <div class="mt-40 grid grid-cols-1 gap-y-28 gap-x-30 md:grid-cols-3 md:gap-y-60 lg:grid-cols-4">
-      <ProductItem v-for="iter in productList" :key="iter.id" :model="iter" />
+    <div class="mt-40 grid grid-cols-2 gap-x-16 gap-y-28 md:grid-cols-3 md:gap-y-60 lg:grid-cols-4">
+      <ProductItem v-for="iter in productList" :key="iter.id" :model="iter" @on-favor="updateData()" />
     </div>
     <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>
   </main>

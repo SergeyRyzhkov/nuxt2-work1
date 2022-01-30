@@ -42,6 +42,7 @@ export default class ProductItem extends Vue {
 
   async toogleFavor() {
     this.model.is_favorite = await this.$serviceLocator.getService(CatalogService).toogleFavorites(this.model);
+    this.$emit("on-favor", this.model.is_favorite);
   }
 
   async addToBasket() {

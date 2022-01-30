@@ -5,7 +5,7 @@
     <div class="arenda-banner flex flex-col justify-between p-16 md:p-40 lg:flex-row lg:items-center">
       <div class="flex flex-col md:flex-row md:items-center">
         <h1 class="flex-shrink-0 grow">Аренда студии</h1>
-        <p class="w-full break-all text-14 md:ml-40 lg:w-1/2 xl:ml-60">
+        <p class="text-14 w-full break-all md:ml-40 lg:w-1/2 xl:ml-60">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
           aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
         </p>
@@ -14,11 +14,11 @@
         >Узнать больше</BaseButton
       >
     </div>
-    <div class="mt-40 flex items-center justify-between md:mt-60">
+    <div class="mt-40 flex flex-col md:mt-60 md:flex-row md:items-center md:justify-between">
       <h1>Обучение</h1>
       <base-calendar
         v-model="daysRange"
-        class="hidden md:block"
+        class="mt-16 md:mt-0"
         :config="{
           isMultiple: true,
           calendarsCount: 1,
@@ -30,12 +30,12 @@
       ></base-calendar>
     </div>
 
-    <div v-if="$fetchState.pending" class="mt-30 grid grid-cols-1 gap-y-30 gap-x-30 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
+    <div v-if="$fetchState.pending" class="mt-30 gap-y-30 gap-x-30 grid grid-cols-1 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
       <template v-for="index in 6">
         <SkeletonTrainingItem :key="index"> </SkeletonTrainingItem>
       </template>
     </div>
-    <div class="mt-30 grid grid-cols-1 gap-y-30 gap-x-30 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-30 gap-y-30 gap-x-30 grid grid-cols-1 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
       <TrainingItem v-for="iter in trainingList" :key="iter.id" :item="iter"> </TrainingItem>
     </div>
     <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>
