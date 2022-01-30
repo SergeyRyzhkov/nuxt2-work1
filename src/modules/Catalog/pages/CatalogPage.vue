@@ -132,7 +132,15 @@ export default class CatalogPage extends Vue {
   }
 
   goBack() {
-    if (this.isLeafCategory) {
+    if (this.selectedModel.id === 0) {
+      this.$router.push({ name: "main" });
+    }
+
+    if (!this.isLeafCategory && this.selectedModel.id !== 0) {
+      this.$router.push({ name: "catalog-root" });
+    }
+    if (this.isLeafCategory && !!this.parentCategoryRoute) {
+      this.$router.push(this.parentCategoryRoute);
     }
   }
 
