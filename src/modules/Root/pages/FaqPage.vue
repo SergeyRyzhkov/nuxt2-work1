@@ -1,9 +1,19 @@
 <template>
-  <main class="page-wrapper container">
+  <main v-if="!$fetchState.pending" class="page-wrapper container">
     <BreadCrumbs />
-    <div class="flex flex-col md:flex-row">
+
+    <div class="hidden flex-col md:flex md:flex-row">
       <FaqLeftSide class="w-full md:w-1/4" :faq-model="faqList" @select-item="faqSelected"></FaqLeftSide>
-      <div class="w-full md:w-3/4" v-html="selectedFaq.description"></div>
+      <div class="w-full md:w-1/2" v-html="selectedFaq.description"></div>
+    </div>
+
+    <div class="md:hidden">
+      <BaseAccordion v-for="(item, index) in faqList.content.context" :key="index" :is-arrow="true" class="mb-12">
+        <template #header>
+          <div class="text-14 text-secondary pb-12">{{ item.title }}</div>
+        </template>
+        <template #content><div class="my-12" v-html="item.description"></div></template>
+      </BaseAccordion>
     </div>
   </main>
 </template>
@@ -40,7 +50,9 @@ export default class MainPage extends Vue {
   }
 
   head() {
-    return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(undefined, this.$route.fullPath);
+    if (!this.faqList) {
+      return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(this.faqList, this.$route.fullPath);
+    }
   }
 }
 </script>

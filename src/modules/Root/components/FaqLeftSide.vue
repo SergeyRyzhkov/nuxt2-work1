@@ -1,6 +1,6 @@
 <template>
-  <ul class="faq-menu-list">
-    <li v-for="(item, index) in faqModel.content" :key="index" :class="activeClass(item)" @click="onClick(item)">
+  <ul v-show="!!faqModel" class="faq-menu-list">
+    <li v-for="(item, index) in faqModel.content.context" :key="index" :class="activeClass(item)" @click="onClick(item)">
       {{ item.title }}
     </li>
   </ul>
@@ -19,8 +19,8 @@ export default class FaqLeftSide extends Vue {
 
   @Watch("faqModel", { immediate: true })
   onFaqModelChanged() {
-    if (this.faqModel?.content?.length > 0) {
-      this.onClick(this.faqModel?.content[0]);
+    if (this.faqModel?.content?.context.length > 0) {
+      this.onClick(this.faqModel?.content.context[0]);
     }
   }
 

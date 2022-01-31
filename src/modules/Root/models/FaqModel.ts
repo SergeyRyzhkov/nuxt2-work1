@@ -7,7 +7,10 @@ export default class FaqModel extends SeoModel {
   }
 
   content: {
-    title: string;
-    description: string;
-  }[];
+    context: {
+      title: string;
+      footer: boolean;
+      description: string;
+    }[];
+  };
 }
