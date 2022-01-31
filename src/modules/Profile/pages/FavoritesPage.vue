@@ -2,6 +2,13 @@
   <main class="page-wrapper container">
     <BreadCrumbs />
     <h1>Избранное</h1>
+
+    <div v-if="$fetchState.pending" class="mt-40 grid grid-cols-2 gap-x-16 gap-y-28 md:grid-cols-3 md:gap-y-60 lg:grid-cols-4">
+      <template v-for="index in 6">
+        <ProductItemSkeleton :key="index"> </ProductItemSkeleton>
+      </template>
+    </div>
+
     <div class="mt-40 grid grid-cols-2 gap-x-16 gap-y-28 md:grid-cols-3 md:gap-y-60 lg:grid-cols-4">
       <ProductItem v-for="iter in productList" :key="iter.id" :model="iter" @on-favor="updateData()" />
     </div>

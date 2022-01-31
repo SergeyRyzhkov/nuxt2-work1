@@ -10,6 +10,6 @@
         <div class="skeleton skeleton--wave mt-22 h-120"></div>
       </div>
     </div>
-    <div :key="4" class="skeleton skeleton--wave mt-20 h-400 md:mt-40"></div>
+    <div :key="4" class="skeleton skeleton--wave h-400 mt-20 md:mt-40"></div>
   </transition-group>
 </template>
