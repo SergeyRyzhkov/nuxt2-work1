@@ -1,13 +1,13 @@
 <template>
-  <main v-if="!$fetchState.pending" class="page-wrapper container">
+  <main class="page-wrapper container">
     <BreadCrumbs />
 
-    <div class="hidden flex-col md:flex md:flex-row">
+    <div v-if="isDataExists" class="hidden flex-col md:flex md:flex-row">
       <FaqLeftSide class="w-full md:w-1/4" :faq-model="faqList" @select-item="faqSelected"></FaqLeftSide>
       <div class="w-full md:w-1/2" v-html="selectedFaq.description"></div>
     </div>
 
-    <div class="md:hidden">
+    <div v-if="isDataExists" class="md:hidden">
       <BaseAccordion v-for="(item, index) in faqList.content.context" :key="index" :is-arrow="true" class="mb-12">
         <template #header>
           <div class="text-14 text-secondary pb-12">{{ item.title }}</div>
@@ -24,6 +24,7 @@ import FaqModel from "../models/FaqModel";
 import AppStore from "../store/AppStore";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import { EmptyService } from "@/_core/service/EmptyService";
+import Cacheable from "@/_core/MethodCacheDecorator";
 
 @Component
 export default class MainPage extends Vue {
@@ -34,10 +35,23 @@ export default class MainPage extends Vue {
   faqList: FaqModel = new FaqModel();
 
   async fetch() {
-    this.faqList = await this.$serviceLocator
-      .getService(EmptyService)
-      .getAnyOrNull(`users/pages/${this.isFaq ? "help" : "document"}`);
+    this.faqList = this.isFaq ? await this.getHelpData() : this.getDocsData();
     this.updateBreadCrumbs();
+  }
+
+  get isDataExists() {
+    console.log(!!this.faqList?.content?.context?.length);
+    return this.faqList?.content?.context?.length > -1;
+  }
+
+  @Cacheable(0)
+  async getHelpData() {
+    return await this.$serviceLocator.getService(EmptyService).getAnyOrNull("users/pages/help");
+  }
+
+  @Cacheable(0)
+  async getDocsData() {
+    return await this.$serviceLocator.getService(EmptyService).getAnyOrNull("users/pages/document");
   }
 
   faqSelected(item: { title: string; description: string }) {
