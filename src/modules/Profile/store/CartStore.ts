@@ -8,7 +8,6 @@ import CartModel from "@/modules/Profile/models/CartModel";
 })
 export default class CartStore extends VuexModule {
   private cart: CartModel[] = [];
-  // private userHash: string = "732bfa6bc0224eee8467de517fe0058a";
 
   @VuexMutation
   private setUserCart(cartItems: CartModel[]) {
@@ -23,10 +22,6 @@ export default class CartStore extends VuexModule {
   get userCart() {
     return this.cart;
   }
-
-  // get getUserHash() {
-  //   return this.userHash;
-  // }
 
   get userCartCount() {
     let count = 0;

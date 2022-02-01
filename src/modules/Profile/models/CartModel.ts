@@ -8,4 +8,5 @@ export default class CartModel extends SeoModel {
   guest_hash: string | null;
   count: number;
   product: ProductModel;
+  delivery_methods: { id: number; title: string; price: number; free_from: any }[];
 }

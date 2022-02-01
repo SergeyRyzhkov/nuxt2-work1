@@ -8,37 +8,37 @@
       </section>
       <section class="w-full pt-60 md:w-1/2 xl:px-40">
         <div class="shopping-cart-items flex flex-col">
+          <!-- <CartItem :is-ordering="true" />
           <CartItem :is-ordering="true" />
-          <CartItem :is-ordering="true" />
-          <CartItem :is-ordering="true" />
+          <CartItem :is-ordering="true" /> -->
         </div>
 
         <div class="py-26">
-          <div class="flex items-center justify-between text-14">
+          <div class="text-14 flex items-center justify-between">
             <div>Общий вес</div>
             <div>200 г</div>
           </div>
-          <div class="mt-8 flex items-center justify-between text-14">
+          <div class="text-14 mt-8 flex items-center justify-between">
             <div>Количество</div>
             <div>1</div>
           </div>
         </div>
         <div class="cost-border py-26">
-          <div class="mt-8 flex items-center justify-between text-14">
+          <div class="text-14 mt-8 flex items-center justify-between">
             <div>НДС</div>
             <div>0 ₽</div>
           </div>
-          <div class="mt-8 flex items-center justify-between text-14">
+          <div class="text-14 mt-8 flex items-center justify-between">
             <div>Доставка</div>
             <div>0 ₽</div>
           </div>
-          <div class="mt-8 flex items-center justify-between text-14">
+          <div class="text-14 mt-8 flex items-center justify-between">
             <div>Скидка</div>
             <div>0 ₽</div>
           </div>
         </div>
 
-        <div class="mt-25 flex items-center justify-between text-24">
+        <div class="mt-25 text-24 flex items-center justify-between">
           <div>Итого</div>
           <div>2 000 ₽</div>
         </div>

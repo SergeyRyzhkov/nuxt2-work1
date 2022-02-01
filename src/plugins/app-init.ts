@@ -5,26 +5,22 @@ import { AuthService } from "@/modules/Auth/AuthService";
 import { CatalogService } from "@/modules/Catalog/CatalogService";
 import { ProfileService } from "@/modules/Profile/ProfileService";
 
-export default async (ctx: Context, inject: Inject) => {
+export default (ctx: Context, inject: Inject) => {
   configAxios(ctx);
 
   ServiceLocator.createFreshServiceLocator();
   ServiceLocator.instance.updateNuxtContext(ctx);
 
   if (process.server) {
-    await ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
-    await ServiceLocator.instance.getService(AuthService).tryRestoreSessionUser();
-    await ServiceLocator.instance.getService(ProfileService).updateUserCartState();
+    initAppState();
   }
 
   if (process.client) {
-    await ServiceLocator.instance.getService(CatalogService).addCatalogRoutes();
+    ServiceLocator.instance.getService(CatalogService).addCatalogRoutes();
   }
 
   inject("serviceLocator", ServiceLocator.instance);
 };
-
-// const cache = new WeakMap<String, any>();
 
 const configAxios = (ctx: Context) => {
   ctx.$axios.onRequest((config) => {
@@ -42,4 +38,16 @@ const configAxios = (ctx: Context) => {
       ServiceLocator.instance.getService(AuthService).updateAccessToken(token);
     }
   });
+
+  ctx.$axios.onError((err) => {
+    console.log(err);
+  });
+};
+
+const initAppState = async () => {
+  if (process.server) {
+    // await ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
+    await ServiceLocator.instance.getService(AuthService).tryRestoreSessionUser();
+    await ServiceLocator.instance.getService(ProfileService).updateUserCartState();
+  }
 };

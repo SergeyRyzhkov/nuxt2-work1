@@ -167,6 +167,8 @@ export default class BaseCalendar extends Vue {
   display: flex;
   flex-direction: row;
   align-items: center;
+  border-bottom: 1px solid #c9c9c9;
+  padding-bottom: 8px;
   .vfc-single-input {
     display: flex;
     align-items: center;
@@ -316,6 +318,6 @@ span.vfc-span-day.vfc-end-marked::before {
 
 .vfc-single-input__placeholder {
   font-size: 14px !important;
-  color: $text-gray !important;
+  color: $gray !important;
 }
 </style>

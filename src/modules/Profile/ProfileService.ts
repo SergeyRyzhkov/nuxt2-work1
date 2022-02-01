@@ -1,4 +1,6 @@
 import { getModule } from "vuex-module-decorators";
+import { plainToInstance } from "class-transformer";
+import OrderModel from "./models/OrderModel";
 import { AuthService } from "@/modules/Auth/AuthService";
 import { BaseService } from "@/_core/service/BaseService";
 import CartModel from "@/modules/Profile/models/CartModel";
@@ -19,13 +21,19 @@ export class ProfileService extends BaseService {
   }
 
   async updateUserCartState() {
-    if (this.isAuthenticated) {
-      const cart = await this.getArrayOrEmpty(CartModel, "users/carts");
-      this.сartStore.updateUserCart(cart);
-    }
-    if (!this.isAuthenticated && this.getUserHash()) {
-      const cart = await this.getArrayOrEmpty(CartModel, "users/carts", { params: { guest_hash: this.getUserHash() } });
-      this.сartStore.updateUserCart(cart);
+    if (this.isAuthenticated || (!this.isAuthenticated && this.getUserHash())) {
+      const response = await this.apiRequest.get(
+        "users/carts",
+        !this.isAuthenticated && this.getUserHash() ? { params: { guest_hash: this.getUserHash() } } : {}
+      );
+      const data = response?.data?.data || response?.data;
+      const deliveryMethods = response?.data?.delivery_methods;
+
+      const cartList = !!data ? plainToInstance(CartModel, Array.from(data)) : [];
+      cartList.forEach((iter) => {
+        iter.delivery_methods = deliveryMethods;
+      });
+      this.сartStore.updateUserCart(cartList);
     }
   }
 
@@ -75,6 +83,16 @@ export class ProfileService extends BaseService {
       await this.apiRequest.post(`users/carts/${id}`, formData);
     }
     this.updateUserCartState();
+  }
+
+  async checkoutOrder(order: OrderModel) {
+    if (this.isAuthenticated) {
+      // delete order.guest_hash;
+      await this.apiRequest.post(`users/orders`, order);
+    } else if (!this.isAuthenticated && this.getUserHash()) {
+      order.guest_hash = this.getUserHash();
+      await this.apiRequest.post(`users/orders`, order);
+    }
   }
 
   setUserHash(guestHash: string) {
