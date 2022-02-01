@@ -12,7 +12,7 @@
         <div class="md:my-70 container z-50 my-60 flex flex-col">
           <div class="bg-primary text-14 w-max rounded-full px-16 py-8 text-white">{{ statusName }}</div>
           <div class="mb:mt-60 mt-40 font-normal">{{ dateType }}</div>
-          <h1 class="font-compact text-60 mt-24 uppercase">{{ model.name }}</h1>
+          <h1 class="font-compact text-62 mt-24 uppercase">{{ model.name }}</h1>
           <base-button class="base-button mt-18 w-max flex-shrink-0 grow bg-white lg:mt-40" @click="onSubscribeClicked">
             Записаться на курс
           </base-button>

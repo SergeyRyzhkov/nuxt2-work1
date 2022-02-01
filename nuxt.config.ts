@@ -120,7 +120,6 @@ const nuxtConfig: NuxtConfig = {
   render: {
     compressor: false,
     resourceHints: false,
-    asyncScripts: true,
     crossorigin: "anonymous",
     etag: false,
   },
