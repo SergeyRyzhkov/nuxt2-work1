@@ -1,5 +1,8 @@
 <template>
   <main class="page-wrapper">
+    <div v-show="$fetchState.pending" class="container">
+      <SkeletonTrainingPage></SkeletonTrainingPage>
+    </div>
     <section class="container-fluid relative min-h-[max-content] overflow-hidden">
       <img
         v-show="!!bannerSrc"

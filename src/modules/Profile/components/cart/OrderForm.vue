@@ -1,78 +1,129 @@
 <template>
   <section class="order-form pt-22 md:pr-76">
     <h2>Контактная информация</h2>
-    <form class="mt-30" @submit.prevent="">
-      <BaseInput placeholder="ФИО*" class="mb-27" />
-      <div class="lg:mb-27 justify-between lg:flex">
-        <BaseInput placeholder="Телефон*" class="mb-27 lg:mb-0 lg:w-1/2 lg:pr-16" />
-        <BaseInput placeholder="Email*" class="mb-27 lg:mb-0 lg:w-1/2 lg:pl-16" />
+    <form class="mt-30" @submit.prevent="confirmOrder()">
+      <BaseInput
+        v-model="order.last_name"
+        placeholder="Фамилия*"
+        :has-error="$v.order.last_name.$error"
+        class="mb-27"
+        @blur="$v.order.last_name.$touch()"
+      />
+      <BaseInput
+        v-model="order.first_name"
+        placeholder="Имя*"
+        :has-error="$v.order.first_name.$error"
+        class="mb-27"
+        @blur="$v.order.first_name.$touch()"
+      />
+      <BaseInput
+        v-model="order.patronymic"
+        placeholder="Отчество"
+        :has-error="$v.order.patronymic.$error"
+        class="mb-27"
+        @blur="$v.order.patronymic.$touch()"
+      />
+      <div class="flex flex-col md:flex-row">
+        <BaseInput
+          v-model="order.phone"
+          type="tel"
+          placeholder="Телефон*"
+          :mask="phoneMask"
+          :has-error="$v.order.phone.$error"
+          class="mb-27"
+          @blur="$v.order.phone.$touch()"
+        />
+        <BaseInput
+          v-model="order.email"
+          placeholder="Email*"
+          :has-error="$v.order.email.$error"
+          class="mb-27 md:ml-32"
+          @blur="$v.order.email.$touch()"
+        />
       </div>
-      <BaseInput placeholder="Адрес*" />
+
+      <BaseInput
+        v-model="order.delivery_address"
+        placeholder="Адрес*"
+        :has-error="$v.order.delivery_address.$error"
+        @blur="$v.order.delivery_address.$touch()"
+      />
+
       <div class="mt-52">
         <h2>Способ доставки</h2>
         <div class="mt-30">
-          <div class="mb-16">
-            <BaseRadioButton label="Доставка до двери курьером СДЭК" />
-            <div class="del-info pl-30 mt-9">275₽, 14-16 декабря</div>
-          </div>
-          <div class="mb-16">
-            <BaseRadioButton label="Доставка до пункта выдачи СДЭК" />
-            <div class="del-info pl-30 mt-9">135₽, 20-22 декабря</div>
-          </div>
-          <div class="mb-16">
-            <BaseRadioButton label="Самовывоз из офиса г. Москва" />
-            <div class="del-info pl-30 mt-9">0₽, 14-16 декабря</div>
-          </div>
-          <div>
-            <BaseRadioButton label="Самовывоз из офиса г. Москва" />
-            <div class="del-info pl-30 mt-9">0₽, 14-16 декабря</div>
+          <div v-for="iter in deliveryMethods" :key="iter.id" class="mb-16">
+            <BaseRadioButton v-model="order.delivery_method_id" :label="iter.title" :value="iter.id" />
+            <div class="del-info pl-30 mt-9">{{ getDeliveryMethodPrice(iter) }}, 14-16 декабря</div>
           </div>
         </div>
       </div>
+
       <div class="mt-52">
-        <h2>Способа оплаты</h2>
+        <h2>Способы оплаты</h2>
         <div class="mt-32">
-          <BaseRadioButton label="Наличными при получении" class="mb-20" />
-          <BaseRadioButton label="Банковской картой на сайте" />
+          <BaseRadioButton v-model="order.payment_type" label="Наличными при получении" value="invoice" class="mb-20" />
+          <BaseRadioButton v-model="order.payment_type" label="Банковской картой на сайте" value="card" />
         </div>
       </div>
       <div class="mt-52">
         <h2>Комментарий</h2>
-        <BaseInput placeholder="Комментарий" class="mt-30" />
+        <BaseInput v-model="order.comment" placeholder="Введите текст" class="mt-30" />
         <div class="order-checkbox mt-32">
-          <BaseCheckbox id="order-privacy" />
+          <BaseCheckbox id="order-privacy" v-model="order.agreement" />
           <label for="order-privacy" class="pl-28"
             >Я согласен на обработку
-            <a href="javascript:void(0)" class="inline-block underline"> персональных данных и условиями оферты</a>
+            <a href="javascript:void(0)" class="inline-block underline focus:no-underline">
+              персональных данных и условиями оферты</a
+            >
           </label>
         </div>
       </div>
-      <BaseButton class="mt-40 hidden lg:block" type="submit" @click="confirmOrder()">Оформтиь</BaseButton>
+      <BaseButton class="mt-40 hidden lg:block" type="submit" :disabled="!order.agreement">Оформить</BaseButton>
     </form>
   </section>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
-import OrderModel from "../../models/OrderModel";
+import { Component, Prop, Vue } from "nuxt-property-decorator";
+import { email, required } from "vuelidate/lib/validators";
 import { ProfileService } from "../../ProfileService";
+import OrderModel from "../../models/OrderModel";
+import { phoneMask } from "@/utils/InputMaskDefinitions";
 
-@Component
+const validations = () => {
+  return {
+    order: {
+      first_name: { required },
+      last_name: { required },
+      patronymic: { required },
+      phone: { required },
+      email: { required, email },
+      delivery_address: { required },
+    },
+  };
+};
+
+@Component({ validations })
 export default class OrderForm extends Vue {
+  @Prop()
+  order: OrderModel;
+
+  @Prop()
+  deliveryMethods: { id: number; title: string; price: number; free_from: any }[];
+
+  phoneMask = phoneMask;
+
   confirmOrder() {
-    const order = new OrderModel();
+    this.$v.$touch();
+    if (this.$v.$invalid) {
+      return;
+    }
+    this.$serviceLocator.getService(ProfileService).checkoutOrder(this.order);
+  }
 
-    order.first_name = "first_name";
-    order.agreement = true;
-    order.last_name = "last_name";
-    order.phone = "79218941537";
-    order.email = "ryzhkov@mail.ru";
-    order.delivery_address = "Земля";
-    order.delivery_method_id = 2;
-    order.payment_type = "card";
-    order.comment = "test comment";
-
-    this.$serviceLocator.getService(ProfileService).checkoutOrder(order);
+  getDeliveryMethodPrice(type: any) {
+    return type.price?.toLocaleString("ru-RU") + " ₽";
   }
 }
 </script>

@@ -1,8 +1,8 @@
 <template>
   <section class="cart-item pr-16">
-    <img v-lazysrc="imageSrc" alt=" " class="h-86 w-86 object-scale-down hover:scale-105 md:h-127 md:w-127" />
+    <img v-lazysrc="imageSrc" alt=" " class="h-86 w-86 md:h-127 md:w-127 object-scale-down hover:scale-105" />
     <div
-      class="w-full pl-16 md:pl-26"
+      class="md:pl-26 w-full pl-16"
       :class="{ 'flex w-full flex-col justify-between md:flex-row md:items-center': isOrdering }"
     >
       <div>
@@ -93,7 +93,7 @@ export default class CartItem extends Vue {
 
 <style lang="scss">
 .cart-item {
-  @apply relative flex items-start pt-23 pb-30 md:items-center;
+  @apply pt-23 pb-30 relative flex items-start md:items-center;
   &-products_counter {
     .number {
       @apply px-5 text-center;

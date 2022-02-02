@@ -4,23 +4,21 @@
       <section class="line-half w-full pt-60 md:w-1/2">
         <h1>Оформление заказа</h1>
         <BreadCrumbs />
-        <OrderForm />
+        <OrderForm :order="order" :delivery-methods="deliveryMethods" />
       </section>
-      <section class="w-full pt-60 md:w-1/2 xl:px-40">
+      <section class="max-h-[75vh] w-full pt-60 md:w-1/2 xl:pl-40">
         <div class="shopping-cart-items flex flex-col">
-          <!-- <CartItem :is-ordering="true" />
-          <CartItem :is-ordering="true" />
-          <CartItem :is-ordering="true" /> -->
+          <CartItem v-for="iter in cartItems" :key="iter.id" :cart-item="iter" :is-ordering="true" />
         </div>
 
         <div class="py-26">
           <div class="text-14 flex items-center justify-between">
             <div>Общий вес</div>
-            <div>200 г</div>
+            <div>{{ allWeight }} г.</div>
           </div>
           <div class="text-14 mt-8 flex items-center justify-between">
             <div>Количество</div>
-            <div>1</div>
+            <div>{{ allCount }} шт.</div>
           </div>
         </div>
         <div class="cost-border py-26">
@@ -30,17 +28,17 @@
           </div>
           <div class="text-14 mt-8 flex items-center justify-between">
             <div>Доставка</div>
-            <div>0 ₽</div>
+            <div>{{ deliverySum }} ₽</div>
           </div>
           <div class="text-14 mt-8 flex items-center justify-between">
             <div>Скидка</div>
-            <div>0 ₽</div>
+            <div>{{ discountSum }} ₽</div>
           </div>
         </div>
 
         <div class="mt-25 text-24 flex items-center justify-between">
           <div>Итого</div>
-          <div>2 000 ₽</div>
+          <div>{{ price }}</div>
         </div>
       </section>
     </div>
@@ -49,13 +47,45 @@
 
 <script lang="ts">
 import { Vue, Component, getModule } from "nuxt-property-decorator";
+import OrderModel from "../models/OrderModel";
+import { ProfileService } from "../ProfileService";
+import CartModel from "../models/CartModel";
 import AppStore from "@/modules/Root/store/AppStore";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 
 @Component
 export default class OrderingPage extends Vue {
+  order = new OrderModel();
+  deliveryMethods: { id: number; title: string; price: number; free_from: any }[] = [];
+  cartItems: CartModel[] = [];
+
   fetch() {
     this.updateBreadCrumbs();
+    this.deliveryMethods = this.$serviceLocator.getService(ProfileService).getDeliveryMethods();
+    this.cartItems = this.$serviceLocator.getService(ProfileService).getCartItems();
+  }
+
+  get allWeight() {
+    return this.cartItems
+      .reduce((sum, iterCart) => sum + (iterCart.product.weight || 0) * iterCart.count, 0)
+      .toLocaleString("ru-RU");
+  }
+
+  get allCount() {
+    return this.cartItems.length;
+  }
+
+  get deliverySum() {
+    return 0;
+  }
+
+  get discountSum() {
+    return 0;
+  }
+
+  get price() {
+    const pr = this.cartItems.reduce((sum, iterCart) => sum + (iterCart.product.price || 0) * iterCart.count, 0);
+    return (pr + this.deliverySum - this.discountSum).toLocaleString("ru-RU") + " ₽";
   }
 
   updateBreadCrumbs() {

@@ -45,7 +45,7 @@
     />
     <BaseButton type="submit" class="mt-20 md:mt-40">Отправить</BaseButton>
 
-    <p class="mt-16 -mb-32 text-12 text-gray-color md:mt-32">
+    <p class="text-12 text-gray-color mt-16 -mb-32 md:mt-32">
       Защита от спама reCAPTCHA
       <a class="inline underline focus:no-underline" href="https://policies.google.com/privacy" target="_blank"
         >Конфиденциальность

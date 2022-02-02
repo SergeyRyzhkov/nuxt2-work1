@@ -8,8 +8,12 @@ import CartStore from "@/modules/Profile/store/CartStore";
 import { ServiceLocator } from "@/_core/service/ServiceLocator";
 
 export class ProfileService extends BaseService {
-  public get сartStore() {
+  get сartStore() {
     return getModule(CartStore, this.nuxtContext.store);
+  }
+
+  getCartItems() {
+    return this.сartStore.userCart;
   }
 
   async getFavorites() {
@@ -85,9 +89,12 @@ export class ProfileService extends BaseService {
     this.updateUserCartState();
   }
 
+  getDeliveryMethods() {
+    return this.сartStore.userCart.length > 0 ? this.сartStore.userCart[0].delivery_methods : [];
+  }
+
   async checkoutOrder(order: OrderModel) {
     if (this.isAuthenticated) {
-      // delete order.guest_hash;
       await this.apiRequest.post(`users/orders`, order);
     } else if (!this.isAuthenticated && this.getUserHash()) {
       order.guest_hash = this.getUserHash();

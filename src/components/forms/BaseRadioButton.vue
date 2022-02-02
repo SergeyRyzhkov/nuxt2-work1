@@ -6,11 +6,10 @@
         :name="name"
         class="hidden"
         v-bind="$attrs"
-        :value="value"
         :checked="isChecked"
         v-on="{
           ...$listeners,
-          change: (event) => $emit('change', event.target.value),
+          change: (event) => $emit('change', value),
         }"
       />
       <span class="label"></span>{{ label }}

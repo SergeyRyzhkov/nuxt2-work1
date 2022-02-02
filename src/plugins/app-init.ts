@@ -11,9 +11,7 @@ export default (ctx: Context, inject: Inject) => {
   ServiceLocator.createFreshServiceLocator();
   ServiceLocator.instance.updateNuxtContext(ctx);
 
-  if (process.server) {
-    initAppState();
-  }
+  initAppState();
 
   if (process.client) {
     ServiceLocator.instance.getService(CatalogService).addCatalogRoutes();
@@ -56,10 +54,11 @@ const initAppState = async () => {
   if (process.server) {
     // await ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
     await ServiceLocator.instance.getService(AuthService).tryRestoreSessionUser();
-    try {
-      await ServiceLocator.instance.getService(ProfileService).updateUserCartState();
-    } catch (err) {
-      console.log(err);
-    }
+  }
+
+  try {
+    await ServiceLocator.instance.getService(ProfileService).updateUserCartState();
+  } catch (err) {
+    console.log(err);
   }
 };
