@@ -42,12 +42,24 @@ const configAxios = (ctx: Context) => {
   ctx.$axios.onError((err) => {
     console.log(err);
   });
+
+  ctx.$axios.onRequestError((err) => {
+    console.log(err);
+  });
+
+  ctx.$axios.onResponseError((err) => {
+    console.log(err);
+  });
 };
 
 const initAppState = async () => {
   if (process.server) {
     // await ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
     await ServiceLocator.instance.getService(AuthService).tryRestoreSessionUser();
-    await ServiceLocator.instance.getService(ProfileService).updateUserCartState();
+    try {
+      await ServiceLocator.instance.getService(ProfileService).updateUserCartState();
+    } catch (err) {
+      console.log(err);
+    }
   }
 };
