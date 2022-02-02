@@ -40,14 +40,6 @@ const configAxios = (ctx: Context) => {
   ctx.$axios.onError((err) => {
     console.log(err);
   });
-
-  ctx.$axios.onRequestError((err) => {
-    console.log(err);
-  });
-
-  ctx.$axios.onResponseError((err) => {
-    console.log(err);
-  });
 };
 
 const initAppState = async () => {

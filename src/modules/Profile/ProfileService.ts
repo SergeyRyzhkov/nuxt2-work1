@@ -94,12 +94,19 @@ export class ProfileService extends BaseService {
   }
 
   async checkoutOrder(order: OrderModel) {
+    if (!this.сartStore.userCart.length) {
+      return false;
+    }
+
     if (this.isAuthenticated) {
-      await this.apiRequest.post(`users/orders`, order);
+      const result = await this.apiRequest.post(`users/orders`, order);
+      return result.status === 204 || result.status === 200;
     } else if (!this.isAuthenticated && this.getUserHash()) {
       order.guest_hash = this.getUserHash();
-      await this.apiRequest.post(`users/orders`, order);
+      const result = await this.apiRequest.post(`users/orders`, order);
+      return result.status === 204 || result.status === 200;
     }
+    return false;
   }
 
   setUserHash(guestHash: string) {

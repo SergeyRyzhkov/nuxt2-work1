@@ -89,6 +89,7 @@ import { Component, Prop, Vue } from "nuxt-property-decorator";
 import { email, required } from "vuelidate/lib/validators";
 import { ProfileService } from "../../ProfileService";
 import OrderModel from "../../models/OrderModel";
+import OrderingSuccess from "@/modules/Profile/components/OrderingSuccess.vue";
 import { phoneMask } from "@/utils/InputMaskDefinitions";
 
 const validations = () => {
@@ -114,12 +115,17 @@ export default class OrderForm extends Vue {
 
   phoneMask = phoneMask;
 
-  confirmOrder() {
+  async confirmOrder() {
     this.$v.$touch();
     if (this.$v.$invalid) {
       return;
     }
-    this.$serviceLocator.getService(ProfileService).checkoutOrder(this.order);
+    if (await this.$serviceLocator.getService(ProfileService).checkoutOrder(this.order)) {
+      this.$modalManager.modalShow(OrderingSuccess);
+      if (this.$route.name !== "personal") {
+        this.$router.push({ name: "personal" });
+      }
+    }
   }
 
   getDeliveryMethodPrice(type: any) {

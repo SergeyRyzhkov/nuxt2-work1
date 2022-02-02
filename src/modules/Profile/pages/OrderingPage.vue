@@ -28,7 +28,7 @@
           </div>
           <div class="text-14 mt-8 flex items-center justify-between">
             <div>Доставка</div>
-            <div>{{ deliverySum }} ₽</div>
+            <div>{{ deliverySum }}</div>
           </div>
           <div class="text-14 mt-8 flex items-center justify-between">
             <div>Скидка</div>
@@ -75,8 +75,18 @@ export default class OrderingPage extends Vue {
     return this.cartItems.length;
   }
 
-  get deliverySum() {
+  get deliverySumNmb() {
+    if (this.cartItems.length > 0 && this.deliveryMethods.length > 0) {
+      const method = this.deliveryMethods.find((iter) => iter.id === this.order.delivery_method_id);
+      if (!!method) {
+        return method.free_from > this.priceNmb ? method.price : 0;
+      }
+    }
     return 0;
+  }
+
+  get deliverySum() {
+    return this.deliverySumNmb.toLocaleString("ru-RU") + " ₽";
   }
 
   get discountSum() {
@@ -84,8 +94,11 @@ export default class OrderingPage extends Vue {
   }
 
   get price() {
-    const pr = this.cartItems.reduce((sum, iterCart) => sum + (iterCart.product.price || 0) * iterCart.count, 0);
-    return (pr + this.deliverySum - this.discountSum).toLocaleString("ru-RU") + " ₽";
+    return (this.priceNmb + this.deliverySumNmb - this.discountSum).toLocaleString("ru-RU") + " ₽";
+  }
+
+  get priceNmb() {
+    return this.cartItems.reduce((sum, iterCart) => sum + (iterCart.product.price || 0) * iterCart.count, 0);
   }
 
   updateBreadCrumbs() {
