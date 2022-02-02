@@ -34,10 +34,14 @@ export class ProfileService extends BaseService {
       const deliveryMethods = response?.data?.delivery_methods;
 
       const cartList = !!data ? plainToInstance(CartModel, Array.from(data)) : [];
-      cartList.forEach((iter) => {
-        iter.delivery_methods = deliveryMethods;
-      });
-      this.сartStore.updateUserCart(cartList);
+      if (!!cartList) {
+        cartList.forEach((iter) => {
+          iter.delivery_methods = deliveryMethods;
+        });
+        this.сartStore.updateUserCart(cartList);
+      } else {
+        this.сartStore.updateUserCart([]);
+      }
     }
   }
 
@@ -100,10 +104,12 @@ export class ProfileService extends BaseService {
 
     if (this.isAuthenticated) {
       const result = await this.apiRequest.post(`users/orders`, order);
+      this.updateUserCartState();
       return result.status === 204 || result.status === 200;
     } else if (!this.isAuthenticated && this.getUserHash()) {
       order.guest_hash = this.getUserHash();
       const result = await this.apiRequest.post(`users/orders`, order);
+      this.updateUserCartState();
       return result.status === 204 || result.status === 200;
     }
     return false;
