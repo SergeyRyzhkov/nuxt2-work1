@@ -2,7 +2,7 @@ const loadClassesName = ["loading-image"];
 
 const options = {
   root: null,
-  rootMargin: "40px",
+  rootMargin: "50px",
   threshold: 0,
 };
 

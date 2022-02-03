@@ -30,11 +30,11 @@
       ></base-calendar>
     </div>
 
-    <div class="training-list-wrapper">
+    <div class="training-list-wrapper mt-40">
       <TrainingItem v-for="iter in trainingList" :key="iter.id" :item="iter"> </TrainingItem>
     </div>
 
-    <InfiniteScroll class="training-list-wrapper" @on-intersect="loadMore()">
+    <InfiniteScroll class="training-list-wrapper mt-0" @on-intersect="loadMore()">
       <template v-if="loading">
         <SkeletonTrainingItem v-for="index in 6" :key="index"> </SkeletonTrainingItem>
       </template>
@@ -108,7 +108,7 @@ export default class TrainingListPage extends Vue {
 
 <style lang="scss">
 .training-list-wrapper {
-  @apply mt-30 gap-y-30 gap-x-30 grid grid-cols-1 md:mt-40 md:grid-cols-2 lg:grid-cols-3;
+  @apply gap-y-30 gap-x-30 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
 }
 .arenda-banner {
   background: linear-gradient(268.69deg, #baccff -0.81%, #f2e1dc 60.12%), #eaeaea;

@@ -24,8 +24,7 @@ const ClickOutsideDirective = {
 // el.$destroy = () => el.removeEventListener
 
 const LazySrc = {
-  bind(el, binding) {
-    // el.decoding = "async";
+  bind(el, binding, _vnode) {
     if (el.setAttribute) {
       if (!el.getAttribute("alt")) {
         el.setAttribute("alt", " ");

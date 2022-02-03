@@ -29,33 +29,49 @@
     </div>
     <ul class="footer-ul" :class="{ show }">
       <li>
-        <nuxt-link :to="{ name: 'documents' }">Помощь</nuxt-link>
+        <nuxt-link :to="{ name: 'help' }">Помощь</nuxt-link>
       </li>
-      <li>
-        <nuxt-link :to="{ name: 'faq' }">Вопрос-ответ</nuxt-link>
-      </li>
-      <li>
-        <nuxt-link :to="{ name: 'documents' }">Условия оплаты</nuxt-link>
-      </li>
-      <li>
-        <nuxt-link :to="{ name: 'documents' }">Условия доставки</nuxt-link>
-      </li>
-
-      <li>
-        <nuxt-link :to="{ name: 'documents' }">Гарантия на товар</nuxt-link>
+      <li v-for="(iter, index) in footerItems" :key="index">
+        <a @click="gotoHelp(iter)">
+          {{ iter.title }}
+        </a>
       </li>
     </ul>
   </div>
 </template>
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
+import { EmptyService } from "@/_core/service/EmptyService";
+import Cacheable from "@/_core/MethodCacheDecorator";
 
 @Component
 export default class FooterInfo extends Vue {
   show: boolean = false;
 
+  footerItems: { title?: string; meta_slug?: string; name?: string } = {};
+
   openList() {
     this.show = !this.show;
+  }
+
+  async fetch() {
+    this.footerItems = await this.getFooterItems();
+  }
+
+  @Cacheable(0)
+  async getFooterItems() {
+    return await this.$serviceLocator.getService(EmptyService).getAnyOrNull("users/pages-footer");
+  }
+
+  async gotoHelp(iter: any) {
+    try {
+      await this.$router.push({
+        name: iter.name,
+        // @ts-ignore
+        params: { title: iter, isFaq: iter.name === "help" },
+        query: iter.meta_slug,
+      });
+    } catch {}
   }
 }
 </script>

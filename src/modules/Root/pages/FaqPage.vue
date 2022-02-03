@@ -1,9 +1,8 @@
 <template>
   <main class="page-wrapper container">
     <BreadCrumbs />
-
     <div v-if="isDataExists" class="hidden flex-col md:flex md:flex-row">
-      <FaqLeftSide class="w-full md:w-1/4" :faq-model="faqList" @select-item="faqSelected"></FaqLeftSide>
+      <FaqLeftSide class="w-full md:w-1/4" :faq-model="faqList" :selected-faq="selectedFaq" @select-item="onSelect"></FaqLeftSide>
       <div class="w-full md:w-1/2" v-html="selectedFaq.description"></div>
     </div>
 
@@ -19,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { Component, getModule, Prop, Vue } from "nuxt-property-decorator";
+import { Component, getModule, Prop, Vue, Watch } from "nuxt-property-decorator";
 import FaqModel from "../models/FaqModel";
 import AppStore from "../store/AppStore";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
@@ -31,17 +30,37 @@ export default class MainPage extends Vue {
   @Prop({ default: true })
   isFaq: boolean;
 
-  selectedFaq: { title?: string; description?: string } = {};
+  @Prop()
+  title;
+
+  @Watch("title")
+  async onTitleChanged() {
+    await this.updateData();
+  }
+
+  selectedFaq: { title?: string; description?: string } = { title: "", description: "" };
   faqList: FaqModel = new FaqModel();
 
   async fetch() {
-    this.faqList = this.isFaq ? await this.getHelpData() : this.getDocsData();
     this.updateBreadCrumbs();
+    await this.updateData();
+  }
+
+  async updateData() {
+    this.faqList = this.isFaq ? await this.getHelpData() : await this.getDocsData();
+    if (!!this.title) {
+      this.selectedFaq = this.title;
+    } else {
+      this.selectedFaq = this.faqList.content?.context[0];
+    }
   }
 
   get isDataExists() {
-    console.log(!!this.faqList?.content?.context?.length);
     return this.faqList?.content?.context?.length > -1;
+  }
+
+  get extTitle() {
+    return this.title?.title;
   }
 
   @Cacheable(0)
@@ -54,7 +73,7 @@ export default class MainPage extends Vue {
     return await this.$serviceLocator.getService(EmptyService).getAnyOrNull("users/pages/document");
   }
 
-  faqSelected(item: { title: string; description: string }) {
+  onSelect(item: { title: string; description: string }) {
     this.selectedFaq = item;
   }
 

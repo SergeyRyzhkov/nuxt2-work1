@@ -29,12 +29,18 @@
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
+import { ProfileService } from "../ProfileService";
 import { DaysRangeModel } from "@/components/forms/BaseCalendar.vue";
 
 @Component
 export default class ProfileOrderList extends Vue {
   tabActive = 1;
   daysRange: DaysRangeModel = new DaysRangeModel();
+
+  async fetch() {
+    const orders = await this.$serviceLocator.getService(ProfileService).getOrderList();
+    console.log(orders);
+  }
 
   clearDate() {
     this.daysRange = new DaysRangeModel();

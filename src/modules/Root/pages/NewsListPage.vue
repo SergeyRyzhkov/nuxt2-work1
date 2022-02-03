@@ -3,11 +3,11 @@
     <BreadCrumbs />
     <h1>Новости</h1>
 
-    <section class="news-list-wrapper">
+    <section class="news-list-wrapper mt-40">
       <NewsItem v-for="iter in newsList" :key="iter.id" :article-model="iter"> </NewsItem>
     </section>
 
-    <InfiniteScroll class="news-list-wrapper" @on-intersect="loadMore()">
+    <InfiniteScroll class="news-list-wrapper mt-0" @on-intersect="loadMore()">
       <template v-if="loading">
         <SkeletonNewsItem v-for="index in 6" :key="index"> </SkeletonNewsItem>
       </template>
@@ -59,6 +59,6 @@ export default class NewsListPage extends Vue {
 </script>
 <style lang="scss">
 .news-list-wrapper {
-  @apply gap-y-30 gap-x-30 mt-40 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  @apply gap-y-30 gap-x-30 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
 }
 </style>

@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "nuxt-property-decorator";
+import { Component, Prop, Vue } from "nuxt-property-decorator";
 import FaqModel from "../models/FaqModel";
 
 @Component
@@ -15,22 +15,15 @@ export default class FaqLeftSide extends Vue {
   @Prop()
   faqModel: FaqModel;
 
-  activeItemTitle = "";
-
-  @Watch("faqModel", { immediate: true })
-  onFaqModelChanged() {
-    if (this.faqModel?.content?.context.length > 0) {
-      this.onClick(this.faqModel?.content.context[0]);
-    }
-  }
+  @Prop()
+  selectedFaq;
 
   onClick(item: { title: string; description: string }) {
-    this.activeItemTitle = item.title;
     this.$emit("select-item", item);
   }
 
   activeClass(item: { title: string; description: string }) {
-    if (item.title === this.activeItemTitle) {
+    if (item.title === this.selectedFaq?.title) {
       return "active";
     }
   }
