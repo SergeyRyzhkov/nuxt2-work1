@@ -3,16 +3,15 @@
     <BreadCrumbs />
     <h1>Новости</h1>
 
-    <section v-if="$fetchState.pending" class="mt-40 grid grid-cols-1 gap-y-30 gap-x-30 md:grid-cols-2 lg:grid-cols-3">
-      <template v-for="index in 6">
-        <SkeletonNewsItem :key="index"> </SkeletonNewsItem>
-      </template>
-    </section>
-
-    <section class="mt-40 grid grid-cols-1 gap-y-30 gap-x-30 md:grid-cols-2 lg:grid-cols-3">
+    <section class="news-list-wrapper">
       <NewsItem v-for="iter in newsList" :key="iter.id" :article-model="iter"> </NewsItem>
     </section>
-    <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>
+
+    <InfiniteScroll class="news-list-wrapper" @on-intersect="loadMore()">
+      <template v-if="loading">
+        <SkeletonNewsItem v-for="index in 6" :key="index"> </SkeletonNewsItem>
+      </template>
+    </InfiniteScroll>
   </main>
 </template>
 
@@ -26,20 +25,26 @@ import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 
 @Component
 export default class NewsListPage extends Vue {
+  loading = true;
   newsList: NewsModel[] = [];
   pagination: Pagination = new Pagination();
 
   async fetch() {
     this.updateBreadCrumbs();
-    await this.updateData();
+    await this.loadMore();
   }
 
-  async updateData() {
-    const result = await this.$serviceLocator
-      .getService(EmptyService)
-      .getArrayOrEmptyWithPagination(NewsModel, "users/news", {}, this.pagination);
-    this.newsList = result.data;
-    this.pagination = result.pagination;
+  async loadMore() {
+    if (Pagination.loadMoreHasNextPage(this.pagination)) {
+      this.loading = true;
+      Pagination.loadMore(this.pagination);
+      const result = await this.$serviceLocator
+        .getService(EmptyService)
+        .getArrayOrEmptyWithPagination(NewsModel, "users/news", {}, this.pagination);
+      this.pagination.total = result.pagination.total;
+      this.newsList = [...this.newsList, ...result.data];
+      this.loading = false;
+    }
   }
 
   updateBreadCrumbs() {
@@ -47,13 +52,13 @@ export default class NewsListPage extends Vue {
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
   }
 
-  onUpdatePagination(pageNmb: number) {
-    this.pagination.currentPage = pageNmb;
-    this.updateData();
-  }
-
   head() {
     return this.$serviceLocator.getService(SeoMetaTagsBuilder).create(undefined, this.$route.fullPath);
   }
 }
 </script>
+<style lang="scss">
+.news-list-wrapper {
+  @apply gap-y-30 gap-x-30 mt-40 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+}
+</style>

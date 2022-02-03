@@ -26,19 +26,19 @@
           isDatePicker: false,
           placeholder: 'Выберите дату',
         }"
-        @clear="clearDate"
+        @clear="clearDateRange"
       ></base-calendar>
     </div>
 
-    <div v-if="$fetchState.pending" class="mt-30 gap-y-30 gap-x-30 grid grid-cols-1 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
-      <template v-for="index in 6">
-        <SkeletonTrainingItem :key="index"> </SkeletonTrainingItem>
-      </template>
-    </div>
-    <div class="mt-30 gap-y-30 gap-x-30 grid grid-cols-1 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
+    <div class="training-list-wrapper">
       <TrainingItem v-for="iter in trainingList" :key="iter.id" :item="iter"> </TrainingItem>
     </div>
-    <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>
+
+    <InfiniteScroll class="training-list-wrapper" @on-intersect="loadMore()">
+      <template v-if="loading">
+        <SkeletonTrainingItem v-for="index in 6" :key="index"> </SkeletonTrainingItem>
+      </template>
+    </InfiniteScroll>
   </main>
 </template>
 
@@ -53,6 +53,7 @@ import { DaysRangeModel } from "@/components/forms/BaseCalendar.vue";
 
 @Component
 export default class TrainingListPage extends Vue {
+  loading = true;
   trainingList: TrainingModel[] = [];
   pagination: Pagination = new Pagination();
 
@@ -60,38 +61,43 @@ export default class TrainingListPage extends Vue {
 
   async fetch() {
     this.updateBreadCrumbs();
-    await this.updateData();
+    await this.loadMore();
+  }
+
+  async loadMore() {
+    if (Pagination.loadMoreHasNextPage(this.pagination)) {
+      this.loading = true;
+      Pagination.loadMore(this.pagination);
+      const addDataPart = await this.$serviceLocator
+        .getService(TrainingService)
+        .getAll(this.pagination, this.daysRange.dateRange.start, this.daysRange.dateRange.end);
+      this.pagination.total = addDataPart.pagination.total;
+      this.trainingList = [...this.trainingList, ...addDataPart.data];
+      this.loading = false;
+    }
   }
 
   @Watch("daysRange", { deep: true })
   onDaysRangeChanged() {
     if (!!this.daysRange.dateRange.end) {
-      this.updateData();
+      this.resetDataLoad();
     }
   }
 
-  async updateData() {
-    const result = await this.$serviceLocator
-      .getService(TrainingService)
-      .getAll(this.pagination, this.daysRange.dateRange.start, this.daysRange.dateRange.end);
-    this.trainingList = result.data;
-    this.pagination = result.pagination;
+  clearDateRange() {
+    this.daysRange = new DaysRangeModel();
+    this.resetDataLoad();
   }
 
-  clearDate() {
-    this.daysRange = new DaysRangeModel();
-    this.pagination.currentPage = 1;
-    this.updateData();
+  resetDataLoad() {
+    this.trainingList = [];
+    this.pagination = new Pagination();
+    return this.loadMore();
   }
 
   updateBreadCrumbs() {
     const breadCrumbList = [{ linkName: "Главная", name: "main" }, { linkName: "Обучение" }];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
-  }
-
-  onUpdatePagination(pageNmb: number) {
-    this.pagination.currentPage = pageNmb;
-    this.updateData();
   }
 
   head() {
@@ -101,6 +107,9 @@ export default class TrainingListPage extends Vue {
 </script>
 
 <style lang="scss">
+.training-list-wrapper {
+  @apply mt-30 gap-y-30 gap-x-30 grid grid-cols-1 md:mt-40 md:grid-cols-2 lg:grid-cols-3;
+}
 .arenda-banner {
   background: linear-gradient(268.69deg, #baccff -0.81%, #f2e1dc 60.12%), #eaeaea;
 }

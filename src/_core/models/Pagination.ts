@@ -11,29 +11,34 @@ export class Pagination extends BaseViewModel {
   perPage = 12;
 
   @Expose({ name: "current_page" })
-  currentPage = 1;
+  currentPage = 0;
 
   @Expose({ name: "last_page" })
   lastPage = 0;
 
-  public static createLoadMorePagination(pagination: Pagination) {
-    pagination.currentPage = pagination.selectedPages.length > 0 ? Pagination.getLastSelectedPages(pagination) + 1 : 2;
+  static loadMore(pagination: Pagination) {
+    if (pagination.selectedPages.length === 0 && !!pagination.currentPage) {
+      pagination.selectedPages.push(pagination.currentPage);
+    }
+    pagination.currentPage = pagination.selectedPages.length > 0 ? Pagination.getLastSelectedPages(pagination) + 1 : 1;
     pagination.selectedPages.push(pagination.currentPage);
     return pagination;
   }
 
-  public static clearSelectedPages(pagination: Pagination) {
+  static clearSelectedPages(pagination: Pagination) {
     pagination.selectedPages = [];
   }
 
-  public static getLastSelectedPages(pagination: Pagination) {
-    if (pagination.selectedPages.length === 0 && !!pagination.currentPage) {
-      pagination.selectedPages.push(pagination.currentPage);
-    }
-    return pagination.selectedPages.slice(-1)[0];
+  static getLastSelectedPages(pagination: Pagination) {
+    return pagination.selectedPages.length ? pagination.selectedPages.slice(-1)[0] : 0;
   }
 
-  public static loadMoreHasNextPage(pagination: Pagination) {
-    return Pagination.getLastSelectedPages(pagination) < pagination.lastPage;
+  static loadMoreHasNextPage(pagination: Pagination) {
+    const lastSelectedPage = Pagination.getLastSelectedPages(pagination);
+    return lastSelectedPage === 0 || lastSelectedPage < (pagination.lastPage || Pagination.countPage(pagination));
+  }
+
+  static countPage(pagination: Pagination) {
+    return pagination.perPage > 0 ? Math.ceil(pagination.total / pagination.perPage) : 0;
   }
 }
