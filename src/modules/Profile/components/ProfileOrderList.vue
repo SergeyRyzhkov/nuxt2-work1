@@ -23,23 +23,24 @@
         @clear="clearDate"
       />
     </div>
-    <OrderItem v-for="i in 10" :key="i" class="mt-25 flex flex-col" />
+    <OrderItem v-for="(iter, index) in orderList" :key="index" :model="iter" class="mt-25 flex flex-col" />
   </section>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
 import { ProfileService } from "../ProfileService";
+import ExecutionOrderModel from "../models/ExecutionOrderModel";
 import { DaysRangeModel } from "@/components/forms/BaseCalendar.vue";
 
 @Component
 export default class ProfileOrderList extends Vue {
   tabActive = 1;
   daysRange: DaysRangeModel = new DaysRangeModel();
+  orderList: ExecutionOrderModel[] = [];
 
   async fetch() {
-    const orders = await this.$serviceLocator.getService(ProfileService).getOrderList();
-    console.log(orders);
+    this.orderList = await this.$serviceLocator.getService(ProfileService).getOrderList();
   }
 
   clearDate() {

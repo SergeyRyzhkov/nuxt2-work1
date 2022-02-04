@@ -7,6 +7,7 @@ export default class OrderModel extends BaseViewModel {
   patronymic = "";
   phone = "";
   email = "";
+
   delivery_address = "";
   delivery_method_id = 1;
   payment_type_id = 1;

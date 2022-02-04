@@ -1,6 +1,7 @@
 import { getModule } from "vuex-module-decorators";
 import { plainToInstance } from "class-transformer";
 import OrderModel from "./models/OrderModel";
+import ExecutionOrderModel from "./models/ExecutionOrderModel";
 import { AuthService } from "@/modules/Auth/AuthService";
 import { BaseService } from "@/_core/service/BaseService";
 import CartModel from "@/modules/Profile/models/CartModel";
@@ -124,7 +125,7 @@ export class ProfileService extends BaseService {
 
   getOrderList() {
     const userHash = this.getUserHash();
-    return this.getArrayOrEmpty(OrderModel, `users/orders${!!userHash ? `?guest_hash=${userHash}` : ""}`);
+    return this.getArrayOrEmpty(ExecutionOrderModel, `users/orders${!!userHash ? `?guest_hash=${userHash}` : ""}`);
   }
 
   setUserHash(guestHash: string) {

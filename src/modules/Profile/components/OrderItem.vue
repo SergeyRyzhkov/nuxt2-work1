@@ -3,44 +3,41 @@
     <div class="order-item-header flex flex-col justify-between px-20 pt-16 pb-12 md:flex-row md:items-center">
       <div class="flex flex-col md:flex-row md:items-center">
         <div>
-          <div class="order-item-id">Заказ №: <span class="font-semibold">12233445667</span></div>
-          <div class="order-item-date">Дата создания: 25 июля 2021, 19:30</div>
+          <div class="order-item-id">
+            Заказ №: <span class="font-semibold">{{ model.id }}</span>
+          </div>
+          <div class="order-item-date">Дата создания: {{ dateCreate }}</div>
         </div>
-        <div class="order-item-status md:pl-67">В обработке</div>
+        <div class="order-item-status md:pl-67">{{ deliveryStatus }}</div>
       </div>
       <div class="mt-5 flex flex-row justify-between md:mt-0 md:flex-col">
-        <div class="order-item-price">3 700 ₽</div>
-        <div class="order-item-count">3 товара</div>
+        <div class="order-item-price">{{ totalPrice }}</div>
+        <div class="order-item-count">{{ productCount }}</div>
       </div>
     </div>
     <div class="order-item-body">
       <div class="order-item-info flex items-center justify-between">
-        <div>Ожидается оплата</div>
-        <div class="underline">Подробнее</div>
+        <div>{{ paymentStatus }}</div>
+        <div class="underline focus:no-underline">Подробнее</div>
       </div>
-      <div class="mt-24 flex flex-col md:flex-row md:justify-between">
-        <div class="order-item-products flex items-center">
-          <div class="ml-8 flex max-w-[95px] flex-col first:ml-0 lg:max-w-[132px]">
-            <figure class="order-item-product-image">
-              <img src="/images/tmp_product.jpg" alt="" itemprop="image" class="" loading="lazy" />
-              <figcaption></figcaption>
-            </figure>
-            <div class="order-item-product-title mt-8 md:mt-12">Маска KAYPRO Botu-Cure</div>
-            <div class="order-item-product-price mt-6">2 000 ₽</div>
-          </div>
-          <div class="ml-8 flex max-w-[95px] flex-col lg:max-w-[132px]">
-            <figure class="order-item-product-image">
-              <img src="/images/tmp_product.jpg" alt="" itemprop="image" class="" loading="lazy" />
-              <figcaption></figcaption>
-            </figure>
-            <div class="order-item-product-title mt-12">Маска KAYPRO Botu-Cure</div>
-            <div class="order-item-product-price mt-6">2 000 ₽</div>
+      <div class="flex flex-col lg:flex-row">
+        <div
+          class="order-item-products mt-16 flex w-full min-w-[96] flex-wrap md:justify-between lg:mt-24 lg:w-2/3 lg:min-w-[133]"
+        >
+          <div v-for="iter in products" :key="iter.id" class="mr-8">
+            <img
+              v-lazysrc="productImageSrc(iter)"
+              height="158"
+              width="133"
+              alt=" "
+              class="h-100 px-30 lg:h-158 lg:w-133 w-96 object-scale-down pt-8 transition-all hover:scale-105 lg:pt-12"
+            />
+            <div class="text-12 lg:text-14 mt-8 md:mt-12">{{ iter.name }}</div>
+            <div class="text-14 mt-8 font-semibold">{{ productPrice(iter) }}</div>
           </div>
         </div>
-        <div class="order-item-pay mt-21 flex flex-col items-center md:mt-0 md:items-end">
-          <div>
-            <BaseButton class="order-item-btn">Оплатить заказ</BaseButton>
-          </div>
+        <div class="order-item-pay mt-16 flex w-full flex-col items-center md:mt-0 md:items-end lg:mt-24 lg:w-1/3">
+          <BaseButton class="order-item-btn w-full lg:max-w-max">Оплатить заказ</BaseButton>
           <div class="order-item-pay-cancel mt-16">Отменить заказ</div>
           <div class="order-item-pay-info mt-12 text-center md:text-right">
             Не прошла оплата-онлайн, повторите попытку или заказ будет отменен через 00:29 минут
@@ -52,11 +49,58 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
-@Component({
-  components: {},
-})
-export default class OrderItem extends Vue {}
+import dayjs from "dayjs";
+import { Component, Prop, Vue } from "nuxt-property-decorator";
+import ExecutionOrderModel from "../models/ExecutionOrderModel";
+import { decOfNum } from "@/utils/Formaters";
+import ProductModel from "@/modules/Catalog/models/ProductModel";
+import { CatalogService } from "@/modules/Catalog/CatalogService";
+
+@Component
+export default class OrderItem extends Vue {
+  @Prop()
+  model: ExecutionOrderModel;
+
+  get dateCreate() {
+    return dayjs(this.model?.created_at).format("DD MMMM YYYY, HH:MM");
+  }
+
+  get totalPrice() {
+    return `${this.model?.products_price.toLocaleString("ru-RU")} ₽`;
+  }
+
+  get productCount() {
+    const count = this.model?.order_items_count || 0;
+    return `${count} ${decOfNum(count, ["товар", "товара", "товаров"])}`;
+  }
+
+  get paymentStatus() {
+    return this.model.payment_status;
+  }
+
+  get deliveryStatus() {
+    return this.model?.delivery_status;
+  }
+
+  get products() {
+    if (!!this.model?.order_items) {
+      return this.model.order_items.map((iter) => iter.product);
+    }
+    return [];
+  }
+
+  productPrice(model: ProductModel) {
+    return (model?.price?.toLocaleString() || 0) + " ₽";
+  }
+
+  productRouteLink(model: ProductModel) {
+    return this.$serviceLocator.getService(CatalogService).getProductRouteLocation(model);
+  }
+
+  productImageSrc(model: ProductModel) {
+    return model?.logo && model?.logo.length ? model.logo[0].url : "/images/product-no-photo.jpg";
+  }
+}
 </script>
 
 <style lang="scss">
@@ -67,9 +111,6 @@ export default class OrderItem extends Vue {}
     font-size: 12px !important;
   }
   &-pay {
-    @include widescreen {
-      max-width: 40%;
-    }
     &-cancel {
       font-size: 12px;
       line-height: 24px;
