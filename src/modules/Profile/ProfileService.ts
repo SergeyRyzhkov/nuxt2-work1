@@ -31,12 +31,15 @@ export class ProfileService extends BaseService {
         !this.isAuthenticated && this.getUserHash() ? { params: { guest_hash: this.getUserHash() } } : {}
       );
       const data = response?.data?.data || response?.data;
+
       const deliveryMethods = response?.data?.delivery_methods;
+      const paymentMethods = response?.data?.payment_types;
 
       const cartList = !!data ? plainToInstance(CartModel, Array.from(data)) : [];
       if (!!cartList) {
         cartList.forEach((iter) => {
           iter.delivery_methods = deliveryMethods;
+          iter.payment_types = paymentMethods;
         });
         this.сartStore.updateUserCart(cartList);
       } else {
@@ -95,6 +98,10 @@ export class ProfileService extends BaseService {
 
   getDeliveryMethods() {
     return this.сartStore.userCart.length > 0 ? this.сartStore.userCart[0].delivery_methods : [];
+  }
+
+  getPaymentMethods() {
+    return this.сartStore.userCart.length > 0 ? this.сartStore.userCart[0].payment_types : [];
   }
 
   async checkoutOrder(order: OrderModel) {

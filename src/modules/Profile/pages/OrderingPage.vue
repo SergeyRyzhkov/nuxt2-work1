@@ -4,7 +4,7 @@
       <section class="line-half w-full pt-60 md:w-1/2">
         <h1>Оформление заказа</h1>
         <BreadCrumbs />
-        <OrderForm :order="order" :delivery-methods="deliveryMethods" />
+        <OrderForm :order="order" :delivery-methods="deliveryMethods" :payment-types="paymentTypes" />
       </section>
       <section class="max-h-[75vh] w-full pt-60 md:w-1/2 xl:pl-40">
         <div class="shopping-cart-items flex flex-col">
@@ -57,11 +57,13 @@ import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 export default class OrderingPage extends Vue {
   order = new OrderModel();
   deliveryMethods: { id: number; title: string; price: number; free_from: any }[] = [];
+  paymentTypes: { id: number; title: string }[] = [];
   cartItems: CartModel[] = [];
 
   fetch() {
     this.updateBreadCrumbs();
     this.deliveryMethods = this.$serviceLocator.getService(ProfileService).getDeliveryMethods();
+    this.paymentTypes = this.$serviceLocator.getService(ProfileService).getPaymentMethods();
     this.cartItems = this.$serviceLocator.getService(ProfileService).getCartItems();
   }
 

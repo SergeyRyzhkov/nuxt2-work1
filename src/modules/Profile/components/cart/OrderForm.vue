@@ -62,8 +62,10 @@
       <div class="mt-52">
         <h2>Способы оплаты</h2>
         <div class="mt-32">
-          <BaseRadioButton v-model="order.payment_type" label="Наличными при получении" value="invoice" class="mb-20" />
-          <BaseRadioButton v-model="order.payment_type" label="Банковской картой на сайте" value="card" />
+          <div v-for="iter in paymentTypes" :key="iter.id" class="mb-16">
+            <BaseRadioButton v-model="order.payment_type_id" :label="iter.title" :value="iter.id" />
+            <div class="del-info pl-30 mt-9">{{ iter.title }}</div>
+          </div>
         </div>
       </div>
       <div class="mt-52">
@@ -112,6 +114,9 @@ export default class OrderForm extends Vue {
 
   @Prop()
   deliveryMethods: { id: number; title: string; price: number; free_from: any }[];
+
+  @Prop()
+  paymentTypes: { id: number; title: string }[];
 
   phoneMask = phoneMask;
 
