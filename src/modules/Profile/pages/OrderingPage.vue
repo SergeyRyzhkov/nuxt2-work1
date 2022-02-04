@@ -22,15 +22,15 @@
           </div>
         </div>
         <div class="cost-border py-26">
-          <div class="text-14 mt-8 flex items-center justify-between">
+          <!-- <div class="text-14 mt-8 flex items-center justify-between">
             <div>НДС</div>
             <div>0 ₽</div>
-          </div>
+          </div> -->
           <div class="text-14 mt-8 flex items-center justify-between">
             <div>Доставка</div>
             <div>{{ deliverySum }}</div>
           </div>
-          <div class="text-14 mt-8 flex items-center justify-between">
+          <div v-if="!!discountSum" class="text-14 mt-8 flex items-center justify-between">
             <div>Скидка</div>
             <div>{{ discountSum }} ₽</div>
           </div>

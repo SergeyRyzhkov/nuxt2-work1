@@ -1,7 +1,6 @@
 <template>
   <div>
     <RootCategory v-show="isRootCategory"></RootCategory>
-
     <div v-if="isNotLeafCategory">
       <section>
         <LazyBaseSwiper :slides="subCategories" :settings="sliderSettings">
@@ -31,22 +30,24 @@
         </LazyBaseSwiper>
       </section>
 
-      <section v-if="!!model && !!model.products" class="mt-40 md:mt-60">
+      <section v-if="!!model" class="mt-40 md:mt-60">
         <div class="text-14 text-text-gray mb-28">{{ productCountText }}</div>
         <div class="gap-x-30 grid grid-cols-1 gap-y-40 md:grid-cols-2 lg:grid-cols-3">
-          <ProductItem v-for="iter in model.products" :key="iter.id" :model="iter"> </ProductItem>
+          <ProductItem v-for="iter in productList" :key="iter.id" :model="iter"> </ProductItem>
         </div>
       </section>
     </div>
 
-    <LeafCategory v-show="isLeafCategory" :model="model"></LeafCategory>
+    <LeafCategory v-if="isLeafCategory" :model="model"></LeafCategory>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "nuxt-property-decorator";
+import { Component, Prop, Vue, Watch } from "nuxt-property-decorator";
 import { CatalogService } from "../CatalogService";
 import CategoryModel from "../models/CategoryModel";
+import ProductModel from "../models/ProductModel";
+import { decOfNum } from "@/utils/Formaters";
 
 @Component
 export default class CategoryContent extends Vue {
@@ -55,6 +56,15 @@ export default class CategoryContent extends Vue {
 
   @Prop()
   slug: string;
+
+  productList: ProductModel[] = [];
+
+  @Watch("isNotLeafCategory")
+  async onNotLeaf(val) {
+    if (!!val) {
+      this.productList = await this.$serviceLocator.getService(CatalogService).getProductsByCategory(this.model);
+    }
+  }
 
   get isRootCategory() {
     return !this.slug && !this.model?.id;
@@ -69,11 +79,7 @@ export default class CategoryContent extends Vue {
   }
 
   get productCountText() {
-    return this.$serviceLocator.getService(CatalogService).productCountText(this.model);
-  }
-
-  get products() {
-    return this.$serviceLocator.getService(CatalogService).getAllProducts(this.model);
+    return `Найдено: ${this.productList.length} ${decOfNum(this.productList.length, ["товар", "товара", "товаров"])}`;
   }
 
   get sliders() {

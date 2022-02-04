@@ -18,7 +18,7 @@
     <div class="order-item-body">
       <div class="order-item-info flex items-center justify-between">
         <div>{{ paymentStatus }}</div>
-        <div class="underline focus:no-underline">Подробнее</div>
+        <div class="cursor-pointer underline hover:no-underline">Подробнее</div>
       </div>
       <div class="flex flex-col lg:flex-row">
         <div
@@ -87,6 +87,10 @@ export default class OrderItem extends Vue {
       return this.model.order_items.map((iter) => iter.product);
     }
     return [];
+  }
+
+  get deliveryStatusStyle() {
+    return "";
   }
 
   productPrice(model: ProductModel) {
