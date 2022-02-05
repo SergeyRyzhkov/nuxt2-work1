@@ -34,12 +34,15 @@
         <div class="text-14 text-text-gray mb-28">{{ productCountText }}</div>
         <div class="gap-x-30 grid grid-cols-1 gap-y-40 md:grid-cols-2 lg:grid-cols-3">
           <ProductItem v-for="iter in productList" :key="iter.id" :model="iter"> </ProductItem>
-          <InfiniteScroll @on-intersect="loadMoreProducts()">
-            <template v-if="loading">
-              <ProductItemSkeleton v-for="index in 6" :key="index"> </ProductItemSkeleton>
-            </template>
-          </InfiniteScroll>
         </div>
+        <InfiniteScroll
+          class="gap-x-30 grid grid-cols-1 gap-y-40 md:grid-cols-2 lg:grid-cols-3"
+          @on-intersect="loadMoreProducts()"
+        >
+          <template v-if="loading">
+            <ProductItemSkeleton v-for="index in 6" :key="index"> </ProductItemSkeleton>
+          </template>
+        </InfiniteScroll>
       </section>
     </div>
 
