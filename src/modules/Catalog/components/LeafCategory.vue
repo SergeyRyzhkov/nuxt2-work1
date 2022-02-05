@@ -7,6 +7,11 @@
       <div class="text-14 text-text-gray mb-28">{{ productCountText }}</div>
       <div class="grid grid-cols-2 gap-x-9 gap-y-40 md:grid-cols-2 lg:grid-cols-3">
         <ProductItem v-for="iter in productList" :key="iter.id" :model="iter"> </ProductItem>
+        <InfiniteScroll @on-intersect="loadMoreProducts()">
+          <template v-if="loading">
+            <ProductItemSkeleton v-for="index in 6" :key="index"> </ProductItemSkeleton>
+          </template>
+        </InfiniteScroll>
       </div>
     </section>
   </div>
@@ -18,16 +23,30 @@ import CategoryModel from "../models/CategoryModel";
 import { CatalogService } from "../CatalogService";
 import ProductModel from "../models/ProductModel";
 import { decOfNum } from "@/utils/Formaters";
+import { Pagination } from "@/_core/models/Pagination";
 
 @Component
 export default class LeafCategory extends Vue {
   @Prop()
   model: CategoryModel;
 
+  pagination: Pagination = new Pagination();
+  loading = true;
   productList: ProductModel[] = [];
 
   async fetch() {
-    this.productList = await this.$serviceLocator.getService(CatalogService).getProductsByCategory(this.model);
+    await this.loadMoreProducts();
+  }
+
+  async loadMoreProducts() {
+    if (Pagination.hasNextPage(this.pagination)) {
+      this.loading = true;
+      Pagination.nextPage(this.pagination);
+      const result = await this.$serviceLocator.getService(CatalogService).getProductsByCategory(this.pagination, this.model);
+      this.pagination.total = result.pagination.total;
+      this.productList = [...this.productList, ...result.data];
+      this.loading = false;
+    }
   }
 
   get bannerSrc() {
@@ -35,7 +54,7 @@ export default class LeafCategory extends Vue {
   }
 
   get productCountText() {
-    return `Найдено: ${this.productList.length} ${decOfNum(this.productList.length, ["товар", "товара", "товаров"])}`;
+    return `Найдено: ${this.pagination.total} ${decOfNum(this.pagination.total, ["товар", "товара", "товаров"])}`;
   }
 }
 </script>

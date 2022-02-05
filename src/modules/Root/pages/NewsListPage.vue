@@ -35,9 +35,9 @@ export default class NewsListPage extends Vue {
   }
 
   async loadMore() {
-    if (Pagination.loadMoreHasNextPage(this.pagination)) {
+    if (Pagination.hasNextPage(this.pagination)) {
       this.loading = true;
-      Pagination.loadMore(this.pagination);
+      Pagination.nextPage(this.pagination);
       const result = await this.$serviceLocator
         .getService(EmptyService)
         .getArrayOrEmptyWithPagination(NewsModel, "users/news", {}, this.pagination);

@@ -29,7 +29,8 @@ export default class ProductItem extends Vue {
   model: ProductModel;
 
   get price() {
-    return (this.model?.price?.toLocaleString() || 0) + " ₽";
+    const price = this.model?.price || 0;
+    return Number(price).toLocaleString("ru-RU") + " ₽";
   }
 
   get routeLink() {

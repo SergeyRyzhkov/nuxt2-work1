@@ -32,8 +32,8 @@
             </template>
 
             <template #slide="{ slide }">
-              <div class="flex w-full flex-col p-44 md:p-68">
-                <img v-lazysrc="slide" height="500" width="260" alt=" " class="h-300 w-full object-scale-down md:h-500" />
+              <div class="md:p-68 flex w-full flex-col p-44">
+                <img v-lazysrc="slide" height="500" width="260" alt=" " class="h-300 md:h-500 w-full object-scale-down" />
               </div>
             </template>
 
@@ -47,7 +47,7 @@
           <client-only>
             <div
               v-if="video && !$fetchState.pending"
-              class="absolute bottom-0 z-50 mt-16 hidden h-127 w-116 cursor-pointer items-center justify-between bg-[#F5F5F5] md:flex"
+              class="h-127 w-116 absolute bottom-0 z-50 mt-16 hidden cursor-pointer items-center justify-between bg-[#F5F5F5] md:flex"
               :class="showVideo ? 'border' : ''"
               @click="showVideo = true"
             >
@@ -56,9 +56,9 @@
           </client-only>
         </div>
         <div class="ml-0 lg:ml-80 lg:w-5/12">
-          <div class="block text-14 text-[#4BC967] md:hidden">В наличии на складе</div>
+          <div class="text-14 block text-[#4BC967] md:hidden">В наличии на складе</div>
           <h2 class="text-24 font-semibold">{{ model.name }}</h2>
-          <div class="mt-16 text-14 text-gray-color">Артикул: {{ model.vendor_code }}</div>
+          <div class="text-14 text-gray-color mt-16">Артикул: {{ model.vendor_code }}</div>
           <div class="mt-32">
             <div class="flex flex-row items-center justify-between md:flex-col md:items-start">
               <div class="text-28 font-semibold">{{ price }} ₽</div>
@@ -75,7 +75,7 @@
                       </svg>
                     </span>
                   </BaseButton>
-                  <div class="mx-12 text-14">{{ productCount }}</div>
+                  <div class="text-14 mx-12">{{ productCount }}</div>
                   <BaseButton
                     class="border-counter h-36 w-36 rounded-full"
                     :padding-empty="true"
@@ -95,13 +95,13 @@
                       </svg> </span
                   ></BaseButton>
                 </div>
-                <div class="ml-24 hidden text-14 text-[#4BC967] md:block">В наличии на складе</div>
+                <div class="text-14 ml-24 hidden text-[#4BC967] md:block">В наличии на складе</div>
               </div>
             </div>
             <div class="mt-32 flex items-center justify-between md:justify-start">
               <BaseButton @click="addToCart">Добавить в корзину</BaseButton>
               <BaseHeartButton
-                class="ml-14 flex h-52 w-52 items-center justify-center rounded-full border border-primary"
+                class="border-primary ml-14 flex h-52 w-52 items-center justify-center rounded-full border"
                 :is-red="model.is_favorite"
                 @click.prevent="toogleFavor()"
               ></BaseHeartButton>
@@ -146,17 +146,17 @@
                   stroke-linejoin="round"
                 />
               </svg>
-              <div class="ml-12 text-14">в <span class="text-secondary">Москву</span> бесплатно</div>
+              <div class="text-14 ml-12">в <span class="text-secondary">Москву</span> бесплатно</div>
             </div>
-            <div class="mt-16 text-12 text-gray-color">
+            <div class="text-12 text-gray-color mt-16">
               Цена действительна только для интернет-магазина и может отличаться от цен в розничных магазинах
             </div>
           </div>
-          <div class="mt-32 rounded-[20px] bg-nude p-24">
+          <div class="bg-nude mt-32 rounded-[20px] p-24">
             <div class="text-14 font-semibold">
               Доставка до двери по Москве - на следующий рабочий день. При заказе от 3000 рублей - бесплатно!
             </div>
-            <div class="mt-8 text-12">
+            <div class="text-12 mt-8">
               Для заказов по Москве доступна бесплатная доставка курьерами фирмы при заказе от 3000 рублей. Желаем приятных
               покупок!
             </div>
@@ -231,7 +231,8 @@ export default class ProductPage extends Vue {
   }
 
   get price() {
-    return this.model.price?.toLocaleString("ru-RU") || 0;
+    const price = +this.model.price || 0;
+    return price.toLocaleString("ru-RU") || 0;
   }
 
   get images() {

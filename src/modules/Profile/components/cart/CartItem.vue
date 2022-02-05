@@ -7,11 +7,11 @@
     >
       <div>
         <div class="cart-item-title" :class="{ 'cart-item-title-ordering': isOrdering }">
-          {{ cartItem.product.meta_title }} {{ cartItem.product_id }}
+          {{ cartItem.product.name }} {{ cartItem.product_id }}
         </div>
         <div class="cart-item-id">Артикул: {{ cartItem.product.vendor_code }}</div>
       </div>
-      <div v-if="isOrdering">1 шт.</div>
+      <div v-if="isOrdering">{{ cartItem.count }} шт.</div>
       <div class="flex flex-col justify-between md:flex-row md:items-center">
         <div v-if="!isOrdering" class="cart-item-products_counter flex items-center">
           <button
@@ -31,7 +31,7 @@
             </svg>
           </button>
         </div>
-        <div class="cart-item-price whitespace-nowrap">{{ price }} ₽</div>
+        <div class="cart-item-price whitespace-nowrap">{{ price.toLocaleString("ru-RU") }} ₽</div>
       </div>
     </div>
     <button class="remove-cart-item" @click="deleteCartItem">
@@ -83,7 +83,7 @@ export default class CartItem extends Vue {
 
   get price() {
     if (this.cartItem.product.price) {
-      return this.cartItem.product.price * this.cartItem.count;
+      return +this.cartItem.product.price * this.cartItem.count;
     } else {
       return 0;
     }

@@ -7,6 +7,7 @@ import { RouteLink } from "@/_core/models/RouteLink";
 import { lazyLoad } from "@/utils/Common";
 import Cacheable from "@/_core/MethodCacheDecorator";
 import { ServiceLocator } from "@/_core/service/ServiceLocator";
+import { Pagination } from "@/_core/models/Pagination";
 
 export class CatalogService extends BaseService {
   @Cacheable(0)
@@ -15,8 +16,15 @@ export class CatalogService extends BaseService {
   }
 
   @Cacheable(0)
-  async getProductsByCategory(cat: CategoryModel) {
-    return await this.getArrayOrEmpty(ProductModel, "users/products", { params: { category_id_1c: `${cat.title}` } });
+  async getProductsByCategory(pagination: Pagination, cat: CategoryModel) {
+    return await this.getArrayOrEmptyWithPagination(
+      ProductModel,
+      "users/products",
+      {
+        params: { category_id_1c: `${cat.title}` },
+      },
+      pagination
+    );
   }
 
   @Cacheable(0)

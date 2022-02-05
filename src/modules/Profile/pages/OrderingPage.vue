@@ -49,7 +49,7 @@
 import { Vue, Component, getModule } from "nuxt-property-decorator";
 import OrderModel from "../models/OrderModel";
 import { ProfileService } from "../ProfileService";
-import CartModel from "../models/CartModel";
+import CartStore from "../store/CartStore";
 import AppStore from "@/modules/Root/store/AppStore";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 
@@ -58,13 +58,15 @@ export default class OrderingPage extends Vue {
   order = new OrderModel();
   deliveryMethods: { id: number; title: string; price: number; free_from: any }[] = [];
   paymentTypes: { id: number; title: string }[] = [];
-  cartItems: CartModel[] = [];
 
   fetch() {
     this.updateBreadCrumbs();
     this.deliveryMethods = this.$serviceLocator.getService(ProfileService).getDeliveryMethods();
     this.paymentTypes = this.$serviceLocator.getService(ProfileService).getPaymentMethods();
-    this.cartItems = this.$serviceLocator.getService(ProfileService).getCartItems();
+  }
+
+  get cartItems() {
+    return getModule(CartStore, this.$store).userCart;
   }
 
   get allWeight() {
@@ -100,7 +102,7 @@ export default class OrderingPage extends Vue {
   }
 
   get priceNmb() {
-    return this.cartItems.reduce((sum, iterCart) => sum + (iterCart.product.price || 0) * iterCart.count, 0);
+    return this.cartItems.reduce((sum, iterCart) => sum + (+iterCart.product.price || 0) * iterCart.count, 0);
   }
 
   updateBreadCrumbs() {

@@ -12,7 +12,7 @@ export default class ProductModel extends SeoModel {
   vendor_code: string;
   count: number;
   name: string;
-  price: number | null;
+  price: string;
   unit: number;
   category: string;
   category_slug: string;

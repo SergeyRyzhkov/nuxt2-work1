@@ -65,9 +65,9 @@ export default class TrainingListPage extends Vue {
   }
 
   async loadMore() {
-    if (Pagination.loadMoreHasNextPage(this.pagination)) {
+    if (Pagination.hasNextPage(this.pagination)) {
       this.loading = true;
-      Pagination.loadMore(this.pagination);
+      Pagination.nextPage(this.pagination);
       const addDataPart = await this.$serviceLocator
         .getService(TrainingService)
         .getAll(this.pagination, this.daysRange.dateRange.start, this.daysRange.dateRange.end);

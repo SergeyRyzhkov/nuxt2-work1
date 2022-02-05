@@ -16,7 +16,7 @@ export class Pagination extends BaseViewModel {
   @Expose({ name: "last_page" })
   lastPage = 0;
 
-  static loadMore(pagination: Pagination) {
+  static nextPage(pagination: Pagination) {
     if (pagination.selectedPages.length === 0 && !!pagination.currentPage) {
       pagination.selectedPages.push(pagination.currentPage);
     }
@@ -33,7 +33,7 @@ export class Pagination extends BaseViewModel {
     return pagination.selectedPages.length ? pagination.selectedPages.slice(-1)[0] : 0;
   }
 
-  static loadMoreHasNextPage(pagination: Pagination) {
+  static hasNextPage(pagination: Pagination) {
     const lastSelectedPage = Pagination.getLastSelectedPages(pagination);
     return lastSelectedPage === 0 || lastSelectedPage < (pagination.lastPage || Pagination.countPage(pagination));
   }
