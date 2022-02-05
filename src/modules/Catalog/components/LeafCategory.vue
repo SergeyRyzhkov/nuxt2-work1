@@ -8,7 +8,10 @@
       <div class="grid grid-cols-2 gap-x-9 gap-y-40 md:grid-cols-2 lg:grid-cols-3">
         <ProductItem v-for="iter in productList" :key="iter.id" :model="iter"> </ProductItem>
       </div>
-      <InfiniteScroll class="grid grid-cols-2 gap-x-9 gap-y-40 md:grid-cols-2 lg:grid-cols-3" @on-intersect="loadMoreProducts()">
+      <InfiniteScroll
+        class="mt-28 grid grid-cols-2 gap-x-9 gap-y-40 md:grid-cols-2 lg:grid-cols-3"
+        @on-intersect="loadMoreProducts()"
+      >
         <template v-if="loading">
           <ProductItemSkeleton v-for="index in 6" :key="index"> </ProductItemSkeleton>
         </template>

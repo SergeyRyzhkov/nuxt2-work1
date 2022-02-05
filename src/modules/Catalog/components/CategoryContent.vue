@@ -36,7 +36,7 @@
           <ProductItem v-for="iter in productList" :key="iter.id" :model="iter"> </ProductItem>
         </div>
         <InfiniteScroll
-          class="gap-x-30 grid grid-cols-1 gap-y-40 md:grid-cols-2 lg:grid-cols-3"
+          class="gap-x-30 mt-28 grid grid-cols-1 gap-y-40 md:grid-cols-2 lg:grid-cols-3"
           @on-intersect="loadMoreProducts()"
         >
           <template v-if="loading">
