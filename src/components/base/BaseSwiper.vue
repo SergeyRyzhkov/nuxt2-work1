@@ -66,7 +66,7 @@ export default class BaseSwiper extends Vue {
   sliderClasses: string;
 
   @Prop()
-  containerClasses: any[];
+  containerClasses;
 
   @Prop({ default: false })
   showThumbs: boolean;
@@ -108,6 +108,8 @@ export default class BaseSwiper extends Vue {
     observer: true,
     observeParents: true,
     mousewheel: true,
+    resizeObserver: true,
+    speed: 1000,
 
     pagination: {
       el: ".swiper-pagination",

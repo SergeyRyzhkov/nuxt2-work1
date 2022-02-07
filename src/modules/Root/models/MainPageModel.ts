@@ -20,8 +20,9 @@ export default class MainPageModel extends SeoModel {
     bestsellers: ProductModel[];
     new_products: ProductModel[];
     popular: ProductModel[];
-    instagram: { url: string }[];
   };
+
+  instagram: { url: string }[];
 
   banner: { url: string };
 
