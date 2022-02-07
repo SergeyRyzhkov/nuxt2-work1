@@ -6,7 +6,7 @@ const routes = [
     children: [
       {
         name: "personal",
-        path: "/profile",
+        path: "personal",
         component: () => lazyLoad(import("@/modules/Profile/components/PersonalData.vue")),
       },
       {

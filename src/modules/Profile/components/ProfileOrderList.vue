@@ -1,6 +1,12 @@
 <template>
   <section class="w-full">
-    <h3>Заказы</h3>
+    <h3 class="hidden lg:block">Заказы</h3>
+
+    <div class="mb-38 mt-32 flex items-center lg:hidden">
+      <img class="cursor-pointer" src="/icons/left-arrow.svg" width="24" height="24" @click="$router.push({ name: 'profile' })" />
+      <h3 class="mx-auto">Заказы</h3>
+    </div>
+
     <div class="mt-40 flex flex-col items-center justify-between md:flex-row">
       <div>
         <button type="button" class="order-tab-page" :class="{ active: tabActive === 1 }" @click="tabActive = 1">Текущие</button>
