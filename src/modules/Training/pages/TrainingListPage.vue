@@ -34,7 +34,7 @@
       <TrainingItem v-for="iter in trainingList" :key="iter.id" :item="iter"> </TrainingItem>
     </div>
 
-    <InfiniteScroll class="training-list-wrapper mt-0" @on-intersect="loadMore()">
+    <InfiniteScroll class="training-list-wrapper mt-0" @on-intersect="loadDataChunk()">
       <template v-if="loading">
         <SkeletonTrainingItem v-for="index in 6" :key="index"> </SkeletonTrainingItem>
       </template>
@@ -61,10 +61,10 @@ export default class TrainingListPage extends Vue {
 
   async fetch() {
     this.updateBreadCrumbs();
-    await this.loadMore();
+    await this.loadDataChunk();
   }
 
-  async loadMore() {
+  async loadDataChunk() {
     if (Pagination.hasNextPage(this.pagination)) {
       this.loading = true;
       Pagination.nextPage(this.pagination);
@@ -80,19 +80,19 @@ export default class TrainingListPage extends Vue {
   @Watch("daysRange", { deep: true })
   onDaysRangeChanged() {
     if (!!this.daysRange.dateRange.end) {
-      this.resetDataLoad();
+      this.resetData();
     }
   }
 
   clearDateRange() {
     this.daysRange = new DaysRangeModel();
-    this.resetDataLoad();
+    this.resetData();
   }
 
-  resetDataLoad() {
+  resetData() {
     this.trainingList = [];
     this.pagination = new Pagination();
-    return this.loadMore();
+    return this.loadDataChunk();
   }
 
   updateBreadCrumbs() {

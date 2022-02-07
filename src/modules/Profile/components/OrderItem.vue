@@ -24,16 +24,16 @@
         <div
           class="order-item-products mt-16 flex w-full min-w-[96] flex-wrap md:justify-between lg:mt-24 lg:w-2/3 lg:min-w-[133]"
         >
-          <div v-for="iter in products" :key="iter.id" class="mr-8">
+          <div v-for="iter in products" :key="iter.product.id" class="mr-8">
             <img
-              v-lazysrc="productImageSrc(iter)"
+              v-lazysrc="productImageSrc(iter.product)"
               height="158"
               width="133"
               alt=" "
               class="h-100 px-30 lg:h-158 lg:w-133 w-96 object-scale-down pt-8 transition-all hover:scale-105 lg:pt-12"
             />
-            <div class="text-12 lg:text-14 mt-8 md:mt-12">{{ iter.name }}</div>
-            <div class="text-14 mt-8 font-semibold">{{ productPrice(iter) }}</div>
+            <div class="text-12 lg:text-14 mt-8 md:mt-12">{{ iter.product.name }}</div>
+            <div class="text-14 mt-8 font-semibold">{{ productPrice(iter.product) }}</div>
           </div>
         </div>
         <div class="order-item-pay mt-16 flex w-full flex-col items-center md:mt-0 md:items-end lg:mt-24 lg:w-1/3">
@@ -84,7 +84,9 @@ export default class OrderItem extends Vue {
 
   get products() {
     if (!!this.model?.order_items) {
-      return this.model.order_items.map((iter) => iter.product);
+      return this.model.order_items.filter((iter) => {
+        return !!iter && !!iter.product;
+      });
     }
     return [];
   }

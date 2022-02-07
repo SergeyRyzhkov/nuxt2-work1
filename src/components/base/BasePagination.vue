@@ -36,15 +36,12 @@ export default class BasePagination extends Vue {
   @Prop({ default: true })
   onUpdateScroolToTop;
 
-  @Prop()
-  selectedPages: number[];
-
   isActivePage(pageNmb: number) {
-    return pageNmb === this.pagination.currentPage || this.selectedPages?.includes(pageNmb);
+    return pageNmb === this.pagination.currentPage || this.pagination.selectedPages?.includes(pageNmb);
   }
 
   get countPage() {
-    return this.pagination.perPage > 0 ? Math.ceil(this.pagination.total / this.pagination.perPage) : 0;
+    return Pagination.countPage(this.pagination);
   }
 
   get pages() {
