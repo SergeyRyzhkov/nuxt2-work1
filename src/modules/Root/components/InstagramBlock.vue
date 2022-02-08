@@ -42,8 +42,8 @@ export default class InstagramBlock extends Vue {
     return {
       loop: true,
       autoplay: {
-        disableOnInteraction: false,
         delay: 2000,
+        disableOnInteraction: false,
       },
       breakpoints: {
         320: {

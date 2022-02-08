@@ -29,12 +29,19 @@
         @clear="clearDate"
       />
     </div>
-    <OrderItem v-for="(iter, index) in orderList" :key="index" :model="iter" class="mt-25 flex flex-col" />
+    <OrderItem
+      v-for="(iter, index) in orderList"
+      :key="index"
+      :model="iter"
+      class="mt-25 flex flex-col"
+      @cancel-order="cancelOrder"
+      @repeat-order="repeatOrder"
+    />
   </section>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator";
+import { Vue, Component, Watch } from "nuxt-property-decorator";
 import { ProfileService } from "../ProfileService";
 import ExecutionOrderModel from "../models/ExecutionOrderModel";
 import { DaysRangeModel } from "@/components/forms/BaseCalendar.vue";
@@ -46,11 +53,43 @@ export default class ProfileOrderList extends Vue {
   orderList: ExecutionOrderModel[] = [];
 
   async fetch() {
-    this.orderList = await this.$serviceLocator.getService(ProfileService).getOrderList();
+    await this.updateData();
+  }
+
+  async updateData() {
+    this.orderList = await this.$serviceLocator
+      .getService(ProfileService)
+      .getOrderList(this.daysRange.dateRange.start, this.daysRange.dateRange.end);
+  }
+
+  async cancelOrder(order: ExecutionOrderModel) {
+    const message = await this.$serviceLocator.getService(ProfileService).cancelOrder(order);
+    if (!message) {
+      this.updateData();
+    } else {
+      this.$modalManager.showError(message);
+    }
+  }
+
+  async repeatOrder(order: ExecutionOrderModel) {
+    const message = await this.$serviceLocator.getService(ProfileService).repeatOrder(order);
+    if (!message) {
+      this.updateData();
+    } else {
+      this.$modalManager.showError(message);
+    }
+  }
+
+  @Watch("daysRange", { deep: true })
+  onDaysRangeChanged() {
+    if (!!this.daysRange.dateRange.end) {
+      this.updateData();
+    }
   }
 
   clearDate() {
     this.daysRange = new DaysRangeModel();
+    this.updateData();
   }
 }
 </script>

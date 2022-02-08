@@ -57,7 +57,7 @@ import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 export default class OrderingPage extends Vue {
   order = new OrderModel();
   deliveryMethods: { id: number; title: string; price: number; free_from: any }[] = [];
-  paymentTypes: { id: number; title: string }[] = [];
+  paymentTypes: { id: string; title: string }[] = [];
 
   fetch() {
     this.updateBreadCrumbs();

@@ -8,7 +8,7 @@
           </div>
           <div class="order-item-date">Дата создания: {{ dateCreate }}</div>
         </div>
-        <div class="order-item-status md:pl-67">{{ deliveryStatus }}</div>
+        <div class="order-item-status md:pl-67">{{ status }}</div>
       </div>
       <div class="mt-5 flex flex-row justify-between md:mt-0 md:flex-col">
         <div class="order-item-price">{{ totalPrice }}</div>
@@ -37,11 +37,14 @@
           </div>
         </div>
         <div class="order-item-pay mt-16 flex w-full flex-col items-center md:mt-0 md:items-end lg:mt-24 lg:w-1/3">
-          <BaseButton class="order-item-btn w-full lg:max-w-max">Оплатить заказ</BaseButton>
-          <div class="order-item-pay-cancel mt-16">Отменить заказ</div>
-          <div class="order-item-pay-info mt-12 text-center md:text-right">
+          <BaseButton v-if="payOrderEnabled" class="order-item-btn w-full lg:max-w-max">Оплатить заказ</BaseButton>
+          <BaseButton v-if="repeatOrderEnabled" class="order-item-btn w-full lg:max-w-max" @click="retryOrder()"
+            >Повторить заказ</BaseButton
+          >
+          <div v-if="cancelOrderEnabled" class="order-item-pay-cancel mt-16" @click="cancelOrder()">Отменить заказ</div>
+          <!-- <div class="order-item-pay-info mt-12 text-center md:text-right">
             Не прошла оплата-онлайн, повторите попытку или заказ будет отменен через 00:29 минут
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -52,12 +55,18 @@
 import dayjs from "dayjs";
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 import ExecutionOrderModel from "../models/ExecutionOrderModel";
+import { OrderStatusType } from "../models/OredrStatusType";
+import { ProfileService } from "../ProfileService";
+import { PayStatusType } from "../models/PayStatusType";
 import { decOfNum } from "@/utils/Formaters";
 import ProductModel from "@/modules/Catalog/models/ProductModel";
 import { CatalogService } from "@/modules/Catalog/CatalogService";
 
 @Component
 export default class OrderItem extends Vue {
+  OrderStatusType = OrderStatusType;
+  PayStatusType = PayStatusType;
+
   @Prop()
   model: ExecutionOrderModel;
 
@@ -66,7 +75,8 @@ export default class OrderItem extends Vue {
   }
 
   get totalPrice() {
-    return `${this.model?.products_price.toLocaleString("ru-RU")} ₽`;
+    const price = Number(this.model?.products_price);
+    return `${price?.toLocaleString("ru-RU")} ₽`;
   }
 
   get productCount() {
@@ -75,11 +85,11 @@ export default class OrderItem extends Vue {
   }
 
   get paymentStatus() {
-    return this.model.payment_status;
+    return PayStatusType[this.model.payment_status];
   }
 
-  get deliveryStatus() {
-    return this.model?.delivery_status;
+  get status() {
+    return OrderStatusType[this.model?.status];
   }
 
   get products() {
@@ -91,12 +101,33 @@ export default class OrderItem extends Vue {
     return [];
   }
 
+  get cancelOrderEnabled() {
+    return this.$serviceLocator.getService(ProfileService).cancelOrderEnabled(this.model);
+  }
+
+  get repeatOrderEnabled() {
+    return this.$serviceLocator.getService(ProfileService).repeatOrderEnabled(this.model);
+  }
+
+  get payOrderEnabled() {
+    return this.$serviceLocator.getService(ProfileService).payOrderEnabled(this.model);
+  }
+
   get deliveryStatusStyle() {
     return "";
   }
 
+  cancelOrder() {
+    this.$emit("cancel-order", this.model);
+  }
+
+  retryOrder() {
+    this.$emit("repeat-order", this.model);
+  }
+
   productPrice(model: ProductModel) {
-    return (model?.price?.toLocaleString() || 0) + " ₽";
+    const price = Number(model?.price);
+    return (price?.toLocaleString("ru-RU") || 0) + " ₽";
   }
 
   productRouteLink(model: ProductModel) {
@@ -153,7 +184,7 @@ export default class OrderItem extends Vue {
   &-price {
     font-size: 18px;
     line-height: 24px;
-    font-weight: bold;
+    font-weight: 600;
   }
   &-count {
     font-size: 12px;

@@ -63,8 +63,7 @@
         <h2>Способы оплаты</h2>
         <div class="mt-32">
           <div v-for="iter in paymentTypes" :key="iter.id" class="mb-16">
-            <BaseRadioButton v-model="order.payment_type_id" :label="iter.title" :value="iter.id" />
-            <div class="del-info pl-30 mt-9">{{ iter.title }}</div>
+            <BaseRadioButton v-model="order.payment_type" :label="iter.title" :value="iter.id" />
           </div>
         </div>
       </div>
@@ -116,7 +115,7 @@ export default class OrderForm extends Vue {
   deliveryMethods: { id: number; title: string; price: number; free_from: any }[];
 
   @Prop()
-  paymentTypes: { id: number; title: string }[];
+  paymentTypes: { id: string; title: string }[];
 
   phoneMask = phoneMask;
 
