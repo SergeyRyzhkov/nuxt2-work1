@@ -19,8 +19,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
+import { Component, getModule, Vue } from "nuxt-property-decorator";
 import NewsModel from "../models/NewsModel";
+import AppStore from "../store/AppStore";
 import { Pagination } from "@/_core/models/Pagination";
 import { EmptyService } from "@/_core/service/EmptyService";
 
@@ -35,6 +36,7 @@ export default class NewsListPage extends Vue {
 
   // "Первый" раз подгрузим данные
   async fetch() {
+    this.updateBreadCrumbs();
     await this.loadDataChunk();
   }
 
@@ -57,6 +59,11 @@ export default class NewsListPage extends Vue {
       // "Выключаем+" отображение скелетона
       this.loading = false;
     }
+  }
+
+  updateBreadCrumbs() {
+    const breadCrumbList = [{ linkName: "Главная", name: "main" }, { linkName: "Новости" }];
+    getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
   }
 }
 </script>
