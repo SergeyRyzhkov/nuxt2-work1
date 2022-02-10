@@ -128,6 +128,13 @@ export class ProfileService extends BaseService {
     return this.getArrayOrEmpty(ExecutionOrderModel, `users/orders${!!userHash ? `?guest_hash=${userHash}` : ""}`);
   }
 
+  getOrder(id: number) {
+    const userHash = this.getUserHash();
+    // const result = this.getArrayOrEmpty(ExecutionOrderModel, `users/orders/${id}${!!userHash ? `?guest_hash=${userHash}` : ""}`);
+    // console.log(id, result);
+    return this.getOneOrDefault(ExecutionOrderModel, `users/orders/${id}${!!userHash ? `?guest_hash=${userHash}` : ""}`);
+  }
+
   setUserHash(guestHash: string) {
     this.nuxtContext.app.$cookies.set("guest_hash", guestHash, { maxAge: 60 * 60 * 24 * 30 });
   }

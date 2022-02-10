@@ -18,7 +18,7 @@
     <div class="order-item-body">
       <div class="order-item-info flex items-center justify-between">
         <div>{{ paymentStatus }}</div>
-        <div class="cursor-pointer underline hover:no-underline">Подробнее</div>
+        <nuxt-link :to="'/order/' + model.id" class="cursor-pointer underline hover:no-underline">Подробнее</nuxt-link>
       </div>
       <div class="flex flex-col lg:flex-row">
         <div
