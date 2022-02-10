@@ -11,16 +11,16 @@ const routes = [
       },
       {
         name: "orders",
-        path: "/orders",
+        path: "orders",
         component: () => lazyLoad(import("@/modules/Profile/components/ProfileOrderList.vue")),
       },
       {
-        name: "order",
-        path: "/order/:id",
+        name: "order-detail",
+        path: "order/:id",
+        props: true,
         component: () => lazyLoad(import("@/modules/Profile/pages/OrderDetail.vue")),
       },
     ],
-    // TODO :id instead detail
   },
   {
     name: "favorites",

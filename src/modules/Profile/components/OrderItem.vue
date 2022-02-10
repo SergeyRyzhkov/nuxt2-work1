@@ -18,7 +18,7 @@
     <div class="order-item-body">
       <div class="order-item-info flex items-center justify-between">
         <div>{{ paymentStatus }}</div>
-        <nuxt-link :to="'/order/' + model.id" class="cursor-pointer underline hover:no-underline">Подробнее</nuxt-link>
+        <nuxt-link :to="routeLocation" class="cursor-pointer underline hover:no-underline">Подробнее</nuxt-link>
       </div>
       <div class="flex flex-col lg:flex-row">
         <div
@@ -69,6 +69,13 @@ export default class OrderItem extends Vue {
 
   @Prop()
   model: ExecutionOrderModel;
+
+  get routeLocation() {
+    return {
+      name: "order-detail",
+      params: { id: this.model.id },
+    };
+  }
 
   get dateCreate() {
     return dayjs(this.model?.created_at).format("DD MMMM YYYY, HH:MM");

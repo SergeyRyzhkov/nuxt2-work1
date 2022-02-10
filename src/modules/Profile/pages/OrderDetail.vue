@@ -1,7 +1,7 @@
 <template>
   <section v-if="!$fetchState.pending">
     <div class="mb-50 mt-30 order-detail">
-      <nuxt-link to="/orders" class="mb-40 flex items-center">
+      <nuxt-link :to="{ name: 'orders' }" class="mb-40 flex items-center">
         <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5.99316 9.9873L1.98621 5.98035L5.99316 1.97339" stroke="#16192C" stroke-width="1.5" stroke-linecap="round" />
         </svg>
@@ -79,7 +79,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
+import { Component, Prop, Vue } from "nuxt-property-decorator";
 import dayjs from "dayjs";
 import ExecutionOrderModel from "../models/ExecutionOrderModel";
 import { ProfileService } from "../ProfileService";
@@ -95,9 +95,11 @@ export default class OrderDetail extends Vue {
   OrderStatusType = OrderStatusType;
   PayStatusType = PayStatusType;
 
+  @Prop()
+  id: number;
+
   async fetch() {
-    const id = parseInt(this.$route.params.id);
-    this.order = await this.$serviceLocator.getService(ProfileService).getOrder(id);
+    this.order = await this.$serviceLocator.getService(ProfileService).getOrder(this.id);
   }
 
   get dateCreate() {

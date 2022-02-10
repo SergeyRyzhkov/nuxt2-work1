@@ -168,8 +168,6 @@ export class ProfileService extends BaseService {
 
   getOrder(id: number) {
     const userHash = this.getUserHash();
-    // const result = this.getArrayOrEmpty(ExecutionOrderModel, `users/orders/${id}${!!userHash ? `?guest_hash=${userHash}` : ""}`);
-    // console.log(id, result);
     return this.getOneOrDefault(ExecutionOrderModel, `users/orders/${id}${!!userHash ? `?guest_hash=${userHash}` : ""}`);
   }
 
