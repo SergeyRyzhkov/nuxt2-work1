@@ -10,7 +10,7 @@ export default class OrderModel extends BaseViewModel {
 
   delivery_address = "";
   delivery_method_id = 1;
-  payment_type_id = 1;
+  payment_type = "card";
   comment = "";
   agreement = true;
 }

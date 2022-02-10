@@ -13,7 +13,7 @@
           <div class="text-14 ordr-detail-date">Дата создания: {{ dateCreate }}</div>
         </div>
         <div class="order-detail-status">
-          <div class="text-14 mb-3">{{ deliveryStatus }}</div>
+          <div class="text-14 mb-3">{{ status }}</div>
           <div class="text-14">{{ paymentStatus }}</div>
         </div>
       </div>
@@ -83,6 +83,8 @@ import { Component, Vue } from "nuxt-property-decorator";
 import dayjs from "dayjs";
 import ExecutionOrderModel from "../models/ExecutionOrderModel";
 import { ProfileService } from "../ProfileService";
+import { OrderStatusType } from "../models/OredrStatusType";
+import { PayStatusType } from "../models/PayStatusType";
 import { decOfNum } from "@/utils/Formaters";
 import ProductModel from "@/modules/Catalog/models/ProductModel";
 import { CatalogService } from "@/modules/Catalog/CatalogService";
@@ -90,6 +92,8 @@ import { CatalogService } from "@/modules/Catalog/CatalogService";
 @Component
 export default class OrderDetail extends Vue {
   order: ExecutionOrderModel = new ExecutionOrderModel();
+  OrderStatusType = OrderStatusType;
+  PayStatusType = PayStatusType;
 
   async fetch() {
     const id = parseInt(this.$route.params.id);
@@ -110,11 +114,11 @@ export default class OrderDetail extends Vue {
   }
 
   get paymentStatus() {
-    return this.order.payment_status;
+    return PayStatusType[this.order.payment_status];
   }
 
-  get deliveryStatus() {
-    return this.order?.delivery_status;
+  get status() {
+    return OrderStatusType[this.order?.status];
   }
 
   get products() {

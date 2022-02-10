@@ -1,6 +1,12 @@
 <template>
   <section class="w-full">
-    <h3>Заказы</h3>
+    <h3 class="hidden lg:block">Заказы</h3>
+
+    <div class="mb-38 mt-32 flex items-center lg:hidden">
+      <img class="cursor-pointer" src="/icons/left-arrow.svg" width="24" height="24" @click="$router.push({ name: 'profile' })" />
+      <h3 class="mx-auto">Заказы</h3>
+    </div>
+
     <div class="mt-40 flex flex-col items-center justify-between md:flex-row">
       <div>
         <button type="button" class="order-tab-page" :class="{ active: tabActive === 1 }" @click="tabActive = 1">Текущие</button>
@@ -23,12 +29,19 @@
         @clear="clearDate"
       />
     </div>
-    <OrderItem v-for="(iter, index) in orderList" :key="index" :model="iter" class="mt-25 flex flex-col" />
+    <OrderItem
+      v-for="(iter, index) in orderList"
+      :key="index"
+      :model="iter"
+      class="mt-25 flex flex-col"
+      @cancel-order="cancelOrder"
+      @repeat-order="repeatOrder"
+    />
   </section>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator";
+import { Vue, Component, Watch } from "nuxt-property-decorator";
 import { ProfileService } from "../ProfileService";
 import ExecutionOrderModel from "../models/ExecutionOrderModel";
 import { DaysRangeModel } from "@/components/forms/BaseCalendar.vue";
@@ -40,11 +53,43 @@ export default class ProfileOrderList extends Vue {
   orderList: ExecutionOrderModel[] = [];
 
   async fetch() {
-    this.orderList = await this.$serviceLocator.getService(ProfileService).getOrderList();
+    await this.updateData();
+  }
+
+  async updateData() {
+    this.orderList = await this.$serviceLocator
+      .getService(ProfileService)
+      .getOrderList(this.daysRange.dateRange.start, this.daysRange.dateRange.end);
+  }
+
+  async cancelOrder(order: ExecutionOrderModel) {
+    const message = await this.$serviceLocator.getService(ProfileService).cancelOrder(order);
+    if (!message) {
+      this.updateData();
+    } else {
+      this.$modalManager.showError(message);
+    }
+  }
+
+  async repeatOrder(order: ExecutionOrderModel) {
+    const message = await this.$serviceLocator.getService(ProfileService).repeatOrder(order);
+    if (!message) {
+      this.updateData();
+    } else {
+      this.$modalManager.showError(message);
+    }
+  }
+
+  @Watch("daysRange", { deep: true })
+  onDaysRangeChanged() {
+    if (!!this.daysRange.dateRange.end) {
+      this.updateData();
+    }
   }
 
   clearDate() {
     this.daysRange = new DaysRangeModel();
+    this.updateData();
   }
 }
 </script>

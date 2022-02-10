@@ -1,7 +1,13 @@
 <template>
-  <section class="w-1/2">
-    <h3>Личные данные</h3>
-    <div class="mt-22">
+  <section class="w-full">
+    <h3 class="hidden lg:block">Личные данные</h3>
+
+    <div class="mb-38 mt-32 flex items-center lg:hidden">
+      <img class="cursor-pointer" src="/icons/left-arrow.svg" width="24" height="24" @click="$router.push({ name: 'profile' })" />
+      <h3 class="mx-auto">Личные данные</h3>
+    </div>
+
+    <div class="mt-22 w-full lg:w-1/2">
       <div>Персональные данные</div>
       <div class="mt-33">
         <form @submit.prevent="savePersonal">

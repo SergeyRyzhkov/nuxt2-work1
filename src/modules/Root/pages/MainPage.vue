@@ -72,7 +72,7 @@
             </div>
           </div>
         </div>
-        <div class="h-340 bg-nude w-full lg:h-full lg:w-1/2">
+        <div class="h-340 bg-nude w-full lg:h-auto lg:w-1/2">
           <img
             v-lazysrc="'/images/main-apps.png'"
             class="h-full w-full object-cover object-left-top"
@@ -85,9 +85,9 @@
     </section>
 
     <!-- instagram -->
-    <section class="md:mt-185 mt-40">
+    <section class="md:mt-180 mt-40">
       <LazyHydrate when-visible>
-        <InstagramBlock />
+        <InstagramBlock :foto-list="model.instagram" />
       </LazyHydrate>
     </section>
 
@@ -100,7 +100,7 @@
     </section>
 
     <LazyHydrate when-visible>
-      <section class="md:mt-100 mt-40">
+      <section class="mt-10">
         <LazySnakeComponent />
       </section>
     </LazyHydrate>

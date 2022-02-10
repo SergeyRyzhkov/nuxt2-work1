@@ -1,7 +1,10 @@
+/* eslint-disable camelcase */
 import { getModule } from "vuex-module-decorators";
 import { plainToInstance } from "class-transformer";
 import OrderModel from "./models/OrderModel";
 import ExecutionOrderModel from "./models/ExecutionOrderModel";
+import { OrderStatusType } from "./models/OredrStatusType";
+import { PayStatusType } from "./models/PayStatusType";
 import { AuthService } from "@/modules/Auth/AuthService";
 import { BaseService } from "@/_core/service/BaseService";
 import CartModel from "@/modules/Profile/models/CartModel";
@@ -34,13 +37,11 @@ export class ProfileService extends BaseService {
       const data = response?.data?.data || response?.data;
 
       const deliveryMethods = response?.data?.delivery_methods;
-      const paymentMethods = response?.data?.payment_types;
 
       const cartList = !!data ? plainToInstance(CartModel, Array.from(data)) : [];
       if (!!cartList) {
         cartList.forEach((iter) => {
           iter.delivery_methods = deliveryMethods;
-          iter.payment_types = paymentMethods;
         });
         this.сartStore.updateUserCart(cartList);
       } else {
@@ -102,7 +103,11 @@ export class ProfileService extends BaseService {
   }
 
   getPaymentMethods() {
-    return this.сartStore.userCart.length > 0 ? this.сartStore.userCart[0].payment_types : [];
+    return [
+      { id: "card", title: "Банковской картой на сайте" },
+      { id: "cash", title: "Наличными при получении" },
+      { id: "invoice", title: "invoice" },
+    ];
   }
 
   async checkoutOrder(order: OrderModel) {
@@ -123,9 +128,42 @@ export class ProfileService extends BaseService {
     return false;
   }
 
-  getOrderList() {
-    const userHash = this.getUserHash();
-    return this.getArrayOrEmpty(ExecutionOrderModel, `users/orders${!!userHash ? `?guest_hash=${userHash}` : ""}`);
+  cancelOrderEnabled(order: ExecutionOrderModel) {
+    return (
+      order.status === (OrderStatusType.created || order.status === OrderStatusType.processing) &&
+      order.payment_status !== PayStatusType.paid
+    );
+  }
+
+  async cancelOrder(order: ExecutionOrderModel) {
+    try {
+      await this.apiRequest.put(`users/orders/${order.id}/cancel`, { params: { guest_hash: this.getUserHash() } });
+      return null;
+    } catch (err: any) {
+      return err.response?.data?.message;
+    }
+  }
+
+  repeatOrderEnabled(order: ExecutionOrderModel) {
+    return order.payment_status === PayStatusType.paid;
+  }
+
+  payOrderEnabled(order: ExecutionOrderModel) {
+    return order.payment_status !== PayStatusType.paid;
+  }
+
+  async repeatOrder(order: ExecutionOrderModel) {
+    try {
+      await this.apiRequest.post(`users/orders/${order.id}/repeat`, {}, { params: { guest_hash: this.getUserHash() } });
+      return null;
+    } catch (err: any) {
+      return err.response?.data?.message;
+    }
+  }
+
+  getOrderList(date_from?: string, date_to?: string) {
+    const params = { params: { guest_hash: this.getUserHash(), date_from, date_to } };
+    return this.getArrayOrEmpty(ExecutionOrderModel, `users/orders`, params);
   }
 
   getOrder(id: number) {

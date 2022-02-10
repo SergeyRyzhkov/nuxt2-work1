@@ -10,5 +10,5 @@ export default class CartModel extends BaseViewModel {
   product: ProductModel;
   delivery_time;
   delivery_methods: { id: number; title: string; price: number; free_from: any }[];
-  payment_types: { id: number; title: string }[];
+  payment_type: string;
 }
