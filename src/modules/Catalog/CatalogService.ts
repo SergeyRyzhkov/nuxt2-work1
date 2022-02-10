@@ -1,3 +1,4 @@
+import { stringify } from "query-string";
 import { AuthService } from "../Auth/AuthService";
 import CategoryModel from "./models/CategoryModel";
 import ProductModel from "./models/ProductModel";
@@ -17,12 +18,11 @@ export class CatalogService extends BaseService {
 
   @Cacheable(0)
   async getProductsByCategory(pagination: Pagination, cat: CategoryModel) {
+    const params = { category_id_1c: [cat.title] };
     return await this.getArrayOrEmptyWithPagination(
       ProductModel,
-      "users/products",
-      {
-        params: { category_id_1c: `${cat.title}` },
-      },
+      `users/products?${stringify(params, { arrayFormat: "bracket" })}`,
+      {},
       pagination
     );
   }
