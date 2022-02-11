@@ -10,6 +10,7 @@ import { BaseService } from "@/_core/service/BaseService";
 import CartModel from "@/modules/Profile/models/CartModel";
 import CartStore from "@/modules/Profile/store/CartStore";
 import { ServiceLocator } from "@/_core/service/ServiceLocator";
+import { EnumValues } from "@/utils/EnumUtils";
 
 export class ProfileService extends BaseService {
   get сartStore() {
@@ -130,8 +131,9 @@ export class ProfileService extends BaseService {
 
   cancelOrderEnabled(order: ExecutionOrderModel) {
     return (
-      order.status === (OrderStatusType.created || order.status === OrderStatusType.processing) &&
-      order.payment_status !== PayStatusType.paid
+      (order.status === EnumValues.getNameFromValue(OrderStatusType, OrderStatusType.created) ||
+        order.status === EnumValues.getNameFromValue(OrderStatusType, OrderStatusType.processing)) &&
+      order.payment_status !== EnumValues.getNameFromValue(PayStatusType, PayStatusType.paid)
     );
   }
 
@@ -145,11 +147,14 @@ export class ProfileService extends BaseService {
   }
 
   repeatOrderEnabled(order: ExecutionOrderModel) {
-    return order.payment_status === PayStatusType.paid;
+    return order.payment_status === EnumValues.getNameFromValue(PayStatusType, PayStatusType.paid);
   }
 
   payOrderEnabled(order: ExecutionOrderModel) {
-    return order.payment_status !== PayStatusType.paid;
+    return (
+      order.payment_status !== EnumValues.getNameFromValue(PayStatusType, PayStatusType.paid) &&
+      order.status !== EnumValues.getNameFromValue(OrderStatusType, OrderStatusType.canceled)
+    );
   }
 
   async repeatOrder(order: ExecutionOrderModel) {

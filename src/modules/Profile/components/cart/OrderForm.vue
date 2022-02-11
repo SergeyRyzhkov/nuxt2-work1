@@ -126,8 +126,8 @@ export default class OrderForm extends Vue {
     }
     if (await this.$serviceLocator.getService(ProfileService).checkoutOrder(this.order)) {
       this.$modalManager.modalShow(OrderingSuccess);
-      if (this.$route.name !== "personal") {
-        this.$router.push({ name: "personal" });
+      if (this.$route.name !== "orders") {
+        this.$router.push({ name: "orders" });
       }
     }
   }

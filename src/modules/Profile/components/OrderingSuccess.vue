@@ -8,7 +8,7 @@
       <img src="/icons/alert_check.svg" width="74" height="74" />
       <span class="text-24 mt-40 text-center">Ваш заказ оформлен!</span>
       <nuxt-link
-        :to="{ name: 'personal' }"
+        :to="{ name: 'orders' }"
         class="text-14 mt-32 text-center underline focus:no-underline"
         @click.native="$emit('close')"
         >Перейти в личный кабинет</nuxt-link

@@ -41,7 +41,9 @@
           <BaseButton v-if="repeatOrderEnabled" class="order-item-btn w-full lg:max-w-max" @click="retryOrder()"
             >Повторить заказ</BaseButton
           >
-          <div v-if="cancelOrderEnabled" class="order-item-pay-cancel mt-16" @click="cancelOrder()">Отменить заказ</div>
+          <div v-if="cancelOrderEnabled" class="order-item-pay-cancel mt-16 cursor-pointer" @click="cancelOrder()">
+            Отменить заказ
+          </div>
           <!-- <div class="order-item-pay-info mt-12 text-center md:text-right">
             Не прошла оплата-онлайн, повторите попытку или заказ будет отменен через 00:29 минут
           </div> -->
