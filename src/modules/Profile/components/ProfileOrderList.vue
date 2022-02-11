@@ -56,10 +56,33 @@ export default class ProfileOrderList extends Vue {
     await this.updateData();
   }
 
+  @Watch("tabActive", { immediate: true })
+  onTabChanged() {
+    this.updateData();
+  }
+
   async updateData() {
+    const statusList: string[] = [];
+    if (this.tabActive === 1) {
+      statusList.push("created");
+      statusList.push("processing");
+      statusList.push("confirmed");
+      statusList.push("in_work");
+      statusList.push("handing");
+      statusList.push("on_the_way");
+    }
+
+    if (this.tabActive === 2) {
+      statusList.push("completed");
+    }
+
+    if (this.tabActive === 3) {
+      statusList.push("canceled");
+    }
+
     this.orderList = await this.$serviceLocator
       .getService(ProfileService)
-      .getOrderList(this.daysRange.dateRange.start, this.daysRange.dateRange.end);
+      .getOrderList(this.daysRange.dateRange.start, this.daysRange.dateRange.end, statusList);
   }
 
   async cancelOrder(order: ExecutionOrderModel) {

@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import { getModule } from "vuex-module-decorators";
 import { plainToInstance } from "class-transformer";
+import { stringify } from "query-string";
 import OrderModel from "./models/OrderModel";
 import ExecutionOrderModel from "./models/ExecutionOrderModel";
 import { OrderStatusType } from "./models/OredrStatusType";
@@ -166,9 +167,12 @@ export class ProfileService extends BaseService {
     }
   }
 
-  getOrderList(date_from?: string, date_to?: string) {
-    const params = { params: { guest_hash: this.getUserHash(), date_from, date_to } };
-    return this.getArrayOrEmpty(ExecutionOrderModel, `users/orders`, params);
+  getOrderList(date_from?: string, date_to?: string, statusList?: string[]) {
+    let params = { guest_hash: this.getUserHash(), date_from, date_to };
+    if (statusList) {
+      params = { ...params, ...{ statuses: [...statusList] } };
+    }
+    return this.getArrayOrEmpty(ExecutionOrderModel, `users/orders?${stringify(params, { arrayFormat: "bracket" })}`);
   }
 
   getOrder(id: number) {
