@@ -17,29 +17,33 @@
       <MainPageFirstLineSlider :model="model"></MainPageFirstLineSlider>
     </section>
 
-    <!-- content.bestsellers -->
-    <section class="md:mt-100 container mt-40">
-      <h2 class="font-compact text-48 uppercase">Хиты продаж</h2>
-      <LazyBaseSwiper :slides="bestSellers" class="mt-16 md:mt-32" :settings="sliderSettings">
-        <template #slide="{ slide }">
-          <ProductItem :model="slide" class="w-max"><span>HIT</span></ProductItem>
-        </template>
-      </LazyBaseSwiper>
-    </section>
+    <LazyHydrate when-visible>
+      <section class="md:mt-100 container mt-40">
+        <h2 class="font-compact text-48 uppercase">Хиты продаж</h2>
+        <LazyBaseSwiper :slides="bestSellers" class="mt-16 md:mt-32" :settings="sliderSettings">
+          <template #slide="{ slide }">
+            <ProductItem :model="slide" class="w-max"><span>HIT</span></ProductItem>
+          </template>
+        </LazyBaseSwiper>
+      </section>
+    </LazyHydrate>
 
-    <section class="md:mt-100 container mt-40">
-      <MainPageProduct :model="model"></MainPageProduct>
-    </section>
+    <LazyHydrate when-visible>
+      <section class="md:mt-100 container mt-40">
+        <MainPageProduct :model="model"></MainPageProduct>
+      </section>
+    </LazyHydrate>
 
-    <!-- content.popular -->
-    <section v-if="!!populars" class="md:mt-100 container mt-40">
-      <h2 class="font-compact text-48 uppercase">Популярное</h2>
-      <LazyBaseSwiper :slides="populars" class="mt-16 md:mt-32" :settings="sliderSettings">
-        <template #slide="{ slide }">
-          <ProductItem :model="slide" class="w-max"><span class="text-secondary">популярное</span></ProductItem>
-        </template>
-      </LazyBaseSwiper>
-    </section>
+    <LazyHydrate when-visible>
+      <section v-if="!!populars" class="md:mt-100 container mt-40">
+        <h2 class="font-compact text-48 uppercase">Популярное</h2>
+        <LazyBaseSwiper :slides="populars" class="mt-16 md:mt-32" :settings="sliderSettings">
+          <template #slide="{ slide }">
+            <ProductItem :model="slide" class="w-max"><span class="text-secondary">популярное</span></ProductItem>
+          </template>
+        </LazyBaseSwiper>
+      </section>
+    </LazyHydrate>
 
     <section class="md:mt-100 container mt-40">
       <div class="flex flex-col lg:flex-row">

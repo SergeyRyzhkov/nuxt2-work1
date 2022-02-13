@@ -9,11 +9,10 @@ const nuxtConfig: NuxtConfig = {
 
   components: [
     { path: "@/components", pathPrefix: false },
-    { path: "@/pages", pathPrefix: false },
     { path: "@/layouts", pathPrefix: false },
   ],
 
-  loading: { color: "red", height: "5px" },
+  loading: { color: "red", height: "2px" },
 
   head: {
     htmlAttrs: {

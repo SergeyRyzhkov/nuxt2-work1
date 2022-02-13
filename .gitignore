@@ -13,8 +13,6 @@ npm-debug.log
 # dist
 
 .env
-.vscode
-/.vscode
 
 coverage
 .nuxt-build-jest

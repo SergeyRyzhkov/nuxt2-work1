@@ -3,9 +3,7 @@
     <TheHeader class="hidden lg:block"> </TheHeader>
     <TheMobileHeader class="block lg:hidden"></TheMobileHeader>
     <nuxt />
-    <LazyHydrate when-visible>
-      <TheFooter class="mt-40 md:mt-60"></TheFooter>
-    </LazyHydrate>
+    <TheFooter class="mt-40 md:mt-60"></TheFooter>
     <client-only><BaseBackToTop></BaseBackToTop></client-only>
     <client-only>
       <cookie-component />
