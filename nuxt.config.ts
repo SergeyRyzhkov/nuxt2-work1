@@ -10,6 +10,7 @@ const nuxtConfig: NuxtConfig = {
   components: [
     { path: "@/components", pathPrefix: false },
     { path: "@/layouts", pathPrefix: false },
+    { path: "@/modules", pathPrefix: false },
   ],
 
   loading: { color: "red", height: "2px" },
