@@ -1,7 +1,7 @@
 <template>
   <main class="page-wrapper">
     <BaseStaticBanner v-if="!!bannerUrl" :image-src="bannerUrl" default-image="/images/about_default_banner.jpg">
-      <div class="absolute bottom-30 w-screen md:bottom-60">
+      <div class="bottom-30 absolute w-screen md:bottom-60">
         <h1 class="container w-full text-white md:w-1/2">
           Добро пожаловать в <br />
           KAYPRO
@@ -12,7 +12,7 @@
       <section class="ml-auto mr-auto w-auto xl:w-1/2" v-html="firstContent"></section>
       <section class="mt-30 ml-auto mr-auto flex w-auto flex-col items-center justify-center md:mt-60 lg:w-5/6 lg:flex-row">
         <img v-lazysrc="firstImageSrc" class="w-full" />
-        <img v-lazysrc="secondImageSrc" class="ml-0 mt-30 w-full lg:ml-20 lg:mt-0" />
+        <img v-lazysrc="secondImageSrc" class="mt-30 ml-0 w-full lg:ml-20 lg:mt-0" />
       </section>
       <section class="mt-30 ml-auto mr-auto w-auto lg:mt-60 xl:w-1/2" v-html="lastContent"></section>
     </main>

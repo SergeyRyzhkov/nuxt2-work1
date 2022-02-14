@@ -72,7 +72,6 @@ import { Component, getModule, Prop, Ref, Vue } from "nuxt-property-decorator";
 import dayjs from "dayjs";
 import TrainingModel from "../models/TrainingModel";
 import { TrainingService } from "../TrainingService";
-import EnrollTraining from "../components/EnrollTraining.vue";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import AppStore from "@/modules/Root/store/AppStore";
 import Cacheable from "@/_core/MethodCacheDecorator";
@@ -82,7 +81,7 @@ export default class TrainingPage extends Vue {
   @Prop()
   slug: string;
 
-  @Ref() readonly enrollTraining!: EnrollTraining;
+  @Ref() readonly enrollTraining!: any;
 
   model: TrainingModel = new TrainingModel();
 

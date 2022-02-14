@@ -10,7 +10,6 @@ const nuxtConfig: NuxtConfig = {
   components: [
     { path: "@/components", pathPrefix: false },
     { path: "@/layouts", pathPrefix: false },
-    { path: "@/modules", pathPrefix: false },
   ],
 
   loading: { color: "red", height: "2px" },
@@ -56,8 +55,8 @@ const nuxtConfig: NuxtConfig = {
 
   plugins: [
     { src: "@/plugins/app-init" },
-    { src: "@/plugins/directives" },
     { src: "@/plugins/vuelidate" },
+    { src: "@/plugins/directives" },
     { src: "@/plugins/dayjs" },
     { src: "@/plugins/modal-manager.client" },
   ],
@@ -152,7 +151,15 @@ const nuxtConfig: NuxtConfig = {
     config: {
       // Add native Sentry config here
       // https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/
-      tracesSampleRate: 1.0,
+      // tracesSampleRate: 1.0,
+      // denyUrls: "localhost",
+      // beforeSend: (event) => {
+      //   console.log(event);
+      //   if (!!window && window.location.hostname === "localhost") {
+      //     return null;
+      //   }
+      //   return event;
+      // },
     },
   },
 

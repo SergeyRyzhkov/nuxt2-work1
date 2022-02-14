@@ -48,9 +48,5 @@ const initAppState = async () => {
     await ServiceLocator.instance.getService(AuthService).tryRestoreSessionUser();
   }
 
-  try {
-    await ServiceLocator.instance.getService(ProfileService).updateUserCartState();
-  } catch (err) {
-    console.log(err);
-  }
+  await ServiceLocator.instance.getService(ProfileService).updateUserCartState();
 };

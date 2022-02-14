@@ -97,7 +97,7 @@
 
     <section class="md:mt-100 container mt-40 flex flex-col">
       <div class="ml-auto mr-auto flex flex-col items-center">
-        <h2 class="font-compact text-62">Доступ к оптовым ценам</h2>
+        <h2 class="font-compact text-62 text-center">Доступ к оптовым ценам</h2>
         <span class="mt-14">Заполните заявку на сотрудничество</span>
         <base-button class="mt-20 w-max md:mt-40" @click="openForm()">Заполнить</base-button>
       </div>

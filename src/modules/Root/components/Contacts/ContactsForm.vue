@@ -1,7 +1,7 @@
 <template>
-  <div class="mt-60 w-full md:mt-70 lg:mt-0 lg:w-1/2">
+  <div class="md:mt-70 mt-60 w-full lg:mt-0 lg:w-1/2">
     <div class="font-semibold">Наша служба поддержки клиентов готова ответить на любые запросы или жалобы.</div>
-    <div class="mt-24 mb-34 text-14">
+    <div class="mb-34 text-14 mt-24">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </div>
     <FeedbackForm :radio="true" />

@@ -18,10 +18,6 @@
             <div>Общий вес</div>
             <div>{{ cartWeight }} г</div>
           </div>
-          <div class="text-14 mt-8 flex items-center justify-between">
-            <div>НДС</div>
-            <div>0 ₽</div>
-          </div>
           <div class="mt-25 text-24 flex items-center justify-between">
             <div>Итого</div>
             <div>{{ cartPrice }} ₽</div>

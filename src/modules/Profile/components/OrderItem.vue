@@ -22,7 +22,7 @@
       </div>
       <div class="flex flex-col lg:flex-row">
         <div
-          class="order-item-products mt-16 flex w-full min-w-[96] flex-wrap md:justify-between lg:mt-24 lg:w-2/3 lg:min-w-[133]"
+          class="order-item-products mt-16 flex w-full min-w-[96px] flex-wrap md:justify-between lg:mt-24 lg:w-2/3 lg:min-w-[133px]"
         >
           <div v-for="iter in products" :key="iter.product.id" class="mr-8">
             <img

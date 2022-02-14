@@ -22,7 +22,7 @@
           </button>
         </div>
 
-        <div v-if="pagination" class="swiper-pagination"></div>
+        <div v-if="pagination" class="swiper-pagination block md:hidden"></div>
       </div>
 
       <div v-if="showThumbs" class="swiper-container-thumbs" :class="[swiperThumbsClassName, thumbsContainerClasses]">
@@ -180,9 +180,13 @@ export default class BaseSwiper extends Vue {
   width: 100%;
   top: 45%;
   left: 0px;
-  display: flex;
+  display: none;
   justify-content: space-between;
   z-index: 100;
+
+  @include tablet {
+    display: flex;
+  }
 }
 .swiper-button-next,
 .swiper-button-prev {

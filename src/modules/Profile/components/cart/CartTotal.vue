@@ -11,10 +11,6 @@
       </div>
     </div>
     <div :class="{ 'order-total': isOrdering }">
-      <div class="cart-info mt-8 flex items-center justify-between">
-        <div>НДС</div>
-        <div>0 ₽</div>
-      </div>
       <div v-if="isOrdering" class="cart-info mt-8 flex items-center justify-between">
         <div>Доставка</div>
         <div>0 ₽</div>

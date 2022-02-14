@@ -30,15 +30,19 @@
       ></base-calendar>
     </div>
 
+    <div v-if="!trainingList.length" class="lg:mt-100 mt-60">
+      <h3>Нет обучений, измените параметра поиска</h3>
+    </div>
+
     <div class="training-list-wrapper mt-40">
       <TrainingItem v-for="iter in trainingList" :key="iter.id" :item="iter"> </TrainingItem>
     </div>
 
-    <InfiniteScroll class="training-list-wrapper mt-0" @on-intersect="loadDataChunk()">
-      <template v-if="loading">
-        <SkeletonTrainingItem v-for="index in 6" :key="index"> </SkeletonTrainingItem>
-      </template>
-    </InfiniteScroll>
+    <div v-if="$fetchState.pending" class="training-list-wrapper mt-0">
+      <SkeletonTrainingItem v-for="index in 6" :key="index"> </SkeletonTrainingItem>
+    </div>
+
+    <BasePagination :pagination="pagination" class="mt-40 lg:mt-60" @update:page="onUpdatePage"></BasePagination>
   </main>
 </template>
 
@@ -53,7 +57,6 @@ import { DaysRangeModel } from "@/components/forms/BaseCalendar.vue";
 
 @Component
 export default class TrainingListPage extends Vue {
-  loading = true;
   trainingList: TrainingModel[] = [];
   pagination: Pagination = new Pagination();
 
@@ -61,20 +64,20 @@ export default class TrainingListPage extends Vue {
 
   async fetch() {
     this.updateBreadCrumbs();
-    await this.loadDataChunk();
+    await this.updateData();
   }
 
-  async loadDataChunk() {
-    if (Pagination.hasNextPage(this.pagination)) {
-      this.loading = true;
-      Pagination.nextPage(this.pagination);
-      const addDataPart = await this.$serviceLocator
-        .getService(TrainingService)
-        .getAll(this.pagination, this.daysRange.dateRange.start, this.daysRange.dateRange.end);
-      this.pagination.total = addDataPart.pagination.total;
-      this.trainingList = [...this.trainingList, ...addDataPart.data];
-      this.loading = false;
-    }
+  async updateData() {
+    const data = await this.$serviceLocator
+      .getService(TrainingService)
+      .getAll(this.pagination, this.daysRange.dateRange.start, this.daysRange.dateRange.end);
+    this.pagination = data.pagination;
+    this.trainingList = data.data;
+  }
+
+  onUpdatePage(pageNmb: number) {
+    this.pagination.currentPage = pageNmb;
+    this.updateData();
   }
 
   @Watch("daysRange", { deep: true })
@@ -92,7 +95,7 @@ export default class TrainingListPage extends Vue {
   resetData() {
     this.trainingList = [];
     this.pagination = new Pagination();
-    return this.loadDataChunk();
+    return this.updateData();
   }
 
   updateBreadCrumbs() {

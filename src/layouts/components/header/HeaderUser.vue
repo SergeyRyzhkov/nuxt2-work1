@@ -62,8 +62,5 @@ export default class HeaderUser extends Vue {
     }
   }
 
-  get userName() {
-    return this.$serviceLocator.getService(AuthService).getSessionUser().first_name;
-  }
 }
 </script>

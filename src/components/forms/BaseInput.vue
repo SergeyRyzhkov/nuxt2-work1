@@ -5,7 +5,7 @@
       ref="maskFiled"
       v-imask="mask"
       :value="value"
-      :class="[currentClasses, 'base-input__input', classes, type === 'password' ? 'pr-16 md:pr-30' : '']"
+      :class="[currentClasses, 'base-input__input', classes, type === 'password' ? 'md:pr-30 pr-16' : '']"
       :type="type === 'password' && showPassword ? '' : type"
       v-bind="$attrs"
       v-on="{

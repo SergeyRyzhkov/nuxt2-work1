@@ -3,6 +3,30 @@ import fs, { existsSync } from "fs";
 import type { Module } from "@nuxt/types";
 
 const initAppModule: Module = function () {
+  // ============ components:true =========
+  this.nuxt.hook("components:dirs", (dirs) => {
+    const moduleDirs = getDirectories(resolve(this.options.srcDir, "modules"));
+
+    if (!!moduleDirs) {
+      moduleDirs.forEach((iter) => {
+        const comp = resolve(iter, "components");
+        if (existsSync(comp)) {
+          dirs.push({
+            path: comp,
+            pathPrefix: false,
+          });
+        }
+        const pages = resolve(iter, "pages");
+        if (existsSync(pages)) {
+          dirs.push({
+            path: pages,
+            pathPrefix: false,
+          });
+        }
+      });
+    }
+  });
+
   // ============== Router =================
   // Disable parsing `pages/`
   this.nuxt.hook("build:before", () => {
