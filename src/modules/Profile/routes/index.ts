@@ -18,7 +18,7 @@ const routes = [
         name: "order-detail",
         path: "order/:id",
         props: true,
-        component: () => lazyLoad(import("@/modules/Profile/pages/OrderDetail.vue")),
+        component: () => lazyLoad(import("@/modules/Profile/components/OrderDetail.vue")),
       },
     ],
   },
