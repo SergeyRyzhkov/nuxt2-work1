@@ -66,7 +66,7 @@ const nuxtConfig: NuxtConfig = {
     // middleware: ["requiresAuthorize"],
   },
 
-  modules: ["@nuxtjs/axios", "cookie-universal-nuxt", "./render-cache-module", "@nuxtjs/sentry"],
+  modules: ["@nuxtjs/axios", "cookie-universal-nuxt", "./render-cache-module"],
 
   buildModules: [
     "@/_core/nuxt_modules/init-router-store.module.ts",
@@ -140,22 +140,6 @@ const nuxtConfig: NuxtConfig = {
     events: false,
     google: {
       families: ["Montserrat:400,500,600,700:cyrillic&display=swap"],
-    },
-  },
-
-  sentry: {
-    dsn: "https://a78dbd5674854e6fa4b6e25414ccc580@o1142691.ingest.sentry.io/6201750",
-    lazy: true,
-    consgig: {
-      denyUrls: ["localhost"],
-    },
-    clientConfig: {
-      beforeSend: (event) => {
-        if (window.location.hostname === "localhost") {
-          return null;
-        }
-        return event;
-      },
     },
   },
 

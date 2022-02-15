@@ -65,4 +65,19 @@ https://winter-comet-610410.postman.co/workspace/Team-Workspace~b5ea60f9-713c-40
    - После сохранения и удаления данных, убедиться, что в БД и\или соответствующем эндпоинте данные реально изменены и не возникло ошибок (каскадность итд)
 
 
-<link rel="preload" href="https://dergunov.com/assets/fonts/7.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+ sentry: {
+    dsn: "https://a78dbd5674854e6fa4b6e25414ccc580@o1142691.ingest.sentry.io/6201750",
+    lazy: true,
+    consgig: {
+      denyUrls: ["localhost"],
+    },
+    clientConfig: {
+      beforeSend: (event) => {
+        if (window.location.hostname === "localhost") {
+          return null;
+        }
+        return event;
+      },
+    },
+  },
