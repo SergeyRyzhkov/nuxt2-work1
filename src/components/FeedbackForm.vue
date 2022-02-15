@@ -99,6 +99,7 @@ const validations = () => {
       city: { required },
       phone: { required },
       area: { required },
+      comment: { required },
       email: { required, email },
     },
   };

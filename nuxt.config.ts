@@ -144,22 +144,18 @@ const nuxtConfig: NuxtConfig = {
   },
 
   sentry: {
-    dsn: "https://a78dbd5674854e6fa4b6e25414ccc580@o1142691.ingest.sentry.io/6201750", // Enter your project's DSN here
-    // Additional Module Options go here
-    // https://sentry.nuxtjs.org/sentry/options
+    dsn: "https://a78dbd5674854e6fa4b6e25414ccc580@o1142691.ingest.sentry.io/6201750",
     lazy: true,
-    config: {
-      // Add native Sentry config here
-      // https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/
-      // tracesSampleRate: 1.0,
-      // denyUrls: "localhost",
-      // beforeSend: (event) => {
-      //   console.log(event);
-      //   if (!!window && window.location.hostname === "localhost") {
-      //     return null;
-      //   }
-      //   return event;
-      // },
+    consgig: {
+      denyUrls: ["localhost"],
+    },
+    clientConfig: {
+      beforeSend: (event) => {
+        if (window.location.hostname === "localhost") {
+          return null;
+        }
+        return event;
+      },
     },
   },
 
