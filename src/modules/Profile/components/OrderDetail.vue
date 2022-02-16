@@ -77,10 +77,11 @@
         <div class="text-16 mb-8 font-semibold">{{ iter.product.name }}</div>
         <div class="text-14 text-text-gray hidden md:flex">Артикул {{ iter.product.vendor_code }}</div>
       </div>
+
       <BaseHeartButton class="hidden cursor-pointer justify-self-center md:flex"></BaseHeartButton>
-      <div class="text-16">шт.</div>
+      <div class="text-16">{{ iter.count }} шт.</div>
       <div class="text-18 font-semibold">{{ productPrice(iter.product) }}</div>
-      <div class="text-14 hidden cursor-pointer lg:flex" @click.prevent="addToBasket()">Добавить в корзину</div>
+      <div class="text-14 hidden cursor-pointer lg:flex" @click.prevent="addToBasket(iter)">Добавить в корзину</div>
     </div>
 
     <div class="mt-30 flex flex-col lg:hidden">
@@ -100,6 +101,7 @@ import { ProfileService } from "../ProfileService";
 import { OrderStatusType } from "../models/OredrStatusType";
 import { PayStatusType } from "../models/PayStatusType";
 import CartStore from "../store/CartStore";
+import CartModel from "../models/CartModel";
 import ProductModel from "@/modules/Catalog/models/ProductModel";
 import { CatalogService } from "@/modules/Catalog/CatalogService";
 import { AuthService } from "@/modules/Auth/AuthService";
@@ -117,6 +119,13 @@ export default class OrderDetail extends Vue {
     this.order = await this.$serviceLocator.getService(ProfileService).getOrder(this.id);
   }
 
+  // get routeLocation() {
+  //   return {
+  //     name: "product",
+  //     params: { id: this.product.id },
+  //   };
+  // }
+
   get dateCreate() {
     return dayjs(this.order?.created_at).format("DD MMMM YYYY, HH:MM");
   }
@@ -129,11 +138,6 @@ export default class OrderDetail extends Vue {
   get totalItems() {
     return this.products.map((iter: any) => iter.count).reduce((prev, curr) => prev + curr, 0);
   }
-
-  // async toogleFavor() {
-  //   this.model.is_favorite = await this.$serviceLocator.getService(CatalogService).toogleFavorites(this.model);
-  //   this.$emit("on-favor", this.model.is_favorite);
-  // }
 
   get paymentStatus() {
     return PayStatusType[this.order.payment_status];
@@ -201,9 +205,9 @@ export default class OrderDetail extends Vue {
     this.$modalManager.showNotify("Добавлено. Можете оформить заказ!");
   }
 
-  addToBasket() {
-    // await this.$serviceLocator.getService(ProfileService).addToCart(this.order.order_items.product_id, 1);
-    // this.$modalManager.showNotify("Добавлено. Можете оформить заказ!");
+  async addToBasket(product: CartModel) {
+    await this.$serviceLocator.getService(ProfileService).addToCart(product.product_id, product.count);
+    this.$modalManager.showNotify("Добавлено. Можете оформить заказ!");
   }
 }
 </script>
@@ -219,9 +223,6 @@ export default class OrderDetail extends Vue {
     @media (max-width: 768px) {
       grid-template-columns: 1fr 3fr;
     }
-    // @media (max-width: 768px) {
-    //   grid-template-columns: 1fr 2fr;
-    // }
   }
 }
 </style>
