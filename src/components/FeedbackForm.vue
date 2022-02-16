@@ -49,17 +49,11 @@
       </BaseMultiSelect>
     </div>
 
-    <BaseInput
-      v-model="formModel.comment"
-      :placeholder="commentRequered ? 'Комментарий*' : 'Комментарий'"
-      :has-error="commenttHasErrorExpr"
-      class="mb-27"
-      @blur="onCommentBlur()"
-    />
+    <BaseInput v-model="formModel.comment" placeholder="Комментарий" class="mb-27" />
 
     <BaseButton type="submit" class="mt-20 md:mt-40">Отправить</BaseButton>
 
-    <p class="text-12 text-gray-color mt-16 -mb-32 md:mt-32">
+    <p class="mt-16 -mb-32 text-12 text-gray-color md:mt-32">
       Защита от спама reCAPTCHA
       <a class="inline underline focus:no-underline" href="https://policies.google.com/privacy" target="_blank"
         >Конфиденциальность
@@ -99,7 +93,6 @@ const validations = () => {
       city: { required },
       phone: { required },
       area: { required },
-      comment: { required },
       email: { required, email },
     },
   };
@@ -113,21 +106,8 @@ export default class FeedbackForm extends Vue {
   @Prop({ default: false })
   radio: boolean;
 
-  @Prop({ default: true })
-  commentRequered: boolean;
-
   mounted() {
     loadReCaptchaScript(this.$config.reCaptchaSiteKey);
-  }
-
-  get commenttHasErrorExpr() {
-    return this.commentRequered ? this.$v?.formModel?.comment?.$error : false;
-  }
-
-  onCommentBlur() {
-    if (this.commentRequered) {
-      this.$v?.formModel?.comment?.$touch();
-    }
   }
 
   async send() {

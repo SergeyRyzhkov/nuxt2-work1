@@ -1,6 +1,6 @@
 <template>
   <div class="base-accordion">
-    <div class="text-18 flex cursor-pointer items-center justify-between font-semibold" @click="toogle()">
+    <div class="flex cursor-pointer items-center justify-between text-18 font-semibold" @click="toogle()">
       <slot name="header"></slot>
 
       <svg

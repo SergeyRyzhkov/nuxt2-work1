@@ -1,6 +1,6 @@
 <template>
   <section class="order-form pt-22 md:pr-76">
-    <h2>Контактная информация</h2>
+    <span class="text-18">Контактная информация</span>
     <form class="mt-30" @submit.prevent="confirmOrder()">
       <BaseInput
         v-model="order.last_name"
@@ -50,17 +50,17 @@
       />
 
       <div class="mt-52">
-        <h2>Способ доставки</h2>
+        <span class="text-18">Способ доставки</span>
         <div class="mt-30">
           <div v-for="iter in deliveryMethods" :key="iter.id" class="mb-16">
             <BaseRadioButton v-model="order.delivery_method_id" :label="iter.title" :value="iter.id" />
-            <div class="del-info pl-30 mt-9">{{ getDeliveryMethodPrice(iter) }}, 14-16 декабря</div>
+            <div class="del-info mt-9 pl-30">{{ getDeliveryMethodPrice(iter) }}, 14-16 декабря</div>
           </div>
         </div>
       </div>
 
       <div class="mt-52">
-        <h2>Способы оплаты</h2>
+        <span class="text-18">Способы оплаты</span>
         <div class="mt-32">
           <div v-for="iter in paymentTypes" :key="iter.id" class="mb-16">
             <BaseRadioButton v-model="order.payment_type" :label="iter.title" :value="iter.id" />
@@ -68,7 +68,7 @@
         </div>
       </div>
       <div class="mt-52">
-        <h2>Комментарий</h2>
+        <span>Комментарий</span>
         <BaseInput v-model="order.comment" placeholder="Введите текст" class="mt-30" />
         <div class="order-checkbox mt-32">
           <BaseCheckbox id="order-privacy" v-model="order.agreement" />

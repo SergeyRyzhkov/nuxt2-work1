@@ -8,17 +8,17 @@
         </div>
         <button @click="clearCart()">Очистить</button>
       </div>
-      <div class="md:mt-42 mt-24 flex h-full flex-col justify-between">
+      <div class="mt-24 flex h-full flex-col justify-between md:mt-42">
         <div class="shopping-cart-items flex flex-col pr-6">
           <CartItem v-for="(item, index) in cartItems" :key="index" :cart-item="item" />
         </div>
 
         <div class="mb-100 mt-40 w-full">
-          <div class="text-14 flex items-center justify-between">
+          <div class="flex items-center justify-between text-14">
             <div>Общий вес</div>
             <div>{{ cartWeight }} г</div>
           </div>
-          <div class="mt-25 text-24 flex items-center justify-between">
+          <div class="mt-25 flex items-center justify-between text-24">
             <div>Итого</div>
             <div>{{ cartPrice }} ₽</div>
           </div>
@@ -109,7 +109,7 @@ export default class ShoppingCart extends Vue {
     > button {
       font-size: 14px;
       line-height: 17px;
-      @apply text-gray-color mb-6 ml-32 outline-none;
+      @apply outline-none mb-6 ml-32 text-gray-color;
     }
   }
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container-fluid bg-primary z-50 h-[43px] text-sm"></div>
+    <div class="container-fluid text-sm z-50 h-[43px] bg-primary"></div>
     <header class="flex h-[63px] items-center justify-between p-16">
       <div class="flex items-center">
         <div class="menu-toogler" :class="{ active: menuOpened }" @click="menuToggle()">

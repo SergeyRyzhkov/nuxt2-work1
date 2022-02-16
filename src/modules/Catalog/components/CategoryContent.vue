@@ -6,13 +6,7 @@
         <LazyBaseSwiper :slides="subCategories" :settings="sliderSettings">
           <template #slide="{ slide }">
             <nuxt-link class="w-226 flex flex-col" :to="getSubCategoryRoute(slide)">
-              <img
-                v-lazysrc="getSubCategoryLogo(slide)"
-                height="226"
-                width="226"
-                alt=" "
-                class="h-226 w-226 object-scale-down transition-all hover:scale-105"
-              />
+              <img v-lazysrc="getSubCategoryLogo(slide)" height="226" width="226" alt=" " class="h-226 w-226 object-scale-down" />
               <span class="mt-16">{{ slide.title }}</span>
               <span class="text-12 text-text-gray mt-6">{{ slide.subtitle }}</span>
             </nuxt-link>

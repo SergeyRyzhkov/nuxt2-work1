@@ -1,10 +1,10 @@
 <template>
   <div v-if="!!model">
     <BaseStaticBanner :image-src="bannerSrc" :is-container="true" default-image="/images/default-banner-black.jpg"
-      ><h1 v-if="!bannerSrc" class="bottom-30 absolute left-60 text-white md:bottom-60" v-html="model.title"></h1
+      ><h1 v-if="!bannerSrc" class="absolute bottom-30 left-60 text-white md:bottom-60" v-html="model.title"></h1
     ></BaseStaticBanner>
     <section v-if="!!model && !!productList" class="mt-40 md:mt-60">
-      <div class="text-14 text-text-gray mb-28">{{ productCountText }}</div>
+      <div class="mb-28 text-14 text-text-gray">{{ productCountText }}</div>
       <div class="grid grid-cols-2 gap-x-9 gap-y-40 md:grid-cols-2 lg:grid-cols-3">
         <ProductItem v-for="iter in productList" :key="iter.id" :model="iter"> </ProductItem>
       </div>

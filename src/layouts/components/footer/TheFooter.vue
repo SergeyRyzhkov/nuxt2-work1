@@ -13,8 +13,8 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid border-footer-color md:mt-82 mt-0 border-b"></div>
-    <FooterLast class="py-18 md:pt-22 md:pb-26 container flex"></FooterLast>
+    <div class="container-fluid mt-0 border-b border-footer-color md:mt-82"></div>
+    <FooterLast class="container flex py-18 md:pt-22 md:pb-26"></FooterLast>
   </footer>
 </template>
 

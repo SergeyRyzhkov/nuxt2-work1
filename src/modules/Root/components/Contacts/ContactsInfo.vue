@@ -3,26 +3,26 @@
     <div class="flex flex-col md:flex-row">
       <div class="flex w-full flex-col md:w-1/3">
         <div class="font-semibold">Для связи</div>
-        <ul class="text-14 mt-28">
+        <ul class="mt-28 text-14">
           <li>
             <a :href="`tel:${phone}`">{{ phone }}</a>
           </li>
-          <li class="mt-15 underline underline-offset-4">
+          <li class="underline-offset-4 mt-15 underline">
             <a :href="`mailto:${email}`">{{ email }}</a>
           </li>
           <!-- <li class="mt-15">@kaypro_russia</li> -->
         </ul>
       </div>
-      <div class="md:ml-100 mt-40 flex flex-col md:mt-0">
+      <div class="mt-40 flex flex-col md:ml-100 md:mt-0">
         <div class="font-semibold">Офис</div>
-        <ul class="text-14 mt-28">
+        <ul class="mt-28 text-14">
           <li>{{ address }}</li>
-          <li class="text-text-gray mt-16">{{ schedule }}</li>
+          <li class="mt-16 text-text-gray">{{ schedule }}</li>
           <!-- <li class="mt-18 underline underline-offset-4 cursor-pointer">Показать на карте</li> -->
         </ul>
       </div>
     </div>
-    <LazyBaseYandexMap class="mt-50 md:mt-45 h-3/4 w-full"></LazyBaseYandexMap>
+    <LazyBaseYandexMap class="mt-50 h-3/4 w-full md:mt-45"></LazyBaseYandexMap>
   </div>
 </template>
 

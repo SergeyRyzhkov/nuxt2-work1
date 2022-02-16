@@ -2,7 +2,7 @@
   <div v-if="!$fetchState.pending">
     <BaseStaticBanner :image-src="bannerSrc" :is-container="true" default-image="/images/default-banner-black.jpg">
       <div class="absolute flex h-full w-full flex-col items-center justify-between p-20 md:p-60">
-        <div class="font-compact text-60 md:text-100 uppercase">{{ bannerTitle }}</div>
+        <div class="font-compact text-60 uppercase md:text-100">{{ bannerTitle }}</div>
         <div class="text-18" v-html="bannerDescription"></div>
         <base-button v-if="!!bannerButtonText" class="mt-18 w-max flex-shrink-0 bg-white lg:mt-0" @click="gotoFromBanner()">{{
           bannerButtonText
@@ -21,22 +21,17 @@
 
     <section class="mt-40 flex w-full flex-col justify-between md:mt-60 md:flex-row">
       <div class="w-full cursor-pointer md:w-1/2" @click="gotoLine1()">
-        <img
-          v-lazysrc="lineImg1"
-          alt=" "
-          class="h-200 md:h-300 w-full object-scale-down transition-all hover:scale-105"
-          height="300"
-        />
-        <div class="text-18 mt-16 font-semibold uppercase">{{ lineText1 }}</div>
+        <img v-lazysrc="lineImg1" alt=" " class="h-200 w-full object-scale-down md:h-300" height="300" />
+        <div class="mt-16 text-18 font-semibold uppercase">{{ lineText1 }}</div>
       </div>
       <div class="w-full cursor-pointer md:ml-32 md:w-1/2" @click="gotoLine2()">
         <img
           v-lazysrc="lineImg2"
           alt=" "
-          class="h-200 md:h-300 mt-32 ml-0 w-full object-scale-down transition-all hover:scale-105 md:mt-0 md:ml-32"
+          class="mt-32 ml-0 h-200 w-full object-scale-down md:mt-0 md:ml-32 md:h-300"
           height="300"
         />
-        <div class="text-18 mt-16 font-semibold uppercase">{{ lineText2 }}</div>
+        <div class="mt-16 text-18 font-semibold uppercase">{{ lineText2 }}</div>
       </div>
     </section>
     <section class="mt-40 md:mt-60">

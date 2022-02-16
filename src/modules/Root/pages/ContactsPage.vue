@@ -1,5 +1,5 @@
 <template>
-  <main class="page-wrapper lg:pb-140 container pb-60">
+  <main class="page-wrapper container pb-60 lg:pb-140">
     <BreadCrumbs />
     <h1>Контакты</h1>
     <div class="mt-40 flex flex-col lg:flex-row">

@@ -2,7 +2,7 @@
   <main class="page-wrapper linear-order">
     <div class="container flex flex-col md:flex-row">
       <section class="line-half w-full pt-60 md:w-1/2">
-        <h1>Оформление заказа</h1>
+        <span class="text-24">Оформление заказа</span>
         <BreadCrumbs />
         <OrderForm :order="order" :delivery-methods="deliveryMethods" :payment-types="paymentTypes" />
       </section>
@@ -12,27 +12,27 @@
         </div>
 
         <div class="py-26">
-          <div class="text-14 flex items-center justify-between">
+          <div class="flex items-center justify-between text-14">
             <div>Общий вес</div>
             <div>{{ allWeight }} г.</div>
           </div>
-          <div class="text-14 mt-8 flex items-center justify-between">
+          <div class="mt-8 flex items-center justify-between text-14">
             <div>Количество</div>
             <div>{{ allCount }} шт.</div>
           </div>
         </div>
         <div class="cost-border py-26">
-          <div class="text-14 mt-8 flex items-center justify-between">
+          <div class="mt-8 flex items-center justify-between text-14">
             <div>Доставка</div>
             <div>{{ deliverySum }}</div>
           </div>
-          <div v-if="!!discountSum" class="text-14 mt-8 flex items-center justify-between">
+          <div v-if="!!discountSum" class="mt-8 flex items-center justify-between text-14">
             <div>Скидка</div>
             <div>{{ discountSum }} ₽</div>
           </div>
         </div>
 
-        <div class="mt-25 text-24 flex items-center justify-between">
+        <div class="mt-25 flex items-center justify-between text-24">
           <div>Итого</div>
           <div>{{ price }}</div>
         </div>

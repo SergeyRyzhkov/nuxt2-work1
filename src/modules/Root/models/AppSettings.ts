@@ -1,4 +1,5 @@
-export default class AppSettings {
+import { BaseViewModel } from "./../../../_core/models/BaseViewModel";
+export default class AppSettings extends BaseViewModel {
   running_line: string;
   phone: string;
   address: string;

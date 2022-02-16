@@ -30,10 +30,10 @@
               height="158"
               width="133"
               alt=" "
-              class="h-100 px-30 lg:h-158 lg:w-133 w-96 object-scale-down pt-8 transition-all hover:scale-105 lg:pt-12"
+              class="h-100 w-96 object-scale-down px-30 pt-8 lg:h-158 lg:w-133 lg:pt-12"
             />
-            <div class="text-12 lg:text-14 mt-8 md:mt-12">{{ iter.product.name }}</div>
-            <div class="text-14 mt-8 font-semibold">{{ productPrice(iter.product) }}</div>
+            <div class="mt-8 text-12 md:mt-12 lg:text-14">{{ iter.product.name }}</div>
+            <div class="mt-8 text-14 font-semibold">{{ productPrice(iter.product) }}</div>
           </div>
         </div>
         <div class="order-item-pay mt-16 flex w-full flex-col items-center md:mt-0 md:items-end lg:mt-24 lg:w-1/3">
