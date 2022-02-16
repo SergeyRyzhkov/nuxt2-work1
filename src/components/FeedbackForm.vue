@@ -77,7 +77,7 @@ import { AuthService } from "@/modules/Auth/AuthService";
 
 class FeedbackModel extends BaseViewModel {
   name = "";
-  phone = null;
+  phone = "";
   email = null;
   comment = "";
   agreement = 1;
@@ -111,7 +111,7 @@ export default class FeedbackForm extends Vue {
     if (this.$serviceLocator.getService(AuthService).isAuthenticated) {
       const user = this.$serviceLocator.getService(AuthService).getSessionUser();
       this.formModel.name = user.first_name + " " + (user.patronymic || "") + " " + (user.last_name || "");
-      this.formModel.phone = user.phone;
+      this.formModel.phone = user.phone as any;
       this.formModel.email = user.email;
     }
   }
