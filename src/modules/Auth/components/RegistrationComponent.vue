@@ -14,13 +14,7 @@
       class="mb-27"
       @blur="$v.registrationData.first_name.$touch()"
     />
-    <BaseInput
-      v-model="registrationData.patronymic"
-      placeholder="Отчество*"
-      :has-error="$v.registrationData.patronymic.$error"
-      class="mb-27"
-      @blur="$v.registrationData.patronymic.$touch()"
-    />
+    <BaseInput v-model="registrationData.patronymic" placeholder="Отчество" class="mb-27" />
     <BaseInput
       v-model="registrationData.phone"
       type="tel"
@@ -88,7 +82,6 @@ const validations = () => {
     registrationData: {
       first_name: { required },
       last_name: { required },
-      patronymic: { required },
       phone: { required },
       email: { required, email },
       password: { required },

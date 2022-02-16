@@ -6,7 +6,7 @@
     <div v-if="mobileFilterVisible" class="fixed top-0 left-0 z-50 h-full w-screen overflow-hidden bg-white">
       <div class="mb-26 mt-16 flex items-center justify-between px-12">
         <span class="text-24">Фильтр</span>
-        <span class="cursor-pointer text-32 font-normal after:content-['\00d7']" @click="toogleMenu()"></span>
+        <span class="text-32 cursor-pointer font-normal after:content-['\00d7']" @click="toogleMenu()"></span>
       </div>
       <!-- <div class="h-full overflow-y-auto"> -->
       <CatalogNavigator class="h-full overflow-y-auto p-12" @category-clicked="onCategoryClicked"></CatalogNavigator>
@@ -23,7 +23,7 @@
         <div v-if="isLeafCategory" class="flex flex-col">
           <h1 class="mb-28">{{ selectedModel.title }}</h1>
           <div v-if="!!selectedModel.parent" class="hidden lg:block">
-            <div class="mb-16 text-18 font-semibold">Категория</div>
+            <div class="text-18 mb-16 font-semibold">Категория</div>
             <nuxt-link :to="parentCategoryRoute" class="flex items-center">
               <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -33,7 +33,7 @@
                   stroke-linecap="round"
                 ></path>
               </svg>
-              <span class="ml-4 text-14">
+              <span class="text-14 ml-4">
                 {{ parentCategoryName }}
               </span>
             </nuxt-link>
@@ -58,7 +58,7 @@
           </svg>
         </button>
         <div class="flex cursor-pointer" @click="toogleMenu()">
-          <div class="mr-16 text-14">Фильтр</div>
+          <div class="text-14 mr-16">Фильтр</div>
           <img src="/icons/filter.svg" width="24" height="24" />
         </div>
       </div>

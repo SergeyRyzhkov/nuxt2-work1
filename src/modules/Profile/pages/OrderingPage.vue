@@ -12,27 +12,27 @@
         </div>
 
         <div class="py-26">
-          <div class="flex items-center justify-between text-14">
+          <div class="text-14 flex items-center justify-between">
             <div>Общий вес</div>
             <div>{{ allWeight }} г.</div>
           </div>
-          <div class="mt-8 flex items-center justify-between text-14">
+          <div class="text-14 mt-8 flex items-center justify-between">
             <div>Количество</div>
             <div>{{ allCount }} шт.</div>
           </div>
         </div>
         <div class="cost-border py-26">
-          <div class="mt-8 flex items-center justify-between text-14">
+          <div class="text-14 mt-8 flex items-center justify-between">
             <div>Доставка</div>
             <div>{{ deliverySum }}</div>
           </div>
-          <div v-if="!!discountSum" class="mt-8 flex items-center justify-between text-14">
+          <div v-if="!!discountSum" class="text-14 mt-8 flex items-center justify-between">
             <div>Скидка</div>
             <div>{{ discountSum }} ₽</div>
           </div>
         </div>
 
-        <div class="mt-25 flex items-center justify-between text-24">
+        <div class="mt-25 text-24 flex items-center justify-between">
           <div>Итого</div>
           <div>{{ price }}</div>
         </div>
@@ -48,6 +48,7 @@ import { ProfileService } from "../ProfileService";
 import CartStore from "../store/CartStore";
 import AppStore from "@/modules/Root/store/AppStore";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
+import { AuthService } from "@/modules/Auth/AuthService";
 
 @Component
 export default class OrderingPage extends Vue {
@@ -59,6 +60,11 @@ export default class OrderingPage extends Vue {
     this.updateBreadCrumbs();
     this.deliveryMethods = this.$serviceLocator.getService(ProfileService).getDeliveryMethods();
     this.paymentTypes = this.$serviceLocator.getService(ProfileService).getPaymentMethods();
+
+    if (this.$serviceLocator.getService(AuthService).isAuthenticated) {
+      const user = this.$serviceLocator.getService(AuthService).getSessionUser();
+      this.order = new OrderModel(user);
+    }
   }
 
   get cartItems() {

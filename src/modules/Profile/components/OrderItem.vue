@@ -25,15 +25,17 @@
           class="order-item-products mt-16 flex w-full min-w-[96px] flex-wrap md:justify-between lg:mt-24 lg:w-2/3 lg:min-w-[133px]"
         >
           <div v-for="iter in products" :key="iter.product.id" class="mr-8">
-            <img
-              v-lazysrc="productImageSrc(iter.product)"
-              height="158"
-              width="133"
-              alt=" "
-              class="h-100 w-96 object-scale-down px-30 pt-8 lg:h-158 lg:w-133 lg:pt-12"
-            />
-            <div class="mt-8 text-12 md:mt-12 lg:text-14">{{ iter.product.name }}</div>
-            <div class="mt-8 text-14 font-semibold">{{ productPrice(iter.product) }}</div>
+            <nuxt-link :to="productRouteLink(iter.product)">
+              <img
+                v-lazysrc="productImageSrc(iter.product)"
+                height="158"
+                width="133"
+                alt=" "
+                class="h-100 px-30 lg:h-158 lg:w-133 w-96 object-scale-down pt-8 lg:pt-12"
+              />
+              <div class="text-12 lg:text-14 mt-8 md:mt-12">{{ iter.product.name }}</div>
+              <div class="text-14 mt-8 font-semibold">{{ productPrice(iter.product) }}</div>
+            </nuxt-link>
           </div>
         </div>
         <div class="order-item-pay mt-16 flex w-full flex-col items-center md:mt-0 md:items-end lg:mt-24 lg:w-1/3">

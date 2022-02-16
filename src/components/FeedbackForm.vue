@@ -53,7 +53,7 @@
 
     <BaseButton type="submit" class="mt-20 md:mt-40">Отправить</BaseButton>
 
-    <p class="mt-16 -mb-32 text-12 text-gray-color md:mt-32">
+    <p class="text-12 text-gray-color mt-16 -mb-32 md:mt-32">
       Защита от спама reCAPTCHA
       <a class="inline underline focus:no-underline" href="https://policies.google.com/privacy" target="_blank"
         >Конфиденциальность
@@ -73,11 +73,12 @@ import { phoneMask } from "@/utils/InputMaskDefinitions";
 import { EmptyService } from "@/_core/service/EmptyService";
 import { BaseViewModel } from "@/_core/models/BaseViewModel";
 import { executeAction, loadReCaptchaScript } from "@/utils/ReCaptcha";
+import { AuthService } from "@/modules/Auth/AuthService";
 
 class FeedbackModel extends BaseViewModel {
   name = "";
-  phone = "";
-  email = "";
+  phone = null;
+  email = null;
   comment = "";
   agreement = 1;
   area: any = null;
@@ -105,6 +106,15 @@ export default class FeedbackForm extends Vue {
 
   @Prop({ default: false })
   radio: boolean;
+
+  fetch() {
+    if (this.$serviceLocator.getService(AuthService).isAuthenticated) {
+      const user = this.$serviceLocator.getService(AuthService).getSessionUser();
+      this.formModel.name = user.first_name + " " + (user.patronymic || "") + " " + (user.last_name || "");
+      this.formModel.phone = user.phone;
+      this.formModel.email = user.email;
+    }
+  }
 
   mounted() {
     loadReCaptchaScript(this.$config.reCaptchaSiteKey);

@@ -16,13 +16,7 @@
         class="mb-27"
         @blur="$v.order.first_name.$touch()"
       />
-      <BaseInput
-        v-model="order.patronymic"
-        placeholder="Отчество"
-        :has-error="$v.order.patronymic.$error"
-        class="mb-27"
-        @blur="$v.order.patronymic.$touch()"
-      />
+      <BaseInput v-model="order.patronymic" placeholder="Отчество" class="mb-27" />
       <div class="flex flex-col md:flex-row">
         <BaseInput
           v-model="order.phone"
@@ -54,7 +48,7 @@
         <div class="mt-30">
           <div v-for="iter in deliveryMethods" :key="iter.id" class="mb-16">
             <BaseRadioButton v-model="order.delivery_method_id" :label="iter.title" :value="iter.id" />
-            <div class="del-info mt-9 pl-30">{{ getDeliveryMethodPrice(iter) }}, 14-16 декабря</div>
+            <div class="del-info pl-30 mt-9">{{ getDeliveryMethodPrice(iter) }}, 14-16 декабря</div>
           </div>
         </div>
       </div>
@@ -98,7 +92,6 @@ const validations = () => {
     order: {
       first_name: { required },
       last_name: { required },
-      patronymic: { required },
       phone: { required },
       email: { required, email },
       delivery_address: { required },

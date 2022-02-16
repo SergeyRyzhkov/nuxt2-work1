@@ -160,6 +160,7 @@ export class AuthService extends BaseService {
   }
 
   public async updateProfile(registrationData: RegistrationData) {
+    registrationData.phone = `+${registrationData.phone}`;
     return await this.apiRequest.post("users/profile?_method=PUT", registrationData);
   }
 

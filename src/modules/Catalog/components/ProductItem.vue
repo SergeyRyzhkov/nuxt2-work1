@@ -6,9 +6,9 @@
       height="286"
       width="226"
       alt=" "
-      class="h-155 w-135 object-scale-down px-30 pt-15 lg:h-286 lg:w-226"
+      class="h-155 w-135 px-30 pt-15 lg:h-286 lg:w-226 object-scale-down"
     />
-    <div class="mt-30 text-center text-14 font-semibold uppercase md:mt-42">
+    <div class="mt-30 text-14 md:mt-42 text-center font-semibold uppercase">
       <slot> </slot>
     </div>
     <div class="mt-8 text-center md:mt-12">{{ model.name }}</div>

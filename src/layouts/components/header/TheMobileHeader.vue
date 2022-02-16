@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="container-fluid text-sm z-50 h-[43px] bg-primary"></div>
+    <div class="container-fluid bg-primary z-50 h-[43px] text-sm"></div>
     <header class="flex h-[63px] items-center justify-between p-16">
       <div class="flex items-center">
-        <div class="menu-toogler" :class="{ active: menuOpened }" @click="menuToggle()">
+        <div v-click-outside="closeMenu" class="menu-toogler" :class="{ active: menuOpened }" @click="menuToggle()">
           <span></span>
           <span></span>
           <span></span>
@@ -46,19 +46,28 @@ export default class TheMobileHeader extends Vue {
   }
 
   changeOverflow(value: boolean) {
-    const overflow = document.getElementsByTagName("html")[0];
-    if (value) {
-      overflow.style.overflow = "hidden";
-      document.body.style.overflow = "hidden";
-    } else {
-      overflow.style.overflow = "auto";
-      document.body.style.overflow = "auto";
+    if (!!document) {
+      const overflow = document.getElementsByTagName("html")[0];
+      if (value) {
+        overflow.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
+      } else {
+        overflow.style.overflow = "auto";
+        document.body.style.overflow = "auto";
+      }
     }
   }
 
   menuToggle() {
     this.menuOpened = !this.menuOpened;
     this.changeOverflow(this.menuOpened);
+  }
+
+  closeMenu() {
+    if (this.menuOpened) {
+      this.menuOpened = false;
+      this.changeOverflow(this.menuOpened);
+    }
   }
 }
 </script>

@@ -29,7 +29,7 @@
         >
           <nuxt-link v-for="(product, index) in products" :key="index" :to="routeLink(product)" class="flex items-center">
             <figure class="dropdown-img">
-              <img :src="product.logo[0].url" :alt="product.meta_title" itemprop="image" width="78" height="78" loading="lazy" />
+              <img :src="getImageSrc(product)" :alt="product.meta_title" itemprop="image" width="78" height="78" loading="lazy" />
               <figcaption></figcaption>
             </figure>
             <div class="item-title pl-20">{{ product.meta_title }}</div>
@@ -64,6 +64,10 @@ export default class HeaderSearchInput extends Vue {
 
   routeLink(product) {
     return this.$serviceLocator.getService(CatalogService).getProductRouteLocation(product);
+  }
+
+  getImageSrc(product: ProductModel) {
+    return product.logo?.length > 0 ? product.logo[0].url : "/images/product-no-photo.jpg";
   }
 
   closeDropDown() {
@@ -125,7 +129,7 @@ export default class HeaderSearchInput extends Vue {
     background: #ffffff;
     top: 62px;
     z-index: 1000;
-    @apply px-22 pt-24 pb-26;
+    @apply px-22 pb-26 pt-24;
     .dropdown-img {
       width: 78px;
       height: 78px;
