@@ -11,7 +11,7 @@
           </svg>
           <h2 class="mt-35 font-compact text-43">
             Заходите к нам <br />
-            в <span class="text-secondary">@kaypro_moscow</span>
+            в <a class="text-secondary" :href="instagrammUrl" target="_blank">@kaypro_moscow</a>
           </h2>
         </div>
       </div>
@@ -32,11 +32,23 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "nuxt-property-decorator";
+import AppSettings from "../models/AppSettings";
+import { SettingService } from "../SettingService";
 
 @Component
 export default class InstagramBlock extends Vue {
   @Prop()
   fotoList: { url: string }[];
+
+  settings: AppSettings = new AppSettings();
+
+  async fetch() {
+    this.settings = await this.$serviceLocator.getService(SettingService).getAppSetting();
+  }
+
+  get instagrammUrl() {
+    return this.settings.socials?.instagram;
+  }
 
   get sliderSettings() {
     return {

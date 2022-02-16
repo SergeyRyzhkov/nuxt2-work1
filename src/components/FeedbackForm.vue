@@ -140,6 +140,7 @@ export default class FeedbackForm extends Vue {
     if (!!recaptchaToken) {
       this.formModel.recaptchaToken = recaptchaToken;
       this.formModel.area = this.formModel?.area?.name;
+      this.formModel.phone = `+${this.formModel.phone}`;
       try {
         await this.$serviceLocator.getService(EmptyService).apiRequest.post("/users/feedback", this.formModel);
         this.$modalManager.showNotify("Сообщение отправлено !");

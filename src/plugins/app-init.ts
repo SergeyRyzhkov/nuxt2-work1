@@ -4,6 +4,7 @@ import { ServiceLocator } from "@/_core/service/ServiceLocator";
 import { AuthService } from "@/modules/Auth/AuthService";
 import { CatalogService } from "@/modules/Catalog/CatalogService";
 import { ProfileService } from "@/modules/Profile/ProfileService";
+import { SettingService } from "@/modules/Root/SettingService";
 
 export default (ctx: Context, inject: Inject) => {
   configAxios(ctx);
@@ -47,6 +48,8 @@ const initAppState = async () => {
     // await ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
     await ServiceLocator.instance.getService(AuthService).tryRestoreSessionUser();
   }
-
   await ServiceLocator.instance.getService(ProfileService).updateUserCartState();
+
+  const test = await ServiceLocator.instance.getService(SettingService).getAppSetting();
+  console.log(test);
 };

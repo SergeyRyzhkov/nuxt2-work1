@@ -153,12 +153,11 @@
             </div>
           </div>
           <div class="bg-nude mt-32 rounded-[20px] p-24">
-            <div class="text-14 font-semibold">
-              Доставка до двери по Москве - на следующий рабочий день. При заказе от 3000 рублей - бесплатно!
+            <div v-if="freeTextTitle" class="text-14 font-semibold">
+              {{ freeTextTitle }}
             </div>
-            <div class="text-12 mt-8">
-              Для заказов по Москве доступна бесплатная доставка курьерами фирмы при заказе от 3000 рублей. Желаем приятных
-              покупок!
+            <div v-if="freeText" class="text-12 mt-8">
+              {{ freeText }}
             </div>
           </div>
         </div>
@@ -214,12 +213,15 @@ import ProductModel from "../models/ProductModel";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import AppStore from "@/modules/Root/store/AppStore";
 import { ProfileService } from "@/modules/Profile/ProfileService";
+import AppSettings from "@/modules/Root/models/AppSettings";
+import { SettingService } from "@/modules/Root/SettingService";
 
 @Component
 export default class ProductPage extends Vue {
   @Prop()
   slug: string;
 
+  settings: AppSettings = new AppSettings();
   model: ProductModel = new ProductModel();
 
   productCount: number = 1;
@@ -227,7 +229,17 @@ export default class ProductPage extends Vue {
 
   async fetch() {
     this.model = await this.$serviceLocator.getService(CatalogService).getProductBySlug(this.slug);
+    this.settings = await this.$serviceLocator.getService(SettingService).getAppSetting();
+
     this.updateBreadCrumbs();
+  }
+
+  get freeText() {
+    return this.settings.product_info?.title;
+  }
+
+  get freeTextTitle() {
+    return this.settings.product_info?.description;
   }
 
   get price() {

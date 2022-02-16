@@ -63,7 +63,7 @@ const nuxtConfig: NuxtConfig = {
 
   router: {
     prefetchLinks: false,
-    // middleware: ["requiresAuthorize"],
+    middleware: ["requiresAuthorize"],
   },
 
   modules: ["@nuxtjs/axios", "cookie-universal-nuxt", "./render-cache-module"],

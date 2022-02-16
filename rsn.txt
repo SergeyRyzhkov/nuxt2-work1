@@ -81,3 +81,11 @@ https://winter-comet-610410.postman.co/workspace/Team-Workspace~b5ea60f9-713c-40
       },
     },
   },
+
+  curl -H "Host: yarus.ru" https://178.248.232.251 -k
+  
+  92.242.39.109
+  213.189.197.203
+  92.242.39.23
+  94.228.116.146
+  92.53.96.251

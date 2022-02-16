@@ -19,7 +19,7 @@
       "@/*": ["src/*"]
     },
     "lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
-    "types": ["@types/node", "@nuxt/types", "@types/jest", "@nuxtjs/axios", "@nuxtjs/sentry"]
+    "types": ["@types/node", "@nuxt/types", "@types/jest", "@nuxtjs/axios"]
   },
   "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
   "exclude": ["node_modules", ".nuxt", "dist"]
