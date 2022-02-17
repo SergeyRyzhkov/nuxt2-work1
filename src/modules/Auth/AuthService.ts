@@ -54,7 +54,7 @@ export class AuthService extends BaseService {
       await this.tryGetCsfrCookie();
       const response = await this.apiRequest.post("users/login", { ...loginData, guestHash });
 
-      if (response.status === 200) {
+      if (response.status === 200 || response.status === 204) {
         const accessToken = response?.data?.access_token;
         if (!!accessToken) {
           this.updateAccessToken(accessToken);

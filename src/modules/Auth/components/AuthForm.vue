@@ -66,7 +66,6 @@ export default class AuthForm extends Vue {
     this.loginRegFormVisible = false;
     this.resetPasswordVisible = false;
     this.emailVerification = true;
-    this.$router.push({ name: "personal" });
   }
 
   onResetSuccess() {

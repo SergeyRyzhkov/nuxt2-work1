@@ -18,7 +18,7 @@
     <BaseInput
       v-model="registrationData.phone"
       type="tel"
-      placeholder="Телефон"
+      placeholder="Телефон*"
       :mask="phoneMask"
       :has-error="$v.registrationData.phone.$error"
       class="mb-27"
