@@ -7,6 +7,7 @@ import SessionUser from "./models/SessionUser";
 import AuthStore from "./store/AuthStore";
 import { ProfileService } from "@/modules/Profile/ProfileService";
 import { BaseService } from "@/_core/service/BaseService";
+import { ServiceLocator } from "@/_core/service/ServiceLocator";
 
 export class AuthService extends BaseService {
   cookieTokenCookieName = "KAYPRO_TOKEN";
@@ -78,6 +79,7 @@ export class AuthService extends BaseService {
     try {
       this.clearAccessToken();
       await this.apiRequest.post("users/logout");
+      await ServiceLocator.instance.getService(ProfileService).updateUserCartState();
     } catch {}
   }
 

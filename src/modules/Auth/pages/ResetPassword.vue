@@ -15,10 +15,12 @@ export default class ResetPassword extends Vue {
     try {
       await this.$serviceLocator.getService(EmptyService).getAnyOrFail(`users/password/recover/${this.code}`);
       this.$modalManager.showNotify("Новый пароль отправлен Вам на почту !");
-      this.$router.push({ name: "personal" });
     } catch (err) {
       this.$modalManager.showNotify("Не удалсоь восстановить пароль !");
-      this.$router.push({ name: "main" });
+    } finally {
+      if (this.$route.name !== "main") {
+        this.$router.push({ name: "main" });
+      }
     }
   }
 }

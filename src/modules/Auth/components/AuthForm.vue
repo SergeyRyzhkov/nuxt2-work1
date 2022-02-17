@@ -1,7 +1,7 @@
 <template>
   <BaseModalFullScreen :back-enabled="!loginRegFormVisible" @go-back="onGoBack()" @close="$emit('close')">
     <template #header-center>
-      <div v-show="errorMessage" class="ml-auto border border-solid border-secondary p-20 text-14 text-secondary">
+      <div v-show="errorMessage" class="border-secondary text-14 text-secondary ml-auto border border-solid p-20">
         <span>{{ errorMessage }}</span>
       </div>
     </template>
@@ -74,6 +74,9 @@ export default class AuthForm extends Vue {
     this.loginRegFormVisible = true;
     this.resetPasswordVisible = false;
     this.emailVerification = false;
+
+    this.$modalManager.showNotify("Письмо для восстановление пароля отправлено на почту");
+    this.$emit("close");
   }
 
   onVerifySuccess() {

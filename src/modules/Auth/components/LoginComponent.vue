@@ -59,7 +59,7 @@ export default class LoginComponent extends Vue {
       this.$emit("login-success", this.loginFormData);
     }
     if (result.logonStatus !== LogonStatus.OK) {
-      this.$emit("error", "Неверный логин или пароль !");
+      this.$emit("error", "Неверный логин или пароль ");
     }
   }
 }

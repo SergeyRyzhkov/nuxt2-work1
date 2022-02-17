@@ -55,6 +55,9 @@
         </form>
       </div>
       <PasswordRecovery />
+      <div class="mt-60 flex items-center">
+        <BaseCheckbox id="subscribe" v-model="registrationData.subscribe" label="Получать информацию о новинках и акциях" />
+      </div>
     </div>
   </section>
 </template>

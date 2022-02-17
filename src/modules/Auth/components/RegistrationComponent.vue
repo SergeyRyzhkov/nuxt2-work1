@@ -110,7 +110,7 @@ export default class RegistrationComponent extends Vue {
         new LoginData({ email: this.registrationData.email, password: this.registrationData.password })
       );
     } else {
-      this.$emit("error", "Не удалось выполнить регистрацию !");
+      this.$emit("error", "Не удалось выполнить регистрацию ");
     }
   }
 }
