@@ -4,7 +4,7 @@
     <MainPageTopBanner v-show="isLoaded" :model="model"></MainPageTopBanner>
 
     <!-- content.new_products -->
-    <section v-if="!!newProducts" class="md:mt-100 container mt-40">
+    <section v-if="!!newProducts && !!newProducts.length" class="md:mt-100 container mt-40">
       <h2 class="font-compact text-48 uppercase">Новые поступления</h2>
       <LazyBaseSwiper :slides="newProducts" class="mt-16 md:mt-32" :settings="sliderSettings">
         <template #slide="{ slide }">
@@ -35,7 +35,7 @@
     </LazyHydrate>
 
     <LazyHydrate when-visible>
-      <section v-if="!!populars" class="md:mt-100 container mt-40">
+      <section v-if="!!populars && !!populars.length" class="md:mt-100 container mt-40">
         <h2 class="font-compact text-48 uppercase">Популярное</h2>
         <LazyBaseSwiper :slides="populars" class="mt-16 md:mt-32" :settings="sliderSettings">
           <template #slide="{ slide }">

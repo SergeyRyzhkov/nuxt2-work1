@@ -47,6 +47,5 @@ const initAppState = async () => {
     // await ServiceLocator.instance.getService(AuthService).tryGetCsfrCookie();
     await ServiceLocator.instance.getService(AuthService).tryRestoreSessionUser();
   }
-
   await ServiceLocator.instance.getService(ProfileService).updateUserCartState();
 };

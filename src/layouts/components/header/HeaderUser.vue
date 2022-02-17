@@ -61,6 +61,5 @@ export default class HeaderUser extends Vue {
       this.$modalManager.showNotify("Войдите в свой аккаунт или зарегистрируйтесь !");
     }
   }
-
 }
 </script>

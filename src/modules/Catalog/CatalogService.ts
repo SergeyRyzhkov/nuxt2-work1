@@ -51,7 +51,7 @@ export class CatalogService extends BaseService {
 
   async toogleFavorites(product: ProductModel): Promise<boolean> {
     if (!ServiceLocator.instance.getService(AuthService).isAuthenticated) {
-      this.nuxtContext.$modalManager.showNotify("Для добавления в избранное вводите в свой аккаунт !");
+      this.nuxtContext.$modalManager.showNotify("Для добавления в избранное войдите в свой аккаунт");
       return product.is_favorite;
     } else {
       const res = await this.apiRequest.post(`users/products/${product.id}/favorites`, { product_id: product.id });

@@ -5,6 +5,7 @@ import ImaskDirective from "./vue-imask-directive";
 const ClickOutsideDirective = {
   onClickHandler(e, el, callback) {
     const elem = e.target as HTMLElement;
+
     if (!!callback && callback instanceof Function && elem.id !== "dont_outside" && !elem.classList.contains("dont_outside")) {
       if (!el.contains(elem)) {
         e.stopPropagation();

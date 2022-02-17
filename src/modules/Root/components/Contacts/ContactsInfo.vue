@@ -13,7 +13,7 @@
           <!-- <li class="mt-15">@kaypro_russia</li> -->
         </ul>
       </div>
-      <div class="mt-40 flex flex-col md:mt-0 md:ml-100">
+      <div class="mt-40 flex flex-col md:ml-100 md:mt-0">
         <div class="font-semibold">Офис</div>
         <ul class="mt-28 text-14">
           <li>{{ address }}</li>

@@ -10,7 +10,7 @@
       </div>
     </BaseStaticBanner>
 
-    <section v-if="!!popular" class="mt-40 md:mt-60">
+    <section v-if="!!popular && !!popular.length" class="mt-40 md:mt-60">
       <h2 class="font-compact text-42 uppercase">Популярное</h2>
       <LazyBaseSwiper :slides="popular" class="mt-32" :settings="sliderSettings">
         <template #slide="{ slide }">
@@ -21,19 +21,14 @@
 
     <section class="mt-40 flex w-full flex-col justify-between md:mt-60 md:flex-row">
       <div class="w-full cursor-pointer md:w-1/2" @click="gotoLine1()">
-        <img
-          v-lazysrc="lineImg1"
-          alt=" "
-          class="h-200 md:h-300 w-full object-scale-down transition-all hover:scale-105"
-          height="300"
-        />
+        <img v-lazysrc="lineImg1" alt=" " class="h-200 md:h-300 w-full object-scale-down" height="300" />
         <div class="text-18 mt-16 font-semibold uppercase">{{ lineText1 }}</div>
       </div>
       <div class="w-full cursor-pointer md:ml-32 md:w-1/2" @click="gotoLine2()">
         <img
           v-lazysrc="lineImg2"
           alt=" "
-          class="h-200 md:h-300 mt-32 ml-0 w-full object-scale-down transition-all hover:scale-105 md:mt-0 md:ml-32"
+          class="h-200 md:h-300 mt-32 ml-0 w-full object-scale-down md:mt-0 md:ml-32"
           height="300"
         />
         <div class="text-18 mt-16 font-semibold uppercase">{{ lineText2 }}</div>
@@ -58,7 +53,7 @@
         </div>
       </BaseStaticBanner>
     </section>
-    <section v-if="!!bestSellers" class="mt-40 md:mt-60">
+    <section v-if="!!bestSellers && !!bestSellers.length" class="mt-40 md:mt-60">
       <h2 class="font-compact text-42 uppercase">Хиты продаж</h2>
       <LazyBaseSwiper :slides="bestSellers" class="mt-32" :settings="sliderSettings">
         <template #slide="{ slide }">

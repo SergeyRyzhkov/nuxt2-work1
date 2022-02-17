@@ -1,8 +1,8 @@
 <template>
   <section class="cart-item pr-16">
-    <img v-lazysrc="imageSrc" alt=" " class="h-86 w-86 md:h-127 md:w-127 object-scale-down hover:scale-105" />
+    <img v-lazysrc="imageSrc" alt=" " class="h-86 w-86 object-scale-down hover:scale-105 md:h-127 md:w-127" />
     <div
-      class="md:pl-26 w-full pl-16"
+      class="w-full pl-16 md:pl-26"
       :class="{ 'flex w-full flex-col justify-between md:flex-row md:items-center': isOrdering }"
     >
       <div>
@@ -34,7 +34,7 @@
         <div class="cart-item-price whitespace-nowrap">{{ price.toLocaleString("ru-RU") }} ₽</div>
       </div>
     </div>
-    <button class="remove-cart-item" @click="deleteCartItem">
+    <!-- <button class="remove-cart-item" @click="deleteCartItem">
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect
           width="15.1591"
@@ -51,7 +51,7 @@
           fill="#9D9D9D"
         />
       </svg>
-    </button>
+    </button> -->
   </section>
 </template>
 
@@ -93,7 +93,7 @@ export default class CartItem extends Vue {
 
 <style lang="scss">
 .cart-item {
-  @apply pt-23 pb-30 relative flex items-start md:items-center;
+  @apply relative flex items-start pt-23 pb-30 md:items-center;
   &-products_counter {
     .number {
       @apply px-5 text-center;

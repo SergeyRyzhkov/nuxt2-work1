@@ -1,12 +1,12 @@
 <template>
   <section>
     <header class="relative z-50">
-      <div class="container-fluid bg-primary z-50 h-[37px] text-sm">
-        <!-- <LazyBaseTicker direction="row" :repeat="true" :repeat-margin="86" :speed="{ type: 'pps', number: 130 }">
-          <span class="text-white text-12 uppercase w-max flex items-center justify-center p-8"
-            >Бесплатная доставка при заказе от 6 000 рублей</span
-          >
-        </LazyBaseTicker> -->
+      <div class="container-fluid bg-primary z-50 flex h-[37px] text-sm">
+        <HeaderMarquee
+          class="my-auto"
+          :text="marqueeText"
+          text-class="text-12 uppercase font-semibold text-white"
+        ></HeaderMarquee>
       </div>
       <div class="bg-white">
         <div class="py-34 container flex items-center">
@@ -24,6 +24,18 @@
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
+import AppSettings from "@/modules/Root/models/AppSettings";
+import { SettingService } from "@/modules/Root/SettingService";
 @Component
-export default class TheHeader extends Vue {}
+export default class TheHeader extends Vue {
+  settings: AppSettings = new AppSettings();
+
+  async fetch() {
+    this.settings = await this.$serviceLocator.getService(SettingService).getAppSetting();
+  }
+
+  get marqueeText() {
+    return this.settings.running_line;
+  }
+}
 </script>

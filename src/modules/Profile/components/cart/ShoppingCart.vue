@@ -8,13 +8,13 @@
         </div>
         <button @click="clearCart()">Очистить</button>
       </div>
-      <div class="md:mt-42 mt-24 flex h-full flex-col justify-between">
+      <div v-if="!!cartItems && !!cartItems.length" class="md:mt-42 mt-24 flex h-full flex-col justify-between">
         <div class="shopping-cart-items flex flex-col pr-6">
           <CartItem v-for="(item, index) in cartItems" :key="index" :cart-item="item" />
         </div>
 
         <div class="mb-100 mt-40 w-full">
-          <div class="text-14 flex items-center justify-between">
+          <div v-if="!!cartWeight" class="text-14 flex items-center justify-between">
             <div>Общий вес</div>
             <div>{{ cartWeight }} г</div>
           </div>
@@ -24,6 +24,13 @@
           </div>
           <BaseButton class="mt-32 w-full" @click="gotoOrdering()">Перейти к оформлению</BaseButton>
         </div>
+      </div>
+
+      <div class="mt-46 lg:mt-127 flex flex-col items-center justify-center">
+        <img src="/icons/shop-cart-big.svg" width="54" height="54" />
+        <span class="text-14 mt-22">Ваша корзина пуста</span>
+        <span class="text-14 text-gray-color mt-8">Пожалуйста, добавьте еще товаров в корзину</span>
+        <span class="text-14 mt-24 cursor-pointer underline hover:no-underline lg:mt-32" @click="gotoCatalog()">Каталог</span>
       </div>
     </div>
   </div>
@@ -63,6 +70,13 @@ export default class ShoppingCart extends Vue {
 
   clearCart() {
     this.$serviceLocator.getService(ProfileService).clearCart();
+  }
+
+  gotoCatalog() {
+    this.$emit("close");
+    if (this.$route.name !== "catalog-root") {
+      this.$router.push({ name: "catalog-root" });
+    }
   }
 }
 </script>

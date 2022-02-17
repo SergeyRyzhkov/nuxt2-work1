@@ -2,7 +2,7 @@
   <main class="page-wrapper linear-order">
     <div class="container flex flex-col md:flex-row">
       <section class="line-half w-full pt-60 md:w-1/2">
-        <h1>Оформление заказа</h1>
+        <span class="text-24">Оформление заказа</span>
         <BreadCrumbs />
         <OrderForm :order="order" :delivery-methods="deliveryMethods" :payment-types="paymentTypes" />
       </section>
@@ -48,6 +48,7 @@ import { ProfileService } from "../ProfileService";
 import CartStore from "../store/CartStore";
 import AppStore from "@/modules/Root/store/AppStore";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
+import { AuthService } from "@/modules/Auth/AuthService";
 
 @Component
 export default class OrderingPage extends Vue {
@@ -59,6 +60,11 @@ export default class OrderingPage extends Vue {
     this.updateBreadCrumbs();
     this.deliveryMethods = this.$serviceLocator.getService(ProfileService).getDeliveryMethods();
     this.paymentTypes = this.$serviceLocator.getService(ProfileService).getPaymentMethods();
+
+    if (this.$serviceLocator.getService(AuthService).isAuthenticated) {
+      const user = this.$serviceLocator.getService(AuthService).getSessionUser();
+      this.order = new OrderModel(user);
+    }
   }
 
   get cartItems() {

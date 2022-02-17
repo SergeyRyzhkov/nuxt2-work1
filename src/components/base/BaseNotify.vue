@@ -1,5 +1,5 @@
 <template>
-  <div class="text-14 my-auto p-16">{{ text }}</div>
+  <div class="my-auto p-16 text-14">{{ text }}</div>
 </template>
 
 <script lang="ts">

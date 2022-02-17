@@ -66,7 +66,7 @@ export default class BreadCrumbs extends Vue {
       content: ">";
       font-size: 12px;
       color: #9495a6;
-      padding: 0 3px;
+      padding: 0 12px;
     }
 
     &:last-child {

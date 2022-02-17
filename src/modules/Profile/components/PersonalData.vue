@@ -25,13 +25,7 @@
             :has-error="$v.registrationData.first_name.$error"
             @blur="$v.registrationData.first_name.$touch()"
           />
-          <BaseInput
-            v-model="registrationData.patronymic"
-            placeholder="Отчество*"
-            class="mb-27"
-            :has-error="$v.registrationData.patronymic.$error"
-            @blur="$v.registrationData.patronymic.$touch()"
-          />
+          <BaseInput v-model="registrationData.patronymic" placeholder="Отчество" class="mb-27" />
           <div class="flex items-center">
             <BaseInput
               v-model="registrationData.phone"
@@ -61,6 +55,9 @@
         </form>
       </div>
       <PasswordRecovery />
+      <div class="mt-60 flex items-center">
+        <BaseCheckbox id="subscribe" v-model="registrationData.subscribe" label="Получать информацию о новинках и акциях" />
+      </div>
     </div>
   </section>
 </template>
@@ -77,7 +74,6 @@ const validations = () => {
     registrationData: {
       first_name: { required },
       last_name: { required },
-      patronymic: { required },
       phone: { required },
       email: { required, email },
       address: { required },

@@ -1,11 +1,11 @@
 <template>
   <section v-if="!$fetchState.pending" class="lg:w-4/5">
-    <div class="pb-50 mt-30 border-b border-[#e8e8e8]">
+    <div class="mt-30 pb-50 border-b border-[#e8e8e8]">
       <nuxt-link :to="{ name: 'orders' }" class="mb-40 flex items-center">
         <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5.99316 9.9873L1.98621 5.98035L5.99316 1.97339" stroke="#16192C" stroke-width="1.5" stroke-linecap="round" />
         </svg>
-        <span class="text-14 order-detail-back text-primary ml-7">Назад к списку заказов</span>
+        <span class="order-detail-back text-14 text-primary ml-7">Назад к списку заказов</span>
       </nuxt-link>
       <div class="mb-50 flex flex-col justify-between md:flex-row">
         <div>
@@ -33,7 +33,7 @@
         </div>
 
         <div class="order-detail-total-top hidden lg:block">
-          <div class="text-18 mb-27 flex justify-end font-semibold">Итого: {{ totalPrice }}</div>
+          <div class="mb-27 text-18 flex justify-end font-semibold">Итого: {{ totalPrice }}</div>
           <BaseButton v-if="repeatOrderEnabled" class="w-280 flex flex-col" @click="repeatOrder(order)"
             >Повторить заказ</BaseButton
           >
@@ -63,14 +63,8 @@
       :key="iter.product.id"
       class="order-detail-product grid grid-cols-6 items-center gap-6 border-b border-[#e8e8e8] py-20"
     >
-      <div class="h-76 order-detail-img">
-        <img
-          v-lazysrc="productImageSrc(iter.product)"
-          height="76"
-          width="76"
-          alt=" "
-          class="object-scale-down pt-8 transition-all hover:scale-105"
-        />
+      <div class="order-detail-img h-76">
+        <img v-lazysrc="productImageSrc(iter.product)" height="76" width="76" alt=" " class="object-scale-down pt-8" />
       </div>
 
       <div>
@@ -85,7 +79,7 @@
     </div>
 
     <div class="mt-30 flex flex-col lg:hidden">
-      <div class="text-18 mb-27 font-semibold">Итого: {{ totalPrice }}</div>
+      <div class="mb-27 text-18 font-semibold">Итого: {{ totalPrice }}</div>
       <BaseButton v-if="repeatOrderEnabled" class="repeat-order-btn w-280" @click="repeatOrder(order)"
         >Повторить заказ</BaseButton
       >
@@ -166,7 +160,7 @@ export default class OrderDetail extends Vue {
     const payment = this.order.payment_type;
     if (payment === "cash") return `Наличными при получении`;
     if (payment === "card") return `Банковской картой на сайте`;
-    if (payment === "invoice") return `invoice`;
+    if (payment === "invoice") return `Выставление счета`;
   }
 
   get cartItems() {

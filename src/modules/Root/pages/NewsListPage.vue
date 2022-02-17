@@ -53,6 +53,6 @@ export default class NewsListPage extends Vue {
 </script>
 <style lang="scss">
 .news-list-wrapper {
-  @apply gap-y-30 gap-x-30 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  @apply grid grid-cols-1 gap-y-30 gap-x-30 md:grid-cols-2 lg:grid-cols-3;
 }
 </style>

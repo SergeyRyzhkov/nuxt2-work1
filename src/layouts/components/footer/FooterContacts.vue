@@ -29,17 +29,17 @@
         </svg>
       </div>
       <ul class="footer-ul" :class="{ show }">
-        <li>+7(495)740-07-00</li>
-        <li>info@kaypro.ru</li>
-        <li>Москва, Остаповский проезд, 5, стр. 1, оф. 801</li>
+        <li>{{ phone }}</li>
+        <li>{{ email }}</li>
+        <li>{{ address }}</li>
       </ul>
     </div>
-    <FooterSocials class="pt-32 pb-22 lg:mt-20 lg:py-0" />
+    <FooterSocials class="pb-22 pt-32 lg:mt-20 lg:py-0" />
     <div class="mb-24 flex items-center lg:mb-0 lg:mt-40">
-      <a href="" target="_blank">
+      <a v-if="googlePlay" :href="googlePlay" target="_blank">
         <img v-lazysrc="'/images/app_store.svg'" alt=" " width="140" height="42" />
       </a>
-      <a href="" target="_blank">
+      <a v-if="appStore" :href="appStore" target="_blank">
         <img v-lazysrc="'/images/google_play.svg'" class="ml-14" alt=" " width="140" height="42" />
       </a>
     </div>
@@ -47,10 +47,38 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
+import { SettingService } from "@/modules/Root/SettingService";
+import AppSettings from "@/modules/Root/models/AppSettings";
+import { formatPhoneNumber } from "@/utils/Formaters";
 
 @Component
 export default class FooterContacts extends Vue {
   show: boolean = false;
+  settings: AppSettings = new AppSettings();
+
+  async fetch() {
+    this.settings = await this.$serviceLocator.getService(SettingService).getAppSetting();
+  }
+
+  get phone() {
+    return formatPhoneNumber(this.settings.phone);
+  }
+
+  get address() {
+    return this.settings.address;
+  }
+
+  get email() {
+    return this.settings.email;
+  }
+
+  get googlePlay() {
+    return this.settings.google_play;
+  }
+
+  get appStore() {
+    return this.settings.app_store;
+  }
 
   openList() {
     this.show = !this.show;

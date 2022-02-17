@@ -2,7 +2,7 @@
   <div>
     <span
       v-if="closeEnabled"
-      class="vue-dialog_close-button text-32 ml-auto cursor-pointer font-normal after:content-['\00d7']"
+      class="vue-dialog_close-button ml-auto cursor-pointer text-32 font-normal after:content-['\00d7']"
       @click="$emit('close')"
     ></span>
     <slot name="header">
@@ -16,7 +16,7 @@
               stroke-linecap="round"
             />
           </svg>
-          <span class="text-14 ml-16 font-semibold" @click="$emit('go-back')">Назад</span>
+          <span class="ml-16 text-14 font-semibold" @click="$emit('go-back')">Назад</span>
         </button>
         <slot name="header-center"></slot>
       </div>

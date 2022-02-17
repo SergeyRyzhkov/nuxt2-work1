@@ -6,7 +6,7 @@
       height="286"
       width="226"
       alt=" "
-      class="h-155 w-135 px-30 pt-15 lg:h-286 lg:w-226 object-scale-down transition-all hover:scale-105"
+      class="h-155 w-135 px-30 pt-15 lg:h-286 lg:w-226 object-scale-down"
     />
     <div class="mt-30 text-14 md:mt-42 text-center font-semibold uppercase">
       <slot> </slot>

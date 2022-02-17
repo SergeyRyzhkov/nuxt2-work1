@@ -49,13 +49,7 @@
       </BaseMultiSelect>
     </div>
 
-    <BaseInput
-      v-model="formModel.comment"
-      :placeholder="commentRequered ? 'Комментарий*' : 'Комментарий'"
-      :has-error="commenttHasErrorExpr"
-      class="mb-27"
-      @blur="onCommentBlur()"
-    />
+    <BaseInput v-model="formModel.comment" placeholder="Комментарий" class="mb-27" />
 
     <BaseButton type="submit" class="mt-20 md:mt-40">Отправить</BaseButton>
 
@@ -79,11 +73,12 @@ import { phoneMask } from "@/utils/InputMaskDefinitions";
 import { EmptyService } from "@/_core/service/EmptyService";
 import { BaseViewModel } from "@/_core/models/BaseViewModel";
 import { executeAction, loadReCaptchaScript } from "@/utils/ReCaptcha";
+import { AuthService } from "@/modules/Auth/AuthService";
 
 class FeedbackModel extends BaseViewModel {
   name = "";
   phone = "";
-  email = "";
+  email = null;
   comment = "";
   agreement = 1;
   area: any = null;
@@ -112,21 +107,17 @@ export default class FeedbackForm extends Vue {
   @Prop({ default: false })
   radio: boolean;
 
-  @Prop({ default: true })
-  commentRequered: boolean;
+  fetch() {
+    if (this.$serviceLocator.getService(AuthService).isAuthenticated) {
+      const user = this.$serviceLocator.getService(AuthService).getSessionUser();
+      this.formModel.name = user.first_name + " " + (user.patronymic || "") + " " + (user.last_name || "");
+      this.formModel.phone = user.phone as any;
+      this.formModel.email = user.email;
+    }
+  }
 
   mounted() {
     loadReCaptchaScript(this.$config.reCaptchaSiteKey);
-  }
-
-  get commenttHasErrorExpr() {
-    return this.commentRequered ? this.$v?.formModel?.comment?.$error : false;
-  }
-
-  onCommentBlur() {
-    if (this.commentRequered) {
-      this.$v?.formModel?.comment?.$touch();
-    }
   }
 
   async send() {
@@ -139,6 +130,7 @@ export default class FeedbackForm extends Vue {
     if (!!recaptchaToken) {
       this.formModel.recaptchaToken = recaptchaToken;
       this.formModel.area = this.formModel?.area?.name;
+      this.formModel.phone = `+${this.formModel.phone}`;
       try {
         await this.$serviceLocator.getService(EmptyService).apiRequest.post("/users/feedback", this.formModel);
         this.$modalManager.showNotify("Сообщение отправлено !");

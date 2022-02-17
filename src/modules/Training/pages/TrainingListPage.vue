@@ -5,7 +5,7 @@
     <div class="arenda-banner flex flex-col justify-between p-16 md:p-40 lg:flex-row lg:items-center">
       <div class="flex flex-col md:flex-row md:items-center">
         <h1 class="flex-shrink-0 grow">Аренда студии</h1>
-        <p class="text-14 w-full break-all md:ml-40 lg:w-1/2 xl:ml-60">
+        <p class="w-full break-all text-14 md:ml-40 lg:w-1/2 xl:ml-60">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
           aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
         </p>
@@ -30,7 +30,7 @@
       ></base-calendar>
     </div>
 
-    <div v-if="!trainingList.length" class="lg:mt-100 mt-60">
+    <div v-if="!trainingList.length" class="mt-60 lg:mt-100">
       <h3>Нет обучений, измените параметра поиска</h3>
     </div>
 
@@ -111,7 +111,7 @@ export default class TrainingListPage extends Vue {
 
 <style lang="scss">
 .training-list-wrapper {
-  @apply gap-y-30 gap-x-30 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  @apply grid grid-cols-1 gap-y-30 gap-x-30 md:grid-cols-2 lg:grid-cols-3;
 }
 .arenda-banner {
   background: linear-gradient(268.69deg, #baccff -0.81%, #f2e1dc 60.12%), #eaeaea;
