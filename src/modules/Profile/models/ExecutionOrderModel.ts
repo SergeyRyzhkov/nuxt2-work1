@@ -13,5 +13,5 @@ export default class ExecutionOrderModel extends OrderModel {
   products_price: number;
   created_at: string;
   order_items_count: number;
-  order_items: { product: ProductModel; product_id: number }[];
+  order_items: { product: ProductModel; product_id: number; count: number }[];
 }
