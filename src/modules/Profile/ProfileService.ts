@@ -108,7 +108,7 @@ export class ProfileService extends BaseService {
     return [
       { id: "card", title: "Банковской картой на сайте" },
       { id: "cash", title: "Наличными при получении" },
-      { id: "invoice", title: "invoice" },
+      { id: "invoice", title: "Выставление счета" },
     ];
   }
 

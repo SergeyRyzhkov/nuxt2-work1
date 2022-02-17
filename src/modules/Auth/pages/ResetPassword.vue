@@ -14,9 +14,11 @@ export default class ResetPassword extends Vue {
   async mounted() {
     try {
       await this.$serviceLocator.getService(EmptyService).getAnyOrFail(`users/password/recover/${this.code}`);
-      this.$modalManager.showNotify("Новый пароль отправлен Вам на почту !");
+      this.$modalManager.showNotify(
+        "Запрос на восстановление пароля принят, вам отправлено письмо с новым паролем на электронную почту"
+      );
     } catch (err) {
-      this.$modalManager.showNotify("Не удалсоь восстановить пароль !");
+      this.$modalManager.showNotify("Не удалсоь восстановить пароль");
     } finally {
       if (this.$route.name !== "main") {
         this.$router.push({ name: "main" });
@@ -25,5 +27,3 @@ export default class ResetPassword extends Vue {
   }
 }
 </script>
-
-<style lang="scss"></style>

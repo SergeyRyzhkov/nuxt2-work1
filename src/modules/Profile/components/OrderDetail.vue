@@ -1,24 +1,24 @@
 <template>
   <section v-if="!$fetchState.pending" class="lg:w-4/5">
-    <div class="mt-30 border-b border-[#e8e8e8] pb-50">
+    <div class="mt-30 pb-50 border-b border-[#e8e8e8]">
       <nuxt-link :to="{ name: 'orders' }" class="mb-40 flex items-center">
         <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5.99316 9.9873L1.98621 5.98035L5.99316 1.97339" stroke="#16192C" stroke-width="1.5" stroke-linecap="round" />
         </svg>
-        <span class="order-detail-back ml-7 text-14 text-primary">Назад к списку заказов</span>
+        <span class="order-detail-back text-14 text-primary ml-7">Назад к списку заказов</span>
       </nuxt-link>
       <div class="mb-50 flex flex-col justify-between md:flex-row">
         <div>
-          <div class="mb-8 text-18 font-semibold">Заказ № {{ order.id }}</div>
-          <div class="mb-16 text-14 md:mb-0">Дата создания: {{ dateCreate }}</div>
+          <div class="text-18 mb-8 font-semibold">Заказ № {{ order.id }}</div>
+          <div class="text-14 mb-16 md:mb-0">Дата создания: {{ dateCreate }}</div>
         </div>
         <div class="border-b border-[#e8e8e8] pb-24 md:border-0 md:pb-0">
-          <div class="mb-3 text-14">{{ status }}</div>
+          <div class="text-14 mb-3">{{ status }}</div>
           <div class="text-14">{{ paymentStatus }}</div>
         </div>
       </div>
 
-      <div class="mb-24 grid grid-cols-1 gap-6 text-left text-14 md:grid-cols-3 lg:grid-cols-4">
+      <div class="text-14 mb-24 grid grid-cols-1 gap-6 text-left md:grid-cols-3 lg:grid-cols-4">
         <div>
           <div class="mb-6 font-semibold">Доставка по адресу</div>
           <div class="md:mb-5">{{ order.delivery_address }}</div>
@@ -33,14 +33,14 @@
         </div>
 
         <div class="order-detail-total-top hidden lg:block">
-          <div class="mb-27 flex justify-end text-18 font-semibold">Итого: {{ totalPrice }}</div>
-          <BaseButton v-if="repeatOrderEnabled" class="flex w-280 flex-col" @click="repeatOrder(order)"
+          <div class="mb-27 text-18 flex justify-end font-semibold">Итого: {{ totalPrice }}</div>
+          <BaseButton v-if="repeatOrderEnabled" class="w-280 flex flex-col" @click="repeatOrder(order)"
             >Повторить заказ</BaseButton
           >
         </div>
       </div>
 
-      <div class="grid grid-cols-1 gap-4 text-left text-14 md:grid-cols-3 lg:grid-cols-4">
+      <div class="text-14 grid grid-cols-1 gap-4 text-left md:grid-cols-3 lg:grid-cols-4">
         <div class="md:mb-5">
           <div class="mb-6 font-semibold">Получатель</div>
           <div class="mb-6">{{ order.first_name }} {{ order.patronymic }} {{ order.last_name }}</div>
@@ -68,13 +68,13 @@
       </div>
 
       <div>
-        <div class="mb-8 text-16 font-semibold">{{ iter.product.name }}</div>
-        <div class="hidden text-14 text-text-gray md:flex">Артикул {{ iter.product.vendor_code }}</div>
+        <div class="text-16 mb-8 font-semibold">{{ iter.product.name }}</div>
+        <div class="text-14 text-text-gray hidden md:flex">Артикул {{ iter.product.vendor_code }}</div>
       </div>
       <BaseHeartButton class="hidden cursor-pointer justify-self-center md:flex"></BaseHeartButton>
       <div class="text-16">шт.</div>
       <div class="text-18 font-semibold">{{ productPrice(iter.product) }}</div>
-      <div class="hidden cursor-pointer text-14 lg:flex" @click.prevent="addToBasket()">Добавить в корзину</div>
+      <div class="text-14 hidden cursor-pointer lg:flex" @click.prevent="addToBasket()">Добавить в корзину</div>
     </div>
 
     <div class="mt-30 flex flex-col lg:hidden">
@@ -156,7 +156,7 @@ export default class OrderDetail extends Vue {
     const payment = this.order.payment_type;
     if (payment === "cash") return `Наличными при получении`;
     if (payment === "card") return `Банковской картой на сайте`;
-    if (payment === "invoice") return `invoice`;
+    if (payment === "invoice") return `Выставление счета`;
   }
 
   get cartItems() {
