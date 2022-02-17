@@ -64,7 +64,7 @@
       class="order-detail-product grid grid-cols-6 items-center gap-6 border-b border-[#e8e8e8] py-20"
     >
       <nuxt-link :to="routeLocation(iter.product.id)" class="order-detail-img h-76">
-        <img v-lazysrc="productImageSrc(iter.product)" height="76" width="76" alt=" " class="object-scale-down pt-8" />
+        <img v-lazysrc="productImageSrc(iter.product)" height="76" width="76" alt=" " class="h-74 object-scale-down pt-8" />
       </nuxt-link>
 
       <div>
@@ -77,6 +77,7 @@
       <BaseHeartButton
         class="hidden cursor-pointer justify-self-center md:flex"
         :is-red="iter.product.is_favorite"
+        @click="toogleFavor(iter.product)"
       ></BaseHeartButton>
       <div class="text-16">{{ iter.count }} шт.</div>
       <div class="text-18 font-semibold">{{ productPrice(iter.product) }}</div>
@@ -100,7 +101,6 @@ import { ProfileService } from "../ProfileService";
 import { OrderStatusType } from "../models/OredrStatusType";
 import { PayStatusType } from "../models/PayStatusType";
 import CartStore from "../store/CartStore";
-import CartModel from "../models/CartModel";
 import ProductModel from "@/modules/Catalog/models/ProductModel";
 import { CatalogService } from "@/modules/Catalog/CatalogService";
 import { AuthService } from "@/modules/Auth/AuthService";
@@ -191,6 +191,10 @@ export default class OrderDetail extends Vue {
     return order?.logo && order?.logo.length ? order.logo[0].url : "/images/product-no-photo.jpg";
   }
 
+  async toogleFavor(product: ProductModel) {
+    product.is_favorite = await this.$serviceLocator.getService(CatalogService).toogleFavorites(product);
+  }
+
   get isAuthenticated() {
     return this.$serviceLocator.getService(AuthService).isAuthenticated;
   }
@@ -204,7 +208,7 @@ export default class OrderDetail extends Vue {
     this.$modalManager.showNotify("Добавлено. Можете оформить заказ!");
   }
 
-  async addToBasket(product: CartModel) {
+  async addToBasket(product: { product: ProductModel; product_id: number; count: number }) {
     await this.$serviceLocator.getService(ProfileService).addToCart(product.product_id, product.count);
     this.$modalManager.showNotify("Добавлено. Можете оформить заказ!");
   }
