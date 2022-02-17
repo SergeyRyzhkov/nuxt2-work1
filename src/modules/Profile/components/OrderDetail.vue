@@ -63,16 +63,21 @@
       :key="iter.product.id"
       class="order-detail-product grid grid-cols-6 items-center gap-6 border-b border-[#e8e8e8] py-20"
     >
-      <div class="order-detail-img h-76">
+      <nuxt-link :to="routeLocation(iter.product.id)" class="order-detail-img h-76">
         <img v-lazysrc="productImageSrc(iter.product)" height="76" width="76" alt=" " class="object-scale-down pt-8" />
-      </div>
+      </nuxt-link>
 
       <div>
-        <div class="text-16 mb-8 font-semibold">{{ iter.product.name }}</div>
+        <nuxt-link :to="routeLocation(iter.product.id)">
+          <div class="text-16 mb-8 font-semibold">{{ iter.product.name }}</div>
+        </nuxt-link>
         <div class="text-14 text-text-gray hidden md:flex">Артикул {{ iter.product.vendor_code }}</div>
       </div>
 
-      <BaseHeartButton class="hidden cursor-pointer justify-self-center md:flex"></BaseHeartButton>
+      <BaseHeartButton
+        class="hidden cursor-pointer justify-self-center md:flex"
+        :is-red="iter.product.is_favorite"
+      ></BaseHeartButton>
       <div class="text-16">{{ iter.count }} шт.</div>
       <div class="text-18 font-semibold">{{ productPrice(iter.product) }}</div>
       <div class="text-14 hidden cursor-pointer lg:flex" @click.prevent="addToBasket(iter)">Добавить в корзину</div>
@@ -113,12 +118,12 @@ export default class OrderDetail extends Vue {
     this.order = await this.$serviceLocator.getService(ProfileService).getOrder(this.id);
   }
 
-  // get routeLocation() {
-  //   return {
-  //     name: "product",
-  //     params: { id: this.product.id },
-  //   };
-  // }
+  routeLocation(id: number) {
+    return {
+      name: "product",
+      params: { slug: `${id}` },
+    };
+  }
 
   get dateCreate() {
     return dayjs(this.order?.created_at).format("DD MMMM YYYY, HH:MM");
@@ -168,7 +173,7 @@ export default class OrderDetail extends Vue {
   }
 
   get allWeight() {
-    return this.cartItems
+    return this.products
       .reduce((sum, iterCart) => sum + (iterCart.product.weight || 0) * iterCart.count, 0)
       .toLocaleString("ru-RU");
   }
