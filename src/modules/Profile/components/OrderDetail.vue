@@ -205,12 +205,12 @@ export default class OrderDetail extends Vue {
 
   async repeatOrder(order: ExecutionOrderModel) {
     await this.$serviceLocator.getService(ProfileService).repeatOrder(order);
-    this.$modalManager.showNotify("Добавлено. Можете оформить заказ!");
+    this.$modalManager.showNotify("Добавлено. Можете оформить заказ");
   }
 
   async addToBasket(product: { product: ProductModel; product_id: number; count: number }) {
     await this.$serviceLocator.getService(ProfileService).addToCart(product.product_id, product.count);
-    this.$modalManager.showNotify("Добавлено. Можете оформить заказ!");
+    this.$modalManager.showNotify("Добавлено. Можете оформить заказ");
   }
 }
 </script>

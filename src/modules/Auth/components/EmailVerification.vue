@@ -59,7 +59,7 @@ export default class EmailVerification extends Vue {
       if (result) {
         this.$emit("verify-success");
       } else {
-        this.$emit("error", "Неверный код подтверждения !");
+        this.$emit("error", "Неверный код подтверждения");
       }
     }
     this.checkAttemptAndStartTimer();
@@ -70,7 +70,7 @@ export default class EmailVerification extends Vue {
     if (!!this.loginData) {
       // @ts-ignore
       if (!(await this.$serviceLocator.getService(AuthService).resendVerifyEmail(this.loginData.email))) {
-        this.$emit("error", "Не удалось выслать код подтверждения ! !");
+        this.$emit("error", "Не удалось выслать код подтверждения");
       }
     }
   }

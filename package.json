@@ -79,7 +79,7 @@
     "postcss-import": "^14.0.2",
     "postcss-nested": "^5.0.6",
     "prettier": "^2.4.1",
-    "prettier-plugin-tailwindcss": "^0.1.4",
+    "prettier-plugin-tailwindcss": "^0.1.7",
     "sass": "^1.44.0",
     "sass-loader": "^10.1.1",
     "stylelint": "^14.3.0",

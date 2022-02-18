@@ -133,13 +133,13 @@ export default class FeedbackForm extends Vue {
       this.formModel.phone = `+${this.formModel.phone}`;
       try {
         await this.$serviceLocator.getService(EmptyService).apiRequest.post("/users/feedback", this.formModel);
-        this.$modalManager.showNotify("Сообщение отправлено !");
+        this.$modalManager.showNotify("Сообщение отправлено");
         this.formModel = new FeedbackModel();
       } catch (err: any) {
-        this.$modalManager.showError("Не удалось отправить сообщение!");
+        this.$modalManager.showError("Не удалось отправить сообщение");
       }
     } else {
-      this.$modalManager.showError("Вы бот !");
+      this.$modalManager.showError("Вы бот");
     }
     this.$emit("close");
   }

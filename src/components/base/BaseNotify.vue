@@ -7,7 +7,7 @@ import { Component, Vue, Prop } from "nuxt-property-decorator";
 
 @Component
 export default class BaseNotify extends Vue {
-  @Prop({ default: "Выполнено !" })
+  @Prop({ default: "Выполнено" })
   text: string;
 
   @Prop({ default: true })

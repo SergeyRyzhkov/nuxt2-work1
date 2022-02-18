@@ -48,7 +48,6 @@ export default class ProductItem extends Vue {
 
   async addToBasket() {
     await this.$serviceLocator.getService(ProfileService).addToCart(this.model.id, 1);
-    // this.$modalManager.showNotify("Добавлено. Можете оформить заказ!");
   }
 }
 </script>
