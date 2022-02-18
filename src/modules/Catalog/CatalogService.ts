@@ -18,7 +18,7 @@ export class CatalogService extends BaseService {
 
   @Cacheable(0)
   async getProductsByCategory(pagination: Pagination, cat: CategoryModel) {
-    const params = { category_id_1c: [cat.title] };
+    const params = { category_id_1c: [cat.id_1с] };
     return await this.getArrayOrEmptyWithPagination(
       ProductModel,
       `users/products?${stringify(params, { arrayFormat: "bracket" })}`,

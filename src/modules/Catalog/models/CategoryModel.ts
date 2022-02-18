@@ -6,7 +6,7 @@ export default class CategoryModel extends SeoModel {
     Object.assign(this, init);
   }
 
-  category_id_1c: string;
+  id_1с: string;
   id = 0;
   title: string;
   subtitle: string;
