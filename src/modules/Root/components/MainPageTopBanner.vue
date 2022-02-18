@@ -18,19 +18,19 @@
           height="770"
           width="1600"
           alt=" "
-          class="h-300 w-full object-cover object-left-top lg:h-770"
+          class="h-300 lg:h-770 w-full object-cover object-left-top"
         />
       </div>
-      <div class="absolute left-0 top-40 w-screen lg:top-185">
+      <div class="lg:top-185 absolute left-0 top-40 w-screen">
         <div class="container">
-          <div class="ml-0 lg:ml-100">
+          <div class="lg:ml-100 ml-0">
             <div
-              class="mb-12 max-w-[500px] font-compact text-68 uppercase lg:mb-22 lg:text-124 lg:leading-120"
+              class="font-compact text-68 lg:mb-22 lg:text-124 lg:leading-120 mb-12 max-w-[500px] uppercase"
               :style="getTitleColor(slide)"
             >
               {{ slide.title }}
             </div>
-            <div class="text-12 font-semibold lg:text-16" :style="getSubTitleColor(slide)">{{ slide.subtitle }}</div>
+            <div class="text-12 lg:text-16 font-semibold" :style="getSubTitleColor(slide)">{{ slide.subtitle }}</div>
             <base-button v-if="slide.button" class="mt-24 w-max bg-white lg:mt-40" @click="goTo(slide)">{{
               slide.button_text
             }}</base-button>

@@ -4,7 +4,7 @@
       <img v-lazysrc="leftIamgeSrc" height="570" width="300" alt=" " class="h-full w-full object-cover object-left-top" />
     </div>
     <div class="flex w-full lg:w-1/2" :style="bgColor">
-      <div class="py-30 lg:py-100 lg:px-70 m-auto flex h-full flex-col items-center px-16">
+      <div class="m-auto flex h-full flex-col items-center justify-center p-16">
         <div :style="color" class="mt-27 font-compact text-89 text-center">
           {{ title }}
         </div>

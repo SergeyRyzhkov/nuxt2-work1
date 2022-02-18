@@ -13,7 +13,7 @@
       </LazyBaseSwiper>
     </section>
 
-    <section class="md:mt-100 container mt-40">
+    <section class="md:mt-100 mt-40">
       <MainPageFirstLineSlider :model="model"></MainPageFirstLineSlider>
     </section>
 
@@ -29,7 +29,7 @@
     </LazyHydrate>
 
     <LazyHydrate when-visible>
-      <section v-if="isMainProductEnabled" class="md:mt-100 container mt-40">
+      <section v-if="isMainProductEnabled" class="md:mt-100 mt-40">
         <MainPageProduct :model="model"></MainPageProduct>
       </section>
     </LazyHydrate>
