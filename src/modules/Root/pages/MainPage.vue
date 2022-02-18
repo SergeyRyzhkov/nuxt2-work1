@@ -29,7 +29,7 @@
     </LazyHydrate>
 
     <LazyHydrate when-visible>
-      <section v-if="mainProductEnabled" class="md:mt-100 container mt-40">
+      <section v-if="isMainProductEnabled" class="md:mt-100 container mt-40">
         <MainPageProduct :model="model"></MainPageProduct>
       </section>
     </LazyHydrate>
@@ -132,7 +132,7 @@ export default class MainPage extends Vue {
     this.model.loaded = true;
   }
 
-  get mainProductEnabled() {
+  get isMainProductEnabled() {
     return !!this.model?.content?.product?.title;
   }
 
