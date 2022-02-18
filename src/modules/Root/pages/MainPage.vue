@@ -18,7 +18,7 @@
     </section>
 
     <LazyHydrate when-visible>
-      <section class="md:mt-100 container mt-40">
+      <section v-if="!!bestSellers && !!bestSellers.length" class="md:mt-100 container mt-40">
         <h2 class="font-compact text-48 uppercase">Хиты продаж</h2>
         <LazyBaseSwiper :slides="bestSellers" class="mt-16 md:mt-32" :settings="sliderSettings">
           <template #slide="{ slide }">
@@ -29,7 +29,7 @@
     </LazyHydrate>
 
     <LazyHydrate when-visible>
-      <section class="md:mt-100 container mt-40">
+      <section v-if="mainProductEnabled" class="md:mt-100 container mt-40">
         <MainPageProduct :model="model"></MainPageProduct>
       </section>
     </LazyHydrate>
@@ -45,7 +45,7 @@
       </section>
     </LazyHydrate>
 
-    <section class="md:mt-100 container mt-40">
+    <section v-if="!!line2Title1 && !!line2Title2" class="md:mt-100 container mt-40">
       <div class="flex flex-col lg:flex-row">
         <div class="w-full cursor-pointer lg:w-1/2" @click="goToLine21">
           <img v-lazysrc="line2ImgSrc1" height="500" width="300" class="h-210 lg:h-400 w-full object-cover object-left-top" />
@@ -130,6 +130,10 @@ export default class MainPage extends Vue {
   async fetch() {
     this.model = await this.$serviceLocator.getService(EmptyService).getAnyOrNull("users/pages/home");
     this.model.loaded = true;
+  }
+
+  get mainProductEnabled() {
+    return !!this.model?.content?.product?.title;
   }
 
   get isLoaded() {

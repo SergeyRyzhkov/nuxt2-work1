@@ -13,7 +13,7 @@
   >
     <template #slide="{ slide }">
       <div class="flex flex-col lg:flex-row">
-        <div class="h-300 w-full border-b-2 border-r-0 border-secondary lg:h-600 lg:w-1/2 lg:border-r-2 lg:border-b-0">
+        <div class="h-300 border-secondary lg:h-600 w-full border-b-2 border-r-0 lg:w-1/2 lg:border-r-2 lg:border-b-0">
           <LazyBaseVideoPlayer
             v-if="getVideo(slide) && isVideo(slide)"
             :src="getVideo(slide)"
@@ -29,8 +29,8 @@
             height="680"
           />
         </div>
-        <div class="h-full w-full lg:h-600 lg:w-1/2">
-          <div class="flex h-full flex-col items-center bg-[#F5F5F5] py-50 px-16">
+        <div class="lg:h-600 h-full w-full lg:w-1/2">
+          <div class="py-50 flex h-full flex-col items-center bg-[#F5F5F5] px-16">
             <img v-lazysrc="getSliderImage(slide)" height="300" width="250" alt=" " class="w-250 h-300 object-scale-down" />
             <div :style="getTitleColor(slide)" class="mt-27">
               {{ slide.title }}
