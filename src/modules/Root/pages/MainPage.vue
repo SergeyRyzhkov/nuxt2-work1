@@ -8,7 +8,7 @@
       <h2 class="font-compact text-48 uppercase">Новые поступления</h2>
       <LazyBaseSwiper :slides="newProducts" class="mt-16 md:mt-32" :settings="sliderSettings">
         <template #slide="{ slide }">
-          <ProductItem :model="slide" class="w-max"><span class="text-green">Новое</span></ProductItem>
+          <ProductItem :model="slide"><span class="text-green">Новое</span></ProductItem>
         </template>
       </LazyBaseSwiper>
     </section>
@@ -22,7 +22,7 @@
         <h2 class="font-compact text-48 uppercase">Хиты продаж</h2>
         <LazyBaseSwiper :slides="bestSellers" class="mt-16 md:mt-32" :settings="sliderSettings">
           <template #slide="{ slide }">
-            <ProductItem :model="slide" class="w-max"><span>HIT</span></ProductItem>
+            <ProductItem :model="slide"><span>HIT</span></ProductItem>
           </template>
         </LazyBaseSwiper>
       </section>
@@ -39,7 +39,7 @@
         <h2 class="font-compact text-48 uppercase">Популярное</h2>
         <LazyBaseSwiper :slides="populars" class="mt-16 md:mt-32" :settings="sliderSettings">
           <template #slide="{ slide }">
-            <ProductItem :model="slide" class="w-max"><span class="text-secondary">популярное</span></ProductItem>
+            <ProductItem :model="slide"><span class="text-secondary">популярное</span></ProductItem>
           </template>
         </LazyBaseSwiper>
       </section>

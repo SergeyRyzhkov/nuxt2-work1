@@ -199,7 +199,7 @@
       <h2 class="font-compact text-42 uppercase">Рекомендуем</h2>
       <LazyBaseSwiper :slides="recommendation" class="mt-32" :settings="sliderSettings">
         <template #slide="{ slide }">
-          <ProductItem :model="slide" class="w-max"></ProductItem>
+          <ProductItem :model="slide"></ProductItem>
         </template>
       </LazyBaseSwiper>
     </section>
@@ -304,7 +304,7 @@ export default class ProductPage extends Vue {
       { linkName: "Главная", name: "main" },
       { linkName: "Каталог", name: "catalog-root" },
       { linkName: this.model.category, name: this.model.category_slug },
-      { linkName: `${this.model.title || this.model.meta_slug}` },
+      { linkName: `${this.model.name || this.model.meta_slug}` },
     ];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
   }

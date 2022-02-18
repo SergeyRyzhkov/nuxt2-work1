@@ -1,6 +1,6 @@
 <template>
   <main class="page-wrapper">
-    <BaseStaticBanner v-if="!!bannerUrl" :image-src="bannerUrl" default-image="/images/about_default_banner.jpg">
+    <BaseStaticBanner v-if="!!bannerUrl" :image-src="bannerUrl">
       <div class="bottom-30 absolute w-screen md:bottom-60">
         <h1 class="container w-full text-white md:w-1/2">
           Добро пожаловать в <br />
