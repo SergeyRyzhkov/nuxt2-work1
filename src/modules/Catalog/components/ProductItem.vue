@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link v-show="!!model" :to="routeLink" class="relative flex flex-col items-center">
+  <nuxt-link v-show="!!model" :to="routeLink" class="relative flex w-full flex-col items-center">
     <BaseHeartButton class="absolute top-0 right-0" :is-red="model.is_favorite" @click.prevent="toogleFavor()"></BaseHeartButton>
     <img
       v-lazysrc="imageSrc"
@@ -11,7 +11,9 @@
     <div class="mt-30 text-14 md:mt-42 text-center font-semibold uppercase">
       <slot> </slot>
     </div>
-    <div class="mt-8 text-center md:mt-12">{{ model.name }}</div>
+    <div class="mt-8 text-center md:mt-12">
+      <span>{{ model.name }}</span>
+    </div>
     <div class="mt-10 font-semibold md:mt-12">{{ price }}</div>
     <BaseButton class="mt-14 md:mt-20" @click.prevent="addToBasket()">В корзину</BaseButton>
   </nuxt-link>

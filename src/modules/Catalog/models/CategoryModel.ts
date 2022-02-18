@@ -22,4 +22,6 @@ export default class CategoryModel extends SeoModel {
   parent: CategoryModel;
 
   isOpened = false;
+
+  background_color: string;
 }

@@ -5,10 +5,17 @@
       <section>
         <LazyBaseSwiper :slides="subCategories" :settings="sliderSettings">
           <template #slide="{ slide }">
-            <nuxt-link class="w-226 flex flex-col" :to="getSubCategoryRoute(slide)">
-              <img v-lazysrc="getSubCategoryLogo(slide)" height="226" width="226" alt=" " class="h-226 w-226 object-scale-down" />
-              <span class="mt-16">{{ slide.title }}</span>
-              <span class="text-12 text-text-gray mt-6">{{ slide.subtitle }}</span>
+            <nuxt-link class="w-226 flex flex-col justify-center" :to="getSubCategoryRoute(slide)">
+              <img
+                v-lazysrc="getSubCategoryLogo(slide)"
+                height="226"
+                width="226"
+                alt=" "
+                class="h-226 w-full object-cover p-24"
+                :style="subStyle(slide)"
+              />
+              <span class="mt-16 text-center">{{ slide.title }}</span>
+              <span class="text-12 text-text-gray mt-6 text-center">{{ slide.subtitle }}</span>
             </nuxt-link>
           </template>
         </LazyBaseSwiper>
@@ -82,6 +89,10 @@ export default class CategoryContent extends Vue {
     }
   }
 
+  subStyle(model: CategoryModel) {
+    return { background: model.background_color };
+  }
+
   get isRootCategory() {
     return !this.slug && !this.model?.id;
   }
@@ -123,8 +134,8 @@ export default class CategoryContent extends Vue {
           slidesPerGroup: 1,
         },
         1024: {
-          slidesPerView: 3,
-          slidesPerGroup: 3,
+          slidesPerView: 4,
+          slidesPerGroup: 4,
           spaceBetween: 40,
         },
       },

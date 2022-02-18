@@ -1,7 +1,7 @@
 <template>
   <main class="page-wrapper">
     <BaseStaticBanner v-if="!!bannerUrl" :image-src="bannerUrl" default-image="/images/about_default_banner.jpg">
-      <div class="absolute bottom-30 w-screen md:bottom-60">
+      <div class="bottom-30 absolute w-screen md:bottom-60">
         <h1 class="container w-full text-white md:w-1/2">
           Добро пожаловать в <br />
           KAYPRO

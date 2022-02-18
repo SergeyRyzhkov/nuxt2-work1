@@ -1,17 +1,11 @@
 <template>
   <div class="flex flex-col lg:flex-row">
     <div class="max-h-380 lg:max-h-600 flex w-full bg-[#F5F5F5] lg:w-1/2">
-      <img
-        v-lazysrc="leftIamgeSrc"
-        height="570"
-        width="300"
-        alt=" "
-        class="h-247 w-150 px-30 pt-15 lg:h-570 lg:w-300 m-auto object-scale-down"
-      />
+      <img v-lazysrc="leftIamgeSrc" height="570" width="300" alt=" " class="h-full w-full object-cover object-left-top" />
     </div>
     <div class="flex w-full lg:w-1/2" :style="bgColor">
       <div class="py-30 lg:py-100 lg:px-70 m-auto flex h-full flex-col items-center px-16">
-        <div :style="color" class="mt-27 font-compact text-89">
+        <div :style="color" class="mt-27 font-compact text-89 text-center">
           {{ title }}
         </div>
         <div :style="color" class="mt-18 text-14 text-center">

@@ -9,7 +9,7 @@
     <div v-if="isDataExists" class="md:hidden">
       <BaseAccordion v-for="(item, index) in faqList.content.context" :key="index" :is-arrow="true" class="mb-12">
         <template #header>
-          <div class="pb-12 text-14 text-secondary">{{ item.title }}</div>
+          <div class="text-14 text-secondary pb-12">{{ item.title }}</div>
         </template>
         <template #content><div class="my-12" v-html="item.description"></div></template>
       </BaseAccordion>
@@ -78,7 +78,7 @@ export default class MainPage extends Vue {
   }
 
   updateBreadCrumbs() {
-    const breadCrumbList = [{ linkName: "Главная", name: "main" }, { linkName: this.isFaq ? "Вопрос-ответ" : "Документы" }];
+    const breadCrumbList = [{ linkName: "Главная", name: "main" }, { linkName: this.isFaq ? "Помощь" : "Документы" }];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
   }
 
