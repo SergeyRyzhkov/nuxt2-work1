@@ -18,7 +18,7 @@
     />
     <div class="mt-24 flex items-center justify-between">
       <BaseCheckbox id="remember-me" v-model="loginFormData.rememberMe" label="Запомнить меня" />
-      <div class="cursor-pointer text-14 text-secondary" @click="$emit('reset-clicked')">Забыли пароль ?</div>
+      <div class="text-14 text-secondary cursor-pointer" @click="$emit('reset-clicked')">Забыли пароль ?</div>
     </div>
     <BaseButton class="mt-40 md:mt-60" type="submit">Войти</BaseButton>
   </form>
@@ -52,6 +52,11 @@ export default class LoginComponent extends Vue {
       return;
     }
     const result = await this.$serviceLocator.getService(AuthService).login(this.loginFormData);
+
+    if (result.logonStatus === LogonStatus.RegistrationNotConfirmed) {
+      this.$emit("need-verify-email", this.loginFormData);
+    }
+
     if (result.logonStatus === LogonStatus.OK && !this.$serviceLocator.getService(AuthService).isUserActive) {
       this.$emit("need-verify-email", this.loginFormData);
     }
