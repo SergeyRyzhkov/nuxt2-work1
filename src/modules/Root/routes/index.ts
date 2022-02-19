@@ -26,8 +26,9 @@ const routes = [
     component: () => lazyLoad(import("@/modules/Root/pages/CooperationPage.vue")),
   },
   {
-    name: "faq",
-    path: "/faq",
+    name: "help",
+    path: "/help",
+    props: true,
     component: () => lazyLoad(import("@/modules/Root/pages/FaqPage.vue")),
   },
   {
@@ -36,9 +37,10 @@ const routes = [
     component: () => lazyLoad(import("@/modules/Root/pages/ContactsPage.vue")),
   },
   {
-    name: "documents",
+    name: "document",
     path: "/documents",
-    props: { isFaq: false },
+    props: true,
+    // props: { isFaq: false },
     component: () => lazyLoad(import("@/modules/Root/pages/FaqPage.vue")),
   },
 

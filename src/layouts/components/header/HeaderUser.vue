@@ -58,12 +58,8 @@ export default class HeaderUser extends Vue {
         this.$router.push({ name: "favorites" });
       }
     } else {
-      this.$modalManager.showNotify("Войдите в свой аккаунт или зарегистрируйтесь !");
+      this.$modalManager.showNotify("Войдите в свой аккаунт или зарегистрируйтесь");
     }
-  }
-
-  get userName() {
-    return this.$serviceLocator.getService(AuthService).getSessionUser().first_name;
   }
 }
 </script>

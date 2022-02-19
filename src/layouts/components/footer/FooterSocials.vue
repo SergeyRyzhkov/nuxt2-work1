@@ -14,15 +14,36 @@
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
+import AppSettings from "@/modules/Root/models/AppSettings";
+import { SettingService } from "@/modules/Root/SettingService";
 
 @Component
 export default class FooterSocials extends Vue {
-  socials = [
-    { icon: "/icons/social/vk.svg", url: "" },
-    { icon: "/icons/social/facebook.svg", url: "" },
-    { icon: "/icons/social/ok.svg", url: "" },
-    { icon: "/icons/social/youtube.svg", url: "" },
-    { icon: "/icons/social/instagram.svg", url: "" },
-  ];
+  settings: AppSettings = new AppSettings();
+
+  async fetch() {
+    this.settings = await this.$serviceLocator.getService(SettingService).getAppSetting();
+    this.initSocials();
+  }
+
+  socials: { icon: string; url: string }[] = [];
+
+  initSocials() {
+    if (this.settings.socials?.fb) {
+      this.socials.push({ icon: "/icons/social/facebook.svg", url: this.settings.socials?.fb });
+    }
+    if (this.settings.socials?.vk) {
+      this.socials.push({ icon: "/icons/social/vk.svg", url: this.settings.socials?.vk });
+    }
+    if (this.settings.socials?.youtube) {
+      this.socials.push({ icon: "/icons/social/youtube.svg", url: this.settings.socials?.youtube });
+    }
+    if (this.settings.socials?.instagram) {
+      this.socials.push({ icon: "/icons/social/instagram.svg", url: this.settings.socials?.instagram });
+    }
+    // if (this.settings.socials?.fb) {
+    //   this.socials.push({ icon: "/icons/social/facebook.svg", url: this.settings.socials?.fb });
+    // }
+  }
 }
 </script>

@@ -1,24 +1,18 @@
 <template>
   <div class="flex flex-col lg:flex-row">
-    <div class="flex max-h-380 w-full bg-[#F5F5F5] lg:max-h-600 lg:w-1/2">
-      <img
-        v-lazysrc="leftIamgeSrc"
-        height="570"
-        width="300"
-        alt=" "
-        class="m-auto h-247 w-150 object-scale-down px-30 pt-15 lg:h-570 lg:w-300"
-      />
+    <div class="max-h-380 lg:max-h-600 flex w-full bg-[#F5F5F5] lg:w-1/2">
+      <img v-lazysrc="leftIamgeSrc" height="570" width="300" alt=" " class="h-full w-full object-cover object-left-top" />
     </div>
     <div class="flex w-full lg:w-1/2" :style="bgColor">
-      <div class="m-auto flex h-full flex-col items-center py-30 px-16 lg:py-100 lg:px-70">
-        <div :style="color" class="mt-27 font-compact text-89">
+      <div class="m-auto flex h-full flex-col items-center justify-center p-16">
+        <div :style="color" class="mt-27 font-compact text-89 text-center">
           {{ title }}
         </div>
-        <div :style="color" class="mt-18 text-center text-14">
+        <div :style="color" class="mt-18 text-14 text-center">
           {{ description }}
         </div>
         <base-button v-show="!!routeLink" class="mt-40 w-max bg-white" @click="addToBasket()">{{ buttonText }}</base-button>
-        <nuxt-link v-if="!!routeLink" class="mt-20 text-14 underline focus:no-underline" :to="routeLink">Узнать больше</nuxt-link>
+        <nuxt-link v-if="!!routeLink" class="text-14 mt-20 underline focus:no-underline" :to="routeLink">Узнать больше</nuxt-link>
       </div>
     </div>
   </div>
@@ -57,7 +51,7 @@ export default class MainPageProduct extends Vue {
 
   async addToBasket() {
     await this.$serviceLocator.getService(ProfileService).addToCart(this.model?.content?.product?.product.id, 1);
-    this.$modalManager.showNotify("Добавлено. Можете оформить заказ!");
+    this.$modalManager.showNotify("Добавлено. Можете оформить заказ");
   }
 
   get color() {

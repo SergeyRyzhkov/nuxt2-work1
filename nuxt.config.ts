@@ -9,11 +9,10 @@ const nuxtConfig: NuxtConfig = {
 
   components: [
     { path: "@/components", pathPrefix: false },
-    { path: "@/pages", pathPrefix: false },
     { path: "@/layouts", pathPrefix: false },
   ],
 
-  loading: { color: "red", height: "5px" },
+  loading: { color: "red", height: "2px" },
 
   head: {
     htmlAttrs: {
@@ -56,15 +55,15 @@ const nuxtConfig: NuxtConfig = {
 
   plugins: [
     { src: "@/plugins/app-init" },
-    { src: "@/plugins/directives" },
     { src: "@/plugins/vuelidate" },
+    { src: "@/plugins/directives" },
     { src: "@/plugins/dayjs" },
     { src: "@/plugins/modal-manager.client" },
   ],
 
   router: {
     prefetchLinks: false,
-    // middleware: ["requiresAuthorize"],
+    middleware: ["requiresAuthorize"],
   },
 
   modules: ["@nuxtjs/axios", "cookie-universal-nuxt", "./render-cache-module"],

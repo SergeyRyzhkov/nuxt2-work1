@@ -7,6 +7,7 @@ import SessionUser from "./models/SessionUser";
 import AuthStore from "./store/AuthStore";
 import { ProfileService } from "@/modules/Profile/ProfileService";
 import { BaseService } from "@/_core/service/BaseService";
+import { ServiceLocator } from "@/_core/service/ServiceLocator";
 
 export class AuthService extends BaseService {
   cookieTokenCookieName = "KAYPRO_TOKEN";
@@ -53,7 +54,7 @@ export class AuthService extends BaseService {
       await this.tryGetCsfrCookie();
       const response = await this.apiRequest.post("users/login", { ...loginData, guestHash });
 
-      if (response.status === 200) {
+      if (response.status === 200 || response.status === 204) {
         const accessToken = response?.data?.access_token;
         if (!!accessToken) {
           this.updateAccessToken(accessToken);
@@ -78,6 +79,7 @@ export class AuthService extends BaseService {
     try {
       this.clearAccessToken();
       await this.apiRequest.post("users/logout");
+      await ServiceLocator.instance.getService(ProfileService).updateUserCartState();
     } catch {}
   }
 
@@ -160,6 +162,7 @@ export class AuthService extends BaseService {
   }
 
   public async updateProfile(registrationData: RegistrationData) {
+    registrationData.phone = `+${registrationData.phone}`;
     return await this.apiRequest.post("users/profile?_method=PUT", registrationData);
   }
 

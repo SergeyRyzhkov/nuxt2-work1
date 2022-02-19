@@ -1,7 +1,7 @@
 <template>
   <div class="page-wrapper">
-    <BaseStaticBanner :image-src="bannerSrc" default-image="/images/default-banner-black.jpg">
-      <div class="absolute bottom-30 w-screen md:bottom-60">
+    <BaseStaticBanner :image-src="bannerSrc">
+      <div class="bottom-30 absolute w-screen md:bottom-60">
         <h1 class="container w-full text-white md:w-1/2" v-html="title"></h1>
       </div>
     </BaseStaticBanner>

@@ -3,48 +3,52 @@
     <div class="order-item-header flex flex-col justify-between px-20 pt-16 pb-12 md:flex-row md:items-center">
       <div class="flex flex-col md:flex-row md:items-center">
         <div>
-          <div class="order-item-id">Заказ №: <span class="font-semibold">12233445667</span></div>
-          <div class="order-item-date">Дата создания: 25 июля 2021, 19:30</div>
+          <div class="order-item-id">
+            Заказ №: <span class="font-semibold">{{ model.id }}</span>
+          </div>
+          <div class="order-item-date">Дата создания: {{ dateCreate }}</div>
         </div>
-        <div class="order-item-status md:pl-67">В обработке</div>
+        <div class="order-item-status md:pl-67">{{ status }}</div>
       </div>
       <div class="mt-5 flex flex-row justify-between md:mt-0 md:flex-col">
-        <div class="order-item-price">3 700 ₽</div>
-        <div class="order-item-count">3 товара</div>
+        <div class="order-item-price">{{ totalPrice }}</div>
+        <div class="order-item-count">{{ productCount }}</div>
       </div>
     </div>
     <div class="order-item-body">
       <div class="order-item-info flex items-center justify-between">
-        <div>Ожидается оплата</div>
-        <div class="underline">Подробнее</div>
+        <div>{{ paymentStatus }}</div>
+        <nuxt-link :to="routeLocation" class="cursor-pointer underline hover:no-underline">Подробнее</nuxt-link>
       </div>
-      <div class="mt-24 flex flex-col md:flex-row md:justify-between">
-        <div class="order-item-products flex items-center">
-          <div class="ml-8 flex max-w-[95px] flex-col first:ml-0 lg:max-w-[132px]">
-            <figure class="order-item-product-image">
-              <img src="/images/tmp_product.jpg" alt="" itemprop="image" class="" loading="lazy" />
-              <figcaption></figcaption>
-            </figure>
-            <div class="order-item-product-title mt-8 md:mt-12">Маска KAYPRO Botu-Cure</div>
-            <div class="order-item-product-price mt-6">2 000 ₽</div>
-          </div>
-          <div class="ml-8 flex max-w-[95px] flex-col lg:max-w-[132px]">
-            <figure class="order-item-product-image">
-              <img src="/images/tmp_product.jpg" alt="" itemprop="image" class="" loading="lazy" />
-              <figcaption></figcaption>
-            </figure>
-            <div class="order-item-product-title mt-12">Маска KAYPRO Botu-Cure</div>
-            <div class="order-item-product-price mt-6">2 000 ₽</div>
+      <div class="flex flex-col lg:flex-row">
+        <div
+          class="order-item-products mt-16 flex w-full min-w-[96px] flex-wrap md:justify-between lg:mt-24 lg:w-2/3 lg:min-w-[133px]"
+        >
+          <div v-for="iter in products" :key="iter.product.id" class="mr-8">
+            <nuxt-link :to="productRouteLink(iter.product)">
+              <img
+                v-lazysrc="productImageSrc(iter.product)"
+                height="158"
+                width="133"
+                alt=" "
+                class="h-100 px-30 lg:h-158 lg:w-133 w-96 object-scale-down pt-8 lg:pt-12"
+              />
+              <div class="text-12 lg:text-14 mt-8 md:mt-12">{{ iter.product.name }}</div>
+              <div class="text-14 mt-8 font-semibold">{{ productPrice(iter.product) }}</div>
+            </nuxt-link>
           </div>
         </div>
-        <div class="order-item-pay mt-21 flex flex-col items-center md:mt-0 md:items-end">
-          <div>
-            <BaseButton class="order-item-btn">Оплатить заказ</BaseButton>
+        <div class="order-item-pay mt-16 flex w-full flex-col items-center md:mt-0 md:items-end lg:mt-24 lg:w-1/3">
+          <BaseButton v-if="payOrderEnabled" class="order-item-btn w-full lg:max-w-max">Оплатить заказ</BaseButton>
+          <BaseButton v-if="repeatOrderEnabled" class="order-item-btn w-full lg:max-w-max" @click="retryOrder()"
+            >Повторить заказ</BaseButton
+          >
+          <div v-if="cancelOrderEnabled" class="order-item-pay-cancel mt-16 cursor-pointer" @click="cancelOrder()">
+            Отменить заказ
           </div>
-          <div class="order-item-pay-cancel mt-16">Отменить заказ</div>
-          <div class="order-item-pay-info mt-12 text-center md:text-right">
+          <!-- <div class="order-item-pay-info mt-12 text-center md:text-right">
             Не прошла оплата-онлайн, повторите попытку или заказ будет отменен через 00:29 минут
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -52,11 +56,99 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
-@Component({
-  components: {},
-})
-export default class OrderItem extends Vue {}
+import dayjs from "dayjs";
+import { Component, Prop, Vue } from "nuxt-property-decorator";
+import ExecutionOrderModel from "../models/ExecutionOrderModel";
+import { OrderStatusType } from "../models/OredrStatusType";
+import { ProfileService } from "../ProfileService";
+import { PayStatusType } from "../models/PayStatusType";
+import { decOfNum } from "@/utils/Formaters";
+import ProductModel from "@/modules/Catalog/models/ProductModel";
+import { CatalogService } from "@/modules/Catalog/CatalogService";
+
+@Component
+export default class OrderItem extends Vue {
+  OrderStatusType = OrderStatusType;
+  PayStatusType = PayStatusType;
+
+  @Prop()
+  model: ExecutionOrderModel;
+
+  get routeLocation() {
+    return {
+      name: "order-detail",
+      params: { id: this.model.id },
+    };
+  }
+
+  get dateCreate() {
+    return dayjs(this.model?.created_at).format("DD MMMM YYYY, HH:MM");
+  }
+
+  get totalPrice() {
+    const price = Number(this.model?.products_price);
+    return `${price?.toLocaleString("ru-RU")} ₽`;
+  }
+
+  get productCount() {
+    const count = this.model?.order_items_count || 0;
+    return `${count} ${decOfNum(count, ["товар", "товара", "товаров"])}`;
+  }
+
+  get paymentStatus() {
+    return PayStatusType[this.model.payment_status];
+  }
+
+  get status() {
+    return OrderStatusType[this.model?.status];
+  }
+
+  get products() {
+    if (!!this.model?.order_items) {
+      return this.model.order_items.filter((iter) => {
+        return !!iter && !!iter.product;
+      });
+    }
+    return [];
+  }
+
+  get cancelOrderEnabled() {
+    return this.$serviceLocator.getService(ProfileService).cancelOrderEnabled(this.model);
+  }
+
+  get repeatOrderEnabled() {
+    return this.$serviceLocator.getService(ProfileService).repeatOrderEnabled(this.model);
+  }
+
+  get payOrderEnabled() {
+    return this.$serviceLocator.getService(ProfileService).payOrderEnabled(this.model);
+  }
+
+  get deliveryStatusStyle() {
+    return "";
+  }
+
+  cancelOrder() {
+    this.$emit("cancel-order", this.model);
+  }
+
+  retryOrder() {
+    this.$emit("repeat-order", this.model);
+  }
+
+  productPrice(model: ProductModel) {
+    const price = Number(model?.price);
+    return (price?.toLocaleString("ru-RU") || 0) + " ₽";
+  }
+
+  productRouteLink(model: ProductModel) {
+    return this.$serviceLocator.getService(CatalogService).getProductRouteLocation(model);
+  }
+
+  productImageSrc(model: ProductModel) {
+    return model?.logo && model?.logo.length ? model.logo[0].url : "/images/product-no-photo.jpg";
+  }
+}
 </script>
 
 <style lang="scss">
@@ -67,9 +159,6 @@ export default class OrderItem extends Vue {}
     font-size: 12px !important;
   }
   &-pay {
-    @include widescreen {
-      max-width: 40%;
-    }
     &-cancel {
       font-size: 12px;
       line-height: 24px;
@@ -106,7 +195,7 @@ export default class OrderItem extends Vue {}
   &-price {
     font-size: 18px;
     line-height: 24px;
-    font-weight: bold;
+    font-weight: 600;
   }
   &-count {
     font-size: 12px;

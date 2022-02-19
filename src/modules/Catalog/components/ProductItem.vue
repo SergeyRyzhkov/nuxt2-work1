@@ -1,17 +1,19 @@
 <template>
-  <nuxt-link v-show="!!model" :to="routeLink" class="relative flex flex-col items-center">
+  <nuxt-link v-show="!!model" :to="routeLink" class="relative flex w-full flex-col items-center">
     <BaseHeartButton class="absolute top-0 right-0" :is-red="model.is_favorite" @click.prevent="toogleFavor()"></BaseHeartButton>
     <img
       v-lazysrc="imageSrc"
       height="286"
       width="226"
       alt=" "
-      class="h-155 w-135 px-30 pt-15 lg:h-286 lg:w-226 object-scale-down transition-all hover:scale-105"
+      class="h-155 w-135 px-30 pt-15 lg:h-286 lg:w-226 object-scale-down"
     />
     <div class="mt-30 text-14 md:mt-42 text-center font-semibold uppercase">
       <slot> </slot>
     </div>
-    <div class="mt-8 text-center md:mt-12">{{ model.name }}</div>
+    <div class="mt-8 text-center md:mt-12">
+      <span>{{ model.name }}</span>
+    </div>
     <div class="mt-10 font-semibold md:mt-12">{{ price }}</div>
     <BaseButton class="mt-14 md:mt-20" @click.prevent="addToBasket()">В корзину</BaseButton>
   </nuxt-link>
@@ -29,7 +31,8 @@ export default class ProductItem extends Vue {
   model: ProductModel;
 
   get price() {
-    return (this.model?.price?.toLocaleString() || 0) + " ₽";
+    const price = this.model?.price || 0;
+    return Number(price).toLocaleString("ru-RU") + " ₽";
   }
 
   get routeLink() {
@@ -47,7 +50,6 @@ export default class ProductItem extends Vue {
 
   async addToBasket() {
     await this.$serviceLocator.getService(ProfileService).addToCart(this.model.id, 1);
-    // this.$modalManager.showNotify("Добавлено. Можете оформить заказ!");
   }
 }
 </script>

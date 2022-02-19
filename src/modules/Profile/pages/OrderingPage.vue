@@ -2,9 +2,9 @@
   <main class="page-wrapper linear-order">
     <div class="container flex flex-col md:flex-row">
       <section class="line-half w-full pt-60 md:w-1/2">
-        <h1>Оформление заказа</h1>
+        <span class="text-24">Оформление заказа</span>
         <BreadCrumbs />
-        <OrderForm :order="order" :delivery-methods="deliveryMethods" />
+        <OrderForm :order="order" :delivery-methods="deliveryMethods" :payment-types="paymentTypes" />
       </section>
       <section class="max-h-[75vh] w-full pt-60 md:w-1/2 xl:pl-40">
         <div class="shopping-cart-items flex flex-col">
@@ -23,14 +23,10 @@
         </div>
         <div class="cost-border py-26">
           <div class="text-14 mt-8 flex items-center justify-between">
-            <div>НДС</div>
-            <div>0 ₽</div>
-          </div>
-          <div class="text-14 mt-8 flex items-center justify-between">
             <div>Доставка</div>
             <div>{{ deliverySum }}</div>
           </div>
-          <div class="text-14 mt-8 flex items-center justify-between">
+          <div v-if="!!discountSum" class="text-14 mt-8 flex items-center justify-between">
             <div>Скидка</div>
             <div>{{ discountSum }} ₽</div>
           </div>
@@ -49,20 +45,30 @@
 import { Vue, Component, getModule } from "nuxt-property-decorator";
 import OrderModel from "../models/OrderModel";
 import { ProfileService } from "../ProfileService";
-import CartModel from "../models/CartModel";
+import CartStore from "../store/CartStore";
 import AppStore from "@/modules/Root/store/AppStore";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
+import { AuthService } from "@/modules/Auth/AuthService";
 
 @Component
 export default class OrderingPage extends Vue {
   order = new OrderModel();
   deliveryMethods: { id: number; title: string; price: number; free_from: any }[] = [];
-  cartItems: CartModel[] = [];
+  paymentTypes: { id: string; title: string }[] = [];
 
   fetch() {
     this.updateBreadCrumbs();
     this.deliveryMethods = this.$serviceLocator.getService(ProfileService).getDeliveryMethods();
-    this.cartItems = this.$serviceLocator.getService(ProfileService).getCartItems();
+    this.paymentTypes = this.$serviceLocator.getService(ProfileService).getPaymentMethods();
+
+    if (this.$serviceLocator.getService(AuthService).isAuthenticated) {
+      const user = this.$serviceLocator.getService(AuthService).getSessionUser();
+      this.order = new OrderModel(user);
+    }
+  }
+
+  get cartItems() {
+    return getModule(CartStore, this.$store).userCart;
   }
 
   get allWeight() {
@@ -98,7 +104,7 @@ export default class OrderingPage extends Vue {
   }
 
   get priceNmb() {
-    return this.cartItems.reduce((sum, iterCart) => sum + (iterCart.product.price || 0) * iterCart.count, 0);
+    return this.cartItems.reduce((sum, iterCart) => sum + (+iterCart.product.price || 0) * iterCart.count, 0);
   }
 
   updateBreadCrumbs() {

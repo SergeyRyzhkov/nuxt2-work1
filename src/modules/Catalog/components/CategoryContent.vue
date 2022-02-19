@@ -1,21 +1,21 @@
 <template>
   <div>
     <RootCategory v-show="isRootCategory"></RootCategory>
-
     <div v-if="isNotLeafCategory">
       <section>
         <LazyBaseSwiper :slides="subCategories" :settings="sliderSettings">
           <template #slide="{ slide }">
-            <nuxt-link class="w-226 flex flex-col" :to="getSubCategoryRoute(slide)">
+            <nuxt-link class="w-226 flex flex-col justify-center" :to="getSubCategoryRoute(slide)">
               <img
                 v-lazysrc="getSubCategoryLogo(slide)"
                 height="226"
                 width="226"
                 alt=" "
-                class="h-226 w-226 object-scale-down transition-all hover:scale-105"
+                class="h-226 w-full object-cover p-24"
+                :style="subStyle(slide)"
               />
-              <span class="mt-16">{{ slide.title }}</span>
-              <span class="text-12 text-text-gray mt-6">{{ slide.subtitle }}</span>
+              <span class="mt-16 text-center">{{ slide.title }}</span>
+              <span class="text-12 text-text-gray mt-6 text-center">{{ slide.subtitle }}</span>
             </nuxt-link>
           </template>
         </LazyBaseSwiper>
@@ -31,22 +31,33 @@
         </LazyBaseSwiper>
       </section>
 
-      <section v-if="!!model && !!model.products" class="mt-40 md:mt-60">
+      <section v-if="!!model" class="mt-40 md:mt-60">
         <div class="text-14 text-text-gray mb-28">{{ productCountText }}</div>
         <div class="gap-x-30 grid grid-cols-1 gap-y-40 md:grid-cols-2 lg:grid-cols-3">
-          <ProductItem v-for="iter in model.products" :key="iter.id" :model="iter"> </ProductItem>
+          <ProductItem v-for="iter in productList" :key="iter.id" :model="iter"> </ProductItem>
         </div>
+        <InfiniteScroll
+          class="gap-x-30 mt-28 grid grid-cols-1 gap-y-40 md:grid-cols-2 lg:grid-cols-3"
+          @on-intersect="loadMoreProducts()"
+        >
+          <template v-if="loading">
+            <ProductItemSkeleton v-for="index in 6" :key="index"> </ProductItemSkeleton>
+          </template>
+        </InfiniteScroll>
       </section>
     </div>
 
-    <LeafCategory v-show="isLeafCategory" :model="model"></LeafCategory>
+    <LeafCategory v-if="isLeafCategory" :model="model"></LeafCategory>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "nuxt-property-decorator";
+import { Component, Prop, Vue, Watch } from "nuxt-property-decorator";
 import { CatalogService } from "../CatalogService";
 import CategoryModel from "../models/CategoryModel";
+import ProductModel from "../models/ProductModel";
+import { decOfNum } from "@/utils/Formaters";
+import { Pagination } from "@/_core/models/Pagination";
 
 @Component
 export default class CategoryContent extends Vue {
@@ -55,6 +66,32 @@ export default class CategoryContent extends Vue {
 
   @Prop()
   slug: string;
+
+  pagination: Pagination = new Pagination();
+  loading = true;
+  productList: ProductModel[] = [];
+
+  @Watch("isNotLeafCategory")
+  async onNotLeaf(val) {
+    if (!!val) {
+      await this.loadMoreProducts();
+    }
+  }
+
+  async loadMoreProducts() {
+    if (Pagination.hasNextPage(this.pagination)) {
+      this.loading = true;
+      Pagination.nextPage(this.pagination);
+      const result = await this.$serviceLocator.getService(CatalogService).getProductsByCategory(this.pagination, this.model);
+      this.pagination.total = result.pagination.total;
+      this.productList = [...this.productList, ...result.data];
+      this.loading = false;
+    }
+  }
+
+  subStyle(model: CategoryModel) {
+    return { background: model.background_color };
+  }
 
   get isRootCategory() {
     return !this.slug && !this.model?.id;
@@ -69,11 +106,7 @@ export default class CategoryContent extends Vue {
   }
 
   get productCountText() {
-    return this.$serviceLocator.getService(CatalogService).productCountText(this.model);
-  }
-
-  get products() {
-    return this.$serviceLocator.getService(CatalogService).getAllProducts(this.model);
+    return `Найдено: ${this.pagination.total} ${decOfNum(this.pagination.total, ["товар", "товара", "товаров"])}`;
   }
 
   get sliders() {
@@ -101,8 +134,8 @@ export default class CategoryContent extends Vue {
           slidesPerGroup: 1,
         },
         1024: {
-          slidesPerView: 3,
-          slidesPerGroup: 3,
+          slidesPerView: 4,
+          slidesPerGroup: 4,
           spaceBetween: 40,
         },
       },

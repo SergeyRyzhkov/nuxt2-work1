@@ -1,14 +1,7 @@
 <template>
   <article v-if="!!articleModel && !!articleModel.meta_slug" class="article-smallitem" @click="goToCard()">
     <figure class="article-smallitem__preview">
-      <img
-        v-lazysrc="imageSrc"
-        alt=" "
-        itemprop="image"
-        class="article-smallitem__preview-img transition-all hover:scale-105"
-        width="400"
-        height="280"
-      />
+      <img v-lazysrc="imageSrc" alt=" " itemprop="image" class="article-smallitem__preview-img" width="400" height="280" />
       <figcaption>{{ articleModel.title }}</figcaption>
     </figure>
     <header class="article-smallitem__header leading-20">

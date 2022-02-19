@@ -12,25 +12,25 @@
         width="1440"
       />
       <div class="relative w-full">
-        <div class="md:my-70 container z-50 my-60 flex flex-col">
-          <div class="bg-primary text-14 w-max rounded-full px-16 py-8 text-white">{{ statusName }}</div>
+        <div class="container z-50 my-60 flex flex-col md:my-70">
+          <div class="w-max rounded-full bg-primary px-16 py-8 text-14 text-white">{{ statusName }}</div>
           <div class="mb:mt-60 mt-40 font-normal">{{ dateType }}</div>
-          <h1 class="font-compact text-62 mt-24 uppercase">{{ model.name }}</h1>
+          <h1 class="mt-24 font-compact text-62 uppercase">{{ model.name }}</h1>
           <base-button class="base-button mt-18 w-max flex-shrink-0 grow bg-white lg:mt-40" @click="onSubscribeClicked">
             Записаться на курс
           </base-button>
-          <div class="text-14 mt-32 flex font-normal md:mt-60">
+          <div class="mt-32 flex text-14 font-normal md:mt-60">
             <div>
               <div>Спикер</div>
-              <div class="text-18 mt-6 font-semibold">{{ model.lecturer }}</div>
+              <div class="mt-6 text-18 font-semibold">{{ model.lecturer }}</div>
             </div>
-            <div class="md:ml-70 ml-40">
+            <div class="ml-40 md:ml-70">
               <div>Длительность</div>
-              <div class="text-18 mt-6 font-semibold">{{ model.duration }}</div>
+              <div class="mt-6 text-18 font-semibold">{{ model.duration }}</div>
             </div>
-            <div class="md:ml-70 ml-40">
+            <div class="ml-40 md:ml-70">
               <div>Город</div>
-              <div class="text-18 mt-6 font-semibold">{{ model.city }}</div>
+              <div class="mt-6 text-18 font-semibold">{{ model.city }}</div>
             </div>
           </div>
         </div>
@@ -54,7 +54,7 @@
         <h2 class="training-section__caption">СТОИМОСТЬ КУРСА</h2>
         <div class="training-section__content text-48 font-semibold">
           <div>{{ priceFormatted }}</div>
-          <div class="text-14 mt-16 font-semibold">{{ model.price_description }}</div>
+          <div class="mt-16 text-14 font-semibold">{{ model.price_description }}</div>
         </div>
       </div>
     </section>
@@ -72,7 +72,6 @@ import { Component, getModule, Prop, Ref, Vue } from "nuxt-property-decorator";
 import dayjs from "dayjs";
 import TrainingModel from "../models/TrainingModel";
 import { TrainingService } from "../TrainingService";
-import EnrollTraining from "../components/EnrollTraining.vue";
 import { SeoMetaTagsBuilder } from "@/_core/service/SeoMetaTagsBuilder";
 import AppStore from "@/modules/Root/store/AppStore";
 import Cacheable from "@/_core/MethodCacheDecorator";
@@ -82,7 +81,7 @@ export default class TrainingPage extends Vue {
   @Prop()
   slug: string;
 
-  @Ref() readonly enrollTraining!: EnrollTraining;
+  @Ref() readonly enrollTraining!: any;
 
   model: TrainingModel = new TrainingModel();
 

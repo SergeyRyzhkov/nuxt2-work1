@@ -31,18 +31,26 @@
     </div>
 
     <div class="flex flex-col md:flex-row">
-      <BaseInput v-model="formModel.city" placeholder="Из какого вы города*" class="mb-27" />
-      <BaseMultiSelect v-model="formModel.area" placeholder="Сфера деятельности*" :options="areaOptions" class="mb-27 md:ml-32">
+      <BaseInput
+        v-model="formModel.city"
+        placeholder="Из какого вы города*"
+        class="mb-27"
+        :has-error="$v.formModel.city.$error"
+        @blur="$v.formModel.city.$touch()"
+      />
+      <BaseMultiSelect
+        v-model="formModel.area"
+        placeholder="Сфера деятельности*"
+        :options="areaOptions"
+        class="mb-27 md:ml-32"
+        :has-error="$v.formModel.area.$error"
+        @blur="$v.formModel.area.$touch()"
+      >
       </BaseMultiSelect>
     </div>
 
-    <BaseInput
-      v-model="formModel.comment"
-      placeholder="Комментарий*"
-      :has-error="$v.formModel.comment.$error"
-      class="mb-27"
-      @blur="$v.formModel.comment.$touch()"
-    />
+    <BaseInput v-model="formModel.comment" placeholder="Комментарий" class="mb-27" />
+
     <BaseButton type="submit" class="mt-20 md:mt-40">Отправить</BaseButton>
 
     <p class="text-12 text-gray-color mt-16 -mb-32 md:mt-32">
@@ -65,22 +73,12 @@ import { phoneMask } from "@/utils/InputMaskDefinitions";
 import { EmptyService } from "@/_core/service/EmptyService";
 import { BaseViewModel } from "@/_core/models/BaseViewModel";
 import { executeAction, loadReCaptchaScript } from "@/utils/ReCaptcha";
-
-const validations = () => {
-  return {
-    formModel: {
-      name: { required },
-      phone: { required },
-      email: { required, email },
-      comment: { required },
-    },
-  };
-};
+import { AuthService } from "@/modules/Auth/AuthService";
 
 class FeedbackModel extends BaseViewModel {
   name = "";
   phone = "";
-  email = "";
+  email = null;
   comment = "";
   agreement = 1;
   area: any = null;
@@ -89,6 +87,18 @@ class FeedbackModel extends BaseViewModel {
   recaptchaToken = "";
 }
 
+const validations = () => {
+  return {
+    formModel: {
+      name: { required },
+      city: { required },
+      phone: { required },
+      area: { required },
+      email: { required, email },
+    },
+  };
+};
+
 @Component({ validations })
 export default class FeedbackForm extends Vue {
   formModel: FeedbackModel = new FeedbackModel();
@@ -96,6 +106,15 @@ export default class FeedbackForm extends Vue {
 
   @Prop({ default: false })
   radio: boolean;
+
+  fetch() {
+    if (this.$serviceLocator.getService(AuthService).isAuthenticated) {
+      const user = this.$serviceLocator.getService(AuthService).getSessionUser();
+      this.formModel.name = user.first_name + " " + (user.patronymic || "") + " " + (user.last_name || "");
+      this.formModel.phone = user.phone as any;
+      this.formModel.email = user.email;
+    }
+  }
 
   mounted() {
     loadReCaptchaScript(this.$config.reCaptchaSiteKey);
@@ -111,14 +130,16 @@ export default class FeedbackForm extends Vue {
     if (!!recaptchaToken) {
       this.formModel.recaptchaToken = recaptchaToken;
       this.formModel.area = this.formModel?.area?.name;
+      this.formModel.phone = `+${this.formModel.phone}`;
       try {
         await this.$serviceLocator.getService(EmptyService).apiRequest.post("/users/feedback", this.formModel);
-        this.$modalManager.showNotify("Сообщение отправлено !");
+        this.$modalManager.showNotify("Сообщение отправлено");
+        this.formModel = new FeedbackModel();
       } catch (err: any) {
-        this.$modalManager.showError("Не удалось отправить сообщение!");
+        this.$modalManager.showError("Не удалось отправить сообщение");
       }
     } else {
-      this.$modalManager.showError("Вы бот !");
+      this.$modalManager.showError("Вы бот");
     }
     this.$emit("close");
   }

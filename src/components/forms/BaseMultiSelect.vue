@@ -1,6 +1,7 @@
 <template>
   <div class="base-multiselect">
     <multiselect
+      :class="[{ 'base-input--error': isShakeError && hasError }, { 'base-input__input--error': hasError }]"
       :classes="classes"
       v-bind="{ ...$attrs, ...defaultOptions }"
       :options="selectOptions"
@@ -25,6 +26,12 @@ export default class BaseMultiSelect extends Vue {
 
   @Prop()
   options: [];
+
+  @Prop({ default: true })
+  isShakeError: boolean;
+
+  @Prop({ default: false })
+  hasError: boolean;
 
   defaultOptions = {
     options: [{ id: 1000, name: "Другое" }],

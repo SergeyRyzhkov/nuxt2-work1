@@ -4,17 +4,6 @@
       Записаться на курс или <br />
       получить бесплатную консультацию
     </div>
-    <FeedbackForm class="mt-40 md:mt-60"></FeedbackForm>
+    <FeedbackForm class="mt-40 md:mt-60" :comment-requered="false"></FeedbackForm>
   </div>
 </template>
-
-<script lang="ts">
-import { Component, Prop, Vue } from "nuxt-property-decorator";
-import TrainingModel from "../models/TrainingModel";
-
-@Component
-export default class EnrollTraining extends Vue {
-  @Prop()
-  model: TrainingModel;
-}
-</script>

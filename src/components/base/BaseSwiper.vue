@@ -22,7 +22,7 @@
           </button>
         </div>
 
-        <div v-if="pagination" class="swiper-pagination"></div>
+        <div v-if="pagination" class="swiper-pagination block md:hidden"></div>
       </div>
 
       <div v-if="showThumbs" class="swiper-container-thumbs" :class="[swiperThumbsClassName, thumbsContainerClasses]">
@@ -66,7 +66,7 @@ export default class BaseSwiper extends Vue {
   sliderClasses: string;
 
   @Prop()
-  containerClasses: any[];
+  containerClasses;
 
   @Prop({ default: false })
   showThumbs: boolean;
@@ -108,6 +108,8 @@ export default class BaseSwiper extends Vue {
     observer: true,
     observeParents: true,
     mousewheel: true,
+    resizeObserver: true,
+    speed: 1000,
 
     pagination: {
       el: ".swiper-pagination",
@@ -178,9 +180,13 @@ export default class BaseSwiper extends Vue {
   width: 100%;
   top: 45%;
   left: 0px;
-  display: flex;
+  display: none;
   justify-content: space-between;
   z-index: 100;
+
+  @include tablet {
+    display: flex;
+  }
 }
 .swiper-button-next,
 .swiper-button-prev {

@@ -6,13 +6,19 @@ const routes = [
     children: [
       {
         name: "personal",
-        path: "/profile",
+        path: "personal",
         component: () => lazyLoad(import("@/modules/Profile/components/PersonalData.vue")),
       },
       {
         name: "orders",
         path: "orders",
         component: () => lazyLoad(import("@/modules/Profile/components/ProfileOrderList.vue")),
+      },
+      {
+        name: "order-detail",
+        path: "order/:id",
+        props: true,
+        component: () => lazyLoad(import("@/modules/Profile/components/OrderDetail.vue")),
       },
     ],
   },

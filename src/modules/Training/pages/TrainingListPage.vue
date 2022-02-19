@@ -5,7 +5,7 @@
     <div class="arenda-banner flex flex-col justify-between p-16 md:p-40 lg:flex-row lg:items-center">
       <div class="flex flex-col md:flex-row md:items-center">
         <h1 class="flex-shrink-0 grow">Аренда студии</h1>
-        <p class="text-14 w-full break-all md:ml-40 lg:w-1/2 xl:ml-60">
+        <p class="w-full break-all text-14 md:ml-40 lg:w-1/2 xl:ml-60">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
           aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
         </p>
@@ -26,19 +26,23 @@
           isDatePicker: false,
           placeholder: 'Выберите дату',
         }"
-        @clear="clearDate"
+        @clear="clearDateRange"
       ></base-calendar>
     </div>
 
-    <div v-if="$fetchState.pending" class="mt-30 gap-y-30 gap-x-30 grid grid-cols-1 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
-      <template v-for="index in 6">
-        <SkeletonTrainingItem :key="index"> </SkeletonTrainingItem>
-      </template>
+    <div v-if="!trainingList.length" class="mt-60 lg:mt-100">
+      <h3>Нет обучений, измените параметра поиска</h3>
     </div>
-    <div class="mt-30 gap-y-30 gap-x-30 grid grid-cols-1 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
+
+    <div class="training-list-wrapper mt-40">
       <TrainingItem v-for="iter in trainingList" :key="iter.id" :item="iter"> </TrainingItem>
     </div>
-    <BasePagination :pagination="pagination" class="mt-30 md:mt-60" @update:page="onUpdatePagination"></BasePagination>
+
+    <div v-if="$fetchState.pending" class="training-list-wrapper mt-0">
+      <SkeletonTrainingItem v-for="index in 6" :key="index"> </SkeletonTrainingItem>
+    </div>
+
+    <BasePagination :pagination="pagination" class="mt-40 lg:mt-60" @update:page="onUpdatePage"></BasePagination>
   </main>
 </template>
 
@@ -63,35 +67,40 @@ export default class TrainingListPage extends Vue {
     await this.updateData();
   }
 
+  async updateData() {
+    const data = await this.$serviceLocator
+      .getService(TrainingService)
+      .getAll(this.pagination, this.daysRange.dateRange.start, this.daysRange.dateRange.end);
+    this.pagination = data.pagination;
+    this.trainingList = data.data;
+  }
+
+  onUpdatePage(pageNmb: number) {
+    this.pagination.currentPage = pageNmb;
+    this.updateData();
+  }
+
   @Watch("daysRange", { deep: true })
   onDaysRangeChanged() {
     if (!!this.daysRange.dateRange.end) {
-      this.updateData();
+      this.resetData();
     }
   }
 
-  async updateData() {
-    const result = await this.$serviceLocator
-      .getService(TrainingService)
-      .getAll(this.pagination, this.daysRange.dateRange.start, this.daysRange.dateRange.end);
-    this.trainingList = result.data;
-    this.pagination = result.pagination;
+  clearDateRange() {
+    this.daysRange = new DaysRangeModel();
+    this.resetData();
   }
 
-  clearDate() {
-    this.daysRange = new DaysRangeModel();
-    this.pagination.currentPage = 1;
-    this.updateData();
+  resetData() {
+    this.trainingList = [];
+    this.pagination = new Pagination();
+    return this.updateData();
   }
 
   updateBreadCrumbs() {
     const breadCrumbList = [{ linkName: "Главная", name: "main" }, { linkName: "Обучение" }];
     getModule(AppStore, this.$store).updateBreadCrumbList(breadCrumbList);
-  }
-
-  onUpdatePagination(pageNmb: number) {
-    this.pagination.currentPage = pageNmb;
-    this.updateData();
   }
 
   head() {
@@ -101,6 +110,9 @@ export default class TrainingListPage extends Vue {
 </script>
 
 <style lang="scss">
+.training-list-wrapper {
+  @apply grid grid-cols-1 gap-y-30 gap-x-30 md:grid-cols-2 lg:grid-cols-3;
+}
 .arenda-banner {
   background: linear-gradient(268.69deg, #baccff -0.81%, #f2e1dc 60.12%), #eaeaea;
 }

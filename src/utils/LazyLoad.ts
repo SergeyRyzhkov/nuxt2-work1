@@ -2,8 +2,8 @@ const loadClassesName = ["loading-image"];
 
 const options = {
   root: null,
-  rootMargin: "0px",
-  threshold: 0.1,
+  rootMargin: "150px",
+  threshold: 0,
 };
 
 let observer = {

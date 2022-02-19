@@ -38,7 +38,7 @@ export default class PasswordReset extends Vue {
     if (await this.$serviceLocator.getService(AuthService).recoverPassword(this.email)) {
       this.$emit("reset-success");
     } else {
-      this.$emit("error", "Ошибка восстановления пароля !");
+      this.$emit("error", "Ошибка восстановления пароля ");
     }
   }
 }

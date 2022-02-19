@@ -7,7 +7,14 @@
         </div>
       </div>
       <div class="w-1/3 py-40">
-        <img v-lazysrc="banerSrc" alt=" " width="400" height="240" class="h-240 w-400 object-cover object-left-top" />
+        <img
+          v-if="!!banerSrc"
+          v-lazysrc="banerSrc"
+          alt=" "
+          width="400"
+          height="240"
+          class="h-240 w-400 object-cover object-left-top"
+        />
       </div>
     </div>
     <div
@@ -28,7 +35,7 @@ export default class CatalogMenu extends Vue {
   menuVisible: boolean;
 
   list: CategoryModel[] = [];
-  banerSrc = "/images/catalog-menu-banner.jpg";
+  banerSrc: string | null = null;
 
   async fetch() {
     this.list = await this.$serviceLocator.getService(CatalogService).getRoot();
@@ -42,7 +49,7 @@ export default class CatalogMenu extends Vue {
   }
 
   categoryOver(model: CategoryModel) {
-    this.banerSrc = model.banner_menu?.url || "/images/catalog-menu-banner.jpg";
+    this.banerSrc = model.banner_menu?.url || null;
   }
 }
 </script>
@@ -59,8 +66,8 @@ export default class CatalogMenu extends Vue {
   overflow: hidden;
   &.active {
     position: absolute;
-    height: 35vh;
-    max-height: 40vh;
+    height: 45vh;
+    max-height: 60vh;
   }
   .catalog-top-menu__title {
     font-size: 14px;

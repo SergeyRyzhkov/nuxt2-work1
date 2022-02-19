@@ -18,13 +18,6 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
-
-@Component
-export default class FooterSubscribe extends Vue {}
-</script>
-
 <style lang="scss">
 .footer-subscribe {
   color: #ffffff;

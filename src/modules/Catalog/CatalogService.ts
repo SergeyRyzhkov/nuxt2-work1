@@ -1,3 +1,4 @@
+import { stringify } from "query-string";
 import { AuthService } from "../Auth/AuthService";
 import CategoryModel from "./models/CategoryModel";
 import ProductModel from "./models/ProductModel";
@@ -5,14 +6,25 @@ import CatalogModel from "./models/CatalogModel";
 import { BaseService } from "@/_core/service/BaseService";
 import { RouteLink } from "@/_core/models/RouteLink";
 import { lazyLoad } from "@/utils/Common";
-import { decOfNum } from "@/utils/Formaters";
 import Cacheable from "@/_core/MethodCacheDecorator";
 import { ServiceLocator } from "@/_core/service/ServiceLocator";
+import { Pagination } from "@/_core/models/Pagination";
 
 export class CatalogService extends BaseService {
   @Cacheable(0)
   async getSearchProducts(name: string, search: string) {
     return await this.getArrayOrEmpty(ProductModel, "users/products", { params: { name, search } });
+  }
+
+  @Cacheable(0)
+  async getProductsByCategory(pagination: Pagination, cat: CategoryModel) {
+    const params = { category_id_1c: [cat.id_1с] };
+    return await this.getArrayOrEmptyWithPagination(
+      ProductModel,
+      `users/products?${stringify(params, { arrayFormat: "bracket" })}`,
+      {},
+      pagination
+    );
   }
 
   @Cacheable(0)
@@ -39,7 +51,7 @@ export class CatalogService extends BaseService {
 
   async toogleFavorites(product: ProductModel): Promise<boolean> {
     if (!ServiceLocator.instance.getService(AuthService).isAuthenticated) {
-      this.nuxtContext.$modalManager.showNotify("Для добавления в избранное вводите в свой аккаунт !");
+      this.nuxtContext.$modalManager.showNotify("Для добавления в избранное войдите в свой аккаунт");
       return product.is_favorite;
     } else {
       const res = await this.apiRequest.post(`users/products/${product.id}/favorites`, { product_id: product.id });
@@ -109,19 +121,15 @@ export class CatalogService extends BaseService {
     };
   }
 
-  getAllProducts(category: CategoryModel, list: ProductModel[] = []) {
-    if (category.products) {
-      list = [...list, ...category.products];
-    }
-    category.subcategory?.forEach((iter) => {
-      if (!!iter) {
-        this.getAllProducts(iter, list);
-      }
-    });
-    return list;
-  }
-
-  productCountText(model: CategoryModel) {
-    return `Найдено: ${model?.products.length || 0} ${decOfNum(model?.products.length || 0, ["товар", "товара", "товаров"])}`;
-  }
+  // getAllProducts(category: CategoryModel, list: ProductModel[] = []) {
+  //   if (category.products) {
+  //     list = [...list, ...category.products];
+  //   }
+  //   category.subcategory?.forEach((iter) => {
+  //     if (!!iter) {
+  //       this.getAllProducts(iter, list);
+  //     }
+  //   });
+  //   return list;
+  // }
 }

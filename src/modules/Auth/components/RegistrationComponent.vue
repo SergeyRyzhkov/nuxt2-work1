@@ -14,17 +14,11 @@
       class="mb-27"
       @blur="$v.registrationData.first_name.$touch()"
     />
-    <BaseInput
-      v-model="registrationData.patronymic"
-      placeholder="Отчество*"
-      :has-error="$v.registrationData.patronymic.$error"
-      class="mb-27"
-      @blur="$v.registrationData.patronymic.$touch()"
-    />
+    <BaseInput v-model="registrationData.patronymic" placeholder="Отчество" class="mb-27" />
     <BaseInput
       v-model="registrationData.phone"
       type="tel"
-      placeholder="Телефон"
+      placeholder="Телефон*"
       :mask="phoneMask"
       :has-error="$v.registrationData.phone.$error"
       class="mb-27"
@@ -88,7 +82,6 @@ const validations = () => {
     registrationData: {
       first_name: { required },
       last_name: { required },
-      patronymic: { required },
       phone: { required },
       email: { required, email },
       password: { required },
@@ -117,7 +110,7 @@ export default class RegistrationComponent extends Vue {
         new LoginData({ email: this.registrationData.email, password: this.registrationData.password })
       );
     } else {
-      this.$emit("error", "Не удалось выполнить регистрацию !");
+      this.$emit("error", "Не удалось выполнить регистрацию ");
     }
   }
 }

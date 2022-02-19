@@ -8,6 +8,7 @@ const Cacheable =
     descriptor.value = async function (...args) {
       const key = `${propertyKey}-${!!args ? JSON.stringify(args) : ""}`;
       const val = MemoryCache.get(key);
+
       if (!val) {
         const originVal = await originalMethod.apply(this, args);
         MemoryCache.set(key, originVal, maxAge);

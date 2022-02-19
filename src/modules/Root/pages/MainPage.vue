@@ -4,44 +4,48 @@
     <MainPageTopBanner v-show="isLoaded" :model="model"></MainPageTopBanner>
 
     <!-- content.new_products -->
-    <section v-if="!!newProducts" class="md:mt-100 container mt-40">
+    <section v-if="!!newProducts && !!newProducts.length" class="md:mt-100 container mt-40">
       <h2 class="font-compact text-48 uppercase">Новые поступления</h2>
       <LazyBaseSwiper :slides="newProducts" class="mt-16 md:mt-32" :settings="sliderSettings">
         <template #slide="{ slide }">
-          <ProductItem :model="slide" class="w-max"><span class="text-green">Новое</span></ProductItem>
+          <ProductItem :model="slide"><span class="text-green">Новое</span></ProductItem>
         </template>
       </LazyBaseSwiper>
     </section>
 
-    <section class="md:mt-100 container mt-40">
+    <section class="md:mt-100 mt-40">
       <MainPageFirstLineSlider :model="model"></MainPageFirstLineSlider>
     </section>
 
-    <!-- content.bestsellers -->
-    <section class="md:mt-100 container mt-40">
-      <h2 class="font-compact text-48 uppercase">Хиты продаж</h2>
-      <LazyBaseSwiper :slides="bestSellers" class="mt-16 md:mt-32" :settings="sliderSettings">
-        <template #slide="{ slide }">
-          <ProductItem :model="slide" class="w-max"><span>HIT</span></ProductItem>
-        </template>
-      </LazyBaseSwiper>
-    </section>
+    <LazyHydrate when-visible>
+      <section v-if="!!bestSellers && !!bestSellers.length" class="md:mt-100 container mt-40">
+        <h2 class="font-compact text-48 uppercase">Хиты продаж</h2>
+        <LazyBaseSwiper :slides="bestSellers" class="mt-16 md:mt-32" :settings="sliderSettings">
+          <template #slide="{ slide }">
+            <ProductItem :model="slide"><span>HIT</span></ProductItem>
+          </template>
+        </LazyBaseSwiper>
+      </section>
+    </LazyHydrate>
 
-    <section class="md:mt-100 container mt-40">
-      <MainPageProduct :model="model"></MainPageProduct>
-    </section>
+    <LazyHydrate when-visible>
+      <section v-if="isMainProductEnabled" class="md:mt-100 mt-40">
+        <MainPageProduct :model="model"></MainPageProduct>
+      </section>
+    </LazyHydrate>
 
-    <!-- content.popular -->
-    <section v-if="!!populars" class="md:mt-100 container mt-40">
-      <h2 class="font-compact text-48 uppercase">Популярное</h2>
-      <LazyBaseSwiper :slides="populars" class="mt-16 md:mt-32" :settings="sliderSettings">
-        <template #slide="{ slide }">
-          <ProductItem :model="slide" class="w-max"><span class="text-secondary">популярное</span></ProductItem>
-        </template>
-      </LazyBaseSwiper>
-    </section>
+    <LazyHydrate when-visible>
+      <section v-if="!!populars && !!populars.length" class="md:mt-100 container mt-40">
+        <h2 class="font-compact text-48 uppercase">Популярное</h2>
+        <LazyBaseSwiper :slides="populars" class="mt-16 md:mt-32" :settings="sliderSettings">
+          <template #slide="{ slide }">
+            <ProductItem :model="slide"><span class="text-secondary">популярное</span></ProductItem>
+          </template>
+        </LazyBaseSwiper>
+      </section>
+    </LazyHydrate>
 
-    <section class="md:mt-100 container mt-40">
+    <section v-if="!!line2Title1 && !!line2Title2" class="md:mt-100 container mt-40">
       <div class="flex flex-col lg:flex-row">
         <div class="w-full cursor-pointer lg:w-1/2" @click="goToLine21">
           <img v-lazysrc="line2ImgSrc1" height="500" width="300" class="h-210 lg:h-400 w-full object-cover object-left-top" />
@@ -72,7 +76,7 @@
             </div>
           </div>
         </div>
-        <div class="h-340 bg-nude w-full lg:h-full lg:w-1/2">
+        <div class="h-340 bg-nude w-full lg:h-auto lg:w-1/2">
           <img
             v-lazysrc="'/images/main-apps.png'"
             class="h-full w-full object-cover object-left-top"
@@ -85,22 +89,22 @@
     </section>
 
     <!-- instagram -->
-    <section class="md:mt-185 mt-40">
+    <section class="md:mt-180 mt-40">
       <LazyHydrate when-visible>
-        <InstagramBlock />
+        <InstagramBlock :foto-list="model.instagram" />
       </LazyHydrate>
     </section>
 
     <section class="md:mt-100 container mt-40 flex flex-col">
       <div class="ml-auto mr-auto flex flex-col items-center">
-        <h2 class="font-compact text-62">Доступ к оптовым ценам</h2>
+        <h2 class="font-compact text-62 text-center">Доступ к оптовым ценам</h2>
         <span class="mt-14">Заполните заявку на сотрудничество</span>
         <base-button class="mt-20 w-max md:mt-40" @click="openForm()">Заполнить</base-button>
       </div>
     </section>
 
     <LazyHydrate when-visible>
-      <section class="md:mt-100 mt-40">
+      <section class="mt-10">
         <LazySnakeComponent />
       </section>
     </LazyHydrate>
@@ -126,6 +130,10 @@ export default class MainPage extends Vue {
   async fetch() {
     this.model = await this.$serviceLocator.getService(EmptyService).getAnyOrNull("users/pages/home");
     this.model.loaded = true;
+  }
+
+  get isMainProductEnabled() {
+    return !!this.model?.content?.product?.title;
   }
 
   get isLoaded() {

@@ -1,7 +1,13 @@
 <template>
-  <section class="w-1/2">
-    <h3>Личные данные</h3>
-    <div class="mt-22">
+  <section class="w-full">
+    <h3 class="hidden lg:block">Личные данные</h3>
+
+    <div class="mb-38 mt-32 flex items-center lg:hidden">
+      <img class="cursor-pointer" src="/icons/left-arrow.svg" width="24" height="24" @click="$router.push({ name: 'profile' })" />
+      <h3 class="mx-auto">Личные данные</h3>
+    </div>
+
+    <div class="mt-22 w-full lg:w-1/2">
       <div>Персональные данные</div>
       <div class="mt-33">
         <form @submit.prevent="savePersonal">
@@ -19,13 +25,7 @@
             :has-error="$v.registrationData.first_name.$error"
             @blur="$v.registrationData.first_name.$touch()"
           />
-          <BaseInput
-            v-model="registrationData.patronymic"
-            placeholder="Отчество*"
-            class="mb-27"
-            :has-error="$v.registrationData.patronymic.$error"
-            @blur="$v.registrationData.patronymic.$touch()"
-          />
+          <BaseInput v-model="registrationData.patronymic" placeholder="Отчество" class="mb-27" />
           <div class="flex items-center">
             <BaseInput
               v-model="registrationData.phone"
@@ -55,6 +55,9 @@
         </form>
       </div>
       <PasswordRecovery />
+      <div class="mt-60 flex items-center">
+        <BaseCheckbox id="subscribe" v-model="registrationData.subscribe" label="Получать информацию о новинках и акциях" />
+      </div>
     </div>
   </section>
 </template>
@@ -71,7 +74,6 @@ const validations = () => {
     registrationData: {
       first_name: { required },
       last_name: { required },
-      patronymic: { required },
       phone: { required },
       email: { required, email },
       address: { required },

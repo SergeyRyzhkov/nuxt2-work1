@@ -1,6 +1,6 @@
 <template>
   <section class="order-form pt-22 md:pr-76">
-    <h2>Контактная информация</h2>
+    <span class="text-18">Контактная информация</span>
     <form class="mt-30" @submit.prevent="confirmOrder()">
       <BaseInput
         v-model="order.last_name"
@@ -16,13 +16,7 @@
         class="mb-27"
         @blur="$v.order.first_name.$touch()"
       />
-      <BaseInput
-        v-model="order.patronymic"
-        placeholder="Отчество"
-        :has-error="$v.order.patronymic.$error"
-        class="mb-27"
-        @blur="$v.order.patronymic.$touch()"
-      />
+      <BaseInput v-model="order.patronymic" placeholder="Отчество" class="mb-27" />
       <div class="flex flex-col md:flex-row">
         <BaseInput
           v-model="order.phone"
@@ -50,7 +44,7 @@
       />
 
       <div class="mt-52">
-        <h2>Способ доставки</h2>
+        <span class="text-18">Способ доставки</span>
         <div class="mt-30">
           <div v-for="iter in deliveryMethods" :key="iter.id" class="mb-16">
             <BaseRadioButton v-model="order.delivery_method_id" :label="iter.title" :value="iter.id" />
@@ -60,14 +54,15 @@
       </div>
 
       <div class="mt-52">
-        <h2>Способы оплаты</h2>
+        <span class="text-18">Способы оплаты</span>
         <div class="mt-32">
-          <BaseRadioButton v-model="order.payment_type" label="Наличными при получении" value="invoice" class="mb-20" />
-          <BaseRadioButton v-model="order.payment_type" label="Банковской картой на сайте" value="card" />
+          <div v-for="iter in paymentTypes" :key="iter.id" class="mb-16">
+            <BaseRadioButton v-model="order.payment_type" :label="iter.title" :value="iter.id" />
+          </div>
         </div>
       </div>
       <div class="mt-52">
-        <h2>Комментарий</h2>
+        <span>Комментарий</span>
         <BaseInput v-model="order.comment" placeholder="Введите текст" class="mt-30" />
         <div class="order-checkbox mt-32">
           <BaseCheckbox id="order-privacy" v-model="order.agreement" />
@@ -97,7 +92,6 @@ const validations = () => {
     order: {
       first_name: { required },
       last_name: { required },
-      patronymic: { required },
       phone: { required },
       email: { required, email },
       delivery_address: { required },
@@ -113,6 +107,9 @@ export default class OrderForm extends Vue {
   @Prop()
   deliveryMethods: { id: number; title: string; price: number; free_from: any }[];
 
+  @Prop()
+  paymentTypes: { id: string; title: string }[];
+
   phoneMask = phoneMask;
 
   async confirmOrder() {
@@ -122,8 +119,8 @@ export default class OrderForm extends Vue {
     }
     if (await this.$serviceLocator.getService(ProfileService).checkoutOrder(this.order)) {
       this.$modalManager.modalShow(OrderingSuccess);
-      if (this.$route.name !== "personal") {
-        this.$router.push({ name: "personal" });
+      if (this.$route.name !== "orders") {
+        this.$router.push({ name: "orders" });
       }
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="text-14 my-auto p-16 font-semibold">{{ text }}</div>
+  <div class="my-auto p-16 text-14">{{ text }}</div>
 </template>
 
 <script lang="ts">
@@ -7,7 +7,7 @@ import { Component, Vue, Prop } from "nuxt-property-decorator";
 
 @Component
 export default class BaseNotify extends Vue {
-  @Prop({ default: "Выполнено !" })
+  @Prop({ default: "Выполнено" })
   text: string;
 
   @Prop({ default: true })

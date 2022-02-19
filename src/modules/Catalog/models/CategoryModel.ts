@@ -1,4 +1,3 @@
-import ProductModel from "./ProductModel";
 import SeoModel from "@/_core/models/SeoModel";
 
 export default class CategoryModel extends SeoModel {
@@ -7,6 +6,7 @@ export default class CategoryModel extends SeoModel {
     Object.assign(this, init);
   }
 
+  id_1с: string;
   id = 0;
   title: string;
   subtitle: string;
@@ -22,5 +22,6 @@ export default class CategoryModel extends SeoModel {
   parent: CategoryModel;
 
   isOpened = false;
-  products: ProductModel[];
+
+  background_color: string;
 }
